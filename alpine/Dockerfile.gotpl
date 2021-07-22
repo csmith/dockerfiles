@@ -1,0 +1,18 @@
+{{- /*gotype: github.com/csmith/dockerfiles.UrlAndSum*/ -}}
+FROM reg.c5h.io/alpine AS verify
+
+ARG ARCHIVE_URL="{{.Url}}"
+ARG ARCHIVE_SUM="{{.Sum}}"
+
+RUN set -eux; \
+    apk add --no-cache curl; \
+    curl -sfLo fs.tar.gz $ARCHIVE_URL; \
+    echo "$ARCHIVE_SUM *fs.tar.gz" | sha256sum -wc -; \
+    mkdir /fs; \
+    tar -C /fs -xzf fs.tar.gz
+
+FROM scratch
+COPY --from=verify /fs/ /
+
+ENV LANG=en_US.UTF-8
+CMD ["/bin/sh"]
