@@ -1,0 +1,27 @@
+{{- /*gotype: github.com/csmith/dockerfiles/vault.templateArgs*/ -}}
+FROM {{.Build.Ref}}@{{.Build.Digest}} AS build
+
+ARG TAG="{{.Tag}}"
+
+RUN set -eux; \
+    # Dependencies
+    apk add --no-cache git libcap; \
+    # Check out and build
+    git clone --depth=1 -b $TAG --single-branch https://github.com/hashicorp/vault /src; \
+    cd /src; \
+    go build -tags release -ldflags "-X github.com/hashicorp/vault/sdk/version.GitCommit=$(git rev-parse HEAD)" -o /vault  github.com/hashicorp/vault; \
+    # Make some directories with the correct ownership to copy into the final image, and a listener config snippet
+    mkdir -p /out/logs /out/file /out/config; \
+    echo -e 'listener "tcp" {\n  address = "0.0.0.0:8080"\n  tls_disable = 1\n}' > /out/config/listener.hcl; \
+    chown -R 65532:65532 /out; \
+    # Allow the vault process to prevent its memory regions being swapped out to disk
+    /usr/sbin/setcap CAP_IPC_LOCK=+ep /vault;
+
+FROM {{.Run.Ref}}@{{.Run.Digest}}
+
+COPY --from=build /vault /bin/
+COPY --from=build /out/ /vault/
+EXPOSE 8080
+VOLUME /vault/logs /vault/file
+ENTRYPOINT ["/bin/vault"]
+CMD ["server", "-config=/vault/config/"]

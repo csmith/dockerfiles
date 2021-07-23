@@ -31,3 +31,4 @@ updated dockerfiles back to the repository, triggering a build and push of the i
 | base              | Minimal "distroless" base image                         |
 | distribution      | Docker registry                                         |
 | golang            | Latest stable golang in Alpine, with musl/etc for cgo   |
+| vault             | Latest stable version of Hashicorp Vault                |

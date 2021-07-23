@@ -1,4 +1,4 @@
-# Distribution
+# Golang
 
 * Upstream: https://golang.org/
 * Dependencies: alpine
