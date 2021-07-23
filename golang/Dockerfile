@@ -3,9 +3,8 @@ FROM reg.c5h.io/alpine@sha256:1775bebec23e1f3ce486989bfc9ff3c4e951690df84aa9f926
 ARG ARCHIVE_URL="https:/golang.org/dl/go1.16.6.src.tar.gz"
 ARG ARCHIVE_SUM="a3a5d4bc401b51db065e4f93b523347a4d343ae0c0b08a65c3423b05a138037d"
 
-ENV PATH=/usr/local/go/bin:$PATH \
-    GOPATH=/go \
-    PATH=$GOPATH/bin:$PATH
+ENV GOPATH=/go \
+    PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 
 RUN set -eux; \
     # Dependencies and source for bootstrapping go

@@ -6,7 +6,7 @@ RUN set -eux; \
     apk add --no-cache make git file; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/distribution/distribution /go/src/github.com/docker/distribution; \
     cd /go/src/github.com/docker/distribution; \
-    BUILDTAGS="include_oss include_gcs" GO111MODULE=off CGO_ENABLED=0 make PREFIX=/go binaries
+    BUILDTAGS="include_oss include_gcs" GO111MODULE=off CGO_ENABLED=0 make bin/registry
 
 FROM reg.c5h.io/base@sha256:eb133a7d9c9ee3de40aa43e67fd1c79f7e317743efe85c33cbf45eae548ea8da
 
