@@ -8,7 +8,8 @@ RUN set -eux; \
     curl -sfLo fs.tar.gz $ARCHIVE_URL; \
     echo "$ARCHIVE_SUM *fs.tar.gz" | sha256sum -wc -; \
     mkdir /fs; \
-    tar -C /fs -xzf fs.tar.gz
+    tar -C /fs -xzf fs.tar.gz; \
+    find /fs -exec touch --date=@0 {} \;;
 
 FROM scratch
 COPY --from=verify /fs/ /

@@ -4,9 +4,8 @@ FROM {{.Image.Ref}}@{{.Image.Digest}}
 ARG ARCHIVE_URL="{{.File.Url}}"
 ARG ARCHIVE_SUM="{{.File.Sum}}"
 
-ENV PATH=/usr/local/go/bin:$PATH \
-    GOPATH=/go \
-    PATH=$GOPATH/bin:$PATH
+ENV GOPATH=/go \
+    PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 
 RUN set -eux; \
     # Dependencies and source for bootstrapping go
