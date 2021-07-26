@@ -101,7 +101,10 @@ func readDatabase(reader io.Reader) (map[string]*packageInfo, error) {
 			}
 			res[info.Name] = info
 			for i := range info.Provides {
-				res[info.Provides[i]] = info
+				// Don't overwrite real packages with provides info
+				if _, ok := res[info.Provides[i]]; !ok {
+					res[info.Provides[i]] = info
+				}
 			}
 		}
 	}

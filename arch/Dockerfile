@@ -50,6 +50,8 @@ RUN set -eux; \
         audit=3.0.2-1 \
         bash=5.1.008-1 \
         bzip2=1.0.8-4 \
+        ca-certificates=20210603-1 \
+        ca-certificates-mozilla=3.68-1 \
         ca-certificates-utils=20210603-1 \
         coreutils=8.32-1 \
         curl=7.78.0-1 \

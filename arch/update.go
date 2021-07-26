@@ -11,7 +11,7 @@ type templateArgs struct {
 }
 
 func main() {
-	packages, err := dockerfiles.LatestArchPackages("filesystem", "glibc", "gzip", "licenses", "pacman", "sed")
+	packages, err := dockerfiles.LatestArchPackages("ca-certificates", "filesystem", "glibc", "gzip", "licenses", "pacman", "sed")
 	if err != nil {
 		log.Fatalf("Unable to retrieve latest packages: %v", err)
 	}
