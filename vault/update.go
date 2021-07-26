@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	baseImage   = "reg.c5h.io/base"
+	baseImage   = "reg.c5h.io/alpine"
 	golangImage = "reg.c5h.io/golang"
 	repo        = "hashicorp/vault"
 )

@@ -13,16 +13,44 @@ RUN set -eux; \
     # Make some directories with the correct ownership to copy into the final image, and a listener config snippet
     mkdir -p /out/logs /out/file /out/config; \
     echo -e 'listener "tcp" {\n  address = "0.0.0.0:8080"\n  tls_disable = 1\n}' > /out/config/listener.hcl; \
-    chown -R 65532:65532 /out; \
-    # Allow the vault process to prevent its memory regions being swapped out to disk
-    /usr/sbin/setcap CAP_IPC_LOCK=+ep /vault;
+    chown -R 65532:65532 /out;
 
-FROM {{.Run.Ref}}@{{.Run.Digest}}
+FROM {{.Run.Ref}}@{{.Run.Digest}} AS base
+# This is basically the same thing as reg.c5h.io/base, but we add libcap and don't drop root until after we've
+# had a chance to call setcap on the binary.
 
+RUN set -eux; \
+    # Sort out our dependencies (and sources)
+    apk add --no-cache ca-certificates musl tzdata rsync libcap; \
+    # Set up directories and password file
+    mkdir -p /rootfs/etc/ssl/certs /rootfs/tmp /rootfs/home/nonroot /rootfs/root; \
+    echo "root:x:0:0:root:/root:/sbin/nologin" >> /rootfs/etc/passwd; \
+    echo "nobody:x:65534:65534:nobody:/nonexistent:/sbin/nologin" >> /rootfs/etc/passwd; \
+    echo "nonroot:x:65532:65532:nonroot:/home/nonroot:/sbin/nologin" >> /rootfs/etc/passwd; \
+    chown 65532:65532 /rootfs/home/nonroot; \
+    chmod 01777 /tmp; \
+    # Copy package contents
+    apk info -qL tzdata | rsync -aq --files-from=- / /rootfs/; \
+    apk info -qL musl | rsync -aq --files-from=- / /rootfs/; \
+    apk info -qL libcap | rsync -aq --files-from=- / /rootfs/; \
+    # Generate thw CA certificates file and copy the result
+    /usr/sbin/update-ca-certificates; \
+    cp /etc/ssl/certs/ca-certificates.crt /rootfs/etc/ssl/certs/ca-certificates.crt;
+
+FROM scratch
+
+COPY --from=base /rootfs/ /
 COPY --from=build /vault /bin/
 COPY --from=build /out/ /vault/
+
+RUN ["/usr/sbin/setcap","CAP_IPC_LOCK=+ep","/bin/vault"]
+
+ENV VAULT_ADDR=http://127.0.0.1:8080 \
+    SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+
+USER nonroot
 EXPOSE 8080
 VOLUME /vault/logs /vault/file
 ENTRYPOINT ["/bin/vault"]
-ENV VAULT_ADDRESS http://127.0.0.1:8080
+
 CMD ["server", "-config=/vault/config/"]
