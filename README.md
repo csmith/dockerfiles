@@ -28,6 +28,7 @@ updated dockerfiles back to the repository, triggering a build and push of the i
 | Name              | Description                                             |
 |-------------------|---------------------------------------------------------|
 | alpine            | Latest stable version of Alpine Linux                   |
+| arch              | Minimal Archlinux image                                 |
 | base              | Minimal "distroless" base image                         |
 | distribution      | Docker registry                                         |
 | golang            | Latest stable golang in Alpine, with musl/etc for cgo   |
