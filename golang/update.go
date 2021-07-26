@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/csmith/dockerfiles"
-	"github.com/google/go-containerregistry/pkg/crane"
 	"github.com/hashicorp/go-version"
 )
 
@@ -29,7 +28,7 @@ func main() {
 		log.Fatalf("Unable to retrieve latest file: %v", err)
 	}
 
-	digest, err := crane.Digest(baseImage)
+	digest, err := dockerfiles.LatestDigest(baseImage)
 	if err != nil {
 		log.Fatalf("Couldn't determine base image version: %v", err)
 	}

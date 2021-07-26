@@ -5,9 +5,27 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/google/go-containerregistry/pkg/authn"
+	"github.com/google/go-containerregistry/pkg/crane"
 	"github.com/hashicorp/go-version"
 	"gopkg.in/yaml.v2"
 )
+
+// LatestDigest finds the latest digest for the given docker image reference.
+func LatestDigest(ref string) (string, error) {
+	var authOpt crane.Option
+
+	if *registryUser == "" || *registryPass == "" {
+		authOpt = crane.WithAuthFromKeychain(authn.DefaultKeychain)
+	} else {
+		authOpt = crane.WithAuth(&authn.Basic{
+			Username: *registryUser,
+			Password: *registryPass,
+		})
+	}
+
+	return crane.Digest(ref, authOpt)
+}
 
 // DownloadYaml requests the given url and then attempts to unmarshal the body as YAML into the provided struct.
 func DownloadYaml(url string, i interface{}) error {

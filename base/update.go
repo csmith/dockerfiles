@@ -4,7 +4,6 @@ import (
 	"log"
 
 	"github.com/csmith/dockerfiles"
-	"github.com/google/go-containerregistry/pkg/crane"
 )
 
 const (
@@ -12,7 +11,7 @@ const (
 )
 
 func main() {
-	digest, err := crane.Digest(baseImage)
+	digest, err := dockerfiles.LatestDigest(baseImage)
 	if err != nil {
 		log.Fatalf("Couldn't determine base image version: %v", err)
 	}

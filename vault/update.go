@@ -4,7 +4,6 @@ import (
 	"log"
 
 	"github.com/csmith/dockerfiles"
-	"github.com/google/go-containerregistry/pkg/crane"
 )
 
 const (
@@ -20,12 +19,12 @@ type templateArgs struct {
 }
 
 func main() {
-	baseDigest, err := crane.Digest(baseImage)
+	baseDigest, err := dockerfiles.LatestDigest(baseImage)
 	if err != nil {
 		log.Fatalf("Couldn't determine base image version: %v", err)
 	}
 
-	golangDigest, err := crane.Digest(golangImage)
+	golangDigest, err := dockerfiles.LatestDigest(golangImage)
 	if err != nil {
 		log.Fatalf("Couldn't determine golang image version: %v", err)
 	}
