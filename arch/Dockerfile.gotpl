@@ -69,7 +69,7 @@ RUN set -eux; \
 	    /build/etc/resolv.conf \
 	    /build/proc \
 	    /build/sys \
-	    /build/var/lib/pacman/sync\
+	    /build/var/lib/pacman/sync \
 	    /build/var/log/*; \
 	# Clobber all the timestamps to make the build more reproducible
     find /build -exec touch --date=@0 {} \;;

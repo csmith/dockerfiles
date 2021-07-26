@@ -1,4 +1,4 @@
-FROM reg.c5h.io/golang@sha256:69c5302b51efc9e74ffc330a53d151fb95a65dd76dbb4d6f888579b91fb84c28 AS build
+FROM reg.c5h.io/golang@sha256:eae319ad8b654dc4b903a23ab012a71b840472cf418cfee7c4e176fa9f96faeb AS build
 
 ARG TAG="v1.7.3"
 
@@ -16,12 +16,12 @@ RUN set -eux; \
     # Allow the vault process to prevent its memory regions being swapped out to disk
     /usr/sbin/setcap CAP_IPC_LOCK=+ep /vault;
 
-FROM reg.c5h.io/alpine@sha256:1775bebec23e1f3ce486989bfc9ff3c4e951690df84aa9f926497d82f2ffca9d
+FROM reg.c5h.io/base@sha256:eb133a7d9c9ee3de40aa43e67fd1c79f7e317743efe85c33cbf45eae548ea8da
 
 COPY --from=build /vault /bin/
 COPY --from=build /out/ /vault/
 EXPOSE 8080
 VOLUME /vault/logs /vault/file
 ENTRYPOINT ["/bin/vault"]
-ENV VAULT_ADDR http://127.0.0.1:8080
+ENV VAULT_ADDRESS http://127.0.0.1:8080
 CMD ["server", "-config=/vault/config/"]
