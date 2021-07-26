@@ -23,4 +23,5 @@ COPY --from=build /out/ /vault/
 EXPOSE 8080
 VOLUME /vault/logs /vault/file
 ENTRYPOINT ["/bin/vault"]
+ENV VAULT_ADDR http://127.0.0.1:8080
 CMD ["server", "-config=/vault/config/"]
