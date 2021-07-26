@@ -1,4 +1,4 @@
-FROM reg.c5h.io/alpine@sha256:1775bebec23e1f3ce486989bfc9ff3c4e951690df84aa9f926497d82f2ffca9d
+FROM reg.c5h.io/alpine@sha256:aa32e08a8e01df5c48742ef15cdb25f2fee10e828d18f40b530d7ce8cbc62f49
 
 ARG ARCHIVE_URL="https:/golang.org/dl/go1.16.6.src.tar.gz"
 ARG ARCHIVE_SUM="a3a5d4bc401b51db065e4f93b523347a4d343ae0c0b08a65c3423b05a138037d"
@@ -25,8 +25,8 @@ RUN set -eux; \
     		/usr/local/go/pkg/tool/*/api \
     		/usr/local/go/pkg/tool/*/go_bootstrap \
     		/usr/local/go/src/cmd/dist/dist; \
-    # Dependencies needed for cgo
-    apk add gcc musl-dev; \
+    # Dependencies needed for building
+    apk add gcc musl-dev git; \
     # Set up the go path
     mkdir -p $GOPATH/src $GOPATH/bin; \
     chmod -R 777 $GOPATH;
