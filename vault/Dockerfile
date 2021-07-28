@@ -1,6 +1,6 @@
-FROM reg.c5h.io/golang@sha256:eae319ad8b654dc4b903a23ab012a71b840472cf418cfee7c4e176fa9f96faeb AS build
+FROM reg.c5h.io/golang@sha256:dd7e126ba854294376c61b442d961839eee6e72e5ad36211155a90c70dc3a1b9 AS build
 
-ARG TAG="v1.7.3"
+ARG TAG="v1.8.0"
 
 RUN set -eux; \
     # Dependencies
@@ -12,9 +12,12 @@ RUN set -eux; \
     # Make some directories with the correct ownership to copy into the final image, and a listener config snippet
     mkdir -p /out/logs /out/file /out/config; \
     echo -e 'listener "tcp" {\n  address = "0.0.0.0:8080"\n  tls_disable = 1\n}' > /out/config/listener.hcl; \
-    chown -R 65532:65532 /out;
+    chown -R 65532:65532 /out; \
+    # Clobber all the timestamps to make the build more reproducible
+    find /out -exec touch --date=@0 {} \;; \
+    touch --date=@0 /vault;
 
-FROM reg.c5h.io/alpine@sha256:ccaf5566d84e9177068a42a6fb2c87ac281c42c7c3d5c0b73cfd6decab390d46 AS base
+FROM reg.c5h.io/alpine@sha256:1a78f21d1807da0423a4b835cf05bd85f665a875b5f5030750f25fecd15e41fc AS base
 # This is basically the same thing as reg.c5h.io/base, but we add libcap and don't drop root until after we've
 # had a chance to call setcap on the binary.
 
@@ -34,7 +37,9 @@ RUN set -eux; \
     apk info -qL libcap | rsync -aq --files-from=- / /rootfs/; \
     # Generate thw CA certificates file and copy the result
     /usr/sbin/update-ca-certificates; \
-    cp /etc/ssl/certs/ca-certificates.crt /rootfs/etc/ssl/certs/ca-certificates.crt;
+    cp /etc/ssl/certs/ca-certificates.crt /rootfs/etc/ssl/certs/ca-certificates.crt; \
+    # Clobber all the timestamps to make the build more reproducible
+    find /rootfs -exec touch --date=@0 {} \;;
 
 FROM scratch
 

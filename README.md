@@ -33,12 +33,12 @@ updated dockerfiles back to the repository, triggering a build and push of the i
 | distribution      | Docker registry          |       ✅      |    ✅     |    ✅    |
 | golang            | Golang build toolchain   |       ❌      |    N/A    |    ✅    |
 | postgres-13       | Postgresql v13           |       ❌      |    ❌     |    ❌    |
-| vault             | Hashicorp Vault          |       ❌      |    ✅     |    ✅    |
+| vault             | Hashicorp Vault          |       ✅      |    ✅     |    ✅    |
 
 Meaning of the status columns:
 
 **Reproducible** - if the same Dockerfile is rebuilt at any time on any machine it will produce the same
-image. This is nice to have but it is quite challenging and makes little difference in day-to-day
+image. This is nice to have, but it is quite challenging and makes little difference in day-to-day
 operations. (It also requires the use of a tool like `buildah` that can set layer timestamps; `docker build`
 cannot make reproducible images.)
 
