@@ -29,7 +29,7 @@ updated dockerfiles back to the repository, triggering a build and push of the i
 |-------------------|--------------------------|:-------------:|:---------:|:--------:|
 | alpine            | Alpine Linux             |       ✅      |    N/A    |    ✅    |
 | arch              | Archlinux image          |       ✅      |    N/A    |    ❌    |
-| base              | Minimal base image       |       ❌      |    ✅     |    ✅    |
+| base              | Minimal base image       |       ✅      |    ✅     |    ✅    |
 | distribution      | Docker registry          |       ❌      |    ✅     |    ✅    |
 | golang            | Golang build toolchain   |       ❌      |    N/A    |    ✅    |
 | postgres-13       | Postgresql v13           |       ❌      |    ❌     |    ❌    |

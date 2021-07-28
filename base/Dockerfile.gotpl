@@ -1,9 +1,12 @@
-{{- /*gotype: github.com/csmith/dockerfiles.BaseImage*/ -}}
-FROM {{.Ref}}@{{.Digest}} AS build
+{{- /*gotype: github.com/csmith/dockerfiles/base.templateArgs*/ -}}
+FROM {{.Base.Ref}}@{{.Base.Digest}} AS build
 
 RUN set -eux; \
     # Sort out our dependencies (and sources)
-    apk add --no-cache ca-certificates musl tzdata rsync; \
+    apk add --no-cache \
+        {{range $key, $value := .Packages -}}
+        {{ $key }}={{ $value }} \
+        {{end}}; \
     # Set up directories and password file
     mkdir -p /rootfs/etc/ssl/certs /rootfs/tmp /rootfs/home/nonroot /rootfs/root; \
     echo "root:x:0:0:root:/root:/sbin/nologin" >> /rootfs/etc/passwd; \

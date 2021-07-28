@@ -1,8 +1,19 @@
-FROM reg.c5h.io/alpine@sha256:1775bebec23e1f3ce486989bfc9ff3c4e951690df84aa9f926497d82f2ffca9d AS build
+FROM reg.c5h.io/alpine@sha256:1a78f21d1807da0423a4b835cf05bd85f665a875b5f5030750f25fecd15e41fc AS build
 
 RUN set -eux; \
     # Sort out our dependencies (and sources)
-    apk add --no-cache ca-certificates musl tzdata rsync; \
+    apk add --no-cache \
+        busybox=1.33.1-r3 \
+        ca-certificates=20191127-r5 \
+        libacl=2.2.53-r0 \
+        libcrypto1.1=1.1.1k-r0 \
+        musl=1.2.2-r3 \
+        popt=1.18-r0 \
+        rsync=3.2.3-r2 \
+        tzdata=2021a-r0 \
+        zlib=1.2.11-r3 \
+        zstd-libs=1.4.9-r1 \
+        ; \
     # Set up directories and password file
     mkdir -p /rootfs/etc/ssl/certs /rootfs/tmp /rootfs/home/nonroot /rootfs/root; \
     echo "root:x:0:0:root:/root:/sbin/nologin" >> /rootfs/etc/passwd; \

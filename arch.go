@@ -15,7 +15,7 @@ const pacmanDatabaseUrl = "https://mirrors.melbourne.co.uk/archlinux/%[1]s/os/x8
 // LatestArchPackages returns a map of packages to their latest version. The result will include all of the provided
 // package names, plus all of their direct and transitive dependencies.
 func LatestArchPackages(names ...string) (map[string]string, error) {
-	packages, err := packageInfos()
+	packages, err := pacmanPackageInfos()
 	if err != nil {
 		return nil, err
 	}
@@ -42,15 +42,15 @@ func LatestArchPackages(names ...string) (map[string]string, error) {
 	return res, nil
 }
 
-var packageCache map[string]*packageInfo
+var pacmanPackageCache map[string]*packageInfo
 
-// packageInfos returns a map of all known pacman packages and their latest info.
-func packageInfos() (map[string]*packageInfo, error) {
-	if packageCache != nil {
-		return packageCache, nil
+// pacmanPackageInfos returns a map of all known pacman packages and their latest info.
+func pacmanPackageInfos() (map[string]*packageInfo, error) {
+	if pacmanPackageCache != nil {
+		return pacmanPackageCache, nil
 	}
 
-	packageCache = make(map[string]*packageInfo)
+	pacmanPackageCache = make(map[string]*packageInfo)
 	for _, repo := range []string{"community", "extra", "core"} {
 		err := func() error {
 			res, err := http.Get(fmt.Sprintf(pacmanDatabaseUrl, repo))
@@ -58,12 +58,12 @@ func packageInfos() (map[string]*packageInfo, error) {
 				return err
 			}
 			defer res.Body.Close()
-			info, err := readDatabase(res.Body)
+			info, err := readPacmanDatabase(res.Body)
 			if err != nil {
 				return err
 			}
 			for k := range info {
-				packageCache[k] = info[k]
+				pacmanPackageCache[k] = info[k]
 			}
 			return nil
 		}()
@@ -72,11 +72,11 @@ func packageInfos() (map[string]*packageInfo, error) {
 		}
 	}
 
-	return packageCache, nil
+	return pacmanPackageCache, nil
 }
 
-// readDatabase reads all information from a pacman package database
-func readDatabase(reader io.Reader) (map[string]*packageInfo, error) {
+// readPacmanDatabase reads all information from a pacman package database
+func readPacmanDatabase(reader io.Reader) (map[string]*packageInfo, error) {
 	gz, err := gzip.NewReader(reader)
 	if err != nil {
 		return nil, err
@@ -95,7 +95,7 @@ func readDatabase(reader io.Reader) (map[string]*packageInfo, error) {
 		}
 
 		if header.Typeflag == tar.TypeReg {
-			info, err := readPackageInfo(tr)
+			info, err := readPacmanPackageInfo(tr)
 			if err != nil {
 				return nil, fmt.Errorf("error reading %s: %v", header.Name, err)
 			}
@@ -119,8 +119,8 @@ type packageInfo struct {
 	Provides     []string
 }
 
-// readPackageInfo reads a `desc` file from within the pacman package database, parsing out the relevant information.
-func readPackageInfo(reader io.Reader) (*packageInfo, error) {
+// readPacmanPackageInfo reads a `desc` file from within the pacman package database, parsing out the relevant information.
+func readPacmanPackageInfo(reader io.Reader) (*packageInfo, error) {
 	res := &packageInfo{}
 	scanner := bufio.NewScanner(reader)
 	section := ""
