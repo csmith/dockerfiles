@@ -26,7 +26,9 @@ RUN set -eux; \
     apk info -qL musl | rsync -aq --files-from=- / /rootfs/; \
     # Generate thw CA certificates file and copy the result
     /usr/sbin/update-ca-certificates; \
-    cp /etc/ssl/certs/ca-certificates.crt /rootfs/etc/ssl/certs/ca-certificates.crt;
+    cp /etc/ssl/certs/ca-certificates.crt /rootfs/etc/ssl/certs/ca-certificates.crt; \
+    # Clobber all the timestamps to make the build more reproducible
+    find /rootfs -exec touch --date=@0 {} \;;
 
 FROM scratch
 
