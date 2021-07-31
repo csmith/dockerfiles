@@ -1,11 +1,8 @@
-{{- /*gotype: github.com/csmith/dockerfiles/vault.templateArgs*/ -}}
-FROM {{.Build.Ref}}@{{.Build.Digest}} AS build
+FROM {{image "reg.c5h.io/golang"}} AS build
 
-ARG TAG="{{.Tag}}"
+ARG TAG="{{github_tag "hashicorp/vault"}}"
 
 RUN set -eux; \
-    # Dependencies
-    apk add --no-cache git libcap; \
     # Check out and build
     git clone --depth=1 -b $TAG --single-branch https://github.com/hashicorp/vault /src; \
     cd /src; \
@@ -18,13 +15,16 @@ RUN set -eux; \
     find /out -exec touch --date=@0 {} \;; \
     touch --date=@0 /vault;
 
-FROM {{.Run.Ref}}@{{.Run.Digest}} AS base
+FROM {{image "reg.c5h.io/alpine"}} AS base
 # This is basically the same thing as reg.c5h.io/base, but we add libcap and don't drop root until after we've
 # had a chance to call setcap on the binary.
 
 RUN set -eux; \
     # Sort out our dependencies (and sources)
-    apk add --no-cache ca-certificates musl tzdata rsync libcap; \
+    apk add --no-cache \
+        {{range $key, $value := alpine_packages "ca-certificates" "musl" "tzdata" "rsync" "libcap" -}}
+        {{$key}}={{$value}} \
+        {{end}}; \
     # Set up directories and password file
     mkdir -p /rootfs/etc/ssl/certs /rootfs/tmp /rootfs/home/nonroot /rootfs/root; \
     echo "root:x:0:0:root:/root:/sbin/nologin" >> /rootfs/etc/passwd; \

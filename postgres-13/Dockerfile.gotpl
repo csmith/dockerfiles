@@ -1,11 +1,13 @@
-{{- /*gotype: github.com/csmith/dockerfiles/postgres-13.templateArgs*/ -}}
 # Based on https://github.com/docker-library/postgres/blob/6bbf1c7b308d1c4288251d73c37f6caf75f8a3d4/13/alpine/Dockerfile
 # Original version released under the MIT licence, Copyright (c) 2014, Docker PostgreSQL Authors (See AUTHORS).
 #
 # See LICENCE for a copy of the MIT licence.
 # See https://github.com/docker-library/postgres/blob/517c64f87e6661366b415df3f2273c76cea428b0/AUTHORS for upstream authors.
 
-FROM {{.Image.Ref}}@{{.Image.Digest}}
+FROM {{image "reg.c5h.io/alpine"}}
+
+ARG ARCHIVE_URL="{{postgres13_url}}"
+ARG ARCHIVE_SUM="{{postgres13_checksum}}"
 
 # 70 is the standard uid/gid for "postgres" in Alpine
 # https://git.alpinelinux.org/aports/tree/main/postgresql/postgresql.pre-install?h=3.12-stable
@@ -13,15 +15,8 @@ RUN set -eux; \
 	addgroup -g 70 -S postgres; \
 	adduser -u 70 -S -D -G postgres -H -h /var/lib/postgresql -s /bin/sh postgres; \
 	mkdir -p /var/lib/postgresql; \
-	chown -R postgres:postgres /var/lib/postgresql
-
-RUN mkdir /docker-entrypoint-initdb.d
-
-ARG ARCHIVE_URL="{{.Archive.Url}}"
-ARG ARCHIVE_SUM="{{.Archive.Sum}}"
-
-RUN set -eux; \
-	\
+	chown -R postgres:postgres /var/lib/postgresql; \
+    mkdir /docker-entrypoint-initdb.d; \
 	wget -O postgresql.tar.bz2 "$ARCHIVE_URL"; \
 	echo "$ARCHIVE_SUM *postgresql.tar.bz2" | sha256sum -c -; \
 	mkdir -p /usr/src/postgresql; \

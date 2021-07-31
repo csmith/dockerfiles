@@ -1,8 +1,7 @@
-{{- /*gotype: github.com/csmith/dockerfiles.UrlAndSum*/ -}}
 FROM reg.c5h.io/alpine AS verify
 
-ARG ARCHIVE_URL="{{.Url}}"
-ARG ARCHIVE_SUM="{{.Sum}}"
+ARG ARCHIVE_URL="{{alpine_url}}"
+ARG ARCHIVE_SUM="{{alpine_checksum}}"
 
 RUN set -eux; \
     apk add --no-cache curl; \

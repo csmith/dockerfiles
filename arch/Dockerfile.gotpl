@@ -44,8 +44,8 @@ RUN set -eux; \
         --config /build/etc/pacman.conf \
         --noscriptlet \
         --hookdir /build/alpm-hooks/usr/share/libalpm/hooks/ \
-        {{range $key, $value := .Packages -}}
-        {{ $key }}={{ $value }} \
+        {{range $key, $value := arch_packages "ca-certificates" "filesystem" "glibc" "gzip" "licenses" "pacman" "sed" -}}
+        {{$key}}={{$value}} \
         {{end}}; \
     # Drop in some config files
     echo 'en_US.UTF-8 UTF-8' > /build/etc/locale.gen; \

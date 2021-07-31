@@ -1,10 +1,16 @@
+# Generated from https://github.com/csmith/dockerfiles/blob/master/postgres-13/Dockerfile.gotpl
+# BOM: {"image:reg.c5h.io/alpine":"sha256:1b32fef9ac1c1fce7d7fcc352d0408dc0e8a62a60d380572b8f2e638d435da5f","postgres13":"13.3"}
+
 # Based on https://github.com/docker-library/postgres/blob/6bbf1c7b308d1c4288251d73c37f6caf75f8a3d4/13/alpine/Dockerfile
 # Original version released under the MIT licence, Copyright (c) 2014, Docker PostgreSQL Authors (See AUTHORS).
 #
 # See LICENCE for a copy of the MIT licence.
 # See https://github.com/docker-library/postgres/blob/517c64f87e6661366b415df3f2273c76cea428b0/AUTHORS for upstream authors.
 
-FROM reg.c5h.io/alpine@sha256:1a78f21d1807da0423a4b835cf05bd85f665a875b5f5030750f25fecd15e41fc
+FROM reg.c5h.io/alpine@sha256:1b32fef9ac1c1fce7d7fcc352d0408dc0e8a62a60d380572b8f2e638d435da5f
+
+ARG ARCHIVE_URL="https://ftp.postgresql.org/pub/source/v13.3/postgresql-13.3.tar.bz2"
+ARG ARCHIVE_SUM="3cd9454fa8c7a6255b6743b767700925ead1b9ab0d7a0f9dcb1151010f8eb4a1"
 
 # 70 is the standard uid/gid for "postgres" in Alpine
 # https://git.alpinelinux.org/aports/tree/main/postgresql/postgresql.pre-install?h=3.12-stable
@@ -12,15 +18,8 @@ RUN set -eux; \
 	addgroup -g 70 -S postgres; \
 	adduser -u 70 -S -D -G postgres -H -h /var/lib/postgresql -s /bin/sh postgres; \
 	mkdir -p /var/lib/postgresql; \
-	chown -R postgres:postgres /var/lib/postgresql
-
-RUN mkdir /docker-entrypoint-initdb.d
-
-ARG ARCHIVE_URL="https://ftp.postgresql.org/pub/source/v13.3/postgresql-13.3.tar.bz2"
-ARG ARCHIVE_SUM="3cd9454fa8c7a6255b6743b767700925ead1b9ab0d7a0f9dcb1151010f8eb4a1"
-
-RUN set -eux; \
-	\
+	chown -R postgres:postgres /var/lib/postgresql; \
+    mkdir /docker-entrypoint-initdb.d; \
 	wget -O postgresql.tar.bz2 "$ARCHIVE_URL"; \
 	echo "$ARCHIVE_SUM *postgresql.tar.bz2" | sha256sum -c -; \
 	mkdir -p /usr/src/postgresql; \

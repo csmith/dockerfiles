@@ -10,9 +10,9 @@ import (
 	"strings"
 )
 
-const apkIndexUrl = "https://mirrors.melbourne.co.uk/alpine/latest-stable/main/x86_64/APKINDEX.tar.gz"
+const apkIndexUrl = "https://mirrors.melbourne.co.uk/alpine/latest-stable/%s/x86_64/APKINDEX.tar.gz"
 
-// LatestAlpinePackages returns a map of packages to their latest version. The result will include all of the provided
+// LatestAlpinePackages returns a map of packages to their latest version. The result will include all the provided
 // package names, plus all of their direct and transitive dependencies.
 func LatestAlpinePackages(names ...string) (map[string]string, error) {
 	packages, err := apkPackageInfos()
@@ -51,17 +51,25 @@ func apkPackageInfos() (map[string]*packageInfo, error) {
 	}
 
 	apkPackageCache = make(map[string]*packageInfo)
-	res, err := http.Get(apkIndexUrl)
-	if err != nil {
-		return nil, err
-	}
-	defer res.Body.Close()
-	info, err := readApkIndex(res.Body)
-	if err != nil {
-		return nil, err
-	}
-	for k := range info {
-		apkPackageCache[k] = info[k]
+	for _, repo := range []string{"community", "main"} {
+		err := func() error {
+			res, err := http.Get(fmt.Sprintf(apkIndexUrl, repo))
+			if err != nil {
+				return err
+			}
+			defer res.Body.Close()
+			info, err := readApkIndex(res.Body)
+			if err != nil {
+				return err
+			}
+			for k := range info {
+				apkPackageCache[k] = info[k]
+			}
+			return nil
+		}()
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return apkPackageCache, nil

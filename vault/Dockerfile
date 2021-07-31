@@ -1,10 +1,11 @@
-FROM reg.c5h.io/golang@sha256:dd7e126ba854294376c61b442d961839eee6e72e5ad36211155a90c70dc3a1b9 AS build
+# Generated from https://github.com/csmith/dockerfiles/blob/master/vault/Dockerfile.gotpl
+# BOM: {"apk:busybox":"1.33.1-r3","apk:ca-certificates":"20191127-r5","apk:libacl":"2.2.53-r0","apk:libcap":"2.50-r0","apk:libcrypto1.1":"1.1.1k-r0","apk:musl":"1.2.2-r3","apk:popt":"1.18-r0","apk:rsync":"3.2.3-r4","apk:tzdata":"2021a-r0","apk:zlib":"1.2.11-r3","apk:zstd-libs":"1.4.9-r1","image:reg.c5h.io/alpine":"sha256:1b32fef9ac1c1fce7d7fcc352d0408dc0e8a62a60d380572b8f2e638d435da5f","image:reg.c5h.io/golang":"sha256:3a3534d57448c2109cdc0e08d2fdb9bc759207508ca9af0b166584736d5e034a"}
+
+FROM reg.c5h.io/golang@sha256:3a3534d57448c2109cdc0e08d2fdb9bc759207508ca9af0b166584736d5e034a AS build
 
 ARG TAG="v1.8.0"
 
 RUN set -eux; \
-    # Dependencies
-    apk add --no-cache git libcap; \
     # Check out and build
     git clone --depth=1 -b $TAG --single-branch https://github.com/hashicorp/vault /src; \
     cd /src; \
@@ -17,13 +18,25 @@ RUN set -eux; \
     find /out -exec touch --date=@0 {} \;; \
     touch --date=@0 /vault;
 
-FROM reg.c5h.io/alpine@sha256:1a78f21d1807da0423a4b835cf05bd85f665a875b5f5030750f25fecd15e41fc AS base
+FROM reg.c5h.io/alpine@sha256:1b32fef9ac1c1fce7d7fcc352d0408dc0e8a62a60d380572b8f2e638d435da5f AS base
 # This is basically the same thing as reg.c5h.io/base, but we add libcap and don't drop root until after we've
 # had a chance to call setcap on the binary.
 
 RUN set -eux; \
     # Sort out our dependencies (and sources)
-    apk add --no-cache ca-certificates musl tzdata rsync libcap; \
+    apk add --no-cache \
+        busybox=1.33.1-r3 \
+        ca-certificates=20191127-r5 \
+        libacl=2.2.53-r0 \
+        libcap=2.50-r0 \
+        libcrypto1.1=1.1.1k-r0 \
+        musl=1.2.2-r3 \
+        popt=1.18-r0 \
+        rsync=3.2.3-r4 \
+        tzdata=2021a-r0 \
+        zlib=1.2.11-r3 \
+        zstd-libs=1.4.9-r1 \
+        ; \
     # Set up directories and password file
     mkdir -p /rootfs/etc/ssl/certs /rootfs/tmp /rootfs/home/nonroot /rootfs/root; \
     echo "root:x:0:0:root:/root:/sbin/nologin" >> /rootfs/etc/passwd; \

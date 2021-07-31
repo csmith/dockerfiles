@@ -1,4 +1,7 @@
-FROM reg.c5h.io/golang@sha256:69c5302b51efc9e74ffc330a53d151fb95a65dd76dbb4d6f888579b91fb84c28  AS build
+# Generated from https://github.com/csmith/dockerfiles/blob/master/distribution/Dockerfile.gotpl
+# BOM: {"image:reg.c5h.io/base":"sha256:baef060f5eb0e794f699146fb38f66eff45149f1c36a895ae88b8747f6d1c550","image:reg.c5h.io/golang":"sha256:3a3534d57448c2109cdc0e08d2fdb9bc759207508ca9af0b166584736d5e034a"}
+
+FROM reg.c5h.io/golang@sha256:3a3534d57448c2109cdc0e08d2fdb9bc759207508ca9af0b166584736d5e034a AS build
 
 ARG TAG="v2.7.1"
 
@@ -10,7 +13,7 @@ RUN set -eux; \
     # Clobber all the timestamps to make the build more reproducible
     touch --date=@0 /go/src/github.com/docker/distribution/cmd/registry/config-dev.yml /go/src/github.com/docker/distribution/bin/registry;
 
-FROM reg.c5h.io/base@sha256:eb133a7d9c9ee3de40aa43e67fd1c79f7e317743efe85c33cbf45eae548ea8da
+FROM reg.c5h.io/base@sha256:baef060f5eb0e794f699146fb38f66eff45149f1c36a895ae88b8747f6d1c550
 
 COPY --from=build /go/src/github.com/docker/distribution/cmd/registry/config-dev.yml /etc/docker/registry/config.yml
 COPY --from=build /go/src/github.com/docker/distribution/bin/registry /bin/registry

@@ -1,11 +1,10 @@
-{{- /*gotype: github.com/csmith/dockerfiles/base.templateArgs*/ -}}
-FROM {{.Base.Ref}}@{{.Base.Digest}} AS build
+FROM {{image "reg.c5h.io/alpine"}} AS build
 
 RUN set -eux; \
     # Sort out our dependencies (and sources)
     apk add --no-cache \
-        {{range $key, $value := .Packages -}}
-        {{ $key }}={{ $value }} \
+        {{range $key, $value := alpine_packages "ca-certificates" "musl" "tzdata" "rsync" -}}
+        {{$key}}={{$value}} \
         {{end}}; \
     # Set up directories and password file
     mkdir -p /rootfs/etc/ssl/certs /rootfs/tmp /rootfs/home/nonroot /rootfs/root; \
