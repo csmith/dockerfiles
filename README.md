@@ -18,10 +18,13 @@ Each image has its own folder, containing at least:
 
 * `Dockerfile` - the actual dockerfile the latest version should be built from
 * `Dockerfile.gotpl` - a template file for generating the Dockerfile
-* `update.go` - a tiny go application to grab the latest upstream version and render the template
 
-My eventual plan is to have CI infrastructure to run the update checks periodically and commit the
-updated dockerfiles back to the repository, triggering a build and push of the image.
+The template files using go's [text/template syntax](https://pkg.go.dev/text/template), with functions
+defined to retrieve the latest images, releases, packages, etc.
+
+To update all the Dockerfiles in the repo, run the `cmd` package (`go run ./cmd`). This will commit
+each Dockerfile individually and build and push any changed images by default; for local development
+you can pass `--commit=false` and `--build=false`.
 
 ## Images
 
