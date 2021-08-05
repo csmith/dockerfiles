@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/distribution/Dockerfile.gotpl
-# BOM: {"image:reg.c5h.io/base":"sha256:baef060f5eb0e794f699146fb38f66eff45149f1c36a895ae88b8747f6d1c550","image:reg.c5h.io/golang":"sha256:3a3534d57448c2109cdc0e08d2fdb9bc759207508ca9af0b166584736d5e034a"}
+# BOM: {"image:reg.c5h.io/base":"sha256:baef060f5eb0e794f699146fb38f66eff45149f1c36a895ae88b8747f6d1c550","image:reg.c5h.io/golang":"sha256:ee7010266d9ebdfe2021d2fa530b378c863c8ecbb8081d5212f2e0bf37e73d3a"}
 
-FROM reg.c5h.io/golang@sha256:3a3534d57448c2109cdc0e08d2fdb9bc759207508ca9af0b166584736d5e034a AS build
+FROM reg.c5h.io/golang@sha256:ee7010266d9ebdfe2021d2fa530b378c863c8ecbb8081d5212f2e0bf37e73d3a AS build
 
 ARG TAG="v2.7.1"
 
