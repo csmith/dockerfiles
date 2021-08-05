@@ -1,9 +1,9 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/vault/Dockerfile.gotpl
-# BOM: {"apk:busybox":"1.33.1-r3","apk:ca-certificates":"20191127-r5","apk:libacl":"2.2.53-r0","apk:libcap":"2.50-r0","apk:libcrypto1.1":"1.1.1k-r0","apk:musl":"1.2.2-r3","apk:popt":"1.18-r0","apk:rsync":"3.2.3-r4","apk:tzdata":"2021a-r0","apk:zlib":"1.2.11-r3","apk:zstd-libs":"1.4.9-r1","image:reg.c5h.io/alpine":"sha256:1b32fef9ac1c1fce7d7fcc352d0408dc0e8a62a60d380572b8f2e638d435da5f","image:reg.c5h.io/golang":"sha256:3a3534d57448c2109cdc0e08d2fdb9bc759207508ca9af0b166584736d5e034a"}
+# BOM: {"apk:busybox":"1.33.1-r3","apk:ca-certificates":"20191127-r5","apk:libacl":"2.2.53-r0","apk:libcap":"2.50-r0","apk:libcrypto1.1":"1.1.1k-r0","apk:musl":"1.2.2-r3","apk:popt":"1.18-r0","apk:rsync":"3.2.3-r4","apk:tzdata":"2021a-r0","apk:zlib":"1.2.11-r3","apk:zstd-libs":"1.4.9-r1","image:reg.c5h.io/alpine":"sha256:b1e5b4b2fc0ad164ae6422318dab647dea2739a4408ec358fc81cbdb82bc3d44","image:reg.c5h.io/golang":"sha256:ee7010266d9ebdfe2021d2fa530b378c863c8ecbb8081d5212f2e0bf37e73d3a"}
 
-FROM reg.c5h.io/golang@sha256:3a3534d57448c2109cdc0e08d2fdb9bc759207508ca9af0b166584736d5e034a AS build
+FROM reg.c5h.io/golang@sha256:ee7010266d9ebdfe2021d2fa530b378c863c8ecbb8081d5212f2e0bf37e73d3a AS build
 
-ARG TAG="v1.8.0"
+ARG TAG="v1.8.1"
 
 RUN set -eux; \
     # Check out and build
@@ -18,7 +18,7 @@ RUN set -eux; \
     find /out -exec touch --date=@0 {} \;; \
     touch --date=@0 /vault;
 
-FROM reg.c5h.io/alpine@sha256:1b32fef9ac1c1fce7d7fcc352d0408dc0e8a62a60d380572b8f2e638d435da5f AS base
+FROM reg.c5h.io/alpine@sha256:b1e5b4b2fc0ad164ae6422318dab647dea2739a4408ec358fc81cbdb82bc3d44 AS base
 # This is basically the same thing as reg.c5h.io/base, but we add libcap and don't drop root until after we've
 # had a chance to call setcap on the binary.
 
