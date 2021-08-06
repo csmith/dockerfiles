@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/vault/Dockerfile.gotpl
-# BOM: {"apk:busybox":"1.33.1-r3","apk:ca-certificates":"20191127-r5","apk:libacl":"2.2.53-r0","apk:libcap":"2.50-r0","apk:libcrypto1.1":"1.1.1k-r0","apk:musl":"1.2.2-r3","apk:popt":"1.18-r0","apk:rsync":"3.2.3-r4","apk:tzdata":"2021a-r0","apk:zlib":"1.2.11-r3","apk:zstd-libs":"1.4.9-r1","image:reg.c5h.io/alpine":"sha256:b1e5b4b2fc0ad164ae6422318dab647dea2739a4408ec358fc81cbdb82bc3d44","image:reg.c5h.io/golang":"sha256:ee7010266d9ebdfe2021d2fa530b378c863c8ecbb8081d5212f2e0bf37e73d3a"}
+# BOM: {"apk:busybox":"1.33.1-r3","apk:ca-certificates":"20191127-r5","apk:libacl":"2.2.53-r0","apk:libcap":"2.50-r0","apk:libcrypto1.1":"1.1.1k-r0","apk:musl":"1.2.2-r3","apk:popt":"1.18-r0","apk:rsync":"3.2.3-r4","apk:tzdata":"2021a-r0","apk:zlib":"1.2.11-r3","apk:zstd-libs":"1.4.9-r1","image:reg.c5h.io/alpine":"sha256:b1e5b4b2fc0ad164ae6422318dab647dea2739a4408ec358fc81cbdb82bc3d44","image:reg.c5h.io/golang":"sha256:e45c87e13c93a125335f4be23c2c3dc15436023707727dc3d4a9112def47e744"}
 
-FROM reg.c5h.io/golang@sha256:ee7010266d9ebdfe2021d2fa530b378c863c8ecbb8081d5212f2e0bf37e73d3a AS build
+FROM reg.c5h.io/golang@sha256:e45c87e13c93a125335f4be23c2c3dc15436023707727dc3d4a9112def47e744 AS build
 
 ARG TAG="v1.8.1"
 
