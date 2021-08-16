@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/postgres-13/Dockerfile.gotpl
-# BOM: {"image:reg.c5h.io/alpine":"sha256:b1e5b4b2fc0ad164ae6422318dab647dea2739a4408ec358fc81cbdb82bc3d44","postgres13":"13.3"}
+# BOM: {"image:reg.c5h.io/alpine":"sha256:b1e5b4b2fc0ad164ae6422318dab647dea2739a4408ec358fc81cbdb82bc3d44","postgres13":"13.4"}
 
 # Based on https://github.com/docker-library/postgres/blob/6bbf1c7b308d1c4288251d73c37f6caf75f8a3d4/13/alpine/Dockerfile
 # Original version released under the MIT licence, Copyright (c) 2014, Docker PostgreSQL Authors (See AUTHORS).
@@ -9,8 +9,8 @@
 
 FROM reg.c5h.io/alpine@sha256:b1e5b4b2fc0ad164ae6422318dab647dea2739a4408ec358fc81cbdb82bc3d44
 
-ARG ARCHIVE_URL="https://ftp.postgresql.org/pub/source/v13.3/postgresql-13.3.tar.bz2"
-ARG ARCHIVE_SUM="3cd9454fa8c7a6255b6743b767700925ead1b9ab0d7a0f9dcb1151010f8eb4a1"
+ARG ARCHIVE_URL="https://ftp.postgresql.org/pub/source/v13.4/postgresql-13.4.tar.bz2"
+ARG ARCHIVE_SUM="ea93e10390245f1ce461a54eb5f99a48d8cabd3a08ce4d652ec2169a357bc0cd"
 
 # 70 is the standard uid/gid for "postgres" in Alpine
 # https://git.alpinelinux.org/aports/tree/main/postgresql/postgresql.pre-install?h=3.12-stable
