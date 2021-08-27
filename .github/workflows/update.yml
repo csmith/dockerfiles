@@ -20,5 +20,6 @@ jobs:
         run:  |
           git config user.name "csmith-ci"
           git config user.email "concourse@chameth.com"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" reg.c5h.io
           go run ./cmd
           git push
