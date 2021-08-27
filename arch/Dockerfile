@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/arch/Dockerfile.gotpl
-# BOM: {"pacman:acl":"2.3.1-1","pacman:archlinux-keyring":"20210802-1","pacman:attr":"2.5.1-1","pacman:audit":"3.0.3-1","pacman:bash":"5.1.008-1","pacman:bzip2":"1.0.8-4","pacman:ca-certificates":"20210603-1","pacman:ca-certificates-mozilla":"3.69-1","pacman:ca-certificates-utils":"20210603-1","pacman:coreutils":"8.32-1","pacman:curl":"7.78.0-1","pacman:e2fsprogs":"1.46.3-3","pacman:expat":"2.4.1-1","pacman:filesystem":"2021.05.31-1","pacman:findutils":"4.8.0-1","pacman:gcc-libs":"11.1.0-1","pacman:glib2":"2.68.3-1","pacman:glibc":"2.33-5","pacman:gmp":"6.2.1-1","pacman:gnupg":"2.2.29-1","pacman:gnutls":"3.7.2-2","pacman:gpgme":"1.16.0-1","pacman:gzip":"1.10-3","pacman:iana-etc":"20210728-1","pacman:keyutils":"1.6.3-1","pacman:krb5":"1.19.1-1","pacman:less":"1:590-1","pacman:libarchive":"3.5.1-1","pacman:libassuan":"2.5.5-1","pacman:libcap":"2.51-1","pacman:libcap-ng":"0.8.2-3","pacman:libffi":"3.3-4","pacman:libgcrypt":"1.9.3-1","pacman:libgpg-error":"1.42-1","pacman:libidn2":"2.3.2-1","pacman:libksba":"1.6.0-1","pacman:libldap":"2.4.59-2","pacman:libnghttp2":"1.44.0-1","pacman:libp11-kit":"0.24.0-1","pacman:libpsl":"0.21.1-1","pacman:libsasl":"2.1.27-3","pacman:libsecret":"0.20.4-1","pacman:libssh2":"1.9.0-3","pacman:libtasn1":"4.17.0-1","pacman:libtirpc":"1.3.2-1","pacman:libunistring":"0.9.10-3","pacman:libxcrypt":"4.4.25-1","pacman:licenses":"20200427-1","pacman:linux-api-headers":"5.12.3-1","pacman:lz4":"1:1.9.3-2","pacman:ncurses":"6.2-2","pacman:nettle":"3.7.3-1","pacman:npth":"1.6-3","pacman:openssl":"1.1.1.k-1","pacman:p11-kit":"0.24.0-1","pacman:pacman":"6.0.0-5","pacman:pacman-mirrorlist":"20210808-1","pacman:pam":"1.5.1-1","pacman:pambase":"20210605-2","pacman:pcre":"8.45-1","pacman:pcre2":"10.37-1","pacman:pinentry":"1.1.1-1","pacman:readline":"8.1.001-1","pacman:sed":"4.8-1","pacman:sqlite":"3.36.0-1","pacman:systemd-libs":"249.3-1","pacman:tzdata":"2021a-1","pacman:util-linux-libs":"2.37.1-3","pacman:xz":"5.2.5-1","pacman:zlib":"1:1.2.11-4","pacman:zstd":"1.5.0-1"}
+# BOM: {"pacman:acl":"2.3.1-1","pacman:archlinux-keyring":"20210820-1","pacman:attr":"2.5.1-1","pacman:audit":"3.0.4-1","pacman:bash":"5.1.008-1","pacman:bzip2":"1.0.8-4","pacman:ca-certificates":"20210603-1","pacman:ca-certificates-mozilla":"3.69-1","pacman:ca-certificates-utils":"20210603-1","pacman:coreutils":"8.32-1","pacman:curl":"7.78.0-1","pacman:e2fsprogs":"1.46.4-1","pacman:expat":"2.4.1-1","pacman:filesystem":"2021.05.31-1","pacman:findutils":"4.8.0-1","pacman:gcc-libs":"11.1.0-1","pacman:glib2":"2.68.4-1","pacman:glibc":"2.33-5","pacman:gmp":"6.2.1-1","pacman:gnupg":"2.2.29-1","pacman:gnutls":"3.7.2-2","pacman:gpgme":"1.16.0-1","pacman:gzip":"1.10-3","pacman:iana-etc":"20210728-1","pacman:keyutils":"1.6.3-1","pacman:krb5":"1.19.1-1","pacman:less":"1:590-1","pacman:libarchive":"3.5.2-1","pacman:libassuan":"2.5.5-1","pacman:libcap":"2.53-1","pacman:libcap-ng":"0.8.2-3","pacman:libffi":"3.3-4","pacman:libgcrypt":"1.9.3-1","pacman:libgpg-error":"1.42-1","pacman:libidn2":"2.3.2-1","pacman:libksba":"1.6.0-1","pacman:libldap":"2.4.59-2","pacman:libnghttp2":"1.44.0-1","pacman:libp11-kit":"0.24.0-1","pacman:libpsl":"0.21.1-1","pacman:libsasl":"2.1.27-3","pacman:libsecret":"0.20.4-1","pacman:libssh2":"1.9.0-3","pacman:libtasn1":"4.17.0-1","pacman:libtirpc":"1.3.2-1","pacman:libunistring":"0.9.10-3","pacman:libxcrypt":"4.4.25-1","pacman:licenses":"20200427-1","pacman:linux-api-headers":"5.12.3-1","pacman:lz4":"1:1.9.3-2","pacman:ncurses":"6.2-2","pacman:nettle":"3.7.3-1","pacman:npth":"1.6-3","pacman:openssl":"1.1.1.l-1","pacman:p11-kit":"0.24.0-1","pacman:pacman":"6.0.0-5","pacman:pacman-mirrorlist":"20210822-1","pacman:pam":"1.5.1-1","pacman:pambase":"20210605-2","pacman:pcre":"8.45-1","pacman:pcre2":"10.37-1","pacman:pinentry":"1.1.1-1","pacman:readline":"8.1.001-1","pacman:sed":"4.8-1","pacman:sqlite":"3.36.0-1","pacman:systemd-libs":"249.3-1","pacman:tzdata":"2021a-1","pacman:util-linux-libs":"2.37.2-1","pacman:xz":"5.2.5-1","pacman:zlib":"1:1.2.11-4","pacman:zstd":"1.5.0-1"}
 
 FROM reg.c5h.io/arch AS build
 
@@ -48,9 +48,9 @@ RUN set -eux; \
         --noscriptlet \
         --hookdir /build/alpm-hooks/usr/share/libalpm/hooks/ \
         acl=2.3.1-1 \
-        archlinux-keyring=20210802-1 \
+        archlinux-keyring=20210820-1 \
         attr=2.5.1-1 \
-        audit=3.0.3-1 \
+        audit=3.0.4-1 \
         bash=5.1.008-1 \
         bzip2=1.0.8-4 \
         ca-certificates=20210603-1 \
@@ -58,12 +58,12 @@ RUN set -eux; \
         ca-certificates-utils=20210603-1 \
         coreutils=8.32-1 \
         curl=7.78.0-1 \
-        e2fsprogs=1.46.3-3 \
+        e2fsprogs=1.46.4-1 \
         expat=2.4.1-1 \
         filesystem=2021.05.31-1 \
         findutils=4.8.0-1 \
         gcc-libs=11.1.0-1 \
-        glib2=2.68.3-1 \
+        glib2=2.68.4-1 \
         glibc=2.33-5 \
         gmp=6.2.1-1 \
         gnupg=2.2.29-1 \
@@ -74,9 +74,9 @@ RUN set -eux; \
         keyutils=1.6.3-1 \
         krb5=1.19.1-1 \
         less=1:590-1 \
-        libarchive=3.5.1-1 \
+        libarchive=3.5.2-1 \
         libassuan=2.5.5-1 \
-        libcap=2.51-1 \
+        libcap=2.53-1 \
         libcap-ng=0.8.2-3 \
         libffi=3.3-4 \
         libgcrypt=1.9.3-1 \
@@ -100,10 +100,10 @@ RUN set -eux; \
         ncurses=6.2-2 \
         nettle=3.7.3-1 \
         npth=1.6-3 \
-        openssl=1.1.1.k-1 \
+        openssl=1.1.1.l-1 \
         p11-kit=0.24.0-1 \
         pacman=6.0.0-5 \
-        pacman-mirrorlist=20210808-1 \
+        pacman-mirrorlist=20210822-1 \
         pam=1.5.1-1 \
         pambase=20210605-2 \
         pcre=8.45-1 \
@@ -114,7 +114,7 @@ RUN set -eux; \
         sqlite=3.36.0-1 \
         systemd-libs=249.3-1 \
         tzdata=2021a-1 \
-        util-linux-libs=2.37.1-3 \
+        util-linux-libs=2.37.2-1 \
         xz=5.2.5-1 \
         zlib=1:1.2.11-4 \
         zstd=1.5.0-1 \
