@@ -1,0 +1,23 @@
+on:
+  schedule:
+    - cron: '33 3 * * *'
+name: update
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-go@v1
+        with:
+          go-version: '1.17'
+      - run: |
+          git config user.name "csmith-ci"
+          git config user.email "concourse@chameth.com"
+      - env:
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+        run:  |
+          git config user.name "csmith-ci"
+          git config user.email "concourse@chameth.com"
+          go run ./cmd
+          git push
