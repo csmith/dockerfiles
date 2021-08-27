@@ -41,7 +41,7 @@ func main() {
 		"golang",       // depends on alpine
 		"distribution", // depends on golang + base
 		"postgres-13",  // depends on alpine
-		"vault",        // depends on alpine + golang
+		// "vault",        // depends on alpine + golang
 	}
 
 	for i := range targets {
