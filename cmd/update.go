@@ -13,6 +13,7 @@ import (
 	"text/template"
 
 	"github.com/csmith/dockerfiles"
+	"github.com/kouhin/envflag"
 )
 
 var (
@@ -28,7 +29,9 @@ var (
 )
 
 func main() {
-	flag.Parse()
+	if err := envflag.Parse(); err != nil {
+		panic(err)
+	}
 
 	// NB: These are manually sorted to flatten the dependency hierarchy.
 	targets := []string{
