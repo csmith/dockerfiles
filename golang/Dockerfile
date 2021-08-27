@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/golang/Dockerfile.gotpl
-# BOM: {"apk:bash":"5.1.4-r0","apk:binutils":"2.35.2-r2","apk:brotli-libs":"1.0.9-r5","apk:busybox":"1.33.1-r3","apk:ca-certificates":"20191127-r5","apk:curl":"7.78.0-r0","apk:expat":"2.4.1-r0","apk:gcc":"10.3.1_git20210424-r2","apk:git":"2.32.0-r0","apk:gmp":"6.2.1-r0","apk:go":"1.16.7-r0","apk:isl22":"0.22-r0","apk:libatomic":"10.3.1_git20210424-r2","apk:libcrypto1.1":"1.1.1k-r0","apk:libcurl":"7.78.0-r0","apk:libgcc":"10.3.1_git20210424-r2","apk:libgomp":"10.3.1_git20210424-r2","apk:libgphobos":"10.3.1_git20210424-r2","apk:libssl1.1":"1.1.1k-r0","apk:libstdc++":"10.3.1_git20210424-r2","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.2-r3","apk:musl-dev":"1.2.2-r3","apk:ncurses-libs":"6.2_p20210612-r0","apk:ncurses-terminfo-base":"6.2_p20210612-r0","apk:nghttp2-libs":"1.43.0-r0","apk:pcre2":"10.36-r0","apk:readline":"8.1.0-r0","apk:zlib":"1.2.11-r3","golang":"go1.17","image:reg.c5h.io/alpine":"sha256:b1e5b4b2fc0ad164ae6422318dab647dea2739a4408ec358fc81cbdb82bc3d44"}
+# BOM: {"apk:bash":"5.1.4-r0","apk:binutils":"2.35.2-r2","apk:brotli-libs":"1.0.9-r5","apk:busybox":"1.33.1-r3","apk:ca-certificates":"20191127-r5","apk:curl":"7.78.0-r0","apk:expat":"2.4.1-r0","apk:gcc":"10.3.1_git20210424-r2","apk:git":"2.32.0-r0","apk:gmp":"6.2.1-r0","apk:go":"1.16.7-r0","apk:isl22":"0.22-r0","apk:libatomic":"10.3.1_git20210424-r2","apk:libcrypto1.1":"1.1.1l-r0","apk:libcurl":"7.78.0-r0","apk:libgcc":"10.3.1_git20210424-r2","apk:libgomp":"10.3.1_git20210424-r2","apk:libgphobos":"10.3.1_git20210424-r2","apk:libssl1.1":"1.1.1l-r0","apk:libstdc++":"10.3.1_git20210424-r2","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.2-r3","apk:musl-dev":"1.2.2-r3","apk:ncurses-libs":"6.2_p20210612-r0","apk:ncurses-terminfo-base":"6.2_p20210612-r0","apk:nghttp2-libs":"1.43.0-r0","apk:pcre2":"10.36-r0","apk:readline":"8.1.0-r0","apk:zlib":"1.2.11-r3","golang":"go1.17","image:reg.c5h.io/alpine":"sha256:b81c50e56d1dd83921e2dbf786ef233ac11bf297a9130308f5e1da9f549d7ff3"}
 
-FROM reg.c5h.io/alpine@sha256:b1e5b4b2fc0ad164ae6422318dab647dea2739a4408ec358fc81cbdb82bc3d44
+FROM reg.c5h.io/alpine@sha256:b81c50e56d1dd83921e2dbf786ef233ac11bf297a9130308f5e1da9f549d7ff3
 
 ARG ARCHIVE_URL="https:/golang.org/dl/go1.17.src.tar.gz"
 ARG ARCHIVE_SUM="3a70e5055509f347c0fb831ca07a2bf3b531068f349b14a3c652e9b5b67beb5d"
@@ -23,12 +23,12 @@ RUN set -eux; \
         go=1.16.7-r0 \
         isl22=0.22-r0 \
         libatomic=10.3.1_git20210424-r2 \
-        libcrypto1.1=1.1.1k-r0 \
+        libcrypto1.1=1.1.1l-r0 \
         libcurl=7.78.0-r0 \
         libgcc=10.3.1_git20210424-r2 \
         libgomp=10.3.1_git20210424-r2 \
         libgphobos=10.3.1_git20210424-r2 \
-        libssl1.1=1.1.1k-r0 \
+        libssl1.1=1.1.1l-r0 \
         libstdc++=10.3.1_git20210424-r2 \
         mpc1=1.2.1-r0 \
         mpfr4=4.1.0-r0 \
@@ -68,12 +68,12 @@ RUN set -eux; \
         gmp=6.2.1-r0 \
         isl22=0.22-r0 \
         libatomic=10.3.1_git20210424-r2 \
-        libcrypto1.1=1.1.1k-r0 \
+        libcrypto1.1=1.1.1l-r0 \
         libcurl=7.78.0-r0 \
         libgcc=10.3.1_git20210424-r2 \
         libgomp=10.3.1_git20210424-r2 \
         libgphobos=10.3.1_git20210424-r2 \
-        libssl1.1=1.1.1k-r0 \
+        libssl1.1=1.1.1l-r0 \
         libstdc++=10.3.1_git20210424-r2 \
         mpc1=1.2.1-r0 \
         mpfr4=4.1.0-r0 \
