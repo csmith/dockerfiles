@@ -39,7 +39,9 @@ All images are available at `reg.c5h.io/<name>`. Only the latest tag is built.
 | irc-bot            | https://github.com/greboid/irc-bot                    |       ✅      |    ✅     |    ✅    |
 | ↳ irc-distribution | https://github.com/csmith/irc-distribution            |       ✅      |    ✅     |    ✅    |
 | ↳ irc-github       | https://github.com/greboid/irc-github                 |       ✅      |    ✅     |    ✅    |
-| golang             | https://golang.org/                                   |       ✅     |    N/A    |    ✅    |
+| ↳ irc-goplum       | https://github.com/greboid/irc-goplum                 |       ✅      |    ✅     |    ✅    |
+| ↳ irc-news         | https://github.com/csmith/ircplugins                  |       ✅      |    ✅     |    ✅    |
+| golang             | https://golang.org/                                   |       ✅      |    N/A    |    ✅    |
 | postgres-13        | https://www.postgresql.org/                           |       ❌      |    ❌     |    ❌    |
 | vault              | https://github.com/hashicorp/vault                    |       ✅      |    ✅     |    ✅    |
 

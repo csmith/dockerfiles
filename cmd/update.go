@@ -49,6 +49,8 @@ func main() {
 		"irc-bot",          // depends on golang + base
 		"irc-distribution", // depends on golang + base
 		"irc-github",       // depends on golang + base
+		"irc-goplum",       // depends on golang + base
+		"irc-news",         // depends on golang + base
 		"postgres-13",      // depends on alpine
 		// "vault",        // depends on alpine + golang
 	}
