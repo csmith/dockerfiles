@@ -19,6 +19,7 @@ import (
 var (
 	shouldCommit = flag.Bool("commit", true, "Whether or not to commit changes")
 	shouldBuild  = flag.Bool("build", true, "Whether or not to build (and push) the image")
+	target       = flag.String("target", "", "Project to build. Blank for all projects.")
 
 	funcs = template.FuncMap{
 		"image":           Image,
@@ -33,6 +34,11 @@ func main() {
 		panic(err)
 	}
 
+	if *target != "" {
+		Update(*target)
+		return
+	}
+
 	// NB: These are manually sorted to flatten the dependency hierarchy.
 	targets := []string{
 		"alpine",
@@ -40,6 +46,7 @@ func main() {
 		"base",         // depends on alpine
 		"golang",       // depends on alpine
 		"distribution", // depends on golang + base
+		"irc-bot",      // depends on golang + base
 		"postgres-13",  // depends on alpine
 		// "vault",        // depends on alpine + golang
 	}
