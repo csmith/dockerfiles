@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/postgres-13/Dockerfile.gotpl
-# BOM: {"image:reg.c5h.io/alpine":"sha256:b81c50e56d1dd83921e2dbf786ef233ac11bf297a9130308f5e1da9f549d7ff3","postgres13":"13.4"}
+# BOM: {"image:reg.c5h.io/alpine":"sha256:f32b56d2f268e9a4dce68b95adac9f81b8ed8f9bc7fd33ba0d804e7426f603fd","postgres13":"13.4"}
 
 # Based on https://github.com/docker-library/postgres/blob/6bbf1c7b308d1c4288251d73c37f6caf75f8a3d4/13/alpine/Dockerfile
 # Original version released under the MIT licence, Copyright (c) 2014, Docker PostgreSQL Authors (See AUTHORS).
@@ -7,7 +7,7 @@
 # See LICENCE for a copy of the MIT licence.
 # See https://github.com/docker-library/postgres/blob/517c64f87e6661366b415df3f2273c76cea428b0/AUTHORS for upstream authors.
 
-FROM reg.c5h.io/alpine@sha256:b81c50e56d1dd83921e2dbf786ef233ac11bf297a9130308f5e1da9f549d7ff3
+FROM reg.c5h.io/alpine@sha256:f32b56d2f268e9a4dce68b95adac9f81b8ed8f9bc7fd33ba0d804e7426f603fd
 
 ARG ARCHIVE_URL="https://ftp.postgresql.org/pub/source/v13.4/postgresql-13.4.tar.bz2"
 ARG ARCHIVE_SUM="ea93e10390245f1ce461a54eb5f99a48d8cabd3a08ce4d652ec2169a357bc0cd"
