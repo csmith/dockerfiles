@@ -1,0 +1,16 @@
+FROM {{image "reg.c5h.io/golang"}} AS build
+
+ARG TAG="{{github_tag "csmith/irc-distribution"}}"
+
+RUN set -eux; \
+    apk add --no-cache git; \
+    git clone --depth=1 -b $TAG --single-branch https://github.com/csmith/irc-distribution /go/src/github.com/csmith/irc-distribution; \
+    cd /go/src/github.com/csmith/irc-distribution; \
+    CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main ./cmd/distribution; \
+    # Clobber all the timestamps to make the build more reproducible
+    touch --date=@0 /go/src/github.com/csmith/irc-distribution/main;
+
+FROM {{image "reg.c5h.io/base"}}
+
+COPY --from=build /go/src/github.com/csmith/irc-distribution/main /irc-distribution
+ENTRYPOINT ["/irc-distribution"]

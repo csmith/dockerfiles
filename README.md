@@ -14,7 +14,7 @@ anyone else's purposes. Feel free to use them, and report any issues you do find
 
 ## Structure
 
-Each image has its own folder, containing at least:
+Each image has its own folder, containing:
 
 * `Dockerfile` - the actual dockerfile the latest version should be built from
 * `Dockerfile.gotpl` - a template file for generating the Dockerfile
@@ -28,15 +28,20 @@ you can pass `--commit=false` and `--build=false`.
 
 ## Images
 
-| Name              | Description              | Reproducible? | Non-root? | Minimal? |
-|-------------------|--------------------------|:-------------:|:---------:|:--------:|
-| alpine            | Alpine Linux             |       ✅      |    N/A    |    ✅    |
-| arch              | Archlinux image          |       ✅      |    N/A    |    ❌    |
-| base              | Minimal base image       |       ✅      |    ✅     |    ✅    |
-| distribution      | Docker registry          |       ✅      |    ✅     |    ✅    |
-| golang            | Golang build toolchain   |       ❌      |    N/A    |    ✅    |
-| postgres-13       | Postgresql v13           |       ❌      |    ❌     |    ❌    |
-| vault             | Hashicorp Vault          |       ✅      |    ✅     |    ✅    |
+All images are available at `reg.c5h.io/<name>`. Only the latest tag is built.
+
+| Name               | Upstream                                              | Reproducible? | Non-root? | Minimal? |
+|--------------------|-------------------------------------------------------|:-------------:|:---------:|:--------:|
+| alpine             | https://alpinelinux.org/                              |       ✅      |    N/A    |    ✅    |
+| arch               | https://archlinux.org/                                |       ✅      |    N/A    |    ❌    |
+| base               | N/A                                                   |       ✅      |    ✅     |    ✅    |
+| distribution       | https://github.com/distribution/distribution          |       ✅      |    ✅     |    ✅    |
+| irc-bot            | https://github.com/greboid/irc-bot                    |       ✅      |    ✅     |    ✅    |
+| ↳ irc-distribution | https://github.com/csmith/irc-distribution            |       ✅      |    ✅     |    ✅    |
+| ↳ irc-github       | https://github.com/greboid/irc-github                 |       ✅      |    ✅     |    ✅    |
+| golang             | https://golang.org/                                   |       ✅     |    N/A    |    ✅    |
+| postgres-13        | https://www.postgresql.org/                           |       ❌      |    ❌     |    ❌    |
+| vault              | https://github.com/hashicorp/vault                    |       ✅      |    ✅     |    ✅    |
 
 Meaning of the status columns:
 
