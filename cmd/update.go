@@ -208,5 +208,6 @@ func GitHubTag(repo string) string {
 	if err != nil {
 		log.Fatalf("Couldn't determine latest tag: %v", err)
 	}
+	materials[fmt.Sprintf("github:%s", repo)] = tag
 	return tag
 }
