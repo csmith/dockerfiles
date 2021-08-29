@@ -1,4 +1,4 @@
-FROM {{image "reg.c5h.io/golang"}} AS build
+FROM {{image "golang"}} AS build
 
 ARG TAG="{{github_tag "hashicorp/vault"}}"
 
@@ -15,8 +15,8 @@ RUN set -eux; \
     find /out -exec touch --date=@0 {} \;; \
     touch --date=@0 /vault;
 
-FROM {{image "reg.c5h.io/alpine"}} AS base
-# This is basically the same thing as reg.c5h.io/base, but we add libcap and don't drop root until after we've
+FROM {{image "alpine"}} AS base
+# This is basically the same thing as base, but we add libcap and don't drop root until after we've
 # had a chance to call setcap on the binary.
 
 RUN set -eux; \

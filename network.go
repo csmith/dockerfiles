@@ -27,7 +27,7 @@ func LatestDigest(ref string) (string, error) {
 		})
 	}
 
-	return crane.Digest(ref, authOpt)
+	return crane.Digest(fmt.Sprintf("%s/%s", *registry, ref), authOpt)
 }
 
 // DownloadYaml requests the given url and then attempts to unmarshal the body as YAML into the provided struct.

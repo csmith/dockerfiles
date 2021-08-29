@@ -1,4 +1,4 @@
-FROM {{image "reg.c5h.io/alpine"}}
+FROM {{image "alpine"}}
 
 ARG ARCHIVE_URL="{{golang_url}}"
 ARG ARCHIVE_SUM="{{golang_checksum}}"

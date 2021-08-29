@@ -1,4 +1,4 @@
-FROM {{image "reg.c5h.io/golang"}} AS build
+FROM {{image "golang"}} AS build
 
 ARG TAG="{{github_tag "csmith/ircplugins"}}"
 
@@ -10,7 +10,7 @@ RUN set -eux; \
     # Clobber all the timestamps to make the build more reproducible
     touch --date=@0 /go/src/github.com/csmith/ircplugins/main;
 
-FROM {{image "reg.c5h.io/base"}}
+FROM {{image "base"}}
 
 COPY --from=build /go/src/github.com/csmith/ircplugins/main /irc-news
 ENTRYPOINT ["/irc-news"]

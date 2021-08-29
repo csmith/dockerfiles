@@ -4,7 +4,7 @@
 # See LICENCE for a copy of the MIT licence.
 # See https://github.com/docker-library/postgres/blob/517c64f87e6661366b415df3f2273c76cea428b0/AUTHORS for upstream authors.
 
-FROM {{image "reg.c5h.io/alpine"}}
+FROM {{image "alpine"}}
 
 ARG ARCHIVE_URL="{{postgres13_url}}"
 ARG ARCHIVE_SUM="{{postgres13_checksum}}"

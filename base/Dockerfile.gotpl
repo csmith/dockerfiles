@@ -1,4 +1,4 @@
-FROM {{image "reg.c5h.io/alpine"}} AS build
+FROM {{image "alpine"}} AS build
 
 RUN set -eux; \
     # Sort out our dependencies (and sources)

@@ -15,11 +15,12 @@ jobs:
           git config user.name "csmith-ci"
           git config user.email "concourse@chameth.com"
       - env:
+          REGISTRY: ${{ secrets.REGISTRY }}
           REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
           REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
         run:  |
-          git config user.name "csmith-ci"
-          git config user.email "concourse@chameth.com"
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" reg.c5h.io
           go run ./cmd
           git push
