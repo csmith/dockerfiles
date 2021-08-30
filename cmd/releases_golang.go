@@ -5,7 +5,6 @@ import (
 	"path"
 	"strings"
 
-	"github.com/csmith/dockerfiles"
 	"github.com/hashicorp/go-version"
 )
 
@@ -26,7 +25,7 @@ func init() {
 			} `yaml:"files"`
 		}
 
-		if err := dockerfiles.DownloadJson(golangJsonUrl, &releases); err != nil {
+		if err := DownloadJson(golangJsonUrl, &releases); err != nil {
 			log.Fatalf("Unable to download golang release information: %v", err)
 		}
 

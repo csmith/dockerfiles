@@ -5,7 +5,6 @@ import (
 	"log"
 	"strings"
 
-	"github.com/csmith/dockerfiles"
 	"github.com/hashicorp/go-version"
 )
 
@@ -17,7 +16,7 @@ func init() {
 			postgresChecksumUrl  = postgresReleaseIndex + "v%[1]s/postgresql-%[1]s.tar.bz2.sha256"
 		)
 
-		versions, err := dockerfiles.FindInHtml(postgresReleaseIndex, `a[href*="v13."]`)
+		versions, err := FindInHtml(postgresReleaseIndex, `a[href*="v13."]`)
 		if err != nil {
 			log.Fatalf("Couldn't find releases: %v", err)
 		}
@@ -36,7 +35,7 @@ func init() {
 		}
 
 		url = fmt.Sprintf(postgresDownloadUrl, latest)
-		checksum, err = dockerfiles.DownloadHash(fmt.Sprintf(postgresChecksumUrl, latest))
+		checksum, err = DownloadHash(fmt.Sprintf(postgresChecksumUrl, latest))
 		if err != nil {
 			log.Fatalf("Couldn't get checksum for postgres releases: %v", versions)
 		}

@@ -1,4 +1,4 @@
-package dockerfiles
+package main
 
 import "flag"
 

@@ -12,7 +12,6 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/csmith/dockerfiles"
 	"github.com/kouhin/envflag"
 )
 
@@ -177,16 +176,16 @@ func existingBom(target string) map[string]string {
 }
 
 func Image(ref string) string {
-	res, err := dockerfiles.LatestDigest(ref)
+	res, err := LatestDigest(ref)
 	if err != nil {
 		log.Fatalf("Unable to get latest digest for ref %s: %v", ref, err)
 	}
 	materials[fmt.Sprintf("image:%s", ref)] = res
-	return fmt.Sprintf("%s@%s", ref, res)
+	return fmt.Sprintf("%s/%s@%s", *registry, ref, res)
 }
 
 func AlpinePackages(packages ...string) map[string]string {
-	res, err := dockerfiles.LatestAlpinePackages(packages...)
+	res, err := LatestAlpinePackages(packages...)
 	if err != nil {
 		log.Fatalf("Unable to get latest packages: %v", err)
 	}
@@ -197,7 +196,7 @@ func AlpinePackages(packages ...string) map[string]string {
 }
 
 func ArchPackages(packages ...string) map[string]string {
-	res, err := dockerfiles.LatestArchPackages(packages...)
+	res, err := LatestArchPackages(packages...)
 	if err != nil {
 		log.Fatalf("Unable to get latest packages: %v", err)
 	}
@@ -208,7 +207,7 @@ func ArchPackages(packages ...string) map[string]string {
 }
 
 func GitHubTag(repo string) string {
-	tag, err := dockerfiles.LatestGitHubTag(repo)
+	tag, err := LatestGitHubTag(repo)
 	if err != nil {
 		log.Fatalf("Couldn't determine latest tag: %v", err)
 	}

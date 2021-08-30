@@ -2,8 +2,6 @@ package main
 
 import (
 	"log"
-
-	"github.com/csmith/dockerfiles"
 )
 
 func init() {
@@ -21,7 +19,7 @@ func init() {
 			Version  string `yaml:"version"`
 		}
 
-		if err := dockerfiles.DownloadYaml(alpineReleaseIndex, &releases); err != nil {
+		if err := DownloadYaml(alpineReleaseIndex, &releases); err != nil {
 			log.Fatalf("Unable to download Alpine release information: %v", err)
 		}
 
