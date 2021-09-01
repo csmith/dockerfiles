@@ -11,9 +11,6 @@ jobs:
       - uses: actions/setup-go@v1
         with:
           go-version: '1.17'
-      - run: |
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
       - env:
           REGISTRY: ${{ secrets.REGISTRY }}
           REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
