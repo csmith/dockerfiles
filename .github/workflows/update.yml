@@ -12,8 +12,8 @@ jobs:
         with:
           go-version: '1.17'
       - run: |
-          git config user.name "csmith-ci"
-          git config user.email "concourse@chameth.com"
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
       - env:
           REGISTRY: ${{ secrets.REGISTRY }}
           REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
@@ -21,6 +21,6 @@ jobs:
         run:  |
           git config user.name "${{ secrets.GIT_USERNAME }}"
           git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" reg.c5h.io
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
           go run ./cmd
           git push
