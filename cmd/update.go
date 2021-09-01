@@ -107,7 +107,7 @@ func Update(dir string) {
 	}
 
 	if *shouldBuild {
-		imageName := fmt.Sprintf("reg.c5h.io/%s", dir)
+		imageName := fmt.Sprintf("%s/%s", *registry, dir)
 		buildahCommand := exec.Command(
 			"/usr/bin/buildah",
 			"bud",
