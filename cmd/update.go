@@ -25,6 +25,7 @@ var (
 		"alpine_packages": AlpinePackages,
 		"arch_packages":   ArchPackages,
 		"github_tag":      GitHubTag,
+		"registry":        Registry,
 	}
 )
 
@@ -174,6 +175,10 @@ func existingBom(target string) map[string]string {
 	}
 
 	return res
+}
+
+func Registry() string {
+	return *registry
 }
 
 func Image(ref string) string {

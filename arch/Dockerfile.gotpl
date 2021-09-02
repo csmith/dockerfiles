@@ -1,4 +1,4 @@
-FROM reg.c5h.io/arch AS build
+FROM {{registry}}/arch AS build
 
 RUN set -eux; \
     # Install packages we need to bootstrap an image

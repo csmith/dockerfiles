@@ -1,4 +1,4 @@
-FROM reg.c5h.io/alpine AS verify
+FROM {{registry}}/alpine AS verify
 
 ARG ARCHIVE_URL="{{alpine_url}}"
 ARG ARCHIVE_SUM="{{alpine_checksum}}"
