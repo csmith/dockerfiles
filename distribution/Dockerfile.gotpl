@@ -7,6 +7,7 @@ RUN set -eux; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/distribution/distribution /go/src/github.com/docker/distribution; \
     cd /go/src/github.com/docker/distribution; \
     BUILDTAGS="include_oss include_gcs" GO111MODULE=off CGO_ENABLED=0 make bin/registry; \
+    go run github.com/google/go-licenses@latest save ./cmd/registry --save_path=/notices; \
     # Clobber all the timestamps to make the build more reproducible
     touch --date=@0 /go/src/github.com/docker/distribution/cmd/registry/config-dev.yml /go/src/github.com/docker/distribution/bin/registry;
 
@@ -14,6 +15,7 @@ FROM {{image "base"}}
 
 COPY --from=build /go/src/github.com/docker/distribution/cmd/registry/config-dev.yml /etc/docker/registry/config.yml
 COPY --from=build /go/src/github.com/docker/distribution/bin/registry /bin/registry
+COPY --from=build /notices /notices
 EXPOSE 5000
 VOLUME ["/var/lib/registry"]
 ENTRYPOINT ["/bin/registry"]
