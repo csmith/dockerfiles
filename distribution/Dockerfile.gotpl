@@ -14,7 +14,6 @@ FROM {{image "base"}}
 
 COPY --from=build /go/src/github.com/docker/distribution/cmd/registry/config-dev.yml /etc/docker/registry/config.yml
 COPY --from=build /go/src/github.com/docker/distribution/bin/registry /bin/registry
-COPY --from=build /notices /notices
 EXPOSE 5000
 VOLUME ["/var/lib/registry"]
 ENTRYPOINT ["/bin/registry"]
