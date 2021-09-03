@@ -10,6 +10,7 @@ RUN set -eux; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/csmith/linx-server /go/src/github.com/csmith/linx-server; \
     cd /go/src/github.com/csmith/linx-server; \
     CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main .; \
+    go run github.com/google/go-licenses@latest save ./... --save_path=/notices; \
     mkdir -p /data/files /data/meta; \
     chown -R 65532:65532 /data; \
     # Clobber all the timestamps to make the build more reproducible
@@ -19,6 +20,7 @@ FROM reg.c5h.io/base@sha256:f7f27db7afb58bae23ad902072228f1b090b878af303d9f63bd2
 
 COPY --from=build /go/src/github.com/csmith/linx-server/main /linx-server
 COPY --from=build /data /data
+COPY --from=build /notices /notices
 
 VOLUME ["/data/files", "/data/meta"]
 EXPOSE 8080
