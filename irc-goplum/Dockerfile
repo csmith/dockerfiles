@@ -1,9 +1,9 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/irc-goplum/Dockerfile.gotpl
-# BOM: {"github:greboid/irc-goplum":"v4.0.0","image:base":"sha256:f7f27db7afb58bae23ad902072228f1b090b878af303d9f63bd2c1526b9b4f53","image:golang":"sha256:39697ca81312ea9a12b8ba883facf35ffd320ac0dcd8ae977fd03ab25c461fca"}
+# BOM: {"github:greboid/irc-goplum":"v4.0.1","image:base":"sha256:f7f27db7afb58bae23ad902072228f1b090b878af303d9f63bd2c1526b9b4f53","image:golang":"sha256:39697ca81312ea9a12b8ba883facf35ffd320ac0dcd8ae977fd03ab25c461fca"}
 
 FROM reg.c5h.io/golang@sha256:39697ca81312ea9a12b8ba883facf35ffd320ac0dcd8ae977fd03ab25c461fca AS build
 
-ARG TAG="v4.0.0"
+ARG TAG="v4.0.1"
 
 RUN set -eux; \
     apk add --no-cache git; \
