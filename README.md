@@ -36,6 +36,7 @@ All images are available at `reg.c5h.io/<name>`. Only the latest tag is built.
 | arch               | https://archlinux.org/                                |       ✅      |    N/A    |    ❌    |
 | base               | N/A                                                   |       ✅      |    ✅     |    ✅    |
 | distribution       | https://github.com/distribution/distribution          |       ✅      |    ✅     |    ✅    |
+| ergo-certwrapper   | https://github.com/ergochatergo                       |       ✅      |    ✅     |    ✅    |
 | irc-bot            | https://github.com/greboid/irc-bot                    |       ✅      |    ✅     |    ✅    |
 | ↳ irc-distribution | https://github.com/csmith/irc-distribution            |       ✅      |    ✅     |    ✅    |
 | ↳ irc-github       | https://github.com/greboid/irc-github                 |       ✅      |    ✅     |    ✅    |
@@ -45,6 +46,12 @@ All images are available at `reg.c5h.io/<name>`. Only the latest tag is built.
 | linx-server        | https://github.com/csmith/linx-server                 |       ✅      |    ✅     |    ✅    |
 | postgres-13        | https://www.postgresql.org/                           |       ❌      |    ❌     |    ❌    |
 | vault              | https://github.com/hashicorp/vault                    |       ✅      |    ✅     |    ✅    |
+
+Images with the `-certwrapper` suffix have [csmith/certwrapper](https://github.com/csmith/certwrapper)
+included as the entrypoint, to facilitate obtaining SSL certificates. To keep image size down, certwrapper
+is built with the `httpreq` build tag (so can only use DNS providers that support the HTTPREQ protocol).
+Pull requests for more general builds are welcome, as these variations are obviously quite specific to
+my setup.
 
 Meaning of the status columns:
 
