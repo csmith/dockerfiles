@@ -33,7 +33,6 @@ All images are available at `reg.c5h.io/<name>`. Only the latest tag is built.
 | Name               | Upstream                                              | Reproducible? | Non-root? | Minimal? |
 |--------------------|-------------------------------------------------------|:-------------:|:---------:|:--------:|
 | alpine             | https://alpinelinux.org/                              |       ✅      |    N/A    |    ✅    |
-| arch               | https://archlinux.org/                                |       ✅      |    N/A    |    ❌    |
 | base               | N/A                                                   |       ✅      |    ✅     |    ✅    |
 | distribution       | https://github.com/distribution/distribution          |       ✅      |    ✅     |    ✅    |
 | ergo-certwrapper   | https://github.com/ergochatergo                       |       ✅      |    ✅     |    ✅    |

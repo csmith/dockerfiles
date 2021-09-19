@@ -140,3 +140,19 @@ func readApkIndexContent(reader io.Reader) map[string]*packageInfo {
 	return res
 }
 
+// packageInfo describes a package available in a repository.
+type packageInfo struct {
+	Name         string
+	Version      string
+	Dependencies []string
+	Provides     []string
+}
+
+// stripVersion removes version qualifiers from a package name such as `foo>=1.2`.
+func stripVersion(name string) string {
+	i := strings.IndexAny(name, ">=<")
+	if i > -1 {
+		return name[0:i]
+	}
+	return name
+}

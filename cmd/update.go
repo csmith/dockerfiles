@@ -23,7 +23,6 @@ var (
 	funcs = template.FuncMap{
 		"image":           Image,
 		"alpine_packages": AlpinePackages,
-		"arch_packages":   ArchPackages,
 		"github_tag":      GitHubTag,
 		"registry":        Registry,
 	}
@@ -42,7 +41,6 @@ func main() {
 	// NB: These are manually sorted to flatten the dependency hierarchy.
 	targets := []string{
 		"alpine",
-		"arch",
 		"base",             // depends on alpine
 		"golang",           // depends on alpine
 		"ergo-certwrapper", // depends on golang + base
@@ -198,17 +196,6 @@ func AlpinePackages(packages ...string) map[string]string {
 	}
 	for i := range res {
 		materials[fmt.Sprintf("apk:%s", i)] = res[i]
-	}
-	return res
-}
-
-func ArchPackages(packages ...string) map[string]string {
-	res, err := LatestArchPackages(packages...)
-	if err != nil {
-		log.Fatalf("Unable to get latest packages: %v", err)
-	}
-	for i := range res {
-		materials[fmt.Sprintf("pacman:%s", i)] = res[i]
 	}
 	return res
 }
