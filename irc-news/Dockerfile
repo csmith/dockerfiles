@@ -1,9 +1,9 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/irc-news/Dockerfile.gotpl
-# BOM: {"github:csmith/irc-news":"v2.0.0","image:base":"sha256:f7f27db7afb58bae23ad902072228f1b090b878af303d9f63bd2c1526b9b4f53","image:golang":"sha256:c6f396c63f87b6463b8090b96a2c9eea9c6065d52a2621cbc4e61f7a6b1c8128"}
+# BOM: {"github:csmith/irc-news":"v2.0.2","image:base":"sha256:f7f27db7afb58bae23ad902072228f1b090b878af303d9f63bd2c1526b9b4f53","image:golang":"sha256:c6f396c63f87b6463b8090b96a2c9eea9c6065d52a2621cbc4e61f7a6b1c8128"}
 
 FROM reg.c5h.io/golang@sha256:c6f396c63f87b6463b8090b96a2c9eea9c6065d52a2621cbc4e61f7a6b1c8128 AS build
 
-ARG TAG="v2.0.0"
+ARG TAG="v2.0.2"
 
 RUN set -eux; \
     apk add --no-cache git; \
