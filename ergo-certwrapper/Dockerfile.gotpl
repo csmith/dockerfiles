@@ -4,10 +4,6 @@ ARG CERTTAG="{{github_tag "csmith/certwrapper"}}"
 ARG ERGOTAG="{{github_tag "ergochat/ergo"}}"
 
 RUN set -eux; \
-    apk add --no-cache \
-        {{range $key, $value := alpine_packages "git" -}}
-        {{$key}}={{$value}} \
-        {{end}}; \
     # Build certwrapper
     git clone --depth=1 -b $CERTTAG --single-branch https://github.com/csmith/certwrapper /go/src/github.com/csmith/certwrapper; \
     cd /go/src/github.com/csmith/certwrapper && (\

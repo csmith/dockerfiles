@@ -3,7 +3,6 @@ FROM {{image "golang"}} AS build
 ARG TAG="{{github_tag "greboid/irc-github"}}"
 
 RUN set -eux; \
-    apk add --no-cache git; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/greboid/irc-github /go/src/github.com/greboid/irc-github; \
     cd /go/src/github.com/greboid/irc-github; \
     CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main ./cmd/github; \
