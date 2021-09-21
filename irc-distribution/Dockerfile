@@ -6,7 +6,6 @@ FROM reg.c5h.io/golang@sha256:c6f396c63f87b6463b8090b96a2c9eea9c6065d52a2621cbc4
 ARG TAG="v1.0.0"
 
 RUN set -eux; \
-    apk add --no-cache git; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/csmith/irc-distribution /go/src/github.com/csmith/irc-distribution; \
     cd /go/src/github.com/csmith/irc-distribution; \
     CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main ./cmd/distribution; \
