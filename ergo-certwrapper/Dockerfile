@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/ergo-certwrapper/Dockerfile.gotpl
-# BOM: {"apk:brotli-libs":"1.0.9-r5","apk:busybox":"1.33.1-r3","apk:ca-certificates":"20191127-r5","apk:expat":"2.4.1-r0","apk:git":"2.32.0-r0","apk:libcrypto1.1":"1.1.1l-r0","apk:libcurl":"7.79.0-r0","apk:libssl1.1":"1.1.1l-r0","apk:musl":"1.2.2-r3","apk:nghttp2-libs":"1.43.0-r0","apk:pcre2":"10.36-r0","apk:zlib":"1.2.11-r3","github:csmith/certwrapper":"v3.1.2","github:ergochat/ergo":"v2.7.0","image:base":"sha256:f7f27db7afb58bae23ad902072228f1b090b878af303d9f63bd2c1526b9b4f53","image:golang":"sha256:c6f396c63f87b6463b8090b96a2c9eea9c6065d52a2621cbc4e61f7a6b1c8128"}
+# BOM: {"github:csmith/certwrapper":"v3.1.2","github:ergochat/ergo":"v2.7.0","image:base":"sha256:f7f27db7afb58bae23ad902072228f1b090b878af303d9f63bd2c1526b9b4f53","image:golang":"sha256:c6f396c63f87b6463b8090b96a2c9eea9c6065d52a2621cbc4e61f7a6b1c8128"}
 
 FROM reg.c5h.io/golang@sha256:c6f396c63f87b6463b8090b96a2c9eea9c6065d52a2621cbc4e61f7a6b1c8128 AS build
 
@@ -7,20 +7,6 @@ ARG CERTTAG="v3.1.2"
 ARG ERGOTAG="v2.7.0"
 
 RUN set -eux; \
-    apk add --no-cache \
-        brotli-libs=1.0.9-r5 \
-        busybox=1.33.1-r3 \
-        ca-certificates=20191127-r5 \
-        expat=2.4.1-r0 \
-        git=2.32.0-r0 \
-        libcrypto1.1=1.1.1l-r0 \
-        libcurl=7.79.0-r0 \
-        libssl1.1=1.1.1l-r0 \
-        musl=1.2.2-r3 \
-        nghttp2-libs=1.43.0-r0 \
-        pcre2=10.36-r0 \
-        zlib=1.2.11-r3 \
-        ; \
     # Build certwrapper
     git clone --depth=1 -b $CERTTAG --single-branch https://github.com/csmith/certwrapper /go/src/github.com/csmith/certwrapper; \
     cd /go/src/github.com/csmith/certwrapper && (\
