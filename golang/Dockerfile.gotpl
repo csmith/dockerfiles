@@ -21,7 +21,8 @@ RUN set -eux; \
     # Clean up a little
 	apk del --no-network .build-deps; \
     rm -rf \
-            go.tar.gz \
+            /go.tar.gz \
+            /root/.cache \
     		/usr/local/go/pkg/*/cmd \
     		/usr/local/go/pkg/bootstrap \
     		/usr/local/go/pkg/obj \
