@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/ergo-certwrapper/Dockerfile.gotpl
-# BOM: {"github:csmith/certwrapper":"v3.1.2","github:ergochat/ergo":"v2.7.0","image:base":"sha256:daa3cfedaabdc411afb9e58693526d5e8d283fbc767abc6c2bcef929ea782566","image:golang":"sha256:2495578a7ef96327cfc4b2971f4264b0006c18d2494a015a03ab03476f86ca70"}
+# BOM: {"github:csmith/certwrapper":"v3.1.2","github:ergochat/ergo":"v2.7.0","image:base":"sha256:74295276a5989bf84e9bc17d2a44b826a4be6aa2fcfa8e53a6b33404c6f37a02","image:golang":"sha256:2495578a7ef96327cfc4b2971f4264b0006c18d2494a015a03ab03476f86ca70"}
 
 FROM reg.c5h.io/golang@sha256:2495578a7ef96327cfc4b2971f4264b0006c18d2494a015a03ab03476f86ca70 AS build
 
@@ -25,7 +25,7 @@ RUN set -eux; \
     # Clobber all the timestamps to make the build more reproducible
     touch --date=@0 /out;
 
-FROM reg.c5h.io/base@sha256:daa3cfedaabdc411afb9e58693526d5e8d283fbc767abc6c2bcef929ea782566
+FROM reg.c5h.io/base@sha256:74295276a5989bf84e9bc17d2a44b826a4be6aa2fcfa8e53a6b33404c6f37a02
 
 ENV CERTWRAPPER_CERTIFICATE_PATH=/certs/certificate.pem \
     CERTWRAPPER_DNS_PROVIDER=httpreq \
