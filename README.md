@@ -44,6 +44,7 @@ All images are available at `reg.c5h.io/<name>`. Only the latest tag is built.
 | ↳ irc-goplum       | https://github.com/greboid/irc-goplum                 |       ✅      |    ✅     |    ✅    |
 | ↳ irc-news         | https://github.com/csmith/irc-news                    |       ✅      |    ✅     |    ✅    |
 | golang             | https://golang.org/                                   |       ✅      |    N/A    |    ✅    |
+| haproxy            | https://www.haproxy.org/                              |       ✅      |    ✅     |    ✅    |
 | linx-server        | https://github.com/csmith/linx-server                 |       ✅      |    ✅     |    ✅    |
 | postgres-13        | https://www.postgresql.org/                           |       ❌      |    ❌     |    ❌    |
 | vault              | https://github.com/hashicorp/vault                    |       ✅      |    ✅     |    ✅    |
