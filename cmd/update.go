@@ -41,10 +41,12 @@ func main() {
 	// NB: These are manually sorted to flatten the dependency hierarchy.
 	targets := []string{
 		"alpine",
-		"base",             // depends on alpine
+		"base-root",        // depends on alpine
+		"base",             // depends on base-root
 		"golang",           // depends on alpine
-		"ergo-certwrapper", // depends on golang + base
 		"distribution",     // depends on golang + base
+		"dotege",           // depends on golang + base
+		"ergo-certwrapper", // depends on golang + base
 		"irc-bot",          // depends on golang + base
 		"irc-distribution", // depends on golang + base
 		"irc-github",       // depends on golang + base

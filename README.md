@@ -34,7 +34,9 @@ All images are available at `reg.c5h.io/<name>`. Only the latest tag is built.
 |--------------------|-------------------------------------------------------|:-------------:|:---------:|:--------:|
 | alpine             | https://alpinelinux.org/                              |       ✅      |    N/A    |    ✅    |
 | base               | N/A                                                   |       ✅      |    ✅     |    ✅    |
+| base-root          | N/A                                                   |       ✅      |    N/A    |    ✅    |
 | distribution       | https://github.com/distribution/distribution          |       ✅      |    ✅     |    ✅    |
+| dotege             | https://github.com/csmith/dotege                      |       ✅      |    ❌     |    ✅    |
 | ergo-certwrapper   | https://github.com/ergochatergo                       |       ✅      |    ✅     |    ✅    |
 | irc-bot            | https://github.com/greboid/irc-bot                    |       ✅      |    ✅     |    ✅    |
 | ↳ irc-distribution | https://github.com/csmith/irc-distribution            |       ✅      |    ✅     |    ✅    |
