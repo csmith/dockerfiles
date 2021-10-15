@@ -7,7 +7,7 @@ RUN set -eux; \
     # Build certwrapper
     git clone --depth=1 -b $CERTTAG --single-branch https://github.com/csmith/certwrapper /go/src/github.com/csmith/certwrapper; \
     cd /go/src/github.com/csmith/certwrapper && (\
-        CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags httpreq -o /out/certwrapper .; \
+        CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags lego_httpreq -o /out/certwrapper .; \
         go run github.com/google/go-licenses@latest save ./... --save_path=/out/notices/certwrapper; \
     ); \
     # Build ergo
