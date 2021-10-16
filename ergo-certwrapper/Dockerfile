@@ -1,16 +1,16 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/ergo-certwrapper/Dockerfile.gotpl
-# BOM: {"github:csmith/certwrapper":"v3.1.2","github:ergochat/ergo":"v2.7.0","image:base":"sha256:6c8430c1a55197f17620bd0933b5cecc648b0bcb56ef60d6f97c766e0ecbb437","image:golang":"sha256:d10adab145c50608e7fb95c0923830744dd674c981e383ac9d2300813f70e670"}
+# BOM: {"github:csmith/certwrapper":"v4.0.0","github:ergochat/ergo":"v2.7.0","image:base":"sha256:6c8430c1a55197f17620bd0933b5cecc648b0bcb56ef60d6f97c766e0ecbb437","image:golang":"sha256:d10adab145c50608e7fb95c0923830744dd674c981e383ac9d2300813f70e670"}
 
 FROM reg.c5h.io/golang@sha256:d10adab145c50608e7fb95c0923830744dd674c981e383ac9d2300813f70e670 AS build
 
-ARG CERTTAG="v3.1.2"
+ARG CERTTAG="v4.0.0"
 ARG ERGOTAG="v2.7.0"
 
 RUN set -eux; \
     # Build certwrapper
     git clone --depth=1 -b $CERTTAG --single-branch https://github.com/csmith/certwrapper /go/src/github.com/csmith/certwrapper; \
     cd /go/src/github.com/csmith/certwrapper && (\
-        CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags httpreq -o /out/certwrapper .; \
+        CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags lego_httpreq -o /out/certwrapper .; \
         go run github.com/google/go-licenses@latest save ./... --save_path=/out/notices/certwrapper; \
     ); \
     # Build ergo
