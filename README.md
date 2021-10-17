@@ -36,6 +36,7 @@ All images are available at `reg.c5h.io/<name>`. Only the latest tag is built.
 | base               | N/A                                                   |       ✅      |    ✅     |    ✅    |
 | base-root          | N/A                                                   |       ✅      |    N/A    |    ✅    |
 | distribution       | https://github.com/distribution/distribution          |       ✅      |    ✅     |    ✅    |
+| docker-socket-proxy| https://github.com/Tecnativa/docker-socket-proxy      |       ✅      |    ❌     |    ✅    |
 | dotege             | https://github.com/csmith/dotege                      |       ✅      |    ❌     |    ✅    |
 | ergo-certwrapper   | https://github.com/ergochatergo                       |       ✅      |    ✅     |    ✅    |
 | irc-bot            | https://github.com/greboid/irc-bot                    |       ✅      |    ✅     |    ✅    |

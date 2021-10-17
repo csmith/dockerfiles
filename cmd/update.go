@@ -47,6 +47,7 @@ func main() {
 		"distribution",     // depends on golang + base
 		"dotege",           // depends on golang + base
 		"ergo-certwrapper", // depends on golang + base
+		"haproxy",          // depends on alpine + base
 		"irc-bot",          // depends on golang + base
 		"irc-distribution", // depends on golang + base
 		"irc-github",       // depends on golang + base
@@ -55,6 +56,7 @@ func main() {
 		"linx-server",      // depends on golang + base
 		"postgres-13",      // depends on alpine
 		// "vault",        // depends on alpine + golang
+		"docker-socket-proxy", // depends on base-root + haproxy
 	}
 
 	for i := range targets {
