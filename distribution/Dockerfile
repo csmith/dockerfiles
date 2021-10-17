@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/distribution/Dockerfile.gotpl
-# BOM: {"apk:file":"5.40-r1","apk:libmagic":"5.40-r1","apk:make":"4.3-r0","apk:musl":"1.2.2-r3","image:base":"sha256:6c8430c1a55197f17620bd0933b5cecc648b0bcb56ef60d6f97c766e0ecbb437","image:golang":"sha256:d10adab145c50608e7fb95c0923830744dd674c981e383ac9d2300813f70e670"}
+# BOM: {"apk:file":"5.40-r1","apk:libmagic":"5.40-r1","apk:make":"4.3-r0","apk:musl":"1.2.2-r3","image:base":"sha256:bba8c74ee389cc37da171979067085b53a8561caa66f49719db79e2fbb5d96cd","image:golang":"sha256:d10adab145c50608e7fb95c0923830744dd674c981e383ac9d2300813f70e670"}
 
 FROM reg.c5h.io/golang@sha256:d10adab145c50608e7fb95c0923830744dd674c981e383ac9d2300813f70e670 AS build
 
@@ -18,7 +18,7 @@ RUN set -eux; \
     # Clobber all the timestamps to make the build more reproducible
     touch --date=@0 /go/src/github.com/docker/distribution/cmd/registry/config-dev.yml /go/src/github.com/docker/distribution/bin/registry;
 
-FROM reg.c5h.io/base@sha256:6c8430c1a55197f17620bd0933b5cecc648b0bcb56ef60d6f97c766e0ecbb437
+FROM reg.c5h.io/base@sha256:bba8c74ee389cc37da171979067085b53a8561caa66f49719db79e2fbb5d96cd
 
 COPY --from=build /go/src/github.com/docker/distribution/cmd/registry/config-dev.yml /etc/docker/registry/config.yml
 COPY --from=build /go/src/github.com/docker/distribution/bin/registry /bin/registry
