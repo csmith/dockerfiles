@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/dotege/Dockerfile.gotpl
-# BOM: {"github:csmith/dotege":"v1.0.0","image:base-root":"sha256:a29d3eb6a5d08c93f7d0e641cc40a1c12ae3dce5ef1e8a9c7eb7643ecc485fdf","image:golang":"sha256:d10adab145c50608e7fb95c0923830744dd674c981e383ac9d2300813f70e670"}
+# BOM: {"github:csmith/dotege":"v1.0.0","image:base":"sha256:bba8c74ee389cc37da171979067085b53a8561caa66f49719db79e2fbb5d96cd","image:golang":"sha256:d10adab145c50608e7fb95c0923830744dd674c981e383ac9d2300813f70e670"}
 
 FROM reg.c5h.io/golang@sha256:d10adab145c50608e7fb95c0923830744dd674c981e383ac9d2300813f70e670 AS build
 
@@ -10,13 +10,16 @@ RUN set -eux; \
     cd /go/src/github.com/csmith/dotege; \
     CGO_ENABLED=0 GOOS=linux go build -a -ldflags "-buildid= -extldflags '-static' -X main.GitSHA=$(git rev-parse --short HEAD)" -trimpath -o main .; \
     go run github.com/google/go-licenses@latest save ./... --save_path=/notices; \
+    # Make volume mount points
+    mkdir -p /data/{config,certs,output}; \
+    chown -R 65532:65532 /data; \
     # Clobber all the timestamps to make the build more reproducible
     touch --date=@0 /go/src/github.com/csmith/dotege/{main,templates} /notices;
 
-FROM reg.c5h.io/base-root@sha256:a29d3eb6a5d08c93f7d0e641cc40a1c12ae3dce5ef1e8a9c7eb7643ecc485fdf
+FROM reg.c5h.io/base@sha256:bba8c74ee389cc37da171979067085b53a8561caa66f49719db79e2fbb5d96cd
 
 COPY --from=build /go/src/github.com/csmith/dotege/main /dotege
-COPY --from=build /notices /notices
+COPY --from=build /notices /data /
 COPY --from=build /go/src/github.com/csmith/dotege/templates /templates
 
 VOLUME /data/config
