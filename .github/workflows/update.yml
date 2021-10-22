@@ -7,17 +7,22 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-go@v1
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v1
         with:
           go-version: '1.17'
-      - env:
+      - name: Update
+        env:
           REGISTRY: ${{ secrets.REGISTRY }}
           REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
           REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
         run:  |
+          go install github.com/csmith/contempt/cmd/contempt@1.0.1
           git config user.name "${{ secrets.GIT_USERNAME }}"
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-          go run ./cmd
+          contempt --commit --build --push . .
           git push
