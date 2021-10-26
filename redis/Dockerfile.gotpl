@@ -1,0 +1,32 @@
+FROM {{image "alpine"}} AS build
+
+ARG TAG="{{github_tag "redis/redis"}}"
+
+ENV LDFLAGS="-static"
+
+COPY redis.conf /redis.conf
+
+RUN set -eux; \
+     apk add --no-cache --virtual .build-deps \
+        {{range $key, $value := alpine_packages "git" "build-base" "tzdata" "ca-certificates" "linux-headers" "pcre-dev" "musl-dev" "openssl-dev" "openssl-libs-static" "zlib-dev" "zlib-static" -}}
+        {{$key}}={{$value}} \
+        {{end}}; \
+     git clone --depth=1 -b $TAG --single-branch https://github.com/redis/redis /src/redis; \
+     cd /src/redis; \
+     make distclean; \
+     make; \
+     mkdir /data; \
+     strip /src/redis/src/redis-server; \
+     touch --date=@0 /src/redis/src/redis-server /data /redis.conf
+
+FROM {{image "base"}}
+
+COPY --from=build --chown=65532:65532 /redis.conf /home/nonroot/redis.conf
+COPY --from=build --chown=65532:65532 /data /home/nonroot/database
+COPY --from=build --chown=65532:65532 /src/redis/src/redis-server /home/nonroot/redis
+
+ENTRYPOINT ["/home/nonroot/redis"]
+
+EXPOSE 6379
+VOLUME "/home/nonroot/database"
+CMD ["/home/nonroot/redis.conf"]
