@@ -20,7 +20,7 @@ jobs:
           REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
           SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
         run:  |
-          go install github.com/csmith/contempt/cmd/contempt@v1.0.2
+          go install github.com/csmith/contempt/cmd/contempt@latest
           git config user.name "${{ secrets.GIT_USERNAME }}"
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
