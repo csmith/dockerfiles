@@ -8,10 +8,10 @@ RUN set -eux; \
     CGO_ENABLED=0 GOOS=linux go build -a -ldflags "-buildid= -extldflags '-static' -X main.GitSHA=$(git rev-parse --short HEAD)" -trimpath -tags lego_httpreq -o main .; \
     go run github.com/google/go-licenses@latest save ./... --save_path=/notices; \
     # Make volume mount points
-    mkdir -p /data/{config,certs,output}; \
+    mkdir -p /data/config /data/certs /data/output; \
     chown -R 65532:65532 /data; \
     # Clobber all the timestamps to make the build more reproducible
-    touch --date=@0 /go/src/github.com/csmith/dotege/{main,templates} /notices;
+    touch --date=@0 /go/src/github.com/csmith/dotege/main /go/src/github.com/csmith/dotege/templates /notices;
 
 FROM {{image "base"}}
 

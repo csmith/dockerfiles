@@ -11,7 +11,7 @@ RUN set -eux; \
     mkdir -p /out/var/run/tailscale /out/state; \
     chown -R 65532:65532 /out; \
     # Clobber all the timestamps to make the build more reproducible
-    touch --date=@0 /src/tailscale{,d} /out;
+    touch --date=@0 /src/tailscale /src/tailscaled /out;
 
 FROM {{image "base"}}
 
