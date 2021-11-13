@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/nitter/Dockerfile.gotpl
-# BOM: {"apk:bash":"5.1.4-r0","apk:binutils":"2.35.2-r2","apk:brotli-libs":"1.0.9-r5","apk:busybox":"1.33.1-r5","apk:ca-certificates":"20191127-r5","apk:curl":"7.79.1-r0","apk:expat":"2.4.1-r0","apk:gcc":"10.3.1_git20210424-r2","apk:git":"2.32.0-r0","apk:gmp":"6.2.1-r0","apk:isl22":"0.22-r0","apk:libatomic":"10.3.1_git20210424-r2","apk:libcrypto1.1":"1.1.1l-r0","apk:libcurl":"7.79.1-r0","apk:libgcc":"10.3.1_git20210424-r2","apk:libgomp":"10.3.1_git20210424-r2","apk:libgphobos":"10.3.1_git20210424-r2","apk:libpcre16":"8.44-r0","apk:libpcre32":"8.44-r0","apk:libpcrecpp":"8.44-r0","apk:libsass":"3.6.5-r0","apk:libsass-dev":"3.6.5-r0","apk:libssl1.1":"1.1.1l-r0","apk:libstdc++":"10.3.1_git20210424-r2","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.2-r3","apk:musl-dev":"1.2.2-r3","apk:ncurses-libs":"6.2_p20210612-r0","apk:ncurses-terminfo-base":"6.2_p20210612-r0","apk:nghttp2-libs":"1.43.0-r0","apk:openssl":"1.1.1l-r0","apk:openssl-dev":"1.1.1l-r0","apk:pcre":"8.44-r0","apk:pcre-dev":"8.44-r0","apk:pcre2":"10.36-r0","apk:pkgconf":"1.7.4-r0","apk:readline":"8.1.0-r0","apk:sqlite-libs":"3.35.5-r0","apk:zlib":"1.2.11-r3","github:nim-lang/nim":"v1.6.0","image:alpine":"f32b56d2f268e9a4dce68b95adac9f81b8ed8f9bc7fd33ba0d804e7426f603fd","image:base":"b2e73bfd5ae1ce12341dd36f24573d1316bf5172809c65dd669ff2720582967f"}
+# BOM: {"apk:bash":"5.1.4-r0","apk:binutils":"2.35.2-r2","apk:brotli-libs":"1.0.9-r5","apk:busybox":"1.33.1-r6","apk:ca-certificates":"20191127-r5","apk:curl":"7.79.1-r0","apk:expat":"2.4.1-r0","apk:gcc":"10.3.1_git20210424-r2","apk:git":"2.32.0-r0","apk:gmp":"6.2.1-r0","apk:isl22":"0.22-r0","apk:libatomic":"10.3.1_git20210424-r2","apk:libcrypto1.1":"1.1.1l-r0","apk:libcurl":"7.79.1-r0","apk:libgcc":"10.3.1_git20210424-r2","apk:libgomp":"10.3.1_git20210424-r2","apk:libgphobos":"10.3.1_git20210424-r2","apk:libpcre16":"8.44-r0","apk:libpcre32":"8.44-r0","apk:libpcrecpp":"8.44-r0","apk:libsass":"3.6.5-r0","apk:libsass-dev":"3.6.5-r0","apk:libssl1.1":"1.1.1l-r0","apk:libstdc++":"10.3.1_git20210424-r2","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.2-r3","apk:musl-dev":"1.2.2-r3","apk:ncurses-libs":"6.2_p20210612-r0","apk:ncurses-terminfo-base":"6.2_p20210612-r0","apk:nghttp2-libs":"1.43.0-r0","apk:openssl":"1.1.1l-r0","apk:openssl-dev":"1.1.1l-r0","apk:pcre":"8.44-r0","apk:pcre-dev":"8.44-r0","apk:pcre2":"10.36-r0","apk:pkgconf":"1.7.4-r0","apk:readline":"8.1.0-r0","apk:sqlite-libs":"3.35.5-r0","apk:zlib":"1.2.11-r3","github:nim-lang/nim":"v1.6.0","image:alpine":"6c5733fa0e3f4ef241e64a81b5bd95ad8138fb2351e3fb3a4b08425c31a798fa","image:base":"b2e73bfd5ae1ce12341dd36f24573d1316bf5172809c65dd669ff2720582967f"}
 
-FROM reg.c5h.io/alpine@sha256:f32b56d2f268e9a4dce68b95adac9f81b8ed8f9bc7fd33ba0d804e7426f603fd as nimbuild
+FROM reg.c5h.io/alpine@sha256:6c5733fa0e3f4ef241e64a81b5bd95ad8138fb2351e3fb3a4b08425c31a798fa as nimbuild
 
 ENV TAG=v1.6.0
 
@@ -11,7 +11,7 @@ RUN set -eux; \
     # Dependencies and source for bootstrapping
     apk add --no-cache --virtual .build-deps \
         brotli-libs=1.0.9-r5 \
-        busybox=1.33.1-r5 \
+        busybox=1.33.1-r6 \
         ca-certificates=20191127-r5 \
         curl=7.79.1-r0 \
         libcrypto1.1=1.1.1l-r0 \
@@ -40,7 +40,7 @@ RUN set -eux; \
         bash=5.1.4-r0 \
         binutils=2.35.2-r2 \
         brotli-libs=1.0.9-r5 \
-        busybox=1.33.1-r5 \
+        busybox=1.33.1-r6 \
         ca-certificates=20191127-r5 \
         expat=2.4.1-r0 \
         gcc=10.3.1_git20210424-r2 \
