@@ -1,23 +1,23 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/miniflux/Dockerfile.gotpl
-# BOM: {"apk:brotli-libs":"1.0.9-r5","apk:busybox":"1.33.1-r6","apk:ca-certificates":"20191127-r5","apk:expat":"2.4.1-r0","apk:git":"2.32.0-r0","apk:libcrypto1.1":"1.1.1l-r0","apk:libcurl":"7.79.1-r0","apk:libssl1.1":"1.1.1l-r0","apk:musl":"1.2.2-r3","apk:nghttp2-libs":"1.43.0-r0","apk:pcre2":"10.36-r0","apk:zlib":"1.2.11-r3","github:miniflux/v2":"2.0.33","image:base":"b2e73bfd5ae1ce12341dd36f24573d1316bf5172809c65dd669ff2720582967f","image:golang":"beba80acf4c14def39eb627a988efb23102fb66a01b952445c7e77aea5f62bc4"}
+# BOM: {"apk:brotli-libs":"1.0.9-r5","apk:busybox":"1.34.1-r3","apk:ca-certificates":"20191127-r7","apk:expat":"2.4.1-r0","apk:git":"2.34.1-r0","apk:libcrypto1.1":"1.1.1l-r7","apk:libcurl":"7.80.0-r0","apk:libssl1.1":"1.1.1l-r7","apk:musl":"1.2.2-r7","apk:nghttp2-libs":"1.46.0-r0","apk:pcre2":"10.39-r0","apk:zlib":"1.2.11-r3","github:miniflux/v2":"2.0.33","image:base":"e3b3d5f2e5fa7e5cbe763581a8da6b56c4498cb2107b9e385acc8f13d4de5903","image:golang":"72adae738352aa1e5dc312952446651fc767661e2b9bdb006be122bfde7fd03a"}
 
-FROM reg.c5h.io/golang@sha256:beba80acf4c14def39eb627a988efb23102fb66a01b952445c7e77aea5f62bc4 AS build
+FROM reg.c5h.io/golang@sha256:72adae738352aa1e5dc312952446651fc767661e2b9bdb006be122bfde7fd03a AS build
 
 ARG TAG="2.0.33"
 
 RUN set -eux; \
     apk add --no-cache \
         brotli-libs=1.0.9-r5\
-        busybox=1.33.1-r6\
-        ca-certificates=20191127-r5\
+        busybox=1.34.1-r3\
+        ca-certificates=20191127-r7\
         expat=2.4.1-r0\
-        git=2.32.0-r0\
-        libcrypto1.1=1.1.1l-r0\
-        libcurl=7.79.1-r0\
-        libssl1.1=1.1.1l-r0\
-        musl=1.2.2-r3\
-        nghttp2-libs=1.43.0-r0\
-        pcre2=10.36-r0\
+        git=2.34.1-r0\
+        libcrypto1.1=1.1.1l-r7\
+        libcurl=7.80.0-r0\
+        libssl1.1=1.1.1l-r7\
+        musl=1.2.2-r7\
+        nghttp2-libs=1.46.0-r0\
+        pcre2=10.39-r0\
         zlib=1.2.11-r3\
         ; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/miniflux/v2 /go/src/github.com/miniflux/v2; \
@@ -27,7 +27,7 @@ RUN set -eux; \
     # Clobber all the timestamps to make the build more reproducible
     touch --date=@0 /go/src/github.com/miniflux/v2/main /notices;
 
-FROM reg.c5h.io/base@sha256:b2e73bfd5ae1ce12341dd36f24573d1316bf5172809c65dd669ff2720582967f
+FROM reg.c5h.io/base@sha256:e3b3d5f2e5fa7e5cbe763581a8da6b56c4498cb2107b9e385acc8f13d4de5903
 
 COPY --from=build /go/src/github.com/miniflux/v2/main /miniflux
 COPY --from=build /notices /notices
