@@ -15,7 +15,8 @@ RUN set -eux; \
     cd /go/src/github.com/emersion/soju && (\
       GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o /out/soju ./cmd/soju; \
       GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o /out/sojuctl ./cmd/sojuctl; \
-      go run github.com/google/go-licenses@latest save ./... --save_path=/out/notices/soju; \
+      # TODO: find a license tool that doesn't hardcode Google's opinion on "forbidden" licenses :/
+      # go run github.com/google/go-licenses@latest save ./... --save_path=/out/notices/soju; \
     ); \
     # Create folders for volumes
     install -o 65532 -g 65532 -d /out/data /out/certs; \
