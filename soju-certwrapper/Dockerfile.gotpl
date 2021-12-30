@@ -1,0 +1,37 @@
+FROM {{image "golang"}} AS build
+
+ARG SOJUTAG="{{github_tag "emersion/soju"}}"
+ARG CERTTAG="{{github_tag "csmith/certwrapper"}}"
+
+RUN set -eux; \
+    # Build certwrapper
+    git clone --depth=1 -b $CERTTAG --single-branch https://github.com/csmith/certwrapper /go/src/github.com/csmith/certwrapper; \
+    cd /go/src/github.com/csmith/certwrapper && (\
+        CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags lego_httpreq -o /out/certwrapper .; \
+        go run github.com/google/go-licenses@latest save ./... --save_path=/out/notices/certwrapper; \
+    ); \
+    # Build soju
+    git clone --depth=1 -b $SOJUTAG --single-branch https://github.com/emersion/soju /go/src/github.com/emersion/soju; \
+    cd /go/src/github.com/emersion/soju && (\
+      GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o /out/soju ./cmd/soju \
+      GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o /out/sojuctl ./cmd/sojuctl \
+      go run github.com/google/go-licenses@latest save ./... --save_path=/out/notices/soju; \
+    ); \
+    # Create folders for volumes
+    install -o 65532 -g 65532 -d /out/data /out/certs; \
+    # Clobber all the timestamps to make the build more reproducible
+    touch --date=@0 /out;
+
+FROM {{image "base"}}
+
+ENV CERTWRAPPER_CERTIFICATE_PATH=/certs/certificate.pem \
+    CERTWRAPPER_DNS_PROVIDER=httpreq \
+    CERTWRAPPER_ISSUER_PATH=/certs/issuer.perm \
+    CERTWRAPPER_PRIVATE_KEY_PATH=/certs/privatekey.pem \
+    CERTWRAPPER_USER_PATH=/certs/user.json
+
+COPY --from=build /out/ /
+VOLUME ["/data", "/certs"]
+
+ENTRYPOINT ["/certwrapper"]
+CMD ["/soju"]
