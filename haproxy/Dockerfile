@@ -5,7 +5,7 @@ FROM reg.c5h.io/alpine@sha256:ef95559f475cdf56e55db71c168f1616d497e2215bbd9f6bc6
 
 ARG TAG="v2.5.0"
 
-COPY buildstatic.patch /src/buildstatic.patch
+COPY *.patch /src/
 
 RUN set -eux; \
      apk add --no-cache --virtual .build-deps \
@@ -57,6 +57,9 @@ RUN set -eux; \
      git clone --depth=1 -b $TAG --single-branch git://github.com/haproxy/haproxy /src/haproxy; \
      cd /src/haproxy; \
      patch Makefile < /src/buildstatic.patch; \
+     if [ "$TAG" = "v2.5.0" ]; then \
+       patch -p1 < /src/header-flags.patch; \
+     fi; \
      make TARGET=linux-musl USE_OPENSSL=1 USE_PCRE=1; \
      make install-bin; \
      strip /usr/local/sbin/haproxy; \
