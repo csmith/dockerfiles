@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/dotege/Dockerfile.gotpl
-# BOM: {"github:csmith/dotege":"v1.1.0","image:base":"e3b3d5f2e5fa7e5cbe763581a8da6b56c4498cb2107b9e385acc8f13d4de5903","image:golang":"52968a8b807cc37629d7bb688498c02998d5d2ef70caba40d5a048dbde4b7edf"}
+# BOM: {"github:csmith/dotege":"v1.1.0","image:base":"f47ed6eddc8491fd9683c0bb66751d16b0dd6f9e920d96c9d028ec0001ae5968","image:golang":"8cd2095369f3583ad067300e5d206077e98cc2b703f3786643b176862f54417a"}
 
-FROM reg.c5h.io/golang@sha256:52968a8b807cc37629d7bb688498c02998d5d2ef70caba40d5a048dbde4b7edf AS build
+FROM reg.c5h.io/golang@sha256:8cd2095369f3583ad067300e5d206077e98cc2b703f3786643b176862f54417a AS build
 
 ARG TAG="v1.1.0"
 
@@ -16,7 +16,7 @@ RUN set -eux; \
     # Clobber all the timestamps to make the build more reproducible
     touch --date=@0 /go/src/github.com/csmith/dotege/main /go/src/github.com/csmith/dotege/templates /notices;
 
-FROM reg.c5h.io/base@sha256:e3b3d5f2e5fa7e5cbe763581a8da6b56c4498cb2107b9e385acc8f13d4de5903
+FROM reg.c5h.io/base@sha256:f47ed6eddc8491fd9683c0bb66751d16b0dd6f9e920d96c9d028ec0001ae5968
 
 COPY --from=build /go/src/github.com/csmith/dotege/main /dotege
 COPY --from=build /notices /data /
