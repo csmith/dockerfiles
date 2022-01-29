@@ -12,6 +12,32 @@ and can follow upstream updates as quickly or slowly as required.
 I'm intending to use these for production services, but won't vouch for their stability or usability for
 anyone else's purposes. Feel free to use them, and report any issues you do find, but at your own risk!
 
+### Aims
+
+#### Reproducibility
+
+It should be possible to take a Dockerfile from this repository, build it on any machine, and get an image with the
+same digest.  This requires using `buildah` to build instead of `docker` as it supports setting the timestamp
+for layers.
+
+As most of the images are based on Alpine they won't continue to be reproducible forever as Alpine do not keep
+old packages indefinitely. While this might be nice, for now reproducibility during the lifetime of the image is
+sufficient.
+
+#### Minimal and non-root
+
+Almost all the images here use a minimal base image, and only ship resources actually required to run. In particular,
+there is generally no shell, no scripted entrypoints, no build tools, etc, shipped in the final images.
+
+Where possible the images all run as a non-root user (uid/gid `65532`), with no direct way to gain root access within
+the container.
+
+#### Up-to-date and transparent
+
+The images all track their upstream projects, and the Dockerfiles are automatically updated when new releases are
+made. The update procedure is performed using GitHub actions, and the revised Dockerfiles are immediately committed
+to the repository. This makes it easy to know what an image contains, and when and how it was built.
+
 ## Structure
 
 Each image has its own folder, containing:
@@ -19,55 +45,15 @@ Each image has its own folder, containing:
 * `Dockerfile` - the actual dockerfile the latest version should be built from
 * `Dockerfile.gotpl` - a template file for generating the Dockerfile
 
-The template files using go's [text/template syntax](https://pkg.go.dev/text/template), with functions
-defined to retrieve the latest images, releases, packages, etc.
-
-To update all the Dockerfiles in the repo, run the `cmd` package (`go run ./cmd`). This will commit
-each Dockerfile individually and build and push any changed images by default; for local development
-you can pass `--commit=false` and `--build=false`.
+The templates are interpreted using the [contempt](https://github.com/csmith/contempt) tool, which handles generating
+the Dockerfile from the template as well as optionally building and pushing the images and committing the results.
 
 ## Images
 
 All images are available at `reg.c5h.io/<name>`. Only the latest tag is built.
-
-| Name               | Upstream                                              | Reproducible? | Non-root? | Minimal? |
-|--------------------|-------------------------------------------------------|:-------------:|:---------:|:--------:|
-| alpine             | https://alpinelinux.org/                              |       ✅      |    N/A    |    ✅    |
-| base               | N/A                                                   |       ✅      |    ✅     |    ✅    |
-| base-root          | N/A                                                   |       ✅      |    N/A    |    ✅    |
-| distribution       | https://github.com/distribution/distribution          |       ✅      |    ✅     |    ✅    |
-| docker-socket-proxy| https://github.com/Tecnativa/docker-socket-proxy      |       ✅      |    ❌     |    ✅    |
-| dotege             | https://github.com/csmith/dotege                      |       ✅      |    ✅     |    ✅    |
-| ergo-certwrapper   | https://github.com/ergochatergo                       |       ✅      |    ✅     |    ✅    |
-| irc-bot            | https://github.com/greboid/irc-bot                    |       ✅      |    ✅     |    ✅    |
-| ↳ irc-distribution | https://github.com/csmith/irc-distribution            |       ✅      |    ✅     |    ✅    |
-| ↳ irc-github       | https://github.com/greboid/irc-github                 |       ✅      |    ✅     |    ✅    |
-| ↳ irc-goplum       | https://github.com/greboid/irc-goplum                 |       ✅      |    ✅     |    ✅    |
-| ↳ irc-news         | https://github.com/csmith/irc-news                    |       ✅      |    ✅     |    ✅    |
-| golang             | https://golang.org/                                   |       ✅      |    N/A    |    ✅    |
-| haproxy            | https://www.haproxy.org/                              |       ✅      |    ✅     |    ✅    |
-| linx-server        | https://github.com/csmith/linx-server                 |       ✅      |    ✅     |    ✅    |
-| postgres-13        | https://www.postgresql.org/                           |       ❌      |    ❌     |    ❌    |
-| vault              | https://github.com/hashicorp/vault                    |       ✅      |    ✅     |    ✅    |
 
 Images with the `-certwrapper` suffix have [csmith/certwrapper](https://github.com/csmith/certwrapper)
 included as the entrypoint, to facilitate obtaining SSL certificates. To keep image size down, certwrapper
 is built with the `httpreq` build tag (so can only use DNS providers that support the HTTPREQ protocol).
 Pull requests for more general builds are welcome, as these variations are obviously quite specific to
 my setup.
-
-Meaning of the status columns:
-
-**Reproducible** - if the same Dockerfile is rebuilt at any time on any machine it will produce the same
-image. This is nice to have, but it is quite challenging and makes little difference in day-to-day
-operations. (It also requires the use of a tool like `buildah` that can set layer timestamps; `docker build`
-cannot make reproducible images.)
-
-**Non-root** - the entrypoint for the image is invoked as a non-root user. Base images are marked as N/A.
-Other images probably drop root later either via a script or as part of the process itself, but it's
-preferable for it to happen in the image.
-
-**Minimal** - the image contains only the bare essentials required. No leftovers, nothing irrelevant,
-no bloat. For base images this definition is a bit hazy as they'll contain things that might be used
-in downstream images. For applications this generally means they're statically compiled and run in the
-"base" image.
