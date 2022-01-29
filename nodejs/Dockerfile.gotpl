@@ -1,0 +1,32 @@
+FROM {{ image "alpine" }} as build
+
+ARG TAG="{{github_tag "nodejs/node"}}"
+
+RUN set -eux; \
+    apk add --no-cache \
+        {{range $key, $value := alpine_packages "curl" "tar" "xz" "rsync" "gnupg" "bash" "libstdc++" "gcompat" -}}
+        {{$key}}={{$value}}\
+        {{end}};\
+    curl -sfLo /checksums.txt.asc https://nodejs.org/dist/$TAG/SHASUMS256.txt.asc; \
+    gpg --keyserver hkps://keys.openpgp.org --keyserver-options auto-key-retrieve --verify /checksums.txt.asc; \
+    curl -sfLo /node.tar.xz https://nodejs.org/dist/$TAG/node-$TAG-linux-x64.tar.xz; \
+    grep ".*linux-x64.tar.xz" checksums.txt.asc | echo $(awk '{print $1}') \*node.tar.xz | sha256sum -wc -; \
+    mkdir -p /src; \
+    mkdir -p /usr/local; \
+    tar -xf /node.tar.xz -C /src; \
+    rsync -ap /src/node*/ /usr/local/; \
+    rm -rf /usr/local/CHANGELOG.md; \
+    rm -rf /usr/local/LICENSE; \
+    rm -rf /usr/local/README.md;
+
+FROM {{ image "alpine" }}
+
+RUN set -eux; \
+    apk add --no-cache \
+        {{range $key, $value := alpine_packages "gcompat" "libstdc++" "git" -}}
+        {{$key}}={{$value}}\
+        {{end}};
+
+COPY --from=build /usr/local /usr/local
+
+CMD ["/usr/local/bin/node"]
