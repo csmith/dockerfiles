@@ -30,6 +30,6 @@ RUN set -eux; \
     mkdir /home/nonroot; \
     chown 65532:65532 /home/nonroot;
 
-COPY --from=build /usr/local /usr/local
+COPY --from=build --chown=0:0 /usr/local /usr/local
 
 CMD ["/usr/local/bin/node"]
