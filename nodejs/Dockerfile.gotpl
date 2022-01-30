@@ -5,7 +5,7 @@ ARG TAG="{{github_tag "nodejs/node"}}"
 RUN set -eux; \
     apk add --no-cache \
         {{range $key, $value := alpine_packages "curl" "tar" "xz" "rsync" "gnupg" "bash" "libstdc++" "gcompat" -}}
-        {{$key}}={{$value}}\
+        {{$key}}={{$value}} \
         {{end}};\
     curl -sfLo /checksums.txt.asc https://nodejs.org/dist/$TAG/SHASUMS256.txt.asc; \
     gpg --keyserver hkps://keys.openpgp.org --keyserver-options auto-key-retrieve --verify /checksums.txt.asc; \
@@ -24,8 +24,11 @@ FROM {{ image "alpine" }}
 RUN set -eux; \
     apk add --no-cache \
         {{range $key, $value := alpine_packages "gcompat" "libstdc++" "git" -}}
-        {{$key}}={{$value}}\
-        {{end}};
+        {{$key}}={{$value}} \
+        {{end}}; \
+    echo "nonroot:x:65532:65532:nonroot:/home/nonroot:/sbin/nologin" >> /etc/passwd; \
+    mkdir /home/nonroot; \
+    chown 65532:65532 /home/nonroot;
 
 COPY --from=build /usr/local /usr/local
 
