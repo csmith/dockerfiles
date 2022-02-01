@@ -1,9 +1,9 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/linx-server/Dockerfile.gotpl
-# BOM: {"github:csmith/linx-server":"v2.3.9","image:base":"f47ed6eddc8491fd9683c0bb66751d16b0dd6f9e920d96c9d028ec0001ae5968","image:golang":"0325ff86f2355b302c706385fab6d5da426d12a596edc395740b3851c36542e7"}
+# BOM: {"github:csmith/linx-server":"v3.0.0","image:base":"f47ed6eddc8491fd9683c0bb66751d16b0dd6f9e920d96c9d028ec0001ae5968","image:golang":"0325ff86f2355b302c706385fab6d5da426d12a596edc395740b3851c36542e7"}
 
 FROM reg.c5h.io/golang@sha256:0325ff86f2355b302c706385fab6d5da426d12a596edc395740b3851c36542e7 AS build
 
-ARG TAG="v2.3.9"
+ARG TAG="v3.0.0"
 
 RUN set -eux; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/csmith/linx-server /go/src/github.com/csmith/linx-server; \
