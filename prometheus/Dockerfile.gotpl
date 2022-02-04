@@ -1,0 +1,27 @@
+FROM {{image "golang"}} AS build
+
+ARG TAG="{{github_tag "prometheus/prometheus"}}"
+
+RUN set -eux; \
+    # Dependencies
+    apk add --no-cache \
+        {{range $key, $value := alpine_packages "npm" "build-base" "bash" "curl" "tar" -}}
+        {{$key}}={{$value}} \
+        {{end}};\
+    # Build
+    git clone --depth=1 -b $TAG --single-branch https://github.com/prometheus/prometheus /tmp/prometheus; \
+    cd /tmp/prometheus; \
+    make assets npm_licenses common-build; \
+    # Fiddle with folders and prepare licenses
+    mkdir -p /tmp/dist/etc/prometheus /tmp/dist/data /tmp/dist/notices; \
+    cp -t /tmp/dist/notices/ /tmp/prometheus/LICENSE /tmp/prometheus/NOTICE /tmp/prometheus/npm_licenses.tar.bz2;
+
+FROM {{image "base"}}
+
+COPY --from=build --chown=65532:65532 /tmp/dist/ /
+COPY --from=build /tmp/prometheus/prometheus /prometheus
+
+VOLUME /etc/prometheus /data
+
+ENTRYPOINT ["/prometheus"]
+CMD ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.path=/data"]
