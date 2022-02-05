@@ -1,0 +1,47 @@
+FROM {{image "golang"}} AS build
+
+ARG TAG="{{github_tag "grafana/grafana"}}"
+
+RUN set -eux; \
+    # Dependencies
+    apk add --no-cache \
+        {{range $key, $value := alpine_packages "yarn" "build-base" "bash" "curl" "tar" -}}
+        {{$key}}={{$value}} \
+        {{end}};\
+    # Build
+    git clone --depth=1 -b $TAG --single-branch https://github.com/grafana/grafana /tmp/grafana; \
+    cd /tmp/grafana; \
+    yarn install; \
+    NODE_ENV=production yarn build; \
+    make build-go; \
+    # Fiddle with folders and prepare licenses
+    mkdir -p \
+        /tmp/dist/etc/grafana/provisioning/dashboards \
+        /tmp/dist/etc/grafana/provisioning/datasources \
+        /tmp/dist/etc/grafana/provisioning/notifiers \
+        /tmp/dist/etc/grafana/provisioning/plugins \
+        /tmp/dist/etc/grafana/provisioning/access-control \
+        /tmp/dist/var/log/grafana \
+        /tmp/dist/var/lib/grafana/plugins \
+        /tmp/dist/usr/share/grafana; \
+    mv -t /tmp/dist/usr/share/grafana /tmp/grafana/public/ /tmp/grafana/tools/ /tmp/grafana/conf/; \
+    mv /tmp/dist/usr/share/grafana/conf/sample.ini /tmp/dist/etc/grafana/grafana.ini;
+
+FROM {{image "base"}}
+
+COPY --from=build --chown=65532:65532 /tmp/dist/ /
+COPY --from=build /tmp/grafana/bin/*/grafana-server /grafana-server
+
+VOLUME /var/lib/grafana /etc/grafana
+
+ENTRYPOINT ["/grafana-server"]
+CMD [ \
+    "--homepath=/usr/share/grafana/", \
+    "--config=/etc/grafana/grafana.ini", \
+    "--packaging=docker", \
+    "cfg:default.log.mode=console", \
+    "cfg:default.paths.data=/var/lib/grafana", \
+    "cfg:default.paths.logs=/var/log/grafana", \
+    "cfg:default.paths.plugins=/var/lib/grafana/plugins", \
+    "cfg:default.paths.provisioning=/etc/grafana/provisioning" \
+]
