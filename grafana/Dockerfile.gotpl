@@ -12,7 +12,7 @@ RUN set -eux; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/grafana/grafana /tmp/grafana; \
     cd /tmp/grafana; \
     yarn install; \
-    NODE_ENV=production yarn build; \
+    NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 yarn build; \
     make build-go; \
     # Fiddle with folders and prepare licenses
     mkdir -p \
