@@ -6,7 +6,10 @@ on:
     paths-ignore:
       - '**/Containerfile'
       - '**/Dockerfile'
+      - '.github/**'
+      - 'READNE.md'
 name: update
+concurrency: dockerfiles
 jobs:
   update:
     runs-on: ubuntu-latest
