@@ -2,6 +2,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '33 3 * * *'
+  push:
+    paths-ignore:
+      - '**/Containerfile'
+      - '**/Dockerfile'
 name: update
 jobs:
   update:
