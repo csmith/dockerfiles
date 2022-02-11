@@ -1,0 +1,23 @@
+FROM {{image "golang"}} AS build
+
+ARG TAG="{{github_tag "gohugoio/hugo"}}"
+ARG MAGE="{{github_tag "magefile/mage"}}"
+
+RUN set -eux; \
+    apk add --no-cache \
+        {{range $key, $value := alpine_packages "g++" -}}
+        {{$key}}={{$value}} \
+        {{end}}; \
+    git clone --depth=1 -b $TAG --single-branch https://github.com/gohugoio/hugo /tmp/work; \
+    cd /tmp/work; \
+    HUGO_BUILD_TAGS=extended go run github.com/magefile/mage@$MAGE hugo; \
+    HUGO_BUILD_TAGS=extended go run github.com/magefile/mage@$MAGE install; \
+    mkdir -p /tmp/site;
+
+FROM {{image "base-glibc"}}
+
+COPY --from=build /go/bin/hugo /usr/bin/hugo
+COPY --from=build --chown=65532:65532 /tmp/site /
+VOLUME /site
+WORKDIR /site
+ENTRYPOINT ["/usr/bin/hugo"]
