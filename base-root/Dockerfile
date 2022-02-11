@@ -4,7 +4,7 @@
 FROM reg.c5h.io/alpine@sha256:ef95559f475cdf56e55db71c168f1616d497e2215bbd9f6bc63398036ae546a1 AS build
 
 RUN set -eux; \
-    # Sort out our dependencies (and sources)
+    # Sort out our dependencies
     apk add --no-cache \
         busybox=1.34.1-r4 \
         ca-certificates=20211220-r0 \
@@ -14,7 +14,6 @@ RUN set -eux; \
         musl=1.2.2-r7 \
         popt=1.18-r0 \
         rsync=3.2.3-r5 \
-        tzdata=2021e-r0 \
         zlib=1.2.11-r3 \
         zstd-libs=1.5.0-r0 \
         ; \
@@ -25,13 +24,15 @@ RUN set -eux; \
     echo "nonroot:x:65532:65532:nonroot:/home/nonroot:/sbin/nologin" >> /rootfs/etc/passwd; \
     chown 65532:65532 /rootfs/home/nonroot; \
     chmod 01777 /tmp; \
-    # Copy the tzdata files and musl
-    apk info -qL tzdata | rsync -aq --files-from=- / /rootfs/; \
+    # Copy our data
+    apk add --no-cache musl=1.2.2-r7; \
     apk info -qL musl | rsync -aq --files-from=- / /rootfs/; \
-    # Generate thw CA certificates file and copy the result
+    apk add --no-cache tzdata=2021e-r0; \
+    apk info -qL tzdata | rsync -aq --files-from=- / /rootfs/; \
+    # Generate the CA certificates file and copy the result
     /usr/sbin/update-ca-certificates; \
     cp /etc/ssl/certs/ca-certificates.crt /rootfs/etc/ssl/certs/ca-certificates.crt; \
-    # Create mount points for various special things \
+    # Create mount points for various special things
     mkdir /rootfs/proc /rootfs/dev /rootfs/sys; \
     # Clobber all the timestamps to make the build more reproducible
     find /rootfs -exec touch --date=@0 {} \;;
