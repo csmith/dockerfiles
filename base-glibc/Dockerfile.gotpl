@@ -14,7 +14,7 @@ RUN set -eux; \
     chown 65532:65532 /rootfs/home/nonroot; \
     chmod 01777 /tmp; \
     # Copy our data
-    {{range $key, $value := alpine_packages "musl" "tzdata" -}}
+    {{range $key, $value := alpine_packages "musl" "tzdata" "libstdc++" "libc6-compat" -}}
     apk add --no-cache {{$key}}={{$value}}; \
     apk info -qL {{$key}} | rsync -aq --files-from=- / /rootfs/; \
     {{end -}}
