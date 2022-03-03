@@ -1,9 +1,9 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hugo/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.37-r3","apk:g++":"10.3.1_git20211027-r0","apk:gcc":"10.3.1_git20211027-r0","apk:gmp":"6.2.1-r1","apk:isl22":"0.22-r0","apk:libatomic":"10.3.1_git20211027-r0","apk:libc-dev":"0.7.2-r3","apk:libgcc":"10.3.1_git20211027-r0","apk:libgomp":"10.3.1_git20211027-r0","apk:libgphobos":"10.3.1_git20211027-r0","apk:libstdc++":"10.3.1_git20211027-r0","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.2-r7","apk:musl-dev":"1.2.2-r7","apk:zlib":"1.2.11-r3","github:gohugoio/hugo":"v0.93.0","github:magefile/mage":"v1.12.1","image:base-glibc":"6e9759afd469f3f0c36622926187536066e338e5ed846b0c4879d257455eb360","image:golang":"0c3e32450b902dac4351d6ecad3289132ec049168a183cfef1b0efdc8ef5cc66"}
+# BOM: {"apk:binutils":"2.37-r3","apk:g++":"10.3.1_git20211027-r0","apk:gcc":"10.3.1_git20211027-r0","apk:gmp":"6.2.1-r1","apk:isl22":"0.22-r0","apk:libatomic":"10.3.1_git20211027-r0","apk:libc-dev":"0.7.2-r3","apk:libgcc":"10.3.1_git20211027-r0","apk:libgomp":"10.3.1_git20211027-r0","apk:libgphobos":"10.3.1_git20211027-r0","apk:libstdc++":"10.3.1_git20211027-r0","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.2-r7","apk:musl-dev":"1.2.2-r7","apk:zlib":"1.2.11-r3","github:gohugoio/hugo":"v0.93.1","github:magefile/mage":"v1.12.1","image:base-glibc":"6e9759afd469f3f0c36622926187536066e338e5ed846b0c4879d257455eb360","image:golang":"0c3e32450b902dac4351d6ecad3289132ec049168a183cfef1b0efdc8ef5cc66"}
 
 FROM reg.c5h.io/golang@sha256:0c3e32450b902dac4351d6ecad3289132ec049168a183cfef1b0efdc8ef5cc66 AS build
 
-ARG TAG="v0.93.0"
+ARG TAG="v0.93.1"
 ARG MAGE="v1.12.1"
 
 RUN set -eux; \
