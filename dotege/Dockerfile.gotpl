@@ -5,7 +5,7 @@ ARG TAG="{{github_tag "csmith/dotege"}}"
 RUN set -eux; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/csmith/dotege /go/src/github.com/csmith/dotege; \
     cd /go/src/github.com/csmith/dotege; \
-    CGO_ENABLED=0 GOOS=linux go build -a -ldflags "-buildid= -extldflags '-static' -X main.GitSHA=$(git rev-parse --short HEAD)" -trimpath -tags lego_httpreq -o main cmd/dotege; \
+    CGO_ENABLED=0 GOOS=linux go build -a -ldflags "-buildid= -extldflags '-static' -X main.GitSHA=$(git rev-parse --short HEAD)" -trimpath -tags lego_httpreq -o main ./cmd/dotege; \
     go run github.com/google/go-licenses@latest save ./... --save_path=/notices; \
     # Make volume mount points
     mkdir -p /data/config /data/certs /data/output; \
