@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/irc-news/Dockerfile.gotpl
-# BOM: {"github:csmith/irc-news":"v2.0.2","image:base":"f47ed6eddc8491fd9683c0bb66751d16b0dd6f9e920d96c9d028ec0001ae5968","image:golang":"65bdde2378d37447617914ff390170958b4b4df47160d3f9c13350d583fc59ff"}
+# BOM: {"github:csmith/irc-news":"v2.0.2","image:base":"f47ed6eddc8491fd9683c0bb66751d16b0dd6f9e920d96c9d028ec0001ae5968","image:golang":"04b65b8002f53c66b0ab66d124fc81bdb06a8a24c69c23f8b58d777c2d21bae4"}
 
-FROM reg.c5h.io/golang@sha256:65bdde2378d37447617914ff390170958b4b4df47160d3f9c13350d583fc59ff AS build
+FROM reg.c5h.io/golang@sha256:04b65b8002f53c66b0ab66d124fc81bdb06a8a24c69c23f8b58d777c2d21bae4 AS build
 
 ARG TAG="v2.0.2"
 
