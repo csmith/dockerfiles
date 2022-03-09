@@ -1,0 +1,22 @@
+FROM {{image "golang"}} AS build
+
+ARG TAG="{{github_tag "greboid/httpredirect"}}"
+
+RUN set -eux; \
+    apk add --no-cache \
+        {{range $key, $value := alpine_packages "git" -}}
+        {{$key}}={{$value}}\
+        {{end}}; \
+    git clone --depth=1 -b $TAG --single-branch https://github.com/greboid/httpredirect /go/src/github.com/greboid/httpredirect; \
+    cd /go/src/github.com/greboid/httpredirect; \
+    CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main .; \
+    go run github.com/google/go-licenses@latest save ./... --save_path=/notices; \
+    # Clobber all the timestamps to make the build more reproducible
+    touch --date=@0 /go/src/github.com/greboid/httpredirect/main;
+
+FROM {{image "base"}}
+
+COPY --from=build /go/src/github.com/greboid/httpredirect/main /httpredirect
+COPY --from=build /notices /notices
+EXPOSE 8080
+ENTRYPOINT ["/httpredirect"]
