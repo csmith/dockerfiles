@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/soju-certwrapper/Dockerfile.gotpl
-# BOM: {"github:csmith/certwrapper":"v4.1.0","github:emersion/soju":"v0.4.0","image:base":"f47ed6eddc8491fd9683c0bb66751d16b0dd6f9e920d96c9d028ec0001ae5968","image:golang":"fd18f706f641c54676356176aca3a3879490e628c2697866d62557d1edeb3aa6"}
+# BOM: {"github:csmith/certwrapper":"v4.1.0","github:emersion/soju":"v0.4.0","image:base":"f47ed6eddc8491fd9683c0bb66751d16b0dd6f9e920d96c9d028ec0001ae5968","image:golang":"930b02a2676ff252c3283ef4dd47ac0a91a90be42536993cd181dca83e5d088e"}
 
-FROM reg.c5h.io/golang@sha256:fd18f706f641c54676356176aca3a3879490e628c2697866d62557d1edeb3aa6 AS build
+FROM reg.c5h.io/golang@sha256:930b02a2676ff252c3283ef4dd47ac0a91a90be42536993cd181dca83e5d088e AS build
 
 ARG SOJUTAG="v0.4.0"
 ARG CERTTAG="v4.1.0"
@@ -11,7 +11,7 @@ RUN set -eux; \
     git clone --depth=1 -b $CERTTAG --single-branch https://github.com/csmith/certwrapper /go/src/github.com/csmith/certwrapper; \
     cd /go/src/github.com/csmith/certwrapper && (\
         CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags lego_httpreq -o /out/certwrapper .; \
-        go run github.com/google/go-licenses@latest save ./... --save_path=/out/notices/certwrapper; \
+        go-licenses save ./... --save_path=/notices; \
     ); \
     # Build soju
     git clone --depth=1 -b $SOJUTAG --single-branch https://github.com/emersion/soju /go/src/github.com/emersion/soju; \
@@ -19,12 +19,10 @@ RUN set -eux; \
       GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o /out/soju ./cmd/soju; \
       GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o /out/sojuctl ./cmd/sojuctl; \
       # TODO: find a license tool that doesn't hardcode Google's opinion on "forbidden" licenses :/
-      # go run github.com/google/go-licenses@latest save ./... --save_path=/out/notices/soju; \
+      # go-licenses save ./... --save_path=/notices; \
     ); \
     # Create folders for volumes
-    install -o 65532 -g 65532 -d /out/data /out/certs; \
-    # Clobber all the timestamps to make the build more reproducible
-    touch --date=@0 /out;
+    install -o 65532 -g 65532 -d /out/data /out/certs;
 
 FROM reg.c5h.io/base@sha256:f47ed6eddc8491fd9683c0bb66751d16b0dd6f9e920d96c9d028ec0001ae5968
 
