@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/distribution/Dockerfile.gotpl
-# BOM: {"apk:file":"5.41-r0","apk:libmagic":"5.41-r0","apk:make":"4.3-r0","apk:musl":"1.2.2-r7","image:base":"f47ed6eddc8491fd9683c0bb66751d16b0dd6f9e920d96c9d028ec0001ae5968","image:golang":"fd18f706f641c54676356176aca3a3879490e628c2697866d62557d1edeb3aa6"}
+# BOM: {"apk:file":"5.41-r0","apk:libmagic":"5.41-r0","apk:make":"4.3-r0","apk:musl":"1.2.2-r7","image:base":"f47ed6eddc8491fd9683c0bb66751d16b0dd6f9e920d96c9d028ec0001ae5968","image:golang":"930b02a2676ff252c3283ef4dd47ac0a91a90be42536993cd181dca83e5d088e"}
 
-FROM reg.c5h.io/golang@sha256:fd18f706f641c54676356176aca3a3879490e628c2697866d62557d1edeb3aa6 AS build
+FROM reg.c5h.io/golang@sha256:930b02a2676ff252c3283ef4dd47ac0a91a90be42536993cd181dca83e5d088e AS build
 
 ARG TAG="v2.7.1"
 
@@ -14,9 +14,7 @@ RUN set -eux; \
         ; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/distribution/distribution /go/src/github.com/docker/distribution; \
     cd /go/src/github.com/docker/distribution; \
-    BUILDTAGS="include_oss include_gcs" GO111MODULE=off CGO_ENABLED=0 make bin/registry; \
-    # Clobber all the timestamps to make the build more reproducible
-    touch --date=@0 /go/src/github.com/docker/distribution/cmd/registry/config-dev.yml /go/src/github.com/docker/distribution/bin/registry;
+    BUILDTAGS="include_oss include_gcs" GO111MODULE=off CGO_ENABLED=0 make bin/registry;
 
 FROM reg.c5h.io/base@sha256:f47ed6eddc8491fd9683c0bb66751d16b0dd6f9e920d96c9d028ec0001ae5968
 
