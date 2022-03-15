@@ -1,10 +1,11 @@
 FROM {{image "alpine"}}
 
+ARG GOLICENSETAG="{{github_tag "google/go-licenses"}}"
 ARG ARCHIVE_URL="{{golang_url}}"
 ARG ARCHIVE_SUM="{{golang_checksum}}"
 
-ENV GOPATH=/go \
-    PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
+ENV GOPATH=/go
+ENV PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 
 RUN set -eux; \
     # Dependencies and source for bootstrapping go
@@ -36,4 +37,5 @@ RUN set -eux; \
         {{end}}; \
     # Set up the go path
     mkdir -p $GOPATH/src $GOPATH/bin; \
-    chmod -R 777 $GOPATH;
+    chmod -R 777 $GOPATH; \
+    go install github.com/google/go-licenses@$GOLICENSETAG
