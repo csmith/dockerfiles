@@ -39,9 +39,7 @@ RUN set -eux; \
     /usr/sbin/update-ca-certificates; \
     cp /etc/ssl/certs/ca-certificates.crt /rootfs/etc/ssl/certs/ca-certificates.crt; \
     # Create mount points for various special things
-    mkdir /rootfs/proc /rootfs/dev /rootfs/sys; \
-    # Clobber all the timestamps to make the build more reproducible
-    find /rootfs -exec touch --date=@0 {} \;;
+    mkdir /rootfs/proc /rootfs/dev /rootfs/sys;
 
 FROM scratch
 
