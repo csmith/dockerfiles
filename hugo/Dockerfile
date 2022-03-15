@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hugo/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.37-r3","apk:g++":"10.3.1_git20211027-r0","apk:gcc":"10.3.1_git20211027-r0","apk:gmp":"6.2.1-r1","apk:isl22":"0.22-r0","apk:libatomic":"10.3.1_git20211027-r0","apk:libc-dev":"0.7.2-r3","apk:libgcc":"10.3.1_git20211027-r0","apk:libgomp":"10.3.1_git20211027-r0","apk:libgphobos":"10.3.1_git20211027-r0","apk:libstdc++":"10.3.1_git20211027-r0","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.2-r7","apk:musl-dev":"1.2.2-r7","apk:zlib":"1.2.11-r3","github:gohugoio/hugo":"v0.94.2","github:magefile/mage":"v1.12.1","image:base-glibc":"6e9759afd469f3f0c36622926187536066e338e5ed846b0c4879d257455eb360","image:golang":"fd18f706f641c54676356176aca3a3879490e628c2697866d62557d1edeb3aa6"}
+# BOM: {"apk:binutils":"2.37-r3","apk:g++":"10.3.1_git20211027-r0","apk:gcc":"10.3.1_git20211027-r0","apk:gmp":"6.2.1-r1","apk:isl22":"0.22-r0","apk:libatomic":"10.3.1_git20211027-r0","apk:libc-dev":"0.7.2-r3","apk:libgcc":"10.3.1_git20211027-r0","apk:libgomp":"10.3.1_git20211027-r0","apk:libgphobos":"10.3.1_git20211027-r0","apk:libstdc++":"10.3.1_git20211027-r0","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.2-r7","apk:musl-dev":"1.2.2-r7","apk:zlib":"1.2.11-r3","github:gohugoio/hugo":"v0.94.2","github:magefile/mage":"v1.12.1","image:base-glibc":"6e9759afd469f3f0c36622926187536066e338e5ed846b0c4879d257455eb360","image:golang":"930b02a2676ff252c3283ef4dd47ac0a91a90be42536993cd181dca83e5d088e"}
 
-FROM reg.c5h.io/golang@sha256:fd18f706f641c54676356176aca3a3879490e628c2697866d62557d1edeb3aa6 AS build
+FROM reg.c5h.io/golang@sha256:930b02a2676ff252c3283ef4dd47ac0a91a90be42536993cd181dca83e5d088e AS build
 
 ARG TAG="v0.94.2"
 ARG MAGE="v1.12.1"
