@@ -1,0 +1,31 @@
+FROM {{image "alpine"}} AS build
+
+ARG TAG="{{github_tag "haproxy/haproxy"}}"
+
+COPY *.patch /src/
+
+RUN set -eux; \
+     apk add --no-cache --virtual .build-deps \
+        {{range $key, $value := alpine_packages "git" "build-base" "tzdata" "ca-certificates" "linux-headers" "pcre-dev" "musl-dev" "openssl-dev" "openssl-libs-static" "zlib-dev" "zlib-static" -}}
+        {{$key}}={{$value}} \
+        {{end}}; \
+     git clone --depth=1 -b $TAG --single-branch https://github.com/haproxy/haproxy /src/haproxy; \
+     cd /src/haproxy; \
+     patch Makefile < /src/buildstatic.patch; \
+     if [ "$TAG" = "v2.5.0" ]; then \
+       patch -p1 < /src/header-flags.patch; \
+     fi; \
+     make TARGET=linux-musl USE_OPENSSL=1 USE_PCRE=1; \
+     make install-bin; \
+     strip /usr/local/sbin/haproxy; \
+     touch --date=@0 /usr/local/sbin/haproxy
+
+FROM {{image "base"}}
+
+STOPSIGNAL SIGUSR1
+
+COPY --from=build /usr/local/sbin/haproxy /haproxy
+
+ENTRYPOINT ["/haproxy", "-W", "-db"]
+
+CMD ["-f", "/usr/local/etc/haproxy/haproxy.cfg"]
