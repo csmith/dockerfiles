@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/dotege/Dockerfile.gotpl
-# BOM: {"github:csmith/dotege":"v1.2.0","image:base":"f47ed6eddc8491fd9683c0bb66751d16b0dd6f9e920d96c9d028ec0001ae5968","image:golang":"930b02a2676ff252c3283ef4dd47ac0a91a90be42536993cd181dca83e5d088e"}
+# BOM: {"github:csmith/dotege":"v1.2.0","image:base":"f47ed6eddc8491fd9683c0bb66751d16b0dd6f9e920d96c9d028ec0001ae5968","image:golang":"ad20796ad97b44998b5a22b02f0b65ad8f650f12b403b96d02dad3dbfff44ceb"}
 
-FROM reg.c5h.io/golang@sha256:930b02a2676ff252c3283ef4dd47ac0a91a90be42536993cd181dca83e5d088e AS build
+FROM reg.c5h.io/golang@sha256:ad20796ad97b44998b5a22b02f0b65ad8f650f12b403b96d02dad3dbfff44ceb AS build
 
 ARG TAG="v1.2.0"
 
