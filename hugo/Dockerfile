@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hugo/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.37-r3","apk:g++":"10.3.1_git20211027-r0","apk:gcc":"10.3.1_git20211027-r0","apk:gmp":"6.2.1-r1","apk:isl22":"0.22-r0","apk:libatomic":"10.3.1_git20211027-r0","apk:libc-dev":"0.7.2-r3","apk:libgcc":"10.3.1_git20211027-r0","apk:libgomp":"10.3.1_git20211027-r0","apk:libgphobos":"10.3.1_git20211027-r0","apk:libstdc++":"10.3.1_git20211027-r0","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.2-r7","apk:musl-dev":"1.2.2-r7","apk:zlib":"1.2.11-r3","github:gohugoio/hugo":"v0.95.0","github:magefile/mage":"v1.13.0","image:base-glibc":"6e9759afd469f3f0c36622926187536066e338e5ed846b0c4879d257455eb360","image:golang":"fd7f55e3c0788183224e811f8c0f49e32d5b678a78710f56aab753ec579dfb18"}
+# BOM: {"apk:binutils":"2.37-r3","apk:g++":"10.3.1_git20211027-r0","apk:gcc":"10.3.1_git20211027-r0","apk:gmp":"6.2.1-r1","apk:isl22":"0.22-r0","apk:libatomic":"10.3.1_git20211027-r0","apk:libc-dev":"0.7.2-r3","apk:libgcc":"10.3.1_git20211027-r0","apk:libgomp":"10.3.1_git20211027-r0","apk:libgphobos":"10.3.1_git20211027-r0","apk:libstdc++":"10.3.1_git20211027-r0","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.2-r7","apk:musl-dev":"1.2.2-r7","apk:zlib":"1.2.11-r3","github:gohugoio/hugo":"v0.95.0","github:magefile/mage":"v1.13.0","image:base-glibc":"902eeaa2ba8128b63e4247b947911c41df14620da6d44fef797179ff80827347","image:golang":"fd7f55e3c0788183224e811f8c0f49e32d5b678a78710f56aab753ec579dfb18"}
 
 FROM reg.c5h.io/golang@sha256:fd7f55e3c0788183224e811f8c0f49e32d5b678a78710f56aab753ec579dfb18 AS build
 
@@ -31,7 +31,7 @@ RUN set -eux; \
     HUGO_BUILD_TAGS=extended go run github.com/magefile/mage@$MAGE install; \
     mkdir -p /tmp/site;
 
-FROM reg.c5h.io/base-glibc@sha256:6e9759afd469f3f0c36622926187536066e338e5ed846b0c4879d257455eb360
+FROM reg.c5h.io/base-glibc@sha256:902eeaa2ba8128b63e4247b947911c41df14620da6d44fef797179ff80827347
 
 COPY --from=build /go/bin/hugo /usr/bin/hugo
 COPY --from=build --chown=65532:65532 /tmp/site /
