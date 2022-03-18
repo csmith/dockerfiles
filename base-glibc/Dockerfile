@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/base-glibc/Dockerfile.gotpl
-# BOM: {"apk:busybox":"1.34.1-r4","apk:ca-certificates":"20211220-r0","apk:libacl":"2.2.53-r0","apk:libc6-compat":"1.2.2-r7","apk:libcrypto1.1":"1.1.1n-r0","apk:libgcc":"10.3.1_git20211027-r0","apk:libstdc++":"10.3.1_git20211027-r0","apk:lz4-libs":"1.9.3-r1","apk:musl":"1.2.2-r7","apk:popt":"1.18-r0","apk:rsync":"3.2.3-r5","apk:tzdata":"2021e-r0","apk:zlib":"1.2.11-r3","apk:zstd-libs":"1.5.0-r0","image:alpine":"8de26ff809746bfb5003ee2c5d1b302c22debf3789d317e0a77c1698c489d907"}
+# BOM: {"apk:busybox":"1.34.1-r4","apk:ca-certificates":"20211220-r0","apk:libacl":"2.2.53-r0","apk:libc6-compat":"1.2.2-r7","apk:libcrypto1.1":"1.1.1n-r0","apk:libgcc":"10.3.1_git20211027-r0","apk:libstdc++":"10.3.1_git20211027-r0","apk:lz4-libs":"1.9.3-r1","apk:musl":"1.2.2-r7","apk:popt":"1.18-r0","apk:rsync":"3.2.3-r5","apk:tzdata":"2022a-r0","apk:zlib":"1.2.11-r3","apk:zstd-libs":"1.5.0-r0","image:alpine":"8de26ff809746bfb5003ee2c5d1b302c22debf3789d317e0a77c1698c489d907"}
 
 FROM reg.c5h.io/alpine@sha256:8de26ff809746bfb5003ee2c5d1b302c22debf3789d317e0a77c1698c489d907 AS build
 
@@ -33,7 +33,7 @@ RUN set -eux; \
     apk info -qL libstdc++ | rsync -aq --files-from=- / /rootfs/; \
     apk add --no-cache musl=1.2.2-r7; \
     apk info -qL musl | rsync -aq --files-from=- / /rootfs/; \
-    apk add --no-cache tzdata=2021e-r0; \
+    apk add --no-cache tzdata=2022a-r0; \
     apk info -qL tzdata | rsync -aq --files-from=- / /rootfs/; \
     # Generate the CA certificates file and copy the result
     /usr/sbin/update-ca-certificates; \
