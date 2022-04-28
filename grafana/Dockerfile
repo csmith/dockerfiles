@@ -1,9 +1,9 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/grafana/Dockerfile.gotpl
-# BOM: {"apk:bash":"5.1.16-r0","apk:binutils":"2.37-r3","apk:brotli-libs":"1.0.9-r5","apk:build-base":"0.5-r2","apk:busybox":"1.34.1-r5","apk:c-ares":"1.18.1-r0","apk:ca-certificates":"20211220-r0","apk:curl":"7.80.0-r0","apk:file":"5.41-r0","apk:fortify-headers":"1.1-r1","apk:g++":"10.3.1_git20211027-r0","apk:gcc":"10.3.1_git20211027-r0","apk:gmp":"6.2.1-r1","apk:isl22":"0.22-r0","apk:libacl":"2.2.53-r0","apk:libatomic":"10.3.1_git20211027-r0","apk:libc-dev":"0.7.2-r3","apk:libcrypto1.1":"1.1.1n-r0","apk:libcurl":"7.80.0-r0","apk:libgcc":"10.3.1_git20211027-r0","apk:libgomp":"10.3.1_git20211027-r0","apk:libgphobos":"10.3.1_git20211027-r0","apk:libmagic":"5.41-r0","apk:libssl1.1":"1.1.1n-r0","apk:libstdc++":"10.3.1_git20211027-r0","apk:make":"4.3-r0","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.2-r7","apk:musl-dev":"1.2.2-r7","apk:ncurses-libs":"6.3_p20211120-r0","apk:ncurses-terminfo-base":"6.3_p20211120-r0","apk:nghttp2-libs":"1.46.0-r0","apk:nodejs":"16.14.2-r0","apk:patch":"2.7.6-r7","apk:readline":"8.1.1-r0","apk:tar":"1.34-r0","apk:yarn":"1.22.17-r0","apk:zlib":"1.2.12-r0","github:grafana/grafana":"v8.4.7","image:base":"f85825cc6e579732f339638d1cd16d87f0673759127df47e8bcd3586412acb5d","image:golang":"5698c1314ccb47feecbbf87d41db3c818ce44791b19b72d3409bdd53799c0725"}
+# BOM: {"apk:bash":"5.1.16-r0","apk:binutils":"2.37-r3","apk:brotli-libs":"1.0.9-r5","apk:build-base":"0.5-r2","apk:busybox":"1.34.1-r5","apk:c-ares":"1.18.1-r0","apk:ca-certificates":"20211220-r0","apk:curl":"7.80.0-r1","apk:file":"5.41-r0","apk:fortify-headers":"1.1-r1","apk:g++":"10.3.1_git20211027-r0","apk:gcc":"10.3.1_git20211027-r0","apk:gmp":"6.2.1-r1","apk:isl22":"0.22-r0","apk:libacl":"2.2.53-r0","apk:libatomic":"10.3.1_git20211027-r0","apk:libc-dev":"0.7.2-r3","apk:libcrypto1.1":"1.1.1n-r0","apk:libcurl":"7.80.0-r1","apk:libgcc":"10.3.1_git20211027-r0","apk:libgomp":"10.3.1_git20211027-r0","apk:libgphobos":"10.3.1_git20211027-r0","apk:libmagic":"5.41-r0","apk:libssl1.1":"1.1.1n-r0","apk:libstdc++":"10.3.1_git20211027-r0","apk:make":"4.3-r0","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.2-r7","apk:musl-dev":"1.2.2-r7","apk:ncurses-libs":"6.3_p20211120-r0","apk:ncurses-terminfo-base":"6.3_p20211120-r0","apk:nghttp2-libs":"1.46.0-r0","apk:nodejs":"16.14.2-r0","apk:patch":"2.7.6-r7","apk:readline":"8.1.1-r0","apk:tar":"1.34-r0","apk:yarn":"1.22.17-r0","apk:zlib":"1.2.12-r1","github:grafana/grafana":"v8.5.1","image:base":"f85825cc6e579732f339638d1cd16d87f0673759127df47e8bcd3586412acb5d","image:golang":"9eb0fe2aa6f733756bd07464419bfa32e312bcf03e4dd4a3ec368b18cbd5c73a"}
 
-FROM reg.c5h.io/golang@sha256:5698c1314ccb47feecbbf87d41db3c818ce44791b19b72d3409bdd53799c0725 AS build
+FROM reg.c5h.io/golang@sha256:9eb0fe2aa6f733756bd07464419bfa32e312bcf03e4dd4a3ec368b18cbd5c73a AS build
 
-ARG TAG="v8.4.7"
+ARG TAG="v8.5.1"
 
 RUN set -eux; \
     # Dependencies
@@ -15,7 +15,7 @@ RUN set -eux; \
         busybox=1.34.1-r5 \
         c-ares=1.18.1-r0 \
         ca-certificates=20211220-r0 \
-        curl=7.80.0-r0 \
+        curl=7.80.0-r1 \
         file=5.41-r0 \
         fortify-headers=1.1-r1 \
         g++=10.3.1_git20211027-r0 \
@@ -26,7 +26,7 @@ RUN set -eux; \
         libatomic=10.3.1_git20211027-r0 \
         libc-dev=0.7.2-r3 \
         libcrypto1.1=1.1.1n-r0 \
-        libcurl=7.80.0-r0 \
+        libcurl=7.80.0-r1 \
         libgcc=10.3.1_git20211027-r0 \
         libgomp=10.3.1_git20211027-r0 \
         libgphobos=10.3.1_git20211027-r0 \
@@ -46,13 +46,13 @@ RUN set -eux; \
         readline=8.1.1-r0 \
         tar=1.34-r0 \
         yarn=1.22.17-r0 \
-        zlib=1.2.12-r0 \
+        zlib=1.2.12-r1 \
         ;\
     # Build
     git clone --depth=1 -b $TAG --single-branch https://github.com/grafana/grafana /tmp/grafana; \
     cd /tmp/grafana; \
     yarn install; \
-    NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 yarn build; \
+    NODE_ENV=production NODE_OPTIONS=--max_old_space_size=6144 yarn build; \
     make build-go; \
     # Fiddle with folders and prepare licenses
     mkdir -p \
