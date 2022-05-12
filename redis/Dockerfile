@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/redis/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.37-r3","apk:brotli-libs":"1.0.9-r5","apk:build-base":"0.5-r2","apk:busybox":"1.34.1-r5","apk:ca-certificates":"20211220-r0","apk:expat":"2.4.7-r0","apk:file":"5.41-r0","apk:fortify-headers":"1.1-r1","apk:g++":"10.3.1_git20211027-r0","apk:gcc":"10.3.1_git20211027-r0","apk:git":"2.34.2-r0","apk:gmp":"6.2.1-r1","apk:isl22":"0.22-r0","apk:libatomic":"10.3.1_git20211027-r0","apk:libc-dev":"0.7.2-r3","apk:libcrypto1.1":"1.1.1n-r0","apk:libcurl":"7.80.0-r1","apk:libgcc":"10.3.1_git20211027-r0","apk:libgomp":"10.3.1_git20211027-r0","apk:libgphobos":"10.3.1_git20211027-r0","apk:libmagic":"5.41-r0","apk:libpcre16":"8.45-r1","apk:libpcre32":"8.45-r1","apk:libpcrecpp":"8.45-r1","apk:libssl1.1":"1.1.1n-r0","apk:libstdc++":"10.3.1_git20211027-r0","apk:linux-headers":"5.10.41-r0","apk:make":"4.3-r0","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.2-r7","apk:musl-dev":"1.2.2-r7","apk:nghttp2-libs":"1.46.0-r0","apk:openssl-dev":"1.1.1n-r0","apk:openssl-libs-static":"1.1.1n-r0","apk:patch":"2.7.6-r7","apk:pcre":"8.45-r1","apk:pcre-dev":"8.45-r1","apk:pcre2":"10.39-r0","apk:pkgconf":"1.8.0-r0","apk:tzdata":"2022a-r0","apk:zlib":"1.2.12-r1","apk:zlib-dev":"1.2.12-r1","apk:zlib-static":"1.2.12-r1","github:redis/redis":"7.0.0","image:alpine":"9d6cd09679135e86162dcb54c7c8515293cb5d7aaba297e7553895e11739f2e0","image:base":"f85825cc6e579732f339638d1cd16d87f0673759127df47e8bcd3586412acb5d"}
+# BOM: {"apk:binutils":"2.37-r3","apk:brotli-libs":"1.0.9-r5","apk:build-base":"0.5-r2","apk:busybox":"1.34.1-r5","apk:ca-certificates":"20211220-r0","apk:expat":"2.4.7-r0","apk:file":"5.41-r0","apk:fortify-headers":"1.1-r1","apk:g++":"10.3.1_git20211027-r0","apk:gcc":"10.3.1_git20211027-r0","apk:git":"2.34.2-r0","apk:gmp":"6.2.1-r1","apk:isl22":"0.22-r0","apk:libatomic":"10.3.1_git20211027-r0","apk:libc-dev":"0.7.2-r3","apk:libcrypto1.1":"1.1.1o-r0","apk:libcurl":"7.80.0-r1","apk:libgcc":"10.3.1_git20211027-r0","apk:libgomp":"10.3.1_git20211027-r0","apk:libgphobos":"10.3.1_git20211027-r0","apk:libmagic":"5.41-r0","apk:libpcre16":"8.45-r1","apk:libpcre32":"8.45-r1","apk:libpcrecpp":"8.45-r1","apk:libssl1.1":"1.1.1o-r0","apk:libstdc++":"10.3.1_git20211027-r0","apk:linux-headers":"5.10.41-r0","apk:make":"4.3-r0","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.2-r7","apk:musl-dev":"1.2.2-r7","apk:nghttp2-libs":"1.46.0-r0","apk:openssl-dev":"1.1.1o-r0","apk:openssl-libs-static":"1.1.1o-r0","apk:patch":"2.7.6-r7","apk:pcre":"8.45-r1","apk:pcre-dev":"8.45-r1","apk:pcre2":"10.39-r0","apk:pkgconf":"1.8.0-r0","apk:tzdata":"2022a-r0","apk:zlib":"1.2.12-r1","apk:zlib-dev":"1.2.12-r1","apk:zlib-static":"1.2.12-r1","github:redis/redis":"7.0.0","image:alpine":"9d6cd09679135e86162dcb54c7c8515293cb5d7aaba297e7553895e11739f2e0","image:base":"f85825cc6e579732f339638d1cd16d87f0673759127df47e8bcd3586412acb5d"}
 
 FROM reg.c5h.io/alpine@sha256:9d6cd09679135e86162dcb54c7c8515293cb5d7aaba297e7553895e11739f2e0 AS build
 
@@ -26,7 +26,7 @@ RUN set -eux; \
         isl22=0.22-r0 \
         libatomic=10.3.1_git20211027-r0 \
         libc-dev=0.7.2-r3 \
-        libcrypto1.1=1.1.1n-r0 \
+        libcrypto1.1=1.1.1o-r0 \
         libcurl=7.80.0-r1 \
         libgcc=10.3.1_git20211027-r0 \
         libgomp=10.3.1_git20211027-r0 \
@@ -35,7 +35,7 @@ RUN set -eux; \
         libpcre16=8.45-r1 \
         libpcre32=8.45-r1 \
         libpcrecpp=8.45-r1 \
-        libssl1.1=1.1.1n-r0 \
+        libssl1.1=1.1.1o-r0 \
         libstdc++=10.3.1_git20211027-r0 \
         linux-headers=5.10.41-r0 \
         make=4.3-r0 \
@@ -44,8 +44,8 @@ RUN set -eux; \
         musl=1.2.2-r7 \
         musl-dev=1.2.2-r7 \
         nghttp2-libs=1.46.0-r0 \
-        openssl-dev=1.1.1n-r0 \
-        openssl-libs-static=1.1.1n-r0 \
+        openssl-dev=1.1.1o-r0 \
+        openssl-libs-static=1.1.1o-r0 \
         patch=2.7.6-r7 \
         pcre=8.45-r1 \
         pcre-dev=8.45-r1 \
