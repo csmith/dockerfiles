@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/base/Dockerfile.gotpl
-# BOM: {"image:base-root":"6d131c89e231e9a653da086b59d83f269f52924449a9ab8e7cbd6e86fe35d74f"}
+# BOM: {"image:base-root":"fae0414d67593373dbb0cba1d6e3b740837e3b8873f44fd91d5639ab3acdf952"}
 
-FROM reg.c5h.io/base-root@sha256:6d131c89e231e9a653da086b59d83f269f52924449a9ab8e7cbd6e86fe35d74f
+FROM reg.c5h.io/base-root@sha256:fae0414d67593373dbb0cba1d6e3b740837e3b8873f44fd91d5639ab3acdf952
 USER nonroot
