@@ -39,7 +39,8 @@ RUN set -eux; \
 		libxml2-dev \
 		libxslt-dev \
 		linux-headers \
-		llvm11-dev clang g++ \
+		clang \
+		g++ \
 		make \
 		openssl-dev \
 		perl-utils \
