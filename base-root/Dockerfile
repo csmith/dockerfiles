@@ -1,21 +1,21 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/base-root/Dockerfile.gotpl
-# BOM: {"apk:busybox":"1.34.1-r5","apk:ca-certificates":"20211220-r0","apk:libacl":"2.2.53-r0","apk:libcrypto1.1":"1.1.1o-r0","apk:lz4-libs":"1.9.3-r1","apk:musl":"1.2.2-r7","apk:popt":"1.18-r0","apk:rsync":"3.2.3-r5","apk:tzdata":"2022a-r0","apk:zlib":"1.2.12-r1","apk:zstd-libs":"1.5.0-r0","image:alpine":"9d6cd09679135e86162dcb54c7c8515293cb5d7aaba297e7553895e11739f2e0"}
+# BOM: {"apk:busybox":"1.35.0-r13","apk:ca-certificates":"20211220-r0","apk:libacl":"2.3.1-r0","apk:libcrypto1.1":"1.1.1o-r0","apk:lz4-libs":"1.9.3-r1","apk:musl":"1.2.3-r0","apk:popt":"1.18-r0","apk:rsync":"3.2.4-r0","apk:tzdata":"2022a-r0","apk:zlib":"1.2.12-r1","apk:zstd-libs":"1.5.2-r1","image:alpine":"e1af61331d46ce7a5770c5083e1c81e297fbf3fcc97b63542b0ac62a8f3900a3"}
 
-FROM reg.c5h.io/alpine@sha256:9d6cd09679135e86162dcb54c7c8515293cb5d7aaba297e7553895e11739f2e0 AS build
+FROM reg.c5h.io/alpine@sha256:e1af61331d46ce7a5770c5083e1c81e297fbf3fcc97b63542b0ac62a8f3900a3 AS build
 
 RUN set -eux; \
     # Sort out our dependencies
     apk add --no-cache \
-        busybox=1.34.1-r5 \
+        busybox=1.35.0-r13 \
         ca-certificates=20211220-r0 \
-        libacl=2.2.53-r0 \
+        libacl=2.3.1-r0 \
         libcrypto1.1=1.1.1o-r0 \
         lz4-libs=1.9.3-r1 \
-        musl=1.2.2-r7 \
+        musl=1.2.3-r0 \
         popt=1.18-r0 \
-        rsync=3.2.3-r5 \
+        rsync=3.2.4-r0 \
         zlib=1.2.12-r1 \
-        zstd-libs=1.5.0-r0 \
+        zstd-libs=1.5.2-r1 \
         ; \
     # Set up directories and password file
     mkdir -p /rootfs/etc/ssl/certs /rootfs/tmp /rootfs/home/nonroot /rootfs/root; \
@@ -25,7 +25,7 @@ RUN set -eux; \
     chown 65532:65532 /rootfs/home/nonroot; \
     chmod 01777 /tmp; \
     # Copy our data
-    apk add --no-cache musl=1.2.2-r7; \
+    apk add --no-cache musl=1.2.3-r0; \
     apk info -qL musl | rsync -aq --files-from=- / /rootfs/; \
     apk add --no-cache tzdata=2022a-r0; \
     apk info -qL tzdata | rsync -aq --files-from=- / /rootfs/; \
