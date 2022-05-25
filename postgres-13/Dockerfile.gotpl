@@ -47,7 +47,7 @@ RUN set -eux; \
 		util-linux-dev \
 		zlib-dev \
 		icu-dev \
-		llvm12-dev \
+		llvm13-dev \
 	; \
 	\
 	cd /usr/src/postgresql; \
