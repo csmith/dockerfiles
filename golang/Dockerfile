@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/golang/Dockerfile.gotpl
-# BOM: {"apk:bash":"5.1.16-r2","apk:binutils":"2.38-r2","apk:brotli-libs":"1.0.9-r6","apk:busybox":"1.35.0-r14","apk:ca-certificates":"20211220-r0","apk:curl":"7.83.1-r2","apk:expat":"2.4.8-r0","apk:gcc":"11.2.1_git20220219-r2","apk:git":"2.36.1-r0","apk:gmp":"6.2.1-r2","apk:go":"1.18.2-r0","apk:isl22":"0.22-r0","apk:libatomic":"11.2.1_git20220219-r2","apk:libcrypto1.1":"1.1.1p-r0","apk:libcurl":"7.83.1-r2","apk:libgcc":"11.2.1_git20220219-r2","apk:libgomp":"11.2.1_git20220219-r2","apk:libssl1.1":"1.1.1p-r0","apk:libstdc++":"11.2.1_git20220219-r2","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r0","apk:musl-dev":"1.2.3-r0","apk:ncurses-libs":"6.3_p20220521-r0","apk:ncurses-terminfo-base":"6.3_p20220521-r0","apk:nghttp2-libs":"1.47.0-r0","apk:pcre2":"10.40-r0","apk:readline":"8.1.2-r0","apk:zlib":"1.2.12-r1","github:google/go-licenses":"v1.2.1","golang":"go1.18.3","image:alpine":"e1af61331d46ce7a5770c5083e1c81e297fbf3fcc97b63542b0ac62a8f3900a3"}
+# BOM: {"apk:bash":"5.1.16-r2","apk:binutils":"2.38-r2","apk:brotli-libs":"1.0.9-r6","apk:busybox":"1.35.0-r14","apk:ca-certificates":"20211220-r0","apk:curl":"7.83.1-r2","apk:expat":"2.4.8-r0","apk:gcc":"11.2.1_git20220219-r2","apk:git":"2.36.1-r0","apk:gmp":"6.2.1-r2","apk:go":"1.18.2-r0","apk:isl22":"0.22-r0","apk:libatomic":"11.2.1_git20220219-r2","apk:libcrypto1.1":"1.1.1q-r0","apk:libcurl":"7.83.1-r2","apk:libgcc":"11.2.1_git20220219-r2","apk:libgomp":"11.2.1_git20220219-r2","apk:libssl1.1":"1.1.1q-r0","apk:libstdc++":"11.2.1_git20220219-r2","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r0","apk:musl-dev":"1.2.3-r0","apk:ncurses-libs":"6.3_p20220521-r0","apk:ncurses-terminfo-base":"6.3_p20220521-r0","apk:nghttp2-libs":"1.47.0-r0","apk:pcre2":"10.40-r0","apk:readline":"8.1.2-r0","apk:zlib":"1.2.12-r1","github:google/go-licenses":"v1.2.1","golang":"go1.18.3","image:alpine":"e1af61331d46ce7a5770c5083e1c81e297fbf3fcc97b63542b0ac62a8f3900a3"}
 
 FROM reg.c5h.io/alpine@sha256:e1af61331d46ce7a5770c5083e1c81e297fbf3fcc97b63542b0ac62a8f3900a3
 
@@ -24,11 +24,11 @@ RUN set -eux; \
         go=1.18.2-r0 \
         isl22=0.22-r0 \
         libatomic=11.2.1_git20220219-r2 \
-        libcrypto1.1=1.1.1p-r0 \
+        libcrypto1.1=1.1.1q-r0 \
         libcurl=7.83.1-r2 \
         libgcc=11.2.1_git20220219-r2 \
         libgomp=11.2.1_git20220219-r2 \
-        libssl1.1=1.1.1p-r0 \
+        libssl1.1=1.1.1q-r0 \
         libstdc++=11.2.1_git20220219-r2 \
         mpc1=1.2.1-r0 \
         mpfr4=4.1.0-r0 \
@@ -69,11 +69,11 @@ RUN set -eux; \
         gmp=6.2.1-r2 \
         isl22=0.22-r0 \
         libatomic=11.2.1_git20220219-r2 \
-        libcrypto1.1=1.1.1p-r0 \
+        libcrypto1.1=1.1.1q-r0 \
         libcurl=7.83.1-r2 \
         libgcc=11.2.1_git20220219-r2 \
         libgomp=11.2.1_git20220219-r2 \
-        libssl1.1=1.1.1p-r0 \
+        libssl1.1=1.1.1q-r0 \
         libstdc++=11.2.1_git20220219-r2 \
         mpc1=1.2.1-r0 \
         mpfr4=4.1.0-r0 \
