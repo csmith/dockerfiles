@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/base-root/Dockerfile.gotpl
-# BOM: {"apk:busybox":"1.35.0-r14","apk:ca-certificates":"20211220-r0","apk:libacl":"2.3.1-r0","apk:libcrypto1.1":"1.1.1p-r0","apk:lz4-libs":"1.9.3-r1","apk:musl":"1.2.3-r0","apk:popt":"1.18-r0","apk:rsync":"3.2.4-r0","apk:tzdata":"2022a-r0","apk:zlib":"1.2.12-r1","apk:zstd-libs":"1.5.2-r1","image:alpine":"e1af61331d46ce7a5770c5083e1c81e297fbf3fcc97b63542b0ac62a8f3900a3"}
+# BOM: {"apk:busybox":"1.35.0-r14","apk:ca-certificates":"20211220-r0","apk:libacl":"2.3.1-r0","apk:libcrypto1.1":"1.1.1q-r0","apk:lz4-libs":"1.9.3-r1","apk:musl":"1.2.3-r0","apk:popt":"1.18-r0","apk:rsync":"3.2.4-r0","apk:tzdata":"2022a-r0","apk:zlib":"1.2.12-r1","apk:zstd-libs":"1.5.2-r1","image:alpine":"e1af61331d46ce7a5770c5083e1c81e297fbf3fcc97b63542b0ac62a8f3900a3"}
 
 FROM reg.c5h.io/alpine@sha256:e1af61331d46ce7a5770c5083e1c81e297fbf3fcc97b63542b0ac62a8f3900a3 AS build
 
@@ -9,7 +9,7 @@ RUN set -eux; \
         busybox=1.35.0-r14 \
         ca-certificates=20211220-r0 \
         libacl=2.3.1-r0 \
-        libcrypto1.1=1.1.1p-r0 \
+        libcrypto1.1=1.1.1q-r0 \
         lz4-libs=1.9.3-r1 \
         musl=1.2.3-r0 \
         popt=1.18-r0 \
