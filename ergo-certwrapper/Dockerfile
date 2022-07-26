@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/ergo-certwrapper/Dockerfile.gotpl
-# BOM: {"github:csmith/certwrapper":"v4.1.0","github:ergochat/ergo":"v2.10.0","image:base":"bffee9632ec79071de34e1a4a4f6c4563a71ad26d5923062bd9d0f9016f72beb","image:golang":"11229b0ed4ba8c1118eed616ea497392cafd1287b0a9bcde71dc65bea6dc163f"}
+# BOM: {"github:csmith/certwrapper":"v4.1.0","github:ergochat/ergo":"v2.10.0","image:base":"bffee9632ec79071de34e1a4a4f6c4563a71ad26d5923062bd9d0f9016f72beb","image:golang":"c5c5d833c49e977af7cc9f49f7ed51aacbf8e11ad0b25bd53f642ba3342c0815"}
 
-FROM reg.c5h.io/golang@sha256:11229b0ed4ba8c1118eed616ea497392cafd1287b0a9bcde71dc65bea6dc163f AS build
+FROM reg.c5h.io/golang@sha256:c5c5d833c49e977af7cc9f49f7ed51aacbf8e11ad0b25bd53f642ba3342c0815 AS build
 
 ARG CERTTAG="v4.1.0"
 ARG ERGOTAG="v2.10.0"
