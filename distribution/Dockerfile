@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/distribution/Dockerfile.gotpl
-# BOM: {"apk:file":"5.41-r0","apk:libmagic":"5.41-r0","apk:make":"4.3-r0","apk:musl":"1.2.3-r0","image:base":"4061e85f242c026f31ae923214310d31cf4a3c2b112953fd9307fe649b3b1d49","image:golang":"a35928efa4dba33cbb0af9b0f5f9931290bb96d4df37bc3948fa40ec4ba4bcec"}
+# BOM: {"apk:file":"5.41-r0","apk:libmagic":"5.41-r0","apk:make":"4.3-r0","apk:musl":"1.2.3-r0","image:base":"4061e85f242c026f31ae923214310d31cf4a3c2b112953fd9307fe649b3b1d49","image:golang":"910c76edec2e5607117d53516e4c8c757c584c4ac1cb1ae09fbf2656d13cd6c5"}
 
-FROM reg.c5h.io/golang@sha256:a35928efa4dba33cbb0af9b0f5f9931290bb96d4df37bc3948fa40ec4ba4bcec AS build
+FROM reg.c5h.io/golang@sha256:910c76edec2e5607117d53516e4c8c757c584c4ac1cb1ae09fbf2656d13cd6c5 AS build
 
 ARG TAG="v2.7.1"
 
