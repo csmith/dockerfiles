@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hugo/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.38-r3","apk:g++":"11.2.1_git20220219-r2","apk:gcc":"11.2.1_git20220219-r2","apk:gmp":"6.2.1-r2","apk:isl22":"0.22-r0","apk:libatomic":"11.2.1_git20220219-r2","apk:libc-dev":"0.7.2-r3","apk:libgcc":"11.2.1_git20220219-r2","apk:libgomp":"11.2.1_git20220219-r2","apk:libstdc++":"11.2.1_git20220219-r2","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r0","apk:musl-dev":"1.2.3-r0","apk:zlib":"1.2.12-r3","github:gohugoio/hugo":"v0.101.0","github:magefile/mage":"v1.13.0","image:base-glibc":"863ee176b8253816fc9b5606ccb34614ac2f3c531e9470e79d60e7481fa52fba","image:golang":"a57c42c603b6b82f0b84fe3c846b9092183863d6a9c28375d5faca6af599f009"}
+# BOM: {"apk:binutils":"2.38-r3","apk:g++":"11.2.1_git20220219-r2","apk:gcc":"11.2.1_git20220219-r2","apk:gmp":"6.2.1-r2","apk:isl22":"0.22-r0","apk:libatomic":"11.2.1_git20220219-r2","apk:libc-dev":"0.7.2-r3","apk:libgcc":"11.2.1_git20220219-r2","apk:libgomp":"11.2.1_git20220219-r2","apk:libstdc++":"11.2.1_git20220219-r2","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r0","apk:musl-dev":"1.2.3-r0","apk:zlib":"1.2.12-r3","github:gohugoio/hugo":"v0.101.0","github:magefile/mage":"v1.13.0","image:base-glibc":"3dafd2c2d6ecb6b31e527a103800fe846b1d98d5d2c4b8ecbeaa410153325fc8","image:golang":"a57c42c603b6b82f0b84fe3c846b9092183863d6a9c28375d5faca6af599f009"}
 
 FROM reg.c5h.io/golang@sha256:a57c42c603b6b82f0b84fe3c846b9092183863d6a9c28375d5faca6af599f009 AS build
 
@@ -30,7 +30,7 @@ RUN set -eux; \
     HUGO_BUILD_TAGS=extended go run github.com/magefile/mage@$MAGE install; \
     mkdir -p /tmp/site;
 
-FROM reg.c5h.io/base-glibc@sha256:863ee176b8253816fc9b5606ccb34614ac2f3c531e9470e79d60e7481fa52fba
+FROM reg.c5h.io/base-glibc@sha256:3dafd2c2d6ecb6b31e527a103800fe846b1d98d5d2c4b8ecbeaa410153325fc8
 
 COPY --from=build /go/bin/hugo /usr/bin/hugo
 COPY --from=build --chown=65532:65532 /tmp/site /
