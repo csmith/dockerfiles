@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/miniflux/Dockerfile.gotpl
-# BOM: {"apk:brotli-libs":"1.0.9-r6","apk:busybox":"1.35.0-r17","apk:ca-certificates":"20220614-r0","apk:expat":"2.4.8-r0","apk:git":"2.36.2-r0","apk:libcrypto1.1":"1.1.1q-r0","apk:libcurl":"7.83.1-r3","apk:libssl1.1":"1.1.1q-r0","apk:musl":"1.2.3-r0","apk:nghttp2-libs":"1.47.0-r0","apk:pcre2":"10.40-r0","apk:zlib":"1.2.12-r3","github:miniflux/v2":"2.0.38","image:base":"dad97084335f003c2ec5251b8f9d22e59704f59c8e2ffcc6108470131341b2df","image:golang":"985473757d044cc99e0a86869f2563da9b0286afdc216ecf208d784f14659b78"}
+# BOM: {"apk:brotli-libs":"1.0.9-r6","apk:busybox":"1.35.0-r17","apk:ca-certificates":"20220614-r0","apk:expat":"2.4.9-r0","apk:git":"2.36.2-r0","apk:libcrypto1.1":"1.1.1q-r0","apk:libcurl":"7.83.1-r3","apk:libssl1.1":"1.1.1q-r0","apk:musl":"1.2.3-r0","apk:nghttp2-libs":"1.47.0-r0","apk:pcre2":"10.40-r0","apk:zlib":"1.2.12-r3","github:miniflux/v2":"2.0.38","image:base":"dad97084335f003c2ec5251b8f9d22e59704f59c8e2ffcc6108470131341b2df","image:golang":"7b2ef5a16bd9fe5b5189d95882d11c55ea10333938ad69302bc3f335c7c04972"}
 
-FROM reg.c5h.io/golang@sha256:985473757d044cc99e0a86869f2563da9b0286afdc216ecf208d784f14659b78 AS build
+FROM reg.c5h.io/golang@sha256:7b2ef5a16bd9fe5b5189d95882d11c55ea10333938ad69302bc3f335c7c04972 AS build
 
 ARG TAG="2.0.38"
 
@@ -10,7 +10,7 @@ RUN set -eux; \
         brotli-libs=1.0.9-r6\
         busybox=1.35.0-r17\
         ca-certificates=20220614-r0\
-        expat=2.4.8-r0\
+        expat=2.4.9-r0\
         git=2.36.2-r0\
         libcrypto1.1=1.1.1q-r0\
         libcurl=7.83.1-r3\
