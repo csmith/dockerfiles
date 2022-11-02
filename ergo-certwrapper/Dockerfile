@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/ergo-certwrapper/Dockerfile.gotpl
-# BOM: {"github:csmith/certwrapper":"v4.1.0","github:ergochat/ergo":"v2.10.0","image:base":"dad97084335f003c2ec5251b8f9d22e59704f59c8e2ffcc6108470131341b2df","image:golang":"a17198cc2304cfc1435c2267f2e1a9f590308c7bb0ad1cb14be359b13db963bb"}
+# BOM: {"github:csmith/certwrapper":"v4.1.0","github:ergochat/ergo":"v2.10.0","image:base":"893c39e6f5fbf0a003c8fdb3c55787d6c9e6c79c60e665bf791f612d35fbcff1","image:golang":"16ea2b79650271d5de2adce54f127133681ae36fabd15ec4e1bb69c696243f0f"}
 
-FROM reg.c5h.io/golang@sha256:a17198cc2304cfc1435c2267f2e1a9f590308c7bb0ad1cb14be359b13db963bb AS build
+FROM reg.c5h.io/golang@sha256:16ea2b79650271d5de2adce54f127133681ae36fabd15ec4e1bb69c696243f0f AS build
 
 ARG CERTTAG="v4.1.0"
 ARG ERGOTAG="v2.10.0"
@@ -23,7 +23,7 @@ RUN set -eux; \
     install -o 65532 -g 65532 -d /out/ircd /out/certs /out/ircd-bin; \
     cp -r /go/src/github.com/ergochat/ergo/languages /out/ircd-bin/languages;
 
-FROM reg.c5h.io/base@sha256:dad97084335f003c2ec5251b8f9d22e59704f59c8e2ffcc6108470131341b2df
+FROM reg.c5h.io/base@sha256:893c39e6f5fbf0a003c8fdb3c55787d6c9e6c79c60e665bf791f612d35fbcff1
 
 ENV CERTWRAPPER_CERTIFICATE_PATH=/certs/certificate.pem \
     CERTWRAPPER_DNS_PROVIDER=httpreq \
