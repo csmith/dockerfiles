@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hugo/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.38-r3","apk:g++":"11.2.1_git20220219-r2","apk:gcc":"11.2.1_git20220219-r2","apk:gmp":"6.2.1-r2","apk:isl22":"0.22-r0","apk:libatomic":"11.2.1_git20220219-r2","apk:libc-dev":"0.7.2-r3","apk:libgcc":"11.2.1_git20220219-r2","apk:libgomp":"11.2.1_git20220219-r2","apk:libstdc++":"11.2.1_git20220219-r2","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r0","apk:musl-dev":"1.2.3-r0","apk:zlib":"1.2.12-r3","github:gohugoio/hugo":"v0.105.0","github:magefile/mage":"v1.14.0","image:base-glibc":"3dafd2c2d6ecb6b31e527a103800fe846b1d98d5d2c4b8ecbeaa410153325fc8","image:golang":"a17198cc2304cfc1435c2267f2e1a9f590308c7bb0ad1cb14be359b13db963bb"}
+# BOM: {"apk:binutils":"2.38-r3","apk:g++":"11.2.1_git20220219-r2","apk:gcc":"11.2.1_git20220219-r2","apk:gmp":"6.2.1-r2","apk:isl22":"0.22-r0","apk:libatomic":"11.2.1_git20220219-r2","apk:libc-dev":"0.7.2-r3","apk:libgcc":"11.2.1_git20220219-r2","apk:libgomp":"11.2.1_git20220219-r2","apk:libstdc++":"11.2.1_git20220219-r2","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r0","apk:musl-dev":"1.2.3-r0","apk:zlib":"1.2.12-r3","github:gohugoio/hugo":"v0.105.0","github:magefile/mage":"v1.14.0","image:base-glibc":"3a7a283ffc856be51e35a415dbc9311ec4a95d3769ec1d561e27e4af337f89e1","image:golang":"16ea2b79650271d5de2adce54f127133681ae36fabd15ec4e1bb69c696243f0f"}
 
-FROM reg.c5h.io/golang@sha256:a17198cc2304cfc1435c2267f2e1a9f590308c7bb0ad1cb14be359b13db963bb AS build
+FROM reg.c5h.io/golang@sha256:16ea2b79650271d5de2adce54f127133681ae36fabd15ec4e1bb69c696243f0f AS build
 
 ARG TAG="v0.105.0"
 ARG MAGE="v1.14.0"
@@ -30,7 +30,7 @@ RUN set -eux; \
     HUGO_BUILD_TAGS=extended go run github.com/magefile/mage@$MAGE install; \
     mkdir -p /tmp/site;
 
-FROM reg.c5h.io/base-glibc@sha256:3dafd2c2d6ecb6b31e527a103800fe846b1d98d5d2c4b8ecbeaa410153325fc8
+FROM reg.c5h.io/base-glibc@sha256:3a7a283ffc856be51e35a415dbc9311ec4a95d3769ec1d561e27e4af337f89e1
 
 COPY --from=build /go/bin/hugo /usr/bin/hugo
 COPY --from=build --chown=65532:65532 /tmp/site /
