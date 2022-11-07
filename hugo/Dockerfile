@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hugo/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.38-r3","apk:g++":"11.2.1_git20220219-r2","apk:gcc":"11.2.1_git20220219-r2","apk:gmp":"6.2.1-r2","apk:isl22":"0.22-r0","apk:libatomic":"11.2.1_git20220219-r2","apk:libc-dev":"0.7.2-r3","apk:libgcc":"11.2.1_git20220219-r2","apk:libgomp":"11.2.1_git20220219-r2","apk:libstdc++":"11.2.1_git20220219-r2","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r0","apk:musl-dev":"1.2.3-r0","apk:zlib":"1.2.12-r3","github:gohugoio/hugo":"v0.105.0","github:magefile/mage":"v1.14.0","image:base-glibc":"3a7a283ffc856be51e35a415dbc9311ec4a95d3769ec1d561e27e4af337f89e1","image:golang":"16ea2b79650271d5de2adce54f127133681ae36fabd15ec4e1bb69c696243f0f"}
+# BOM: {"apk:binutils":"2.38-r3","apk:g++":"11.2.1_git20220219-r2","apk:gcc":"11.2.1_git20220219-r2","apk:gmp":"6.2.1-r2","apk:isl22":"0.22-r0","apk:libatomic":"11.2.1_git20220219-r2","apk:libc-dev":"0.7.2-r3","apk:libgcc":"11.2.1_git20220219-r2","apk:libgomp":"11.2.1_git20220219-r2","apk:libstdc++":"11.2.1_git20220219-r2","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r1","apk:musl-dev":"1.2.3-r1","apk:zlib":"1.2.12-r3","github:gohugoio/hugo":"v0.105.0","github:magefile/mage":"v1.14.0","image:base-glibc":"78d69e7826486b9e0fa8827242818213037c9dbe44c44b99a74e5e467f06d881","image:golang":"c943e10ea8acda82bf2d461bb2a083c59df867cb05f7e001d777c321bf9e08f0"}
 
-FROM reg.c5h.io/golang@sha256:16ea2b79650271d5de2adce54f127133681ae36fabd15ec4e1bb69c696243f0f AS build
+FROM reg.c5h.io/golang@sha256:c943e10ea8acda82bf2d461bb2a083c59df867cb05f7e001d777c321bf9e08f0 AS build
 
 ARG TAG="v0.105.0"
 ARG MAGE="v1.14.0"
@@ -20,8 +20,8 @@ RUN set -eux; \
         libstdc++=11.2.1_git20220219-r2 \
         mpc1=1.2.1-r0 \
         mpfr4=4.1.0-r0 \
-        musl=1.2.3-r0 \
-        musl-dev=1.2.3-r0 \
+        musl=1.2.3-r1 \
+        musl-dev=1.2.3-r1 \
         zlib=1.2.12-r3 \
         ; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/gohugoio/hugo /tmp/work; \
@@ -30,7 +30,7 @@ RUN set -eux; \
     HUGO_BUILD_TAGS=extended go run github.com/magefile/mage@$MAGE install; \
     mkdir -p /tmp/site;
 
-FROM reg.c5h.io/base-glibc@sha256:3a7a283ffc856be51e35a415dbc9311ec4a95d3769ec1d561e27e4af337f89e1
+FROM reg.c5h.io/base-glibc@sha256:78d69e7826486b9e0fa8827242818213037c9dbe44c44b99a74e5e467f06d881
 
 COPY --from=build /go/bin/hugo /usr/bin/hugo
 COPY --from=build --chown=65532:65532 /tmp/site /
