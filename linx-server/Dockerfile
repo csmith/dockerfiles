@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/linx-server/Dockerfile.gotpl
-# BOM: {"github:csmith/linx-server":"v3.0.0","image:base":"893c39e6f5fbf0a003c8fdb3c55787d6c9e6c79c60e665bf791f612d35fbcff1","image:golang":"16ea2b79650271d5de2adce54f127133681ae36fabd15ec4e1bb69c696243f0f"}
+# BOM: {"github:csmith/linx-server":"v3.0.0","image:base":"2ad8fb5e47298cb81072a36ee939a2024bc3acb6221b105cb3928c0e6a97c665","image:golang":"c943e10ea8acda82bf2d461bb2a083c59df867cb05f7e001d777c321bf9e08f0"}
 
-FROM reg.c5h.io/golang@sha256:16ea2b79650271d5de2adce54f127133681ae36fabd15ec4e1bb69c696243f0f AS build
+FROM reg.c5h.io/golang@sha256:c943e10ea8acda82bf2d461bb2a083c59df867cb05f7e001d777c321bf9e08f0 AS build
 
 ARG TAG="v3.0.0"
 
@@ -13,7 +13,7 @@ RUN set -eux; \
     mkdir -p /data/files /data/meta; \
     chown -R 65532:65532 /data;
 
-FROM reg.c5h.io/base@sha256:893c39e6f5fbf0a003c8fdb3c55787d6c9e6c79c60e665bf791f612d35fbcff1
+FROM reg.c5h.io/base@sha256:2ad8fb5e47298cb81072a36ee939a2024bc3acb6221b105cb3928c0e6a97c665
 
 COPY --from=build /go/src/github.com/csmith/linx-server/main /linx-server
 COPY --from=build /data /data
