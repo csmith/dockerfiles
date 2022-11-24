@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/haproxy/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.38-r3","apk:brotli-libs":"1.0.9-r6","apk:build-base":"0.5-r3","apk:busybox":"1.35.0-r17","apk:ca-certificates":"20220614-r0","apk:expat":"2.5.0-r0","apk:file":"5.41-r0","apk:fortify-headers":"1.1-r1","apk:g++":"11.2.1_git20220219-r2","apk:gcc":"11.2.1_git20220219-r2","apk:git":"2.36.3-r0","apk:gmp":"6.2.1-r2","apk:isl22":"0.22-r0","apk:libatomic":"11.2.1_git20220219-r2","apk:libc-dev":"0.7.2-r3","apk:libcrypto1.1":"1.1.1s-r0","apk:libcurl":"7.83.1-r4","apk:libgcc":"11.2.1_git20220219-r2","apk:libgomp":"11.2.1_git20220219-r2","apk:libmagic":"5.41-r0","apk:libpcre16":"8.45-r2","apk:libpcre32":"8.45-r2","apk:libpcrecpp":"8.45-r2","apk:libssl1.1":"1.1.1s-r0","apk:libstdc++":"11.2.1_git20220219-r2","apk:linux-headers":"5.16.7-r1","apk:make":"4.3-r0","apk:mpc1":"1.2.1-r0","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r2","apk:musl-dev":"1.2.3-r2","apk:nghttp2-libs":"1.47.0-r0","apk:openssl-dev":"1.1.1s-r0","apk:openssl-libs-static":"1.1.1s-r0","apk:patch":"2.7.6-r7","apk:pcre":"8.45-r2","apk:pcre-dev":"8.45-r2","apk:pcre2":"10.40-r0","apk:pkgconf":"1.8.0-r1","apk:tzdata":"2022f-r1","apk:zlib":"1.2.12-r3","apk:zlib-dev":"1.2.12-r3","apk:zlib-static":"1.2.12-r3","github:haproxy/haproxy":"v2.6.0","image:alpine":"1f6a4275acd73275186069c89bdb401e7dff76ebcd2fe8469a10d4b698d34512","image:base":"5d2c54fa31ef9b63b0499aabf0dd0091eee215ae556dd89f68189e7894cef381"}
+# BOM: {"apk:binutils":"2.39-r2","apk:brotli-libs":"1.0.9-r9","apk:build-base":"0.5-r3","apk:busybox":"1.35.0-r29","apk:busybox-binsh":"1.35.0-r29","apk:ca-certificates":"20220614-r2","apk:file":"5.43-r0","apk:fortify-headers":"1.1-r1","apk:g++":"12.2.1_git20220924-r4","apk:gcc":"12.2.1_git20220924-r4","apk:git":"2.38.1-r0","apk:gmp":"6.2.1-r2","apk:isl24":"0.24-r1","apk:libatomic":"12.2.1_git20220924-r4","apk:libc-dev":"0.7.2-r3","apk:libcrypto3":"3.0.7-r0","apk:libcurl":"7.86.0-r1","apk:libexpat":"2.5.0-r0","apk:libgcc":"12.2.1_git20220924-r4","apk:libgomp":"12.2.1_git20220924-r4","apk:libmagic":"5.43-r0","apk:libpcre16":"8.45-r2","apk:libpcre32":"8.45-r2","apk:libpcrecpp":"8.45-r2","apk:libssl3":"3.0.7-r0","apk:libstdc++":"12.2.1_git20220924-r4","apk:libstdc++-dev":"12.2.1_git20220924-r4","apk:linux-headers":"5.19.5-r0","apk:make":"4.3-r1","apk:mpc1":"1.2.1-r1","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r4","apk:musl-dev":"1.2.3-r4","apk:nghttp2-libs":"1.51.0-r0","apk:openssl-dev":"3.0.7-r0","apk:openssl-libs-static":"3.0.7-r0","apk:patch":"2.7.6-r8","apk:pcre":"8.45-r2","apk:pcre-dev":"8.45-r2","apk:pcre2":"10.40-r0","apk:pkgconf":"1.9.3-r0","apk:tzdata":"2022f-r1","apk:zlib":"1.2.13-r0","apk:zlib-dev":"1.2.13-r0","apk:zlib-static":"1.2.13-r0","github:haproxy/haproxy":"v2.6.0","image:alpine":"29ea114ee328eb42c2d032da36bff94b5e0804c9e9a3573d7c5fa052f14da082","image:base":"d9260eae728da42310e4b14cf5ca84500c2cb480d1c04fbf7f574b7e6b3e9743"}
 
-FROM reg.c5h.io/alpine@sha256:1f6a4275acd73275186069c89bdb401e7dff76ebcd2fe8469a10d4b698d34512 AS build
+FROM reg.c5h.io/alpine@sha256:29ea114ee328eb42c2d032da36bff94b5e0804c9e9a3573d7c5fa052f14da082 AS build
 
 ARG TAG="v2.6.0"
 
@@ -9,49 +9,51 @@ COPY *.patch /src/
 
 RUN set -eux; \
      apk add --no-cache --virtual .build-deps \
-        binutils=2.38-r3 \
-        brotli-libs=1.0.9-r6 \
+        binutils=2.39-r2 \
+        brotli-libs=1.0.9-r9 \
         build-base=0.5-r3 \
-        busybox=1.35.0-r17 \
-        ca-certificates=20220614-r0 \
-        expat=2.5.0-r0 \
-        file=5.41-r0 \
+        busybox=1.35.0-r29 \
+        busybox-binsh=1.35.0-r29 \
+        ca-certificates=20220614-r2 \
+        file=5.43-r0 \
         fortify-headers=1.1-r1 \
-        g++=11.2.1_git20220219-r2 \
-        gcc=11.2.1_git20220219-r2 \
-        git=2.36.3-r0 \
+        g++=12.2.1_git20220924-r4 \
+        gcc=12.2.1_git20220924-r4 \
+        git=2.38.1-r0 \
         gmp=6.2.1-r2 \
-        isl22=0.22-r0 \
-        libatomic=11.2.1_git20220219-r2 \
+        isl24=0.24-r1 \
+        libatomic=12.2.1_git20220924-r4 \
         libc-dev=0.7.2-r3 \
-        libcrypto1.1=1.1.1s-r0 \
-        libcurl=7.83.1-r4 \
-        libgcc=11.2.1_git20220219-r2 \
-        libgomp=11.2.1_git20220219-r2 \
-        libmagic=5.41-r0 \
+        libcrypto3=3.0.7-r0 \
+        libcurl=7.86.0-r1 \
+        libexpat=2.5.0-r0 \
+        libgcc=12.2.1_git20220924-r4 \
+        libgomp=12.2.1_git20220924-r4 \
+        libmagic=5.43-r0 \
         libpcre16=8.45-r2 \
         libpcre32=8.45-r2 \
         libpcrecpp=8.45-r2 \
-        libssl1.1=1.1.1s-r0 \
-        libstdc++=11.2.1_git20220219-r2 \
-        linux-headers=5.16.7-r1 \
-        make=4.3-r0 \
-        mpc1=1.2.1-r0 \
+        libssl3=3.0.7-r0 \
+        libstdc++=12.2.1_git20220924-r4 \
+        libstdc++-dev=12.2.1_git20220924-r4 \
+        linux-headers=5.19.5-r0 \
+        make=4.3-r1 \
+        mpc1=1.2.1-r1 \
         mpfr4=4.1.0-r0 \
-        musl=1.2.3-r2 \
-        musl-dev=1.2.3-r2 \
-        nghttp2-libs=1.47.0-r0 \
-        openssl-dev=1.1.1s-r0 \
-        openssl-libs-static=1.1.1s-r0 \
-        patch=2.7.6-r7 \
+        musl=1.2.3-r4 \
+        musl-dev=1.2.3-r4 \
+        nghttp2-libs=1.51.0-r0 \
+        openssl-dev=3.0.7-r0 \
+        openssl-libs-static=3.0.7-r0 \
+        patch=2.7.6-r8 \
         pcre=8.45-r2 \
         pcre-dev=8.45-r2 \
         pcre2=10.40-r0 \
-        pkgconf=1.8.0-r1 \
+        pkgconf=1.9.3-r0 \
         tzdata=2022f-r1 \
-        zlib=1.2.12-r3 \
-        zlib-dev=1.2.12-r3 \
-        zlib-static=1.2.12-r3 \
+        zlib=1.2.13-r0 \
+        zlib-dev=1.2.13-r0 \
+        zlib-static=1.2.13-r0 \
         ; \
      git clone --depth=1 -b $TAG --single-branch https://github.com/haproxy/haproxy /src/haproxy; \
      cd /src/haproxy; \
@@ -64,7 +66,7 @@ RUN set -eux; \
      strip /usr/local/sbin/haproxy; \
      touch --date=@0 /usr/local/sbin/haproxy
 
-FROM reg.c5h.io/base@sha256:5d2c54fa31ef9b63b0499aabf0dd0091eee215ae556dd89f68189e7894cef381
+FROM reg.c5h.io/base@sha256:d9260eae728da42310e4b14cf5ca84500c2cb480d1c04fbf7f574b7e6b3e9743
 
 STOPSIGNAL SIGUSR1
 
