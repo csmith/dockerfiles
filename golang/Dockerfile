@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/golang/Dockerfile.gotpl
-# BOM: {"apk:bash":"5.2.15-r0","apk:binutils":"2.39-r2","apk:brotli-libs":"1.0.9-r9","apk:busybox":"1.35.0-r29","apk:busybox-binsh":"1.35.0-r29","apk:ca-certificates":"20220614-r2","apk:curl":"7.86.0-r1","apk:gcc":"12.2.1_git20220924-r4","apk:git":"2.38.2-r0","apk:gmp":"6.2.1-r2","apk:go":"1.19.4-r0","apk:isl24":"0.24-r1","apk:libatomic":"12.2.1_git20220924-r4","apk:libcrypto3":"3.0.7-r0","apk:libcurl":"7.86.0-r1","apk:libexpat":"2.5.0-r0","apk:libgcc":"12.2.1_git20220924-r4","apk:libgomp":"12.2.1_git20220924-r4","apk:libssl3":"3.0.7-r0","apk:libstdc++":"12.2.1_git20220924-r4","apk:mpc1":"1.2.1-r1","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r4","apk:musl-dev":"1.2.3-r4","apk:ncurses-libs":"6.3_p20221119-r0","apk:ncurses-terminfo-base":"6.3_p20221119-r0","apk:nghttp2-libs":"1.51.0-r0","apk:pcre2":"10.42-r0","apk:readline":"8.2.0-r0","apk:zlib":"1.2.13-r0","github:google/go-licenses":"v1.5.0","golang":"go1.19.4","image:alpine":"29ea114ee328eb42c2d032da36bff94b5e0804c9e9a3573d7c5fa052f14da082"}
+# BOM: {"apk:bash":"5.2.15-r0","apk:binutils":"2.39-r2","apk:brotli-libs":"1.0.9-r9","apk:busybox":"1.35.0-r29","apk:busybox-binsh":"1.35.0-r29","apk:ca-certificates":"20220614-r3","apk:curl":"7.86.0-r1","apk:gcc":"12.2.1_git20220924-r4","apk:git":"2.38.2-r0","apk:gmp":"6.2.1-r2","apk:go":"1.19.4-r0","apk:isl24":"0.24-r1","apk:libatomic":"12.2.1_git20220924-r4","apk:libcrypto3":"3.0.7-r0","apk:libcurl":"7.86.0-r1","apk:libexpat":"2.5.0-r0","apk:libgcc":"12.2.1_git20220924-r4","apk:libgomp":"12.2.1_git20220924-r4","apk:libssl3":"3.0.7-r0","apk:libstdc++":"12.2.1_git20220924-r4","apk:mpc1":"1.2.1-r1","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r4","apk:musl-dev":"1.2.3-r4","apk:ncurses-libs":"6.3_p20221119-r0","apk:ncurses-terminfo-base":"6.3_p20221119-r0","apk:nghttp2-libs":"1.51.0-r0","apk:pcre2":"10.42-r0","apk:readline":"8.2.0-r0","apk:zlib":"1.2.13-r0","github:google/go-licenses":"v1.5.0","golang":"go1.19.4","image:alpine":"29ea114ee328eb42c2d032da36bff94b5e0804c9e9a3573d7c5fa052f14da082"}
 
 FROM reg.c5h.io/alpine@sha256:29ea114ee328eb42c2d032da36bff94b5e0804c9e9a3573d7c5fa052f14da082
 
@@ -18,7 +18,7 @@ RUN set -eux; \
         brotli-libs=1.0.9-r9 \
         busybox=1.35.0-r29 \
         busybox-binsh=1.35.0-r29 \
-        ca-certificates=20220614-r2 \
+        ca-certificates=20220614-r3 \
         curl=7.86.0-r1 \
         gcc=12.2.1_git20220924-r4 \
         gmp=6.2.1-r2 \
@@ -64,7 +64,7 @@ RUN set -eux; \
         brotli-libs=1.0.9-r9 \
         busybox=1.35.0-r29 \
         busybox-binsh=1.35.0-r29 \
-        ca-certificates=20220614-r2 \
+        ca-certificates=20220614-r3 \
         gcc=12.2.1_git20220924-r4 \
         git=2.38.2-r0 \
         gmp=6.2.1-r2 \
