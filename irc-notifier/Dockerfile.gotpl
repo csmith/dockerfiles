@@ -1,0 +1,15 @@
+FROM {{image "golang"}} AS build
+
+ARG TAG="{{github_tag "greboid/irc-notifier"}}"
+
+RUN set -eux; \
+    git clone --depth=1 -b $TAG --single-branch https://github.com/greboid/irc-notifier /go/src/github.com/greboid/irc-notifier; \
+    cd /go/src/github.com/greboid/irc-notifier; \
+    CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main ./cmd/notifier; \
+    go-licenses save ./... --save_path=/notices;
+
+FROM {{image "base"}}
+
+COPY --from=build /go/src/github.com/greboid/irc-notifier/main /irc-notifier
+COPY --from=build /notices /notices
+ENTRYPOINT ["/irc-notifier"]
