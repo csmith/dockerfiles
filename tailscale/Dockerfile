@@ -1,9 +1,9 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/tailscale/Dockerfile.gotpl
-# BOM: {"github:tailscale/tailscale":"v1.36.0","image:base":"45ece244ca0ace29f890ad27114ff83a36c00e74e6cbec3d1e226b7e62d0de7a","image:golang":"2da5dadfe49929777b6c3de7e9203d82598d32e049173a13f119d7c9313150c7"}
+# BOM: {"github:tailscale/tailscale":"v1.36.1","image:base":"45ece244ca0ace29f890ad27114ff83a36c00e74e6cbec3d1e226b7e62d0de7a","image:golang":"2da5dadfe49929777b6c3de7e9203d82598d32e049173a13f119d7c9313150c7"}
 
 FROM reg.c5h.io/golang@sha256:2da5dadfe49929777b6c3de7e9203d82598d32e049173a13f119d7c9313150c7 AS build
 
-ARG TAG="v1.36.0"
+ARG TAG="v1.36.1"
 
 RUN set -eux; \
     # Check out and build
