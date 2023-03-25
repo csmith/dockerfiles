@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/irc-notifier/Dockerfile.gotpl
-# BOM: {"github:greboid/irc-notifier":"v1.0.4","image:base":"45ece244ca0ace29f890ad27114ff83a36c00e74e6cbec3d1e226b7e62d0de7a","image:golang":"da990a895e18b0c39c5990bfac24933ef58beb9dfef258de0e9bc393274f2f7e"}
+# BOM: {"github:greboid/irc-notifier":"v1.0.4","image:base":"c41c52eb39d01d876edd44db743514a484b09b61793b6ada6f064315eb18327d","image:golang":"da990a895e18b0c39c5990bfac24933ef58beb9dfef258de0e9bc393274f2f7e"}
 
 FROM reg.c5h.io/golang@sha256:da990a895e18b0c39c5990bfac24933ef58beb9dfef258de0e9bc393274f2f7e AS build
 
@@ -11,7 +11,7 @@ RUN set -eux; \
     CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main ./cmd/notifier; \
     go-licenses save ./... --save_path=/notices;
 
-FROM reg.c5h.io/base@sha256:45ece244ca0ace29f890ad27114ff83a36c00e74e6cbec3d1e226b7e62d0de7a
+FROM reg.c5h.io/base@sha256:c41c52eb39d01d876edd44db743514a484b09b61793b6ada6f064315eb18327d
 
 COPY --from=build /go/src/github.com/greboid/irc-notifier/main /irc-notifier
 COPY --from=build /notices /notices
