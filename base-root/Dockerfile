@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/base-root/Dockerfile.gotpl
-# BOM: {"apk:busybox":"1.35.0-r29","apk:busybox-binsh":"1.35.0-r29","apk:ca-certificates":"20220614-r4","apk:libacl":"2.3.1-r1","apk:libcrypto3":"3.0.8-r1","apk:lz4-libs":"1.9.4-r1","apk:musl":"1.2.3-r4","apk:popt":"1.19-r0","apk:rsync":"3.2.7-r0","apk:tzdata":"2022f-r1","apk:zlib":"1.2.13-r0","apk:zstd-libs":"1.5.2-r9","image:alpine":"3d271830a936728b41e38fcf89a9703ee4a9983af40618722eefead94279b55c"}
+# BOM: {"apk:busybox":"1.35.0-r29","apk:busybox-binsh":"1.35.0-r29","apk:ca-certificates":"20220614-r4","apk:libacl":"2.3.1-r1","apk:libcrypto3":"3.0.8-r1","apk:lz4-libs":"1.9.4-r1","apk:musl":"1.2.3-r4","apk:popt":"1.19-r0","apk:rsync":"3.2.7-r0","apk:tzdata":"2023b-r1","apk:zlib":"1.2.13-r0","apk:zstd-libs":"1.5.2-r9","image:alpine":"3d271830a936728b41e38fcf89a9703ee4a9983af40618722eefead94279b55c"}
 
 FROM reg.c5h.io/alpine@sha256:3d271830a936728b41e38fcf89a9703ee4a9983af40618722eefead94279b55c AS build
 
@@ -28,7 +28,7 @@ RUN set -eux; \
     # Copy our data
     apk add --no-cache musl=1.2.3-r4; \
     apk info -qL musl | rsync -aq --files-from=- / /rootfs/; \
-    apk add --no-cache tzdata=2022f-r1; \
+    apk add --no-cache tzdata=2023b-r1; \
     apk info -qL tzdata | rsync -aq --files-from=- / /rootfs/; \
     # Generate the CA certificates file and copy the result
     /usr/sbin/update-ca-certificates; \
