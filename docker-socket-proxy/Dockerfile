@@ -1,9 +1,9 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/docker-socket-proxy/Dockerfile.gotpl
-# BOM: {"image:base-root":"a069dd817320a9756f9686dee607fa26b5334a9629dfec7e5a73357384a20459","image:haproxy":"ceb62770d790edf2e71eaf548850224635dfd756a371a77205d9785c97d2c9cb"}
+# BOM: {"image:base-root":"14dbdc5aa6a2b2edb6f61e3fc29fc0dbe0770a72233d13b160eae3afc89fec8f","image:haproxy":"9120086ca724405e7367fb1173d179db7a12318a52c957cc2deabfb1c997d2e4"}
 
-FROM reg.c5h.io/haproxy@sha256:ceb62770d790edf2e71eaf548850224635dfd756a371a77205d9785c97d2c9cb AS haproxy
+FROM reg.c5h.io/haproxy@sha256:9120086ca724405e7367fb1173d179db7a12318a52c957cc2deabfb1c997d2e4 AS haproxy
 
-FROM reg.c5h.io/base-root@sha256:a069dd817320a9756f9686dee607fa26b5334a9629dfec7e5a73357384a20459
+FROM reg.c5h.io/base-root@sha256:14dbdc5aa6a2b2edb6f61e3fc29fc0dbe0770a72233d13b160eae3afc89fec8f
 
 STOPSIGNAL SIGUSR1
 
