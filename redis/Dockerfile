@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/redis/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.39-r2","apk:brotli-libs":"1.0.9-r9","apk:build-base":"0.5-r3","apk:busybox":"1.35.0-r29","apk:busybox-binsh":"1.35.0-r29","apk:ca-certificates":"20220614-r4","apk:file":"5.43-r0","apk:fortify-headers":"1.1-r1","apk:g++":"12.2.1_git20220924-r4","apk:gcc":"12.2.1_git20220924-r4","apk:git":"2.38.4-r1","apk:gmp":"6.2.1-r2","apk:isl24":"0.24-r1","apk:libatomic":"12.2.1_git20220924-r4","apk:libc-dev":"0.7.2-r3","apk:libcrypto3":"3.0.8-r3","apk:libcurl":"8.0.1-r0","apk:libexpat":"2.5.0-r0","apk:libgcc":"12.2.1_git20220924-r4","apk:libgomp":"12.2.1_git20220924-r4","apk:libmagic":"5.43-r0","apk:libpcre16":"8.45-r2","apk:libpcre32":"8.45-r2","apk:libpcrecpp":"8.45-r2","apk:libssl3":"3.0.8-r3","apk:libstdc++":"12.2.1_git20220924-r4","apk:libstdc++-dev":"12.2.1_git20220924-r4","apk:linux-headers":"5.19.5-r0","apk:make":"4.3-r1","apk:mpc1":"1.2.1-r1","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r4","apk:musl-dev":"1.2.3-r4","apk:nghttp2-libs":"1.51.0-r0","apk:openssl-dev":"3.0.8-r3","apk:openssl-libs-static":"3.0.8-r3","apk:patch":"2.7.6-r9","apk:pcre":"8.45-r2","apk:pcre-dev":"8.45-r2","apk:pcre2":"10.42-r0","apk:pkgconf":"1.9.4-r0","apk:tzdata":"2023c-r0","apk:zlib":"1.2.13-r0","apk:zlib-dev":"1.2.13-r0","apk:zlib-static":"1.2.13-r0","github:redis/redis":"7.0.11","image:alpine":"e467edf34e56f1ea4884c2512b2250463f3379ffa4524d8f4e5e31e46c8b63b4","image:base":"d97e687affbcacbd2173a2a58381ecf270adc8d37d409258cfbc04b0d0a8b092"}
+# BOM: {"apk:binutils":"2.39-r2","apk:brotli-libs":"1.0.9-r9","apk:build-base":"0.5-r3","apk:busybox":"1.35.0-r29","apk:busybox-binsh":"1.35.0-r29","apk:ca-certificates":"20220614-r4","apk:file":"5.43-r0","apk:fortify-headers":"1.1-r1","apk:g++":"12.2.1_git20220924-r4","apk:gcc":"12.2.1_git20220924-r4","apk:git":"2.38.4-r1","apk:gmp":"6.2.1-r2","apk:isl24":"0.24-r1","apk:libatomic":"12.2.1_git20220924-r4","apk:libc-dev":"0.7.2-r3","apk:libcrypto3":"3.0.8-r4","apk:libcurl":"8.0.1-r0","apk:libexpat":"2.5.0-r0","apk:libgcc":"12.2.1_git20220924-r4","apk:libgomp":"12.2.1_git20220924-r4","apk:libmagic":"5.43-r0","apk:libpcre16":"8.45-r2","apk:libpcre32":"8.45-r2","apk:libpcrecpp":"8.45-r2","apk:libssl3":"3.0.8-r4","apk:libstdc++":"12.2.1_git20220924-r4","apk:libstdc++-dev":"12.2.1_git20220924-r4","apk:linux-headers":"5.19.5-r0","apk:make":"4.3-r1","apk:mpc1":"1.2.1-r1","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r4","apk:musl-dev":"1.2.3-r4","apk:nghttp2-libs":"1.51.0-r0","apk:openssl-dev":"3.0.8-r4","apk:openssl-libs-static":"3.0.8-r4","apk:patch":"2.7.6-r9","apk:pcre":"8.45-r2","apk:pcre-dev":"8.45-r2","apk:pcre2":"10.42-r0","apk:pkgconf":"1.9.4-r0","apk:tzdata":"2023c-r0","apk:zlib":"1.2.13-r0","apk:zlib-dev":"1.2.13-r0","apk:zlib-static":"1.2.13-r0","github:redis/redis":"7.0.11","image:alpine":"e467edf34e56f1ea4884c2512b2250463f3379ffa4524d8f4e5e31e46c8b63b4","image:base":"d97e687affbcacbd2173a2a58381ecf270adc8d37d409258cfbc04b0d0a8b092"}
 
 FROM reg.c5h.io/alpine@sha256:e467edf34e56f1ea4884c2512b2250463f3379ffa4524d8f4e5e31e46c8b63b4 AS build
 
@@ -26,7 +26,7 @@ RUN set -eux; \
         isl24=0.24-r1 \
         libatomic=12.2.1_git20220924-r4 \
         libc-dev=0.7.2-r3 \
-        libcrypto3=3.0.8-r3 \
+        libcrypto3=3.0.8-r4 \
         libcurl=8.0.1-r0 \
         libexpat=2.5.0-r0 \
         libgcc=12.2.1_git20220924-r4 \
@@ -35,7 +35,7 @@ RUN set -eux; \
         libpcre16=8.45-r2 \
         libpcre32=8.45-r2 \
         libpcrecpp=8.45-r2 \
-        libssl3=3.0.8-r3 \
+        libssl3=3.0.8-r4 \
         libstdc++=12.2.1_git20220924-r4 \
         libstdc++-dev=12.2.1_git20220924-r4 \
         linux-headers=5.19.5-r0 \
@@ -45,8 +45,8 @@ RUN set -eux; \
         musl=1.2.3-r4 \
         musl-dev=1.2.3-r4 \
         nghttp2-libs=1.51.0-r0 \
-        openssl-dev=3.0.8-r3 \
-        openssl-libs-static=3.0.8-r3 \
+        openssl-dev=3.0.8-r4 \
+        openssl-libs-static=3.0.8-r4 \
         patch=2.7.6-r9 \
         pcre=8.45-r2 \
         pcre-dev=8.45-r2 \
