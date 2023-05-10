@@ -1,29 +1,30 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hugo/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.39-r2","apk:g++":"12.2.1_git20220924-r4","apk:gcc":"12.2.1_git20220924-r4","apk:gmp":"6.2.1-r2","apk:isl24":"0.24-r1","apk:libatomic":"12.2.1_git20220924-r4","apk:libc-dev":"0.7.2-r3","apk:libgcc":"12.2.1_git20220924-r4","apk:libgomp":"12.2.1_git20220924-r4","apk:libstdc++":"12.2.1_git20220924-r4","apk:libstdc++-dev":"12.2.1_git20220924-r4","apk:mpc1":"1.2.1-r1","apk:mpfr4":"4.1.0-r0","apk:musl":"1.2.3-r4","apk:musl-dev":"1.2.3-r4","apk:zlib":"1.2.13-r0","github:gohugoio/hugo":"v0.111.3","github:magefile/mage":"v1.14.0","image:base-glibc":"8f7b39fe0c31d1ec013c3f74d0997530b54a2ef82be18415a66887b7386640e9","image:golang":"8cca8e81ef263f66855ba7ad711e884e03e7670276e1cd2011d8f0f3f0eec7e0"}
+# BOM: {"apk:binutils":"2.40-r5","apk:g++":"12.2.1_git20220924-r10","apk:gcc":"12.2.1_git20220924-r10","apk:gmp":"6.2.1-r3","apk:isl25":"0.25-r2","apk:libatomic":"12.2.1_git20220924-r10","apk:libc-dev":"0.7.2-r5","apk:libgcc":"12.2.1_git20220924-r10","apk:libgomp":"12.2.1_git20220924-r10","apk:libstdc++":"12.2.1_git20220924-r10","apk:libstdc++-dev":"12.2.1_git20220924-r10","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.0-r1","apk:musl":"1.2.4-r0","apk:musl-dev":"1.2.4-r0","apk:zlib":"1.2.13-r1","apk:zstd-libs":"1.5.5-r4","github:gohugoio/hugo":"v0.111.3","github:magefile/mage":"v1.14.0","image:base-glibc":"62204dca5df4f13d2d4c05bbe262a59f029892c189d49f25eb35f0c40aa8dcb4","image:golang":"71b8cbe08b05ae4886242c0a4fd5a5efdae093613f45604629f0c6e7c781163d"}
 
-FROM reg.c5h.io/golang@sha256:8cca8e81ef263f66855ba7ad711e884e03e7670276e1cd2011d8f0f3f0eec7e0 AS build
+FROM reg.c5h.io/golang@sha256:71b8cbe08b05ae4886242c0a4fd5a5efdae093613f45604629f0c6e7c781163d AS build
 
 ARG TAG="v0.111.3"
 ARG MAGE="v1.14.0"
 
 RUN set -eux; \
     apk add --no-cache \
-        binutils=2.39-r2 \
-        g++=12.2.1_git20220924-r4 \
-        gcc=12.2.1_git20220924-r4 \
-        gmp=6.2.1-r2 \
-        isl24=0.24-r1 \
-        libatomic=12.2.1_git20220924-r4 \
-        libc-dev=0.7.2-r3 \
-        libgcc=12.2.1_git20220924-r4 \
-        libgomp=12.2.1_git20220924-r4 \
-        libstdc++=12.2.1_git20220924-r4 \
-        libstdc++-dev=12.2.1_git20220924-r4 \
-        mpc1=1.2.1-r1 \
-        mpfr4=4.1.0-r0 \
-        musl=1.2.3-r4 \
-        musl-dev=1.2.3-r4 \
-        zlib=1.2.13-r0 \
+        binutils=2.40-r5 \
+        g++=12.2.1_git20220924-r10 \
+        gcc=12.2.1_git20220924-r10 \
+        gmp=6.2.1-r3 \
+        isl25=0.25-r2 \
+        libatomic=12.2.1_git20220924-r10 \
+        libc-dev=0.7.2-r5 \
+        libgcc=12.2.1_git20220924-r10 \
+        libgomp=12.2.1_git20220924-r10 \
+        libstdc++=12.2.1_git20220924-r10 \
+        libstdc++-dev=12.2.1_git20220924-r10 \
+        mpc1=1.3.1-r1 \
+        mpfr4=4.2.0-r1 \
+        musl=1.2.4-r0 \
+        musl-dev=1.2.4-r0 \
+        zlib=1.2.13-r1 \
+        zstd-libs=1.5.5-r4 \
         ; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/gohugoio/hugo /tmp/work; \
     cd /tmp/work; \
@@ -31,7 +32,7 @@ RUN set -eux; \
     HUGO_BUILD_TAGS=extended go run github.com/magefile/mage@$MAGE install; \
     mkdir -p /tmp/site;
 
-FROM reg.c5h.io/base-glibc@sha256:8f7b39fe0c31d1ec013c3f74d0997530b54a2ef82be18415a66887b7386640e9
+FROM reg.c5h.io/base-glibc@sha256:62204dca5df4f13d2d4c05bbe262a59f029892c189d49f25eb35f0c40aa8dcb4
 
 COPY --from=build /go/bin/hugo /usr/bin/hugo
 COPY --from=build --chown=65532:65532 /tmp/site /
