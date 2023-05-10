@@ -1,22 +1,23 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/base-glibc/Dockerfile.gotpl
-# BOM: {"apk:busybox":"1.35.0-r29","apk:busybox-binsh":"1.35.0-r29","apk:ca-certificates":"20230506-r0","apk:libacl":"2.3.1-r1","apk:libc6-compat":"1.2.3-r4","apk:libcrypto3":"3.0.8-r4","apk:libgcc":"12.2.1_git20220924-r4","apk:libstdc++":"12.2.1_git20220924-r4","apk:lz4-libs":"1.9.4-r1","apk:musl":"1.2.3-r4","apk:popt":"1.19-r0","apk:rsync":"3.2.7-r0","apk:tzdata":"2023c-r0","apk:zlib":"1.2.13-r0","apk:zstd-libs":"1.5.5-r0","image:alpine":"e467edf34e56f1ea4884c2512b2250463f3379ffa4524d8f4e5e31e46c8b63b4"}
+# BOM: {"apk:busybox":"1.36.0-r9","apk:busybox-binsh":"1.36.0-r9","apk:ca-certificates":"20230506-r0","apk:libacl":"2.3.1-r3","apk:libc6-compat":"1.2.4-r0","apk:libcrypto3":"3.1.0-r4","apk:libgcc":"12.2.1_git20220924-r10","apk:libstdc++":"12.2.1_git20220924-r10","apk:libxxhash":"0.8.1-r4","apk:lz4-libs":"1.9.4-r4","apk:musl":"1.2.4-r0","apk:popt":"1.19-r2","apk:rsync":"3.2.7-r3","apk:tzdata":"2023c-r1","apk:zlib":"1.2.13-r1","apk:zstd-libs":"1.5.5-r4","image:alpine":"f182b51cb5007336ee5e05fe5389f7c5a1d26428229ab27dbf502a7b4b3b6455"}
 
-FROM reg.c5h.io/alpine@sha256:e467edf34e56f1ea4884c2512b2250463f3379ffa4524d8f4e5e31e46c8b63b4 AS build
+FROM reg.c5h.io/alpine@sha256:f182b51cb5007336ee5e05fe5389f7c5a1d26428229ab27dbf502a7b4b3b6455 AS build
 
 RUN set -eux; \
     # Sort out our dependencies
     apk add --no-cache \
-        busybox=1.35.0-r29 \
-        busybox-binsh=1.35.0-r29 \
+        busybox=1.36.0-r9 \
+        busybox-binsh=1.36.0-r9 \
         ca-certificates=20230506-r0 \
-        libacl=2.3.1-r1 \
-        libcrypto3=3.0.8-r4 \
-        lz4-libs=1.9.4-r1 \
-        musl=1.2.3-r4 \
-        popt=1.19-r0 \
-        rsync=3.2.7-r0 \
-        zlib=1.2.13-r0 \
-        zstd-libs=1.5.5-r0 \
+        libacl=2.3.1-r3 \
+        libcrypto3=3.1.0-r4 \
+        libxxhash=0.8.1-r4 \
+        lz4-libs=1.9.4-r4 \
+        musl=1.2.4-r0 \
+        popt=1.19-r2 \
+        rsync=3.2.7-r3 \
+        zlib=1.2.13-r1 \
+        zstd-libs=1.5.5-r4 \
         ; \
     # Set up directories and password file
     mkdir -p /rootfs/etc/ssl/certs /rootfs/tmp /rootfs/home/nonroot /rootfs/root; \
@@ -26,15 +27,15 @@ RUN set -eux; \
     chown 65532:65532 /rootfs/home/nonroot; \
     chmod 01777 /tmp; \
     # Copy our data
-    apk add --no-cache libc6-compat=1.2.3-r4; \
+    apk add --no-cache libc6-compat=1.2.4-r0; \
     apk info -qL libc6-compat | rsync -aq --files-from=- / /rootfs/; \
-    apk add --no-cache libgcc=12.2.1_git20220924-r4; \
+    apk add --no-cache libgcc=12.2.1_git20220924-r10; \
     apk info -qL libgcc | rsync -aq --files-from=- / /rootfs/; \
-    apk add --no-cache libstdc++=12.2.1_git20220924-r4; \
+    apk add --no-cache libstdc++=12.2.1_git20220924-r10; \
     apk info -qL libstdc++ | rsync -aq --files-from=- / /rootfs/; \
-    apk add --no-cache musl=1.2.3-r4; \
+    apk add --no-cache musl=1.2.4-r0; \
     apk info -qL musl | rsync -aq --files-from=- / /rootfs/; \
-    apk add --no-cache tzdata=2023c-r0; \
+    apk add --no-cache tzdata=2023c-r1; \
     apk info -qL tzdata | rsync -aq --files-from=- / /rootfs/; \
     # Generate the CA certificates file and copy the result
     /usr/sbin/update-ca-certificates; \
