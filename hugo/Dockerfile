@@ -1,14 +1,14 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hugo/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.40-r6","apk:g++":"12.2.1_git20220924-r10","apk:gcc":"12.2.1_git20220924-r10","apk:gmp":"6.2.1-r3","apk:isl25":"0.25-r2","apk:libatomic":"12.2.1_git20220924-r10","apk:libc-dev":"0.7.2-r5","apk:libgcc":"12.2.1_git20220924-r10","apk:libgomp":"12.2.1_git20220924-r10","apk:libstdc++":"12.2.1_git20220924-r10","apk:libstdc++-dev":"12.2.1_git20220924-r10","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.0-r3","apk:musl":"1.2.4-r0","apk:musl-dev":"1.2.4-r0","apk:zlib":"1.2.13-r1","apk:zstd-libs":"1.5.5-r4","github:gohugoio/hugo":"v0.112.3","github:magefile/mage":"v1.15.0","image:base-glibc":"62204dca5df4f13d2d4c05bbe262a59f029892c189d49f25eb35f0c40aa8dcb4","image:golang":"4e73ddf69322c88a1e58fd4976abbd5f4d55dc94b7fdd22bf0c25c71b41637bf"}
+# BOM: {"apk:binutils":"2.40-r7","apk:g++":"12.2.1_git20220924-r10","apk:gcc":"12.2.1_git20220924-r10","apk:gmp":"6.2.1-r3","apk:isl25":"0.25-r2","apk:libatomic":"12.2.1_git20220924-r10","apk:libc-dev":"0.7.2-r5","apk:libgcc":"12.2.1_git20220924-r10","apk:libgomp":"12.2.1_git20220924-r10","apk:libstdc++":"12.2.1_git20220924-r10","apk:libstdc++-dev":"12.2.1_git20220924-r10","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.0-r3","apk:musl":"1.2.4-r0","apk:musl-dev":"1.2.4-r0","apk:zlib":"1.2.13-r1","apk:zstd-libs":"1.5.5-r4","github:gohugoio/hugo":"v0.112.3","github:magefile/mage":"v1.15.0","image:base-glibc":"62204dca5df4f13d2d4c05bbe262a59f029892c189d49f25eb35f0c40aa8dcb4","image:golang":"3040bc74c3eeeaf02d96dc3e4a70138984ad3b14e32bb4aa6ffeb51e2591b9a1"}
 
-FROM reg.c5h.io/golang@sha256:4e73ddf69322c88a1e58fd4976abbd5f4d55dc94b7fdd22bf0c25c71b41637bf AS build
+FROM reg.c5h.io/golang@sha256:3040bc74c3eeeaf02d96dc3e4a70138984ad3b14e32bb4aa6ffeb51e2591b9a1 AS build
 
 ARG TAG="v0.112.3"
 ARG MAGE="v1.15.0"
 
 RUN set -eux; \
     apk add --no-cache \
-        binutils=2.40-r6 \
+        binutils=2.40-r7 \
         g++=12.2.1_git20220924-r10 \
         gcc=12.2.1_git20220924-r10 \
         gmp=6.2.1-r3 \
