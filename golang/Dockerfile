@@ -1,11 +1,11 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/golang/Dockerfile.gotpl
-# BOM: {"apk:bash":"5.2.15-r5","apk:binutils":"2.40-r7","apk:brotli-libs":"1.0.9-r14","apk:busybox":"1.36.1-r0","apk:busybox-binsh":"1.36.1-r0","apk:ca-certificates":"20230506-r0","apk:curl":"8.1.2-r0","apk:gcc":"12.2.1_git20220924-r10","apk:git":"2.40.1-r0","apk:gmp":"6.2.1-r3","apk:go":"1.20.4-r0","apk:isl25":"0.25-r2","apk:libatomic":"12.2.1_git20220924-r10","apk:libcrypto3":"3.1.1-r1","apk:libcurl":"8.1.2-r0","apk:libexpat":"2.5.0-r1","apk:libgcc":"12.2.1_git20220924-r10","apk:libgomp":"12.2.1_git20220924-r10","apk:libidn2":"2.3.4-r1","apk:libncursesw":"6.4_p20230506-r0","apk:libssl3":"3.1.1-r1","apk:libstdc++":"12.2.1_git20220924-r10","apk:libunistring":"1.1-r1","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.0-r3","apk:musl":"1.2.4-r0","apk:musl-dev":"1.2.4-r0","apk:ncurses-terminfo-base":"6.4_p20230506-r0","apk:nghttp2-libs":"1.53.0-r0","apk:pcre2":"10.42-r1","apk:readline":"8.2.1-r1","apk:zlib":"1.2.13-r1","apk:zstd-libs":"1.5.5-r4","github:google/go-licenses":"v1.6.0","golang":"go1.20.4","image:alpine":"f182b51cb5007336ee5e05fe5389f7c5a1d26428229ab27dbf502a7b4b3b6455"}
+# BOM: {"apk:bash":"5.2.15-r5","apk:binutils":"2.40-r7","apk:brotli-libs":"1.0.9-r14","apk:busybox":"1.36.1-r0","apk:busybox-binsh":"1.36.1-r0","apk:ca-certificates":"20230506-r0","apk:curl":"8.1.2-r0","apk:gcc":"12.2.1_git20220924-r10","apk:git":"2.40.1-r0","apk:gmp":"6.2.1-r3","apk:go":"1.20.5-r0","apk:isl25":"0.25-r2","apk:libatomic":"12.2.1_git20220924-r10","apk:libcrypto3":"3.1.1-r1","apk:libcurl":"8.1.2-r0","apk:libexpat":"2.5.0-r1","apk:libgcc":"12.2.1_git20220924-r10","apk:libgomp":"12.2.1_git20220924-r10","apk:libidn2":"2.3.4-r1","apk:libncursesw":"6.4_p20230506-r0","apk:libssl3":"3.1.1-r1","apk:libstdc++":"12.2.1_git20220924-r10","apk:libunistring":"1.1-r1","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.0-r3","apk:musl":"1.2.4-r0","apk:musl-dev":"1.2.4-r0","apk:ncurses-terminfo-base":"6.4_p20230506-r0","apk:nghttp2-libs":"1.53.0-r0","apk:pcre2":"10.42-r1","apk:readline":"8.2.1-r1","apk:zlib":"1.2.13-r1","apk:zstd-libs":"1.5.5-r4","github:google/go-licenses":"v1.6.0","golang":"go1.20.5","image:alpine":"f182b51cb5007336ee5e05fe5389f7c5a1d26428229ab27dbf502a7b4b3b6455"}
 
 FROM reg.c5h.io/alpine@sha256:f182b51cb5007336ee5e05fe5389f7c5a1d26428229ab27dbf502a7b4b3b6455
 
 ARG GOLICENSETAG="v1.6.0"
-ARG ARCHIVE_URL="https:/golang.org/dl/go1.20.4.src.tar.gz"
-ARG ARCHIVE_SUM="9f34ace128764b7a3a4b238b805856cc1b2184304df9e5690825b0710f4202d6"
+ARG ARCHIVE_URL="https:/golang.org/dl/go1.20.5.src.tar.gz"
+ARG ARCHIVE_SUM="9a15c133ba2cfafe79652f4815b62e7cfc267f68df1b9454c6ab2a3ca8b96a88"
 
 ENV GOPATH=/go
 ENV PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
@@ -22,7 +22,7 @@ RUN set -eux; \
         curl=8.1.2-r0 \
         gcc=12.2.1_git20220924-r10 \
         gmp=6.2.1-r3 \
-        go=1.20.4-r0 \
+        go=1.20.5-r0 \
         isl25=0.25-r2 \
         libatomic=12.2.1_git20220924-r10 \
         libcrypto3=3.1.1-r1 \
