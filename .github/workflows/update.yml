@@ -37,7 +37,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project alpine . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   base-glibc:
     name: Build base-glibc
@@ -69,7 +78,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project base-glibc . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   base-root:
     name: Build base-root
@@ -101,7 +119,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project base-root . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   golang:
     name: Build golang
@@ -133,7 +160,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project golang . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   postgres-13:
     name: Build postgres-13
@@ -165,7 +201,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project postgres-13 . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   base:
     name: Build base
@@ -197,7 +242,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project base . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   hugo:
     name: Build hugo
@@ -231,7 +285,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project hugo . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   vault:
     name: Build vault
@@ -265,7 +328,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project vault . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   distribution:
     name: Build distribution
@@ -299,7 +371,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project distribution . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   dotege:
     name: Build dotege
@@ -333,7 +414,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project dotege . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   ergo-certwrapper:
     name: Build ergo-certwrapper
@@ -367,7 +457,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project ergo-certwrapper . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   grafana:
     name: Build grafana
@@ -401,7 +500,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project grafana . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   haproxy:
     name: Build haproxy
@@ -435,7 +543,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project haproxy . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   httpredirect:
     name: Build httpredirect
@@ -469,7 +586,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project httpredirect . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   irc-bot:
     name: Build irc-bot
@@ -503,7 +629,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project irc-bot . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   irc-distribution:
     name: Build irc-distribution
@@ -537,7 +672,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project irc-distribution . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   irc-github:
     name: Build irc-github
@@ -571,7 +715,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project irc-github . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   irc-goplum:
     name: Build irc-goplum
@@ -605,7 +758,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project irc-goplum . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   irc-news:
     name: Build irc-news
@@ -639,7 +801,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project irc-news . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   irc-notifier:
     name: Build irc-notifier
@@ -673,7 +844,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project irc-notifier . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   linx-server:
     name: Build linx-server
@@ -707,7 +887,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project linx-server . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   miniflux:
     name: Build miniflux
@@ -741,7 +930,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project miniflux . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   prometheus:
     name: Build prometheus
@@ -775,7 +973,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project prometheus . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   redis:
     name: Build redis
@@ -809,7 +1016,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project redis . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   soju-certwrapper:
     name: Build soju-certwrapper
@@ -843,7 +1059,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project soju-certwrapper . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   tailscale:
     name: Build tailscale
@@ -877,7 +1102,16 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project tailscale . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 
   docker-socket-proxy:
     name: Build docker-socket-proxy
@@ -911,4 +1145,13 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
           contempt --commit --build --push --project docker-socket-proxy . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done

@@ -42,5 +42,14 @@ jobs:
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 {%- endraw %}
           contempt --commit --build --push --project {{ target.name }} . .
-          git push
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
 {% endfor %}
