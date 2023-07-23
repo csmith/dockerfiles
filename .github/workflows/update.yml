@@ -36,7 +36,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter alpine . .
+          contempt --commit --build --push --project alpine . .
           git push
 
   base-glibc:
@@ -68,7 +68,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter base-glibc . .
+          contempt --commit --build --push --project base-glibc . .
           git push
 
   base-root:
@@ -100,7 +100,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter base-root . .
+          contempt --commit --build --push --project base-root . .
           git push
 
   golang:
@@ -132,7 +132,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter golang . .
+          contempt --commit --build --push --project golang . .
           git push
 
   postgres-13:
@@ -164,7 +164,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter postgres-13 . .
+          contempt --commit --build --push --project postgres-13 . .
           git push
 
   base:
@@ -196,7 +196,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter base . .
+          contempt --commit --build --push --project base . .
           git push
 
   hugo:
@@ -230,7 +230,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter hugo . .
+          contempt --commit --build --push --project hugo . .
           git push
 
   vault:
@@ -264,7 +264,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter vault . .
+          contempt --commit --build --push --project vault . .
           git push
 
   distribution:
@@ -298,7 +298,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter distribution . .
+          contempt --commit --build --push --project distribution . .
           git push
 
   dotege:
@@ -332,7 +332,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter dotege . .
+          contempt --commit --build --push --project dotege . .
           git push
 
   ergo-certwrapper:
@@ -366,7 +366,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter ergo-certwrapper . .
+          contempt --commit --build --push --project ergo-certwrapper . .
           git push
 
   grafana:
@@ -400,7 +400,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter grafana . .
+          contempt --commit --build --push --project grafana . .
           git push
 
   haproxy:
@@ -434,7 +434,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter haproxy . .
+          contempt --commit --build --push --project haproxy . .
           git push
 
   httpredirect:
@@ -468,7 +468,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter httpredirect . .
+          contempt --commit --build --push --project httpredirect . .
           git push
 
   irc-bot:
@@ -502,7 +502,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter irc-bot . .
+          contempt --commit --build --push --project irc-bot . .
           git push
 
   irc-distribution:
@@ -536,7 +536,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter irc-distribution . .
+          contempt --commit --build --push --project irc-distribution . .
           git push
 
   irc-github:
@@ -570,7 +570,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter irc-github . .
+          contempt --commit --build --push --project irc-github . .
           git push
 
   irc-goplum:
@@ -604,7 +604,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter irc-goplum . .
+          contempt --commit --build --push --project irc-goplum . .
           git push
 
   irc-news:
@@ -638,7 +638,41 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter irc-news . .
+          contempt --commit --build --push --project irc-news . .
+          git push
+
+  irc-notifier:
+    name: Build irc-notifier
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project irc-notifier . .
           git push
 
   linx-server:
@@ -672,7 +706,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter linx-server . .
+          contempt --commit --build --push --project linx-server . .
           git push
 
   miniflux:
@@ -706,7 +740,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter miniflux . .
+          contempt --commit --build --push --project miniflux . .
           git push
 
   prometheus:
@@ -740,7 +774,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter prometheus . .
+          contempt --commit --build --push --project prometheus . .
           git push
 
   redis:
@@ -774,7 +808,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter redis . .
+          contempt --commit --build --push --project redis . .
           git push
 
   soju-certwrapper:
@@ -808,7 +842,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter soju-certwrapper . .
+          contempt --commit --build --push --project soju-certwrapper . .
           git push
 
   tailscale:
@@ -842,7 +876,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter tailscale . .
+          contempt --commit --build --push --project tailscale . .
           git push
 
   docker-socket-proxy:
@@ -876,5 +910,5 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --filter docker-socket-proxy . .
+          contempt --commit --build --push --project docker-socket-proxy . .
           git push

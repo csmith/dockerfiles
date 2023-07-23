@@ -41,6 +41,6 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 {%- endraw %}
-          contempt --commit --build --push --filter {{ target.name }} . .
+          contempt --commit --build --push --project {{ target.name }} . .
           git push
 {% endfor %}
