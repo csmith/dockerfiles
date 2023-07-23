@@ -7,12 +7,16 @@ on:
       - '**/Containerfile'
       - '**/Dockerfile'
       - '.github/**'
-      - 'READNE.md'
+      - 'README.md'
 name: update
 concurrency: dockerfiles
 jobs:
-  update:
+
+  alpine:
+    name: Build alpine
     runs-on: ubuntu-latest
+
+
     steps:
       - name: Checkout source
         uses: actions/checkout@master
@@ -31,5 +35,846 @@ jobs:
           git config user.name "${{ secrets.GIT_USERNAME }}"
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-          contempt --commit --build --push . .
+
+          contempt --commit --build --push --filter alpine . .
+          git push
+
+  base-glibc:
+    name: Build base-glibc
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - alpine
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter base-glibc . .
+          git push
+
+  base-root:
+    name: Build base-root
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - alpine
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter base-root . .
+          git push
+
+  golang:
+    name: Build golang
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - alpine
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter golang . .
+          git push
+
+  postgres-13:
+    name: Build postgres-13
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - alpine
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter postgres-13 . .
+          git push
+
+  base:
+    name: Build base
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - base-root
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter base . .
+          git push
+
+  hugo:
+    name: Build hugo
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base-glibc
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter hugo . .
+          git push
+
+  vault:
+    name: Build vault
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - alpine
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter vault . .
+          git push
+
+  distribution:
+    name: Build distribution
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter distribution . .
+          git push
+
+  dotege:
+    name: Build dotege
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter dotege . .
+          git push
+
+  ergo-certwrapper:
+    name: Build ergo-certwrapper
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter ergo-certwrapper . .
+          git push
+
+  grafana:
+    name: Build grafana
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter grafana . .
+          git push
+
+  haproxy:
+    name: Build haproxy
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - alpine
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter haproxy . .
+          git push
+
+  httpredirect:
+    name: Build httpredirect
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter httpredirect . .
+          git push
+
+  irc-bot:
+    name: Build irc-bot
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter irc-bot . .
+          git push
+
+  irc-distribution:
+    name: Build irc-distribution
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter irc-distribution . .
+          git push
+
+  irc-github:
+    name: Build irc-github
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter irc-github . .
+          git push
+
+  irc-goplum:
+    name: Build irc-goplum
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter irc-goplum . .
+          git push
+
+  irc-news:
+    name: Build irc-news
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter irc-news . .
+          git push
+
+  linx-server:
+    name: Build linx-server
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter linx-server . .
+          git push
+
+  miniflux:
+    name: Build miniflux
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter miniflux . .
+          git push
+
+  prometheus:
+    name: Build prometheus
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter prometheus . .
+          git push
+
+  redis:
+    name: Build redis
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - alpine
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter redis . .
+          git push
+
+  soju-certwrapper:
+    name: Build soju-certwrapper
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter soju-certwrapper . .
+          git push
+
+  tailscale:
+    name: Build tailscale
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter tailscale . .
+          git push
+
+  docker-socket-proxy:
+    name: Build docker-socket-proxy
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - haproxy
+
+        - base-root
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --filter docker-socket-proxy . .
           git push
