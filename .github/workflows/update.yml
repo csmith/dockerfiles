@@ -554,6 +554,49 @@ jobs:
             git pull --rebase
           done
 
+  hooktower:
+    name: Build hooktower
+    runs-on: ubuntu-latest
+
+    needs:
+
+        - golang
+
+        - base
+
+
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Update
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project hooktower . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
   httpredirect:
     name: Build httpredirect
     runs-on: ubuntu-latest
