@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/base-root/Dockerfile.gotpl
-# BOM: {"apk:busybox":"1.36.1-r2","apk:busybox-binsh":"1.36.1-r2","apk:ca-certificates":"20230506-r0","apk:libacl":"2.3.1-r3","apk:libcrypto3":"3.1.2-r0","apk:libxxhash":"0.8.2-r0","apk:lz4-libs":"1.9.4-r4","apk:musl":"1.2.4-r1","apk:popt":"1.19-r2","apk:rsync":"3.2.7-r4","apk:tzdata":"2023c-r1","apk:zlib":"1.2.13-r1","apk:zstd-libs":"1.5.5-r4","image:alpine":"0ce982c1a177d43800f731a14ddb968b2cfd1e94017d35961064e62634a7a5b8"}
+# BOM: {"apk:busybox":"1.36.1-r2","apk:busybox-binsh":"1.36.1-r2","apk:ca-certificates":"20230506-r0","apk:libacl":"2.3.1-r3","apk:libcrypto3":"3.1.2-r0","apk:libxxhash":"0.8.2-r0","apk:lz4-libs":"1.9.4-r4","apk:musl":"1.2.4-r1","apk:popt":"1.19-r2","apk:rsync":"3.2.7-r4","apk:tzdata":"2023c-r1","apk:zlib":"1.2.13-r1","apk:zstd-libs":"1.5.5-r4","image:alpine":"bebd01bf754ba1513f8964c434cf78395bb2d41e56fbe33dd18dc4c2f996df27"}
 
-FROM reg.c5h.io/alpine@sha256:0ce982c1a177d43800f731a14ddb968b2cfd1e94017d35961064e62634a7a5b8 AS build
+FROM reg.c5h.io/alpine@sha256:bebd01bf754ba1513f8964c434cf78395bb2d41e56fbe33dd18dc4c2f996df27 AS build
 
 RUN set -eux; \
     # Sort out our dependencies
