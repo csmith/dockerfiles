@@ -29,6 +29,7 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: stable
+          cache: false
       - name: Update
         env:
           REGISTRY: ${{ secrets.REGISTRY }}
