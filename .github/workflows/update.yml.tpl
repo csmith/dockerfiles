@@ -24,17 +24,18 @@ jobs:
 {%- raw -%}
     steps:
       - name: Checkout source
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
       - name: Setup Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v4
         with:
-          go-version: '1.19'
+          go-version: stable
       - name: Update
         env:
           REGISTRY: ${{ secrets.REGISTRY }}
           REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
           REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
           SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
         run:  |
           go install github.com/csmith/contempt/cmd/contempt@latest
           git config user.name "${{ secrets.GIT_USERNAME }}"
