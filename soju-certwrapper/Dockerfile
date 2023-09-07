@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/soju-certwrapper/Dockerfile.gotpl
-# BOM: {"github:csmith/certwrapper":"v4.2.0","github:emersion/soju":"v0.6.2","image:base":"8e5d45c90d7bcc56a15f1770933c8052a79773c1c631b96f36b5e25ef5606d5f","image:golang":"3e8330fcd48f7f61c9f6f00b1b9bb450c848225f37e39cb00efab8c0a1756470"}
+# BOM: {"github:csmith/certwrapper":"v4.2.0","github:emersion/soju":"v0.6.2","image:base":"8e5d45c90d7bcc56a15f1770933c8052a79773c1c631b96f36b5e25ef5606d5f","image:golang":"d09b6894ddc716bb8de7904642e7d41afa32063f284cdeec12cf89f29032b660"}
 
-FROM reg.c5h.io/golang@sha256:3e8330fcd48f7f61c9f6f00b1b9bb450c848225f37e39cb00efab8c0a1756470 AS build
+FROM reg.c5h.io/golang@sha256:d09b6894ddc716bb8de7904642e7d41afa32063f284cdeec12cf89f29032b660 AS build
 
 ARG SOJUTAG="v0.6.2"
 ARG CERTTAG="v4.2.0"
