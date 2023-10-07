@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/httpredirect/Dockerfile.gotpl
-# BOM: {"apk:brotli-libs":"1.0.9-r14","apk:busybox":"1.36.1-r2","apk:busybox-binsh":"1.36.1-r2","apk:ca-certificates":"20230506-r0","apk:git":"2.40.1-r0","apk:libcrypto3":"3.1.3-r0","apk:libcurl":"8.3.0-r0","apk:libexpat":"2.5.0-r1","apk:libidn2":"2.3.4-r1","apk:libssl3":"3.1.3-r0","apk:libunistring":"1.1-r1","apk:musl":"1.2.4-r1","apk:nghttp2-libs":"1.55.1-r0","apk:pcre2":"10.42-r1","apk:zlib":"1.2.13-r1","github:greboid/httpredirect":"v1.0.2","image:base":"8e5d45c90d7bcc56a15f1770933c8052a79773c1c631b96f36b5e25ef5606d5f","image:golang":"a62ef18994033df8f458aa6b4fc3b4291332e35859c5c3bfe957eb2ec9a7f932"}
+# BOM: {"apk:brotli-libs":"1.0.9-r14","apk:busybox":"1.36.1-r2","apk:busybox-binsh":"1.36.1-r2","apk:ca-certificates":"20230506-r0","apk:git":"2.40.1-r0","apk:libcrypto3":"3.1.3-r0","apk:libcurl":"8.3.0-r0","apk:libexpat":"2.5.0-r1","apk:libidn2":"2.3.4-r1","apk:libssl3":"3.1.3-r0","apk:libunistring":"1.1-r1","apk:musl":"1.2.4-r2","apk:nghttp2-libs":"1.55.1-r0","apk:pcre2":"10.42-r1","apk:zlib":"1.2.13-r1","github:greboid/httpredirect":"v1.0.2","image:base":"7442771fc9e4d70fbf8f9d592e28b9ec7b9b81af30ddb87cbaaba90f2cc0064f","image:golang":"8ec62e029f2954b79051926ca2270e2bec6e1ac887188593ea0b366c826cbbc0"}
 
-FROM reg.c5h.io/golang@sha256:a62ef18994033df8f458aa6b4fc3b4291332e35859c5c3bfe957eb2ec9a7f932 AS build
+FROM reg.c5h.io/golang@sha256:8ec62e029f2954b79051926ca2270e2bec6e1ac887188593ea0b366c826cbbc0 AS build
 
 ARG TAG="v1.0.2"
 
@@ -18,7 +18,7 @@ RUN set -eux; \
         libidn2=2.3.4-r1\
         libssl3=3.1.3-r0\
         libunistring=1.1-r1\
-        musl=1.2.4-r1\
+        musl=1.2.4-r2\
         nghttp2-libs=1.55.1-r0\
         pcre2=10.42-r1\
         zlib=1.2.13-r1\
@@ -28,7 +28,7 @@ RUN set -eux; \
     CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main .; \
     go-licenses save ./... --save_path=/notices;
 
-FROM reg.c5h.io/base@sha256:8e5d45c90d7bcc56a15f1770933c8052a79773c1c631b96f36b5e25ef5606d5f
+FROM reg.c5h.io/base@sha256:7442771fc9e4d70fbf8f9d592e28b9ec7b9b81af30ddb87cbaaba90f2cc0064f
 
 COPY --from=build /go/src/github.com/greboid/httpredirect/main /httpredirect
 COPY --from=build /notices /notices
