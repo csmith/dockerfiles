@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hooktower/Dockerfile.gotpl
-# BOM: {"github:adnanh/webhook":"2.8.1","github:containrrr/watchtower":"v1.6.0","image:base":"8e5d45c90d7bcc56a15f1770933c8052a79773c1c631b96f36b5e25ef5606d5f","image:golang":"a62ef18994033df8f458aa6b4fc3b4291332e35859c5c3bfe957eb2ec9a7f932"}
+# BOM: {"github:adnanh/webhook":"2.8.1","github:containrrr/watchtower":"v1.6.0","image:base":"7442771fc9e4d70fbf8f9d592e28b9ec7b9b81af30ddb87cbaaba90f2cc0064f","image:golang":"8ec62e029f2954b79051926ca2270e2bec6e1ac887188593ea0b366c826cbbc0"}
 
-FROM reg.c5h.io/golang@sha256:a62ef18994033df8f458aa6b4fc3b4291332e35859c5c3bfe957eb2ec9a7f932 AS build
+FROM reg.c5h.io/golang@sha256:8ec62e029f2954b79051926ca2270e2bec6e1ac887188593ea0b366c826cbbc0 AS build
 
 ARG WATCHTOWER_TAG="v1.6.0"
 ARG WEBHOOK_TAG="2.8.1"
@@ -16,7 +16,7 @@ RUN set -eux; \
     CGO_ENABLED=0 GOOS=linux go build -a -ldflags "-buildid= -extldflags '-static'" -trimpath -o webhook .; \
     go-licenses save ./... --save_path=/notices/webhook;
 
-FROM reg.c5h.io/base@sha256:8e5d45c90d7bcc56a15f1770933c8052a79773c1c631b96f36b5e25ef5606d5f
+FROM reg.c5h.io/base@sha256:7442771fc9e4d70fbf8f9d592e28b9ec7b9b81af30ddb87cbaaba90f2cc0064f
 
 COPY --from=build /go/src/github.com/containrrr/watchtower/watchtower /watchtower
 COPY --from=build /go/src/github.com/adnanh/webhook/webhook /webhook
