@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/prometheus/Dockerfile.gotpl
-# BOM: {"apk:bash":"5.2.15-r5","apk:binutils":"2.40-r7","apk:brotli-libs":"1.0.9-r14","apk:build-base":"0.5-r3","apk:busybox":"1.36.1-r2","apk:busybox-binsh":"1.36.1-r2","apk:c-ares":"1.19.1-r0","apk:ca-certificates":"20230506-r0","apk:curl":"8.3.0-r0","apk:file":"5.45-r0","apk:fortify-headers":"1.1-r3","apk:g++":"12.2.1_git20220924-r10","apk:gcc":"12.2.1_git20220924-r10","apk:gmp":"6.2.1-r3","apk:icu-data-en":"73.2-r2","apk:icu-libs":"73.2-r2","apk:isl25":"0.25-r2","apk:libacl":"2.3.1-r3","apk:libatomic":"12.2.1_git20220924-r10","apk:libc-dev":"0.7.2-r5","apk:libcrypto3":"3.1.3-r0","apk:libcurl":"8.3.0-r0","apk:libgcc":"12.2.1_git20220924-r10","apk:libgomp":"12.2.1_git20220924-r10","apk:libidn2":"2.3.4-r1","apk:libmagic":"5.45-r0","apk:libncursesw":"6.4_p20230506-r0","apk:libssl3":"3.1.3-r0","apk:libstdc++":"12.2.1_git20220924-r10","apk:libstdc++-dev":"12.2.1_git20220924-r10","apk:libunistring":"1.1-r1","apk:make":"4.4.1-r1","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.0_p12-r0","apk:musl":"1.2.4-r1","apk:musl-dev":"1.2.4-r1","apk:ncurses-terminfo-base":"6.4_p20230506-r0","apk:nghttp2-libs":"1.55.1-r0","apk:nodejs":"18.17.1-r0","apk:npm":"9.6.6-r0","apk:patch":"2.7.6-r10","apk:readline":"8.2.1-r1","apk:tar":"1.34-r3","apk:zlib":"1.2.13-r1","apk:zstd-libs":"1.5.5-r4","github:prometheus/prometheus":"v2.47.1","image:base":"8e5d45c90d7bcc56a15f1770933c8052a79773c1c631b96f36b5e25ef5606d5f","image:golang":"a62ef18994033df8f458aa6b4fc3b4291332e35859c5c3bfe957eb2ec9a7f932"}
+# BOM: {"apk:bash":"5.2.15-r5","apk:binutils":"2.40-r7","apk:brotli-libs":"1.0.9-r14","apk:build-base":"0.5-r3","apk:busybox":"1.36.1-r2","apk:busybox-binsh":"1.36.1-r2","apk:c-ares":"1.19.1-r0","apk:ca-certificates":"20230506-r0","apk:curl":"8.3.0-r0","apk:file":"5.45-r0","apk:fortify-headers":"1.1-r3","apk:g++":"12.2.1_git20220924-r10","apk:gcc":"12.2.1_git20220924-r10","apk:gmp":"6.2.1-r3","apk:icu-data-en":"73.2-r2","apk:icu-libs":"73.2-r2","apk:isl25":"0.25-r2","apk:libacl":"2.3.1-r3","apk:libatomic":"12.2.1_git20220924-r10","apk:libc-dev":"0.7.2-r5","apk:libcrypto3":"3.1.3-r0","apk:libcurl":"8.3.0-r0","apk:libgcc":"12.2.1_git20220924-r10","apk:libgomp":"12.2.1_git20220924-r10","apk:libidn2":"2.3.4-r1","apk:libmagic":"5.45-r0","apk:libncursesw":"6.4_p20230506-r0","apk:libssl3":"3.1.3-r0","apk:libstdc++":"12.2.1_git20220924-r10","apk:libstdc++-dev":"12.2.1_git20220924-r10","apk:libunistring":"1.1-r1","apk:make":"4.4.1-r1","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.0_p12-r0","apk:musl":"1.2.4-r2","apk:musl-dev":"1.2.4-r2","apk:ncurses-terminfo-base":"6.4_p20230506-r0","apk:nghttp2-libs":"1.55.1-r0","apk:nodejs":"18.17.1-r0","apk:npm":"9.6.6-r0","apk:patch":"2.7.6-r10","apk:readline":"8.2.1-r1","apk:tar":"1.34-r3","apk:zlib":"1.2.13-r1","apk:zstd-libs":"1.5.5-r4","github:prometheus/prometheus":"v2.47.1","image:base":"7442771fc9e4d70fbf8f9d592e28b9ec7b9b81af30ddb87cbaaba90f2cc0064f","image:golang":"8ec62e029f2954b79051926ca2270e2bec6e1ac887188593ea0b366c826cbbc0"}
 
-FROM reg.c5h.io/golang@sha256:a62ef18994033df8f458aa6b4fc3b4291332e35859c5c3bfe957eb2ec9a7f932 AS build
+FROM reg.c5h.io/golang@sha256:8ec62e029f2954b79051926ca2270e2bec6e1ac887188593ea0b366c826cbbc0 AS build
 
 ARG TAG="v2.47.1"
 
@@ -42,8 +42,8 @@ RUN set -eux; \
         make=4.4.1-r1 \
         mpc1=1.3.1-r1 \
         mpfr4=4.2.0_p12-r0 \
-        musl=1.2.4-r1 \
-        musl-dev=1.2.4-r1 \
+        musl=1.2.4-r2 \
+        musl-dev=1.2.4-r2 \
         ncurses-terminfo-base=6.4_p20230506-r0 \
         nghttp2-libs=1.55.1-r0 \
         nodejs=18.17.1-r0 \
@@ -62,7 +62,7 @@ RUN set -eux; \
     mkdir -p /tmp/dist/etc/prometheus /tmp/dist/data /tmp/dist/notices; \
     cp -t /tmp/dist/notices/ /tmp/prometheus/LICENSE /tmp/prometheus/NOTICE /tmp/prometheus/npm_licenses.tar.bz2;
 
-FROM reg.c5h.io/base@sha256:8e5d45c90d7bcc56a15f1770933c8052a79773c1c631b96f36b5e25ef5606d5f
+FROM reg.c5h.io/base@sha256:7442771fc9e4d70fbf8f9d592e28b9ec7b9b81af30ddb87cbaaba90f2cc0064f
 
 COPY --from=build --chown=65532:65532 /tmp/dist/ /
 COPY --from=build /tmp/prometheus/prometheus /prometheus
