@@ -1,34 +1,35 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/httpredirect/Dockerfile.gotpl
-# BOM: {"apk:brotli-libs":"1.0.9-r14","apk:busybox":"1.36.1-r5","apk:busybox-binsh":"1.36.1-r5","apk:ca-certificates":"20230506-r0","apk:git":"2.40.1-r0","apk:libcrypto3":"3.1.4-r1","apk:libcurl":"8.4.0-r0","apk:libexpat":"2.5.0-r1","apk:libidn2":"2.3.4-r1","apk:libssl3":"3.1.4-r1","apk:libunistring":"1.1-r1","apk:musl":"1.2.4-r2","apk:nghttp2-libs":"1.57.0-r0","apk:pcre2":"10.42-r1","apk:zlib":"1.2.13-r1","github:greboid/httpredirect":"v1.0.3","image:base":"7442771fc9e4d70fbf8f9d592e28b9ec7b9b81af30ddb87cbaaba90f2cc0064f","image:golang":"5e230c03f6aaf29b89f73ae91102d1b2740706fc131fff0dedc3f72bf189adba"}
+# BOM: {"apk:brotli-libs":"1.1.0-r1","apk:busybox":"1.36.1-r15","apk:busybox-binsh":"1.36.1-r15","apk:c-ares":"1.22.1-r0","apk:ca-certificates":"20230506-r0","apk:git":"2.43.0-r0","apk:libcrypto3":"3.1.4-r2","apk:libcurl":"8.5.0-r0","apk:libexpat":"2.5.0-r2","apk:libidn2":"2.3.4-r4","apk:libssl3":"3.1.4-r2","apk:libunistring":"1.1-r2","apk:musl":"1.2.4_git20230717-r4","apk:nghttp2-libs":"1.58.0-r0","apk:pcre2":"10.42-r2","apk:zlib":"1.3-r2","github:greboid/httpredirect":"v1.0.3","image:base":"67c850424b327e8a75333dbe8fe00ffa4e37f10c114efa3c6884d3e687d6cb47","image:golang":"72e140a52eb30250acb9f89a7ca4c1ce30ffcffb46d5ba1070f5f73afdf7bf78"}
 
-FROM reg.c5h.io/golang@sha256:5e230c03f6aaf29b89f73ae91102d1b2740706fc131fff0dedc3f72bf189adba AS build
+FROM reg.c5h.io/golang@sha256:72e140a52eb30250acb9f89a7ca4c1ce30ffcffb46d5ba1070f5f73afdf7bf78 AS build
 
 ARG TAG="v1.0.3"
 
 RUN set -eux; \
     apk add --no-cache \
-        brotli-libs=1.0.9-r14\
-        busybox=1.36.1-r5\
-        busybox-binsh=1.36.1-r5\
+        brotli-libs=1.1.0-r1\
+        busybox=1.36.1-r15\
+        busybox-binsh=1.36.1-r15\
+        c-ares=1.22.1-r0\
         ca-certificates=20230506-r0\
-        git=2.40.1-r0\
-        libcrypto3=3.1.4-r1\
-        libcurl=8.4.0-r0\
-        libexpat=2.5.0-r1\
-        libidn2=2.3.4-r1\
-        libssl3=3.1.4-r1\
-        libunistring=1.1-r1\
-        musl=1.2.4-r2\
-        nghttp2-libs=1.57.0-r0\
-        pcre2=10.42-r1\
-        zlib=1.2.13-r1\
+        git=2.43.0-r0\
+        libcrypto3=3.1.4-r2\
+        libcurl=8.5.0-r0\
+        libexpat=2.5.0-r2\
+        libidn2=2.3.4-r4\
+        libssl3=3.1.4-r2\
+        libunistring=1.1-r2\
+        musl=1.2.4_git20230717-r4\
+        nghttp2-libs=1.58.0-r0\
+        pcre2=10.42-r2\
+        zlib=1.3-r2\
         ; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/greboid/httpredirect /go/src/github.com/greboid/httpredirect; \
     cd /go/src/github.com/greboid/httpredirect; \
     CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main .; \
     go-licenses save ./... --save_path=/notices;
 
-FROM reg.c5h.io/base@sha256:7442771fc9e4d70fbf8f9d592e28b9ec7b9b81af30ddb87cbaaba90f2cc0064f
+FROM reg.c5h.io/base@sha256:67c850424b327e8a75333dbe8fe00ffa4e37f10c114efa3c6884d3e687d6cb47
 
 COPY --from=build /go/src/github.com/greboid/httpredirect/main /httpredirect
 COPY --from=build /notices /notices
