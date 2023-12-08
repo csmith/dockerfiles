@@ -1,10 +1,10 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/alpine/Dockerfile.gotpl
-# BOM: {"alpine":"3.18.5"}
+# BOM: {"alpine":"3.19.0"}
 
 FROM reg.c5h.io/alpine AS verify
 
-ARG ARCHIVE_URL="https://mirrors.melbourne.co.uk/alpine/latest-stable/releases/x86_64/alpine-minirootfs-3.18.5-x86_64.tar.gz"
-ARG ARCHIVE_SUM="5004cd5b045f2ba6f3efee932c2a85508fe628f2f3425e795ee9ac778671673d"
+ARG ARCHIVE_URL="https://mirrors.melbourne.co.uk/alpine/latest-stable/releases/x86_64/alpine-minirootfs-3.19.0-x86_64.tar.gz"
+ARG ARCHIVE_SUM="f2b6248c9cbcb0993744d86ca9f67a058706f4ef5bf8c3c47d1cca8acf2013e0"
 
 RUN set -eux; \
     apk add --no-cache curl; \
