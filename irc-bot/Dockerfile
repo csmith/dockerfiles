@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/irc-bot/Dockerfile.gotpl
-# BOM: {"github:greboid/irc-bot":"v5.0.7","image:base":"7442771fc9e4d70fbf8f9d592e28b9ec7b9b81af30ddb87cbaaba90f2cc0064f","image:golang":"5e230c03f6aaf29b89f73ae91102d1b2740706fc131fff0dedc3f72bf189adba"}
+# BOM: {"github:greboid/irc-bot":"v5.0.7","image:base":"67c850424b327e8a75333dbe8fe00ffa4e37f10c114efa3c6884d3e687d6cb47","image:golang":"72e140a52eb30250acb9f89a7ca4c1ce30ffcffb46d5ba1070f5f73afdf7bf78"}
 
-FROM reg.c5h.io/golang@sha256:5e230c03f6aaf29b89f73ae91102d1b2740706fc131fff0dedc3f72bf189adba AS build
+FROM reg.c5h.io/golang@sha256:72e140a52eb30250acb9f89a7ca4c1ce30ffcffb46d5ba1070f5f73afdf7bf78 AS build
 
 ARG TAG="v5.0.7"
 
@@ -11,7 +11,7 @@ RUN set -eux; \
     CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main ./cmd/bot; \
     go-licenses save ./... --save_path=/notices;
 
-FROM reg.c5h.io/base@sha256:7442771fc9e4d70fbf8f9d592e28b9ec7b9b81af30ddb87cbaaba90f2cc0064f
+FROM reg.c5h.io/base@sha256:67c850424b327e8a75333dbe8fe00ffa4e37f10c114efa3c6884d3e687d6cb47
 
 COPY --from=build /go/src/github.com/greboid/irc-bot/main /irc-bot
 COPY --from=build /notices /notices
