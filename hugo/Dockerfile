@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hugo/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.41-r0","apk:g++":"13.2.1_git20231014-r0","apk:gcc":"13.2.1_git20231014-r0","apk:gmp":"6.3.0-r0","apk:isl25":"0.25-r2","apk:jansson":"2.14-r4","apk:libatomic":"13.2.1_git20231014-r0","apk:libc-dev":"0.7.2-r5","apk:libgcc":"13.2.1_git20231014-r0","apk:libgomp":"13.2.1_git20231014-r0","apk:libstdc++":"13.2.1_git20231014-r0","apk:libstdc++-dev":"13.2.1_git20231014-r0","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1-r0","apk:musl":"1.2.4_git20230717-r4","apk:musl-dev":"1.2.4_git20230717-r4","apk:zlib":"1.3-r2","apk:zstd-libs":"1.5.5-r8","github:gohugoio/hugo":"v0.121.2","github:magefile/mage":"v1.15.0","image:base-glibc":"a411fd907660407af1915d33673dd35278269057521f4dbe97f95d22a8fb8f37","image:golang":"6b1130d4bbfe162794fbaf32b5e5e2dcf1e9cda0051b19803102c1af52c1bc1d"}
+# BOM: {"apk:binutils":"2.41-r0","apk:g++":"13.2.1_git20231014-r0","apk:gcc":"13.2.1_git20231014-r0","apk:gmp":"6.3.0-r0","apk:isl25":"0.25-r2","apk:jansson":"2.14-r4","apk:libatomic":"13.2.1_git20231014-r0","apk:libc-dev":"0.7.2-r5","apk:libgcc":"13.2.1_git20231014-r0","apk:libgomp":"13.2.1_git20231014-r0","apk:libstdc++":"13.2.1_git20231014-r0","apk:libstdc++-dev":"13.2.1_git20231014-r0","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1-r0","apk:musl":"1.2.4_git20230717-r4","apk:musl-dev":"1.2.4_git20230717-r4","apk:zlib":"1.3.1-r0","apk:zstd-libs":"1.5.5-r8","github:gohugoio/hugo":"v0.121.2","github:magefile/mage":"v1.15.0","image:base-glibc":"a411fd907660407af1915d33673dd35278269057521f4dbe97f95d22a8fb8f37","image:golang":"6d352e89f9ee9e49ffec893024fbcc4996b60c9ff5d48d84ff9197c8c5eb9ea6"}
 
-FROM reg.c5h.io/golang@sha256:6b1130d4bbfe162794fbaf32b5e5e2dcf1e9cda0051b19803102c1af52c1bc1d AS build
+FROM reg.c5h.io/golang@sha256:6d352e89f9ee9e49ffec893024fbcc4996b60c9ff5d48d84ff9197c8c5eb9ea6 AS build
 
 ARG TAG="v0.121.2"
 ARG MAGE="v1.15.0"
@@ -24,7 +24,7 @@ RUN set -eux; \
         mpfr4=4.2.1-r0 \
         musl=1.2.4_git20230717-r4 \
         musl-dev=1.2.4_git20230717-r4 \
-        zlib=1.3-r2 \
+        zlib=1.3.1-r0 \
         zstd-libs=1.5.5-r8 \
         ; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/gohugoio/hugo /tmp/work; \
