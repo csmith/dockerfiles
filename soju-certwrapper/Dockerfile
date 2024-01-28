@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/soju-certwrapper/Dockerfile.gotpl
-# BOM: {"github:csmith/certwrapper":"v4.2.0","github:emersion/soju":"v0.7.0","image:base":"7442771fc9e4d70fbf8f9d592e28b9ec7b9b81af30ddb87cbaaba90f2cc0064f","image:golang":"5e230c03f6aaf29b89f73ae91102d1b2740706fc131fff0dedc3f72bf189adba"}
+# BOM: {"github:csmith/certwrapper":"v4.2.0","github:emersion/soju":"v0.7.0","image:base":"cfa1d5f949b495a6e077bdddb1dbbc3d9a9d55036ab1267f4168a6a5c7e7fdce","image:golang":"45a1591f8121fd2361f10b3b4960542e36ca8ab1d3787d7b5adc0fcbafc9b7fc"}
 
-FROM reg.c5h.io/golang@sha256:5e230c03f6aaf29b89f73ae91102d1b2740706fc131fff0dedc3f72bf189adba AS build
+FROM reg.c5h.io/golang@sha256:45a1591f8121fd2361f10b3b4960542e36ca8ab1d3787d7b5adc0fcbafc9b7fc AS build
 
 ARG SOJUTAG="v0.7.0"
 ARG CERTTAG="v4.2.0"
@@ -16,15 +16,15 @@ RUN set -eux; \
     # Build soju
     git clone --depth=1 -b $SOJUTAG --single-branch https://github.com/emersion/soju /go/src/github.com/emersion/soju; \
     cd /go/src/github.com/emersion/soju && (\
-      GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o /out/soju ./cmd/soju; \
-      GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o /out/sojuctl ./cmd/sojuctl; \
+      GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags=moderncsqlite -o /out/soju ./cmd/soju; \
+      GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags=moderncsqlite -o /out/sojuctl ./cmd/sojuctl; \
       # TODO: find a license tool that doesn't hardcode Google's opinion on "forbidden" licenses :/
       # go-licenses save ./... --save_path=/notices; \
     ); \
     # Create folders for volumes
     install -o 65532 -g 65532 -d /out/data /out/certs;
 
-FROM reg.c5h.io/base@sha256:7442771fc9e4d70fbf8f9d592e28b9ec7b9b81af30ddb87cbaaba90f2cc0064f
+FROM reg.c5h.io/base@sha256:cfa1d5f949b495a6e077bdddb1dbbc3d9a9d55036ab1267f4168a6a5c7e7fdce
 
 ENV CERTWRAPPER_CERTIFICATE_PATH=/certs/certificate.pem \
     CERTWRAPPER_DNS_PROVIDER=httpreq \
