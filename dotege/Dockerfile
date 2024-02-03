@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/dotege/Dockerfile.gotpl
-# BOM: {"github:csmith/dotege":"v1.3.1","image:base":"cfa1d5f949b495a6e077bdddb1dbbc3d9a9d55036ab1267f4168a6a5c7e7fdce","image:golang":"45a1591f8121fd2361f10b3b4960542e36ca8ab1d3787d7b5adc0fcbafc9b7fc"}
+# BOM: {"github:csmith/dotege":"v1.3.1","image:base":"fd06c9da248d637dfa37579addc089c993016cf3e21ee1142b5aea23095ad4f9","image:golang":"45a1591f8121fd2361f10b3b4960542e36ca8ab1d3787d7b5adc0fcbafc9b7fc"}
 
 FROM reg.c5h.io/golang@sha256:45a1591f8121fd2361f10b3b4960542e36ca8ab1d3787d7b5adc0fcbafc9b7fc AS build
 
@@ -14,7 +14,7 @@ RUN set -eux; \
     mkdir -p /data/config /data/certs /data/output; \
     chown -R 65532:65532 /data;
 
-FROM reg.c5h.io/base@sha256:cfa1d5f949b495a6e077bdddb1dbbc3d9a9d55036ab1267f4168a6a5c7e7fdce
+FROM reg.c5h.io/base@sha256:fd06c9da248d637dfa37579addc089c993016cf3e21ee1142b5aea23095ad4f9
 
 COPY --from=build /go/src/github.com/csmith/dotege/main /dotege
 COPY --from=build /notices /data /
