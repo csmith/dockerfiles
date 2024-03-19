@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/tailscale/Dockerfile.gotpl
-# BOM: {"github:tailscale/tailscale":"v1.62.0","image:base":"fd06c9da248d637dfa37579addc089c993016cf3e21ee1142b5aea23095ad4f9","image:golang":"e9bc02ea14a83a22df783d2d6244c8fa4349ccc91d4d202784c2b569b747ab65"}
+# BOM: {"github:tailscale/tailscale":"v1.62.0","image:base":"c4936e066851061b7fd136c869de1dd56413038f3fc44545e606b637a074fd8d","image:golang":"02f9a78797fac2b87fbd32a53f473fdc1c0ef10b68ceb3deb21436cf9f069e7e"}
 
-FROM reg.c5h.io/golang@sha256:e9bc02ea14a83a22df783d2d6244c8fa4349ccc91d4d202784c2b569b747ab65 AS build
+FROM reg.c5h.io/golang@sha256:02f9a78797fac2b87fbd32a53f473fdc1c0ef10b68ceb3deb21436cf9f069e7e AS build
 
 ARG TAG="v1.62.0"
 
@@ -14,7 +14,7 @@ RUN set -eux; \
     mkdir -p /out/var/run/tailscale /out/state; \
     chown -R 65532:65532 /out;
 
-FROM reg.c5h.io/base@sha256:fd06c9da248d637dfa37579addc089c993016cf3e21ee1142b5aea23095ad4f9
+FROM reg.c5h.io/base@sha256:c4936e066851061b7fd136c869de1dd56413038f3fc44545e606b637a074fd8d
 
 COPY --from=build /src/tailscaled /tailscaled
 COPY --from=build /src/tailscale /tailscale
