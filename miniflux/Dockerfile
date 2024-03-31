@@ -1,9 +1,9 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/miniflux/Dockerfile.gotpl
-# BOM: {"apk:brotli-libs":"1.1.0-r1","apk:busybox":"1.36.1-r15","apk:busybox-binsh":"1.36.1-r15","apk:c-ares":"1.27.0-r0","apk:ca-certificates":"20240226-r0","apk:git":"2.43.0-r0","apk:libcrypto3":"3.1.4-r5","apk:libcurl":"8.5.0-r0","apk:libexpat":"2.6.2-r0","apk:libidn2":"2.3.4-r4","apk:libssl3":"3.1.4-r5","apk:libunistring":"1.1-r2","apk:musl":"1.2.4_git20230717-r4","apk:nghttp2-libs":"1.58.0-r0","apk:pcre2":"10.42-r2","apk:zlib":"1.3.1-r0","github:miniflux/v2":"2.1.1","image:base":"c4936e066851061b7fd136c869de1dd56413038f3fc44545e606b637a074fd8d","image:golang":"e8f65f65d61580cd3819e6d4aed29b3eca435d67cf0e09462569d214f9deea5a"}
+# BOM: {"apk:brotli-libs":"1.1.0-r1","apk:busybox":"1.36.1-r15","apk:busybox-binsh":"1.36.1-r15","apk:c-ares":"1.27.0-r0","apk:ca-certificates":"20240226-r0","apk:git":"2.43.0-r0","apk:libcrypto3":"3.1.4-r5","apk:libcurl":"8.5.0-r0","apk:libexpat":"2.6.2-r0","apk:libidn2":"2.3.4-r4","apk:libssl3":"3.1.4-r5","apk:libunistring":"1.1-r2","apk:musl":"1.2.4_git20230717-r4","apk:nghttp2-libs":"1.58.0-r0","apk:pcre2":"10.42-r2","apk:zlib":"1.3.1-r0","github:miniflux/v2":"2.1.2","image:base":"c4936e066851061b7fd136c869de1dd56413038f3fc44545e606b637a074fd8d","image:golang":"e8f65f65d61580cd3819e6d4aed29b3eca435d67cf0e09462569d214f9deea5a"}
 
 FROM reg.c5h.io/golang@sha256:e8f65f65d61580cd3819e6d4aed29b3eca435d67cf0e09462569d214f9deea5a AS build
 
-ARG TAG="2.1.1"
+ARG TAG="2.1.2"
 
 RUN set -eux; \
     apk add --no-cache \
