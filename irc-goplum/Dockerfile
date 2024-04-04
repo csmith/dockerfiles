@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/irc-goplum/Dockerfile.gotpl
-# BOM: {"github:greboid/irc-goplum":"v4.0.2","image:base":"c4936e066851061b7fd136c869de1dd56413038f3fc44545e606b637a074fd8d","image:golang":"e8f65f65d61580cd3819e6d4aed29b3eca435d67cf0e09462569d214f9deea5a"}
+# BOM: {"github:greboid/irc-goplum":"v4.0.2","image:base":"c4936e066851061b7fd136c869de1dd56413038f3fc44545e606b637a074fd8d","image:golang":"ce380808fdf4cc939295924866b2f58eec6b17b0d028308c9d9e7eaaea2a7fe3"}
 
-FROM reg.c5h.io/golang@sha256:e8f65f65d61580cd3819e6d4aed29b3eca435d67cf0e09462569d214f9deea5a AS build
+FROM reg.c5h.io/golang@sha256:ce380808fdf4cc939295924866b2f58eec6b17b0d028308c9d9e7eaaea2a7fe3 AS build
 
 ARG TAG="v4.0.2"
 
