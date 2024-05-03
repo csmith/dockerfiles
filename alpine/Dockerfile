@@ -3,7 +3,7 @@
 
 FROM reg.c5h.io/alpine AS verify
 
-ARG ARCHIVE_URL="https://mirrors.melbourne.co.uk/alpine/latest-stable/releases/x86_64/alpine-minirootfs-3.19.1-x86_64.tar.gz"
+ARG ARCHIVE_URL="https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/alpine-minirootfs-3.19.1-x86_64.tar.gz"
 ARG ARCHIVE_SUM="185123ceb6e7d08f2449fff5543db206ffb79decd814608d399ad447e08fa29e"
 
 RUN set -eux; \
