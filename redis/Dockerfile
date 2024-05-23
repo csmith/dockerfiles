@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/redis/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.41-r0","apk:brotli-libs":"1.1.0-r1","apk:build-base":"0.5-r3","apk:busybox":"1.36.1-r18","apk:busybox-binsh":"1.36.1-r18","apk:c-ares":"1.27.0-r0","apk:ca-certificates":"20240226-r0","apk:file":"5.45-r1","apk:fortify-headers":"1.1-r3","apk:g++":"13.2.1_git20231014-r0","apk:gcc":"13.2.1_git20231014-r0","apk:git":"2.43.4-r0","apk:gmp":"6.3.0-r0","apk:isl25":"0.25-r2","apk:jansson":"2.14-r4","apk:libatomic":"13.2.1_git20231014-r0","apk:libc-dev":"0.7.2-r5","apk:libcrypto3":"3.1.5-r0","apk:libcurl":"8.5.0-r0","apk:libexpat":"2.6.2-r0","apk:libgcc":"13.2.1_git20231014-r0","apk:libgomp":"13.2.1_git20231014-r0","apk:libidn2":"2.3.4-r4","apk:libmagic":"5.45-r1","apk:libpcre16":"8.45-r3","apk:libpcre32":"8.45-r3","apk:libpcrecpp":"8.45-r3","apk:libssl3":"3.1.5-r0","apk:libstdc++":"13.2.1_git20231014-r0","apk:libstdc++-dev":"13.2.1_git20231014-r0","apk:libunistring":"1.1-r2","apk:linux-headers":"6.5-r0","apk:make":"4.4.1-r2","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1-r0","apk:musl":"1.2.4_git20230717-r4","apk:musl-dev":"1.2.4_git20230717-r4","apk:nghttp2-libs":"1.58.0-r0","apk:openssl-dev":"3.1.5-r0","apk:openssl-libs-static":"3.1.5-r0","apk:patch":"2.7.6-r10","apk:pcre":"8.45-r3","apk:pcre-dev":"8.45-r3","apk:pcre2":"10.42-r2","apk:pkgconf":"2.1.0-r0","apk:tzdata":"2024a-r0","apk:zlib":"1.3.1-r0","apk:zlib-dev":"1.3.1-r0","apk:zlib-static":"1.3.1-r0","apk:zstd-libs":"1.5.5-r8","github:redis/redis":"7.2.5","image:alpine":"8a2be8ea03cd3dfada335f805eafa28768098b44255a76310f8da133be9901ef","image:base":"c4936e066851061b7fd136c869de1dd56413038f3fc44545e606b637a074fd8d"}
+# BOM: {"apk:binutils":"2.42-r0","apk:brotli-libs":"1.1.0-r2","apk:build-base":"0.5-r3","apk:busybox":"1.36.1-r28","apk:busybox-binsh":"1.36.1-r28","apk:c-ares":"1.28.1-r0","apk:ca-certificates":"20240226-r0","apk:file":"5.45-r1","apk:fortify-headers":"1.1-r3","apk:g++":"13.2.1_git20240309-r0","apk:gcc":"13.2.1_git20240309-r0","apk:git":"2.45.1-r0","apk:gmp":"6.3.0-r1","apk:isl25":"0.25-r2","apk:jansson":"2.14-r4","apk:libatomic":"13.2.1_git20240309-r0","apk:libcrypto3":"3.3.0-r2","apk:libcurl":"8.7.1-r0","apk:libexpat":"2.6.2-r0","apk:libgcc":"13.2.1_git20240309-r0","apk:libgomp":"13.2.1_git20240309-r0","apk:libidn2":"2.3.7-r0","apk:libmagic":"5.45-r1","apk:libpcre16":"8.45-r3","apk:libpcre32":"8.45-r3","apk:libpcrecpp":"8.45-r3","apk:libpsl":"0.21.5-r1","apk:libssl3":"3.3.0-r2","apk:libstdc++":"13.2.1_git20240309-r0","apk:libstdc++-dev":"13.2.1_git20240309-r0","apk:libunistring":"1.2-r0","apk:linux-headers":"6.6-r0","apk:make":"4.4.1-r2","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1-r0","apk:musl":"1.2.5-r0","apk:musl-dev":"1.2.5-r0","apk:nghttp2-libs":"1.62.0-r0","apk:openssl-dev":"3.3.0-r2","apk:openssl-libs-static":"3.3.0-r2","apk:patch":"2.7.6-r10","apk:pcre":"8.45-r3","apk:pcre-dev":"8.45-r3","apk:pcre2":"10.43-r0","apk:pkgconf":"2.2.0-r0","apk:tzdata":"2024a-r1","apk:zlib":"1.3.1-r1","apk:zlib-dev":"1.3.1-r1","apk:zlib-static":"1.3.1-r1","apk:zstd-libs":"1.5.6-r0","github:redis/redis":"7.2.5","image:alpine":"156a9f5dfd9defd08b6f5205b8d263b1810044b015f8cbb33fd469dd34e045fc","image:base":"b53f7bd15a51e9e9e1c9d1ddea46a2f62223ed7cd8d8fa320c0d6b323f9f3f99"}
 
-FROM reg.c5h.io/alpine@sha256:8a2be8ea03cd3dfada335f805eafa28768098b44255a76310f8da133be9901ef AS build
+FROM reg.c5h.io/alpine@sha256:156a9f5dfd9defd08b6f5205b8d263b1810044b015f8cbb33fd469dd34e045fc AS build
 
 ARG TAG="7.2.5"
 
@@ -11,56 +11,56 @@ COPY redis.conf /redis.conf
 
 RUN set -eux; \
      apk add --no-cache --virtual .build-deps \
-        binutils=2.41-r0 \
-        brotli-libs=1.1.0-r1 \
+        binutils=2.42-r0 \
+        brotli-libs=1.1.0-r2 \
         build-base=0.5-r3 \
-        busybox=1.36.1-r18 \
-        busybox-binsh=1.36.1-r18 \
-        c-ares=1.27.0-r0 \
+        busybox=1.36.1-r28 \
+        busybox-binsh=1.36.1-r28 \
+        c-ares=1.28.1-r0 \
         ca-certificates=20240226-r0 \
         file=5.45-r1 \
         fortify-headers=1.1-r3 \
-        g++=13.2.1_git20231014-r0 \
-        gcc=13.2.1_git20231014-r0 \
-        git=2.43.4-r0 \
-        gmp=6.3.0-r0 \
+        g++=13.2.1_git20240309-r0 \
+        gcc=13.2.1_git20240309-r0 \
+        git=2.45.1-r0 \
+        gmp=6.3.0-r1 \
         isl25=0.25-r2 \
         jansson=2.14-r4 \
-        libatomic=13.2.1_git20231014-r0 \
-        libc-dev=0.7.2-r5 \
-        libcrypto3=3.1.5-r0 \
-        libcurl=8.5.0-r0 \
+        libatomic=13.2.1_git20240309-r0 \
+        libcrypto3=3.3.0-r2 \
+        libcurl=8.7.1-r0 \
         libexpat=2.6.2-r0 \
-        libgcc=13.2.1_git20231014-r0 \
-        libgomp=13.2.1_git20231014-r0 \
-        libidn2=2.3.4-r4 \
+        libgcc=13.2.1_git20240309-r0 \
+        libgomp=13.2.1_git20240309-r0 \
+        libidn2=2.3.7-r0 \
         libmagic=5.45-r1 \
         libpcre16=8.45-r3 \
         libpcre32=8.45-r3 \
         libpcrecpp=8.45-r3 \
-        libssl3=3.1.5-r0 \
-        libstdc++=13.2.1_git20231014-r0 \
-        libstdc++-dev=13.2.1_git20231014-r0 \
-        libunistring=1.1-r2 \
-        linux-headers=6.5-r0 \
+        libpsl=0.21.5-r1 \
+        libssl3=3.3.0-r2 \
+        libstdc++=13.2.1_git20240309-r0 \
+        libstdc++-dev=13.2.1_git20240309-r0 \
+        libunistring=1.2-r0 \
+        linux-headers=6.6-r0 \
         make=4.4.1-r2 \
         mpc1=1.3.1-r1 \
         mpfr4=4.2.1-r0 \
-        musl=1.2.4_git20230717-r4 \
-        musl-dev=1.2.4_git20230717-r4 \
-        nghttp2-libs=1.58.0-r0 \
-        openssl-dev=3.1.5-r0 \
-        openssl-libs-static=3.1.5-r0 \
+        musl=1.2.5-r0 \
+        musl-dev=1.2.5-r0 \
+        nghttp2-libs=1.62.0-r0 \
+        openssl-dev=3.3.0-r2 \
+        openssl-libs-static=3.3.0-r2 \
         patch=2.7.6-r10 \
         pcre=8.45-r3 \
         pcre-dev=8.45-r3 \
-        pcre2=10.42-r2 \
-        pkgconf=2.1.0-r0 \
-        tzdata=2024a-r0 \
-        zlib=1.3.1-r0 \
-        zlib-dev=1.3.1-r0 \
-        zlib-static=1.3.1-r0 \
-        zstd-libs=1.5.5-r8 \
+        pcre2=10.43-r0 \
+        pkgconf=2.2.0-r0 \
+        tzdata=2024a-r1 \
+        zlib=1.3.1-r1 \
+        zlib-dev=1.3.1-r1 \
+        zlib-static=1.3.1-r1 \
+        zstd-libs=1.5.6-r0 \
         ; \
      git clone --depth=1 -b $TAG --single-branch https://github.com/redis/redis /src/redis; \
      cd /src/redis; \
@@ -70,7 +70,7 @@ RUN set -eux; \
      strip /src/redis/src/redis-server; \
      touch --date=@0 /src/redis/src/redis-server /data /redis.conf
 
-FROM reg.c5h.io/base@sha256:c4936e066851061b7fd136c869de1dd56413038f3fc44545e606b637a074fd8d
+FROM reg.c5h.io/base@sha256:b53f7bd15a51e9e9e1c9d1ddea46a2f62223ed7cd8d8fa320c0d6b323f9f3f99
 
 COPY --from=build --chown=65532:65532 /redis.conf /home/nonroot/redis.conf
 COPY --from=build --chown=65532:65532 /data /home/nonroot/database
