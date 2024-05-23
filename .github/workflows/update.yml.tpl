@@ -32,6 +32,7 @@ jobs:
           cache: false
       - name: Update
         env:
+          BUILDAH_ISOLATION: chroot
           REGISTRY: ${{ secrets.REGISTRY }}
           REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
           REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
