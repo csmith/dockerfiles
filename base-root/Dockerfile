@@ -1,13 +1,13 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/base-root/Dockerfile.gotpl
-# BOM: {"apk:busybox":"1.36.1-r28","apk:busybox-binsh":"1.36.1-r28","apk:ca-certificates":"20240226-r0","apk:libacl":"2.3.2-r0","apk:libcrypto3":"3.3.1-r0","apk:libxxhash":"0.8.2-r2","apk:lz4-libs":"1.9.4-r5","apk:musl":"1.2.5-r0","apk:popt":"1.19-r3","apk:rsync":"3.3.0-r0","apk:tzdata":"2024a-r1","apk:zlib":"1.3.1-r1","apk:zstd-libs":"1.5.6-r0","image:alpine":"156a9f5dfd9defd08b6f5205b8d263b1810044b015f8cbb33fd469dd34e045fc"}
+# BOM: {"apk:busybox":"1.36.1-r29","apk:busybox-binsh":"1.36.1-r29","apk:ca-certificates":"20240226-r0","apk:libacl":"2.3.2-r0","apk:libcrypto3":"3.3.1-r0","apk:libxxhash":"0.8.2-r2","apk:lz4-libs":"1.9.4-r5","apk:musl":"1.2.5-r0","apk:popt":"1.19-r3","apk:rsync":"3.3.0-r0","apk:tzdata":"2024a-r1","apk:zlib":"1.3.1-r1","apk:zstd-libs":"1.5.6-r0","image:alpine":"156a9f5dfd9defd08b6f5205b8d263b1810044b015f8cbb33fd469dd34e045fc"}
 
 FROM reg.c5h.io/alpine@sha256:156a9f5dfd9defd08b6f5205b8d263b1810044b015f8cbb33fd469dd34e045fc AS build
 
 RUN set -eux; \
     # Sort out our dependencies
     apk add --no-cache \
-        busybox=1.36.1-r28 \
-        busybox-binsh=1.36.1-r28 \
+        busybox=1.36.1-r29 \
+        busybox-binsh=1.36.1-r29 \
         ca-certificates=20240226-r0 \
         libacl=2.3.2-r0 \
         libcrypto3=3.3.1-r0 \
