@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/linx-server/Dockerfile.gotpl
-# BOM: {"github:csmith/linx-server":"v3.0.0","image:base":"b53f7bd15a51e9e9e1c9d1ddea46a2f62223ed7cd8d8fa320c0d6b323f9f3f99","image:golang":"ddca946bd80cbfbeabf82e6f158fcf123e10298e3abf0247b27679ff69f37c21"}
+# BOM: {"github:csmith/linx-server":"v3.0.0","image:base":"b53f7bd15a51e9e9e1c9d1ddea46a2f62223ed7cd8d8fa320c0d6b323f9f3f99","image:golang":"3354dedcc743bda75d4dc4ec36e128fc11d9139d591f1525979f35543c52e66a"}
 
-FROM reg.c5h.io/golang@sha256:ddca946bd80cbfbeabf82e6f158fcf123e10298e3abf0247b27679ff69f37c21 AS build
+FROM reg.c5h.io/golang@sha256:3354dedcc743bda75d4dc4ec36e128fc11d9139d591f1525979f35543c52e66a AS build
 
 ARG TAG="v3.0.0"
 
