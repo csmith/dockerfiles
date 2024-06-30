@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/irc-notifier/Dockerfile.gotpl
-# BOM: {"github:greboid/irc-notifier":"v1.0.5","image:base":"b53f7bd15a51e9e9e1c9d1ddea46a2f62223ed7cd8d8fa320c0d6b323f9f3f99","image:golang":"3354dedcc743bda75d4dc4ec36e128fc11d9139d591f1525979f35543c52e66a"}
+# BOM: {"github:greboid/irc-notifier":"v1.0.5","image:base":"b53f7bd15a51e9e9e1c9d1ddea46a2f62223ed7cd8d8fa320c0d6b323f9f3f99","image:golang":"7e2e8c4d8b56573cf82e790a41faf3be939b334456fa9fdd7b76ff2287fda51b"}
 
-FROM reg.c5h.io/golang@sha256:3354dedcc743bda75d4dc4ec36e128fc11d9139d591f1525979f35543c52e66a AS build
+FROM reg.c5h.io/golang@sha256:7e2e8c4d8b56573cf82e790a41faf3be939b334456fa9fdd7b76ff2287fda51b AS build
 
 ARG TAG="v1.0.5"
 
