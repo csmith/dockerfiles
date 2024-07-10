@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/irc-goplum/Dockerfile.gotpl
-# BOM: {"github:greboid/irc-goplum":"v4.0.2","image:base":"b53f7bd15a51e9e9e1c9d1ddea46a2f62223ed7cd8d8fa320c0d6b323f9f3f99","image:golang":"39d3f2e4bd71ea4a62f6c555f4c6a63a186717fa64a9cd5fe76b9799f118dcde"}
+# BOM: {"github:greboid/irc-goplum":"v4.0.2","image:base":"b92ffcd70a3cea70972a600a917a409451afe2732844d09e3afe212ad8e041ff","image:golang":"81d66c178513a033b11c343b1033bb5f5cea5ae431b9626faba34c713055190a"}
 
-FROM reg.c5h.io/golang@sha256:39d3f2e4bd71ea4a62f6c555f4c6a63a186717fa64a9cd5fe76b9799f118dcde AS build
+FROM reg.c5h.io/golang@sha256:81d66c178513a033b11c343b1033bb5f5cea5ae431b9626faba34c713055190a AS build
 
 ARG TAG="v4.0.2"
 
@@ -11,7 +11,7 @@ RUN set -eux; \
     CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main ./cmd/goplum; \
     go-licenses save ./... --save_path=/notices;
 
-FROM reg.c5h.io/base@sha256:b53f7bd15a51e9e9e1c9d1ddea46a2f62223ed7cd8d8fa320c0d6b323f9f3f99
+FROM reg.c5h.io/base@sha256:b92ffcd70a3cea70972a600a917a409451afe2732844d09e3afe212ad8e041ff
 
 COPY --from=build /go/src/github.com/greboid/irc-goplum/main /irc-goplum
 COPY --from=build /notices /notices
