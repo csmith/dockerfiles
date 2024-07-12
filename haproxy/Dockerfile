@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/haproxy/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.42-r0","apk:brotli-libs":"1.1.0-r2","apk:build-base":"0.5-r3","apk:busybox":"1.36.1-r29","apk:busybox-binsh":"1.36.1-r29","apk:c-ares":"1.28.1-r0","apk:ca-certificates":"20240705-r0","apk:file":"5.45-r1","apk:fortify-headers":"1.1-r3","apk:g++":"13.2.1_git20240309-r0","apk:gcc":"13.2.1_git20240309-r0","apk:git":"2.45.2-r0","apk:gmp":"6.3.0-r1","apk:isl25":"0.25-r2","apk:jansson":"2.14-r4","apk:libatomic":"13.2.1_git20240309-r0","apk:libcrypto3":"3.3.1-r1","apk:libcurl":"8.8.0-r0","apk:libexpat":"2.6.2-r0","apk:libgcc":"13.2.1_git20240309-r0","apk:libgomp":"13.2.1_git20240309-r0","apk:libidn2":"2.3.7-r0","apk:libmagic":"5.45-r1","apk:libpcre16":"8.45-r3","apk:libpcre32":"8.45-r3","apk:libpcrecpp":"8.45-r3","apk:libpsl":"0.21.5-r1","apk:libssl3":"3.3.1-r1","apk:libstdc++":"13.2.1_git20240309-r0","apk:libstdc++-dev":"13.2.1_git20240309-r0","apk:libunistring":"1.2-r0","apk:linux-headers":"6.6-r0","apk:make":"4.4.1-r2","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1-r0","apk:musl":"1.2.5-r0","apk:musl-dev":"1.2.5-r0","apk:nghttp2-libs":"1.62.1-r0","apk:openssl-dev":"3.3.1-r1","apk:openssl-libs-static":"3.3.1-r1","apk:patch":"2.7.6-r10","apk:pcre":"8.45-r3","apk:pcre-dev":"8.45-r3","apk:pcre2":"10.43-r0","apk:pkgconf":"2.2.0-r0","apk:tzdata":"2024a-r1","apk:zlib":"1.3.1-r1","apk:zlib-dev":"1.3.1-r1","apk:zlib-static":"1.3.1-r1","apk:zstd-libs":"1.5.6-r0","github:haproxy/haproxy":"v3.0.0","image:alpine":"4e352d0ad6388de40184ffe8f9419c8b4600b9aae2bdc1b3e90ab682900769cb","image:base":"b92ffcd70a3cea70972a600a917a409451afe2732844d09e3afe212ad8e041ff"}
+# BOM: {"apk:binutils":"2.42-r0","apk:brotli-libs":"1.1.0-r2","apk:build-base":"0.5-r3","apk:busybox":"1.36.1-r29","apk:busybox-binsh":"1.36.1-r29","apk:c-ares":"1.28.1-r0","apk:ca-certificates":"20240705-r0","apk:file":"5.45-r1","apk:fortify-headers":"1.1-r3","apk:g++":"13.2.1_git20240309-r0","apk:gcc":"13.2.1_git20240309-r0","apk:git":"2.45.2-r0","apk:gmp":"6.3.0-r1","apk:isl25":"0.25-r2","apk:jansson":"2.14-r4","apk:libatomic":"13.2.1_git20240309-r0","apk:libcrypto3":"3.3.1-r3","apk:libcurl":"8.8.0-r0","apk:libexpat":"2.6.2-r0","apk:libgcc":"13.2.1_git20240309-r0","apk:libgomp":"13.2.1_git20240309-r0","apk:libidn2":"2.3.7-r0","apk:libmagic":"5.45-r1","apk:libpcre16":"8.45-r3","apk:libpcre32":"8.45-r3","apk:libpcrecpp":"8.45-r3","apk:libpsl":"0.21.5-r1","apk:libssl3":"3.3.1-r3","apk:libstdc++":"13.2.1_git20240309-r0","apk:libstdc++-dev":"13.2.1_git20240309-r0","apk:libunistring":"1.2-r0","apk:linux-headers":"6.6-r0","apk:make":"4.4.1-r2","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1-r0","apk:musl":"1.2.5-r0","apk:musl-dev":"1.2.5-r0","apk:nghttp2-libs":"1.62.1-r0","apk:openssl-dev":"3.3.1-r3","apk:openssl-libs-static":"3.3.1-r3","apk:patch":"2.7.6-r10","apk:pcre":"8.45-r3","apk:pcre-dev":"8.45-r3","apk:pcre2":"10.43-r0","apk:pkgconf":"2.2.0-r0","apk:tzdata":"2024a-r1","apk:zlib":"1.3.1-r1","apk:zlib-dev":"1.3.1-r1","apk:zlib-static":"1.3.1-r1","apk:zstd-libs":"1.5.6-r0","github:haproxy/haproxy":"v3.0.0","image:alpine":"4e352d0ad6388de40184ffe8f9419c8b4600b9aae2bdc1b3e90ab682900769cb","image:base":"b92ffcd70a3cea70972a600a917a409451afe2732844d09e3afe212ad8e041ff"}
 
 FROM reg.c5h.io/alpine@sha256:4e352d0ad6388de40184ffe8f9419c8b4600b9aae2bdc1b3e90ab682900769cb AS build
 
@@ -25,7 +25,7 @@ RUN set -eux; \
         isl25=0.25-r2 \
         jansson=2.14-r4 \
         libatomic=13.2.1_git20240309-r0 \
-        libcrypto3=3.3.1-r1 \
+        libcrypto3=3.3.1-r3 \
         libcurl=8.8.0-r0 \
         libexpat=2.6.2-r0 \
         libgcc=13.2.1_git20240309-r0 \
@@ -36,7 +36,7 @@ RUN set -eux; \
         libpcre32=8.45-r3 \
         libpcrecpp=8.45-r3 \
         libpsl=0.21.5-r1 \
-        libssl3=3.3.1-r1 \
+        libssl3=3.3.1-r3 \
         libstdc++=13.2.1_git20240309-r0 \
         libstdc++-dev=13.2.1_git20240309-r0 \
         libunistring=1.2-r0 \
@@ -47,8 +47,8 @@ RUN set -eux; \
         musl=1.2.5-r0 \
         musl-dev=1.2.5-r0 \
         nghttp2-libs=1.62.1-r0 \
-        openssl-dev=3.3.1-r1 \
-        openssl-libs-static=3.3.1-r1 \
+        openssl-dev=3.3.1-r3 \
+        openssl-libs-static=3.3.1-r3 \
         patch=2.7.6-r10 \
         pcre=8.45-r3 \
         pcre-dev=8.45-r3 \
