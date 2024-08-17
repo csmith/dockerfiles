@@ -1,9 +1,9 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/dotege/Dockerfile.gotpl
-# BOM: {"github:csmith/dotege":"v1.3.1","image:base":"b92ffcd70a3cea70972a600a917a409451afe2732844d09e3afe212ad8e041ff","image:golang":"a65c74423f2c96b1a1d676105009332bb38adf96f8aed5e1e51e2bc6d9def27d"}
+# BOM: {"github:csmith/dotege":"v1.3.2","image:base":"b92ffcd70a3cea70972a600a917a409451afe2732844d09e3afe212ad8e041ff","image:golang":"19d46582f163eefb8a4a6ac3106238f58921369736045b489e672c2e5d7d990a"}
 
-FROM reg.c5h.io/golang@sha256:a65c74423f2c96b1a1d676105009332bb38adf96f8aed5e1e51e2bc6d9def27d AS build
+FROM reg.c5h.io/golang@sha256:19d46582f163eefb8a4a6ac3106238f58921369736045b489e672c2e5d7d990a AS build
 
-ARG TAG="v1.3.1"
+ARG TAG="v1.3.2"
 
 RUN set -eux; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/csmith/dotege /go/src/github.com/csmith/dotege; \
