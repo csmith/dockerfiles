@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/httpredirect/Dockerfile.gotpl
-# BOM: {"apk:brotli-libs":"1.1.0-r2","apk:busybox":"1.36.1-r29","apk:busybox-binsh":"1.36.1-r29","apk:c-ares":"1.28.1-r0","apk:ca-certificates":"20240705-r0","apk:git":"2.45.2-r0","apk:libcrypto3":"3.3.2-r0","apk:libcurl":"8.10.0-r0","apk:libexpat":"2.6.3-r0","apk:libidn2":"2.3.7-r0","apk:libpsl":"0.21.5-r1","apk:libssl3":"3.3.2-r0","apk:libunistring":"1.2-r0","apk:musl":"1.2.5-r0","apk:nghttp2-libs":"1.62.1-r0","apk:pcre2":"10.43-r0","apk:zlib":"1.3.1-r1","apk:zstd-libs":"1.5.6-r0","github:greboid/httpredirect":"v1.0.3","image:base":"fa9cdd83581affde03cb2234170235ff287588e4da3786133d72846838210621","image:golang":"cfe802314683b47ee24f57a398fc5098702b10a472e4a80aedcc54710d0705c3"}
+# BOM: {"apk:brotli-libs":"1.1.0-r2","apk:busybox":"1.36.1-r29","apk:busybox-binsh":"1.36.1-r29","apk:c-ares":"1.28.1-r0","apk:ca-certificates":"20240705-r0","apk:git":"2.45.2-r0","apk:libcrypto3":"3.3.2-r0","apk:libcurl":"8.10.0-r0","apk:libexpat":"2.6.3-r0","apk:libidn2":"2.3.7-r0","apk:libpsl":"0.21.5-r1","apk:libssl3":"3.3.2-r0","apk:libunistring":"1.2-r0","apk:musl":"1.2.5-r0","apk:nghttp2-libs":"1.62.1-r0","apk:pcre2":"10.43-r0","apk:zlib":"1.3.1-r1","apk:zstd-libs":"1.5.6-r0","github:greboid/httpredirect":"v1.0.3","image:base":"fa9cdd83581affde03cb2234170235ff287588e4da3786133d72846838210621","image:golang":"4d5308af1e133bec7aabbc9f267e4719a991904ba8bb9fbad15ce4a76e3e6498"}
 
-FROM reg.c5h.io/golang@sha256:cfe802314683b47ee24f57a398fc5098702b10a472e4a80aedcc54710d0705c3 AS build
+FROM reg.c5h.io/golang@sha256:4d5308af1e133bec7aabbc9f267e4719a991904ba8bb9fbad15ce4a76e3e6498 AS build
 
 ARG TAG="v1.0.3"
 
