@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/golang/Dockerfile.gotpl
-# BOM: {"apk:bash":"5.2.26-r0","apk:binutils":"2.42-r0","apk:brotli-libs":"1.1.0-r2","apk:busybox":"1.36.1-r29","apk:busybox-binsh":"1.36.1-r29","apk:c-ares":"1.33.1-r0","apk:ca-certificates":"20240705-r0","apk:curl":"8.10.1-r0","apk:gcc":"13.2.1_git20240309-r0","apk:git":"2.45.2-r0","apk:gmp":"6.3.0-r1","apk:go":"1.22.8-r0","apk:isl25":"0.25-r2","apk:jansson":"2.14-r4","apk:libatomic":"13.2.1_git20240309-r0","apk:libcrypto3":"3.3.2-r0","apk:libcurl":"8.10.1-r0","apk:libexpat":"2.6.3-r0","apk:libgcc":"13.2.1_git20240309-r0","apk:libgomp":"13.2.1_git20240309-r0","apk:libidn2":"2.3.7-r0","apk:libncursesw":"6.4_p20240420-r1","apk:libpsl":"0.21.5-r1","apk:libssl3":"3.3.2-r0","apk:libstdc++":"13.2.1_git20240309-r0","apk:libunistring":"1.2-r0","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1-r0","apk:musl":"1.2.5-r0","apk:musl-dev":"1.2.5-r0","apk:ncurses-terminfo-base":"6.4_p20240420-r1","apk:nghttp2-libs":"1.62.1-r0","apk:pcre2":"10.43-r0","apk:readline":"8.2.10-r0","apk:zlib":"1.3.1-r1","apk:zstd-libs":"1.5.6-r0","github:google/go-licenses":"v1.6.0","golang":"go1.23.2","image:alpine":"2e8d81e98838573646bf82865b487cee723829f133bc3e599d5ac3e08f682e5a"}
+# BOM: {"apk:bash":"5.2.26-r0","apk:binutils":"2.42-r0","apk:brotli-libs":"1.1.0-r2","apk:busybox":"1.36.1-r29","apk:busybox-binsh":"1.36.1-r29","apk:c-ares":"1.33.1-r0","apk:ca-certificates":"20240705-r0","apk:curl":"8.10.1-r0","apk:gcc":"13.2.1_git20240309-r0","apk:git":"2.45.2-r0","apk:gmp":"6.3.0-r1","apk:go":"1.22.8-r0","apk:isl25":"0.25-r2","apk:jansson":"2.14-r4","apk:libatomic":"13.2.1_git20240309-r0","apk:libcrypto3":"3.3.2-r1","apk:libcurl":"8.10.1-r0","apk:libexpat":"2.6.3-r0","apk:libgcc":"13.2.1_git20240309-r0","apk:libgomp":"13.2.1_git20240309-r0","apk:libidn2":"2.3.7-r0","apk:libncursesw":"6.4_p20240420-r1","apk:libpsl":"0.21.5-r1","apk:libssl3":"3.3.2-r1","apk:libstdc++":"13.2.1_git20240309-r0","apk:libunistring":"1.2-r0","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1-r0","apk:musl":"1.2.5-r0","apk:musl-dev":"1.2.5-r0","apk:ncurses-terminfo-base":"6.4_p20240420-r1","apk:nghttp2-libs":"1.62.1-r0","apk:pcre2":"10.43-r0","apk:readline":"8.2.10-r0","apk:zlib":"1.3.1-r1","apk:zstd-libs":"1.5.6-r0","github:google/go-licenses":"v1.6.0","golang":"go1.23.2","image:alpine":"2e8d81e98838573646bf82865b487cee723829f133bc3e599d5ac3e08f682e5a"}
 
 FROM reg.c5h.io/alpine@sha256:2e8d81e98838573646bf82865b487cee723829f133bc3e599d5ac3e08f682e5a
 
@@ -27,14 +27,14 @@ RUN set -eux; \
         isl25=0.25-r2 \
         jansson=2.14-r4 \
         libatomic=13.2.1_git20240309-r0 \
-        libcrypto3=3.3.2-r0 \
+        libcrypto3=3.3.2-r1 \
         libcurl=8.10.1-r0 \
         libgcc=13.2.1_git20240309-r0 \
         libgomp=13.2.1_git20240309-r0 \
         libidn2=2.3.7-r0 \
         libncursesw=6.4_p20240420-r1 \
         libpsl=0.21.5-r1 \
-        libssl3=3.3.2-r0 \
+        libssl3=3.3.2-r1 \
         libstdc++=13.2.1_git20240309-r0 \
         libunistring=1.2-r0 \
         mpc1=1.3.1-r1 \
@@ -78,14 +78,14 @@ RUN set -eux; \
         isl25=0.25-r2 \
         jansson=2.14-r4 \
         libatomic=13.2.1_git20240309-r0 \
-        libcrypto3=3.3.2-r0 \
+        libcrypto3=3.3.2-r1 \
         libcurl=8.10.1-r0 \
         libexpat=2.6.3-r0 \
         libgcc=13.2.1_git20240309-r0 \
         libgomp=13.2.1_git20240309-r0 \
         libidn2=2.3.7-r0 \
         libpsl=0.21.5-r1 \
-        libssl3=3.3.2-r0 \
+        libssl3=3.3.2-r1 \
         libstdc++=13.2.1_git20240309-r0 \
         libunistring=1.2-r0 \
         mpc1=1.3.1-r1 \
