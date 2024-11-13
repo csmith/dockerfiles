@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hooktower/Dockerfile.gotpl
-# BOM: {"github:adnanh/webhook":"2.8.2","github:containrrr/watchtower":"v1.7.1","image:base":"fa9cdd83581affde03cb2234170235ff287588e4da3786133d72846838210621","image:golang":"a0af2b86e8fc5387c09787c7c9f322b2fbfef25405b0e674d27f7809021a39b6"}
+# BOM: {"github:adnanh/webhook":"2.8.2","github:containrrr/watchtower":"v1.7.1","image:base":"fa9cdd83581affde03cb2234170235ff287588e4da3786133d72846838210621","image:golang":"2e40bddd1ed791405e2228d7b3afa7c69d2f23f8dcd0e918e8b829bc0de82e3d"}
 
-FROM reg.c5h.io/golang@sha256:a0af2b86e8fc5387c09787c7c9f322b2fbfef25405b0e674d27f7809021a39b6 AS build
+FROM reg.c5h.io/golang@sha256:2e40bddd1ed791405e2228d7b3afa7c69d2f23f8dcd0e918e8b829bc0de82e3d AS build
 
 ARG WATCHTOWER_TAG="v1.7.1"
 ARG WEBHOOK_TAG="2.8.2"
