@@ -1,22 +1,22 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/distribution/Dockerfile.gotpl
-# BOM: {"apk:file":"5.45-r1","apk:libmagic":"5.45-r1","apk:make":"4.4.1-r2","apk:musl":"1.2.5-r0","image:base":"fa9cdd83581affde03cb2234170235ff287588e4da3786133d72846838210621","image:golang":"6fde5c78fe5a9aa03d7f0286e067ba6de93e906527af2e4c886c3eb748b849dc"}
+# BOM: {"apk:file":"5.46-r0","apk:libmagic":"5.46-r0","apk:make":"4.4.1-r2","apk:musl":"1.2.5-r8","image:base":"3d9bc81e06db6829d63423bb674f142586ed9bd48613aab2849ada8f7b431a99","image:golang":"2d5332dbd96c2017fc9f481e608f709ca1b3c9a5c5725a66f9dba26ba5432021"}
 
-FROM reg.c5h.io/golang@sha256:6fde5c78fe5a9aa03d7f0286e067ba6de93e906527af2e4c886c3eb748b849dc AS build
+FROM reg.c5h.io/golang@sha256:2d5332dbd96c2017fc9f481e608f709ca1b3c9a5c5725a66f9dba26ba5432021 AS build
 
 ARG TAG="v2.7.1"
 
 RUN set -eux; \
     apk add --no-cache \
-        file=5.45-r1 \
-        libmagic=5.45-r1 \
+        file=5.46-r0 \
+        libmagic=5.46-r0 \
         make=4.4.1-r2 \
-        musl=1.2.5-r0 \
+        musl=1.2.5-r8 \
         ; \
     git clone --depth=1 -b $TAG --single-branch https://github.com/distribution/distribution /go/src/github.com/docker/distribution; \
     cd /go/src/github.com/docker/distribution; \
     BUILDTAGS="include_oss include_gcs" GO111MODULE=off CGO_ENABLED=0 make bin/registry;
 
-FROM reg.c5h.io/base@sha256:fa9cdd83581affde03cb2234170235ff287588e4da3786133d72846838210621
+FROM reg.c5h.io/base@sha256:3d9bc81e06db6829d63423bb674f142586ed9bd48613aab2849ada8f7b431a99
 
 COPY --from=build /go/src/github.com/docker/distribution/cmd/registry/config-dev.yml /etc/docker/registry/config.yml
 COPY --from=build /go/src/github.com/docker/distribution/bin/registry /bin/registry
