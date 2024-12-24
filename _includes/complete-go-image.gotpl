@@ -1,0 +1,38 @@
+{{-
+/* Clones a repo, statically builds a go project, and copies it and its licenses
+ * over to a base image.
+ *
+ * Expected values:
+ *  .Repo - the repository to be cloned
+ *  .Tag  - the tag (or branch) of the repository to check out
+ *  .LinkerFlags  - extra flags to pass to the linker [optional]
+ *  .BuildFlags   - extra flags to pass to the build tool [optional]
+ *  .Package      - the package to build (e.g. ./cmd/myapp)
+ *  .BinaryName   - the file name for the resulting binary
+ *  .ExtraDirs    - extra directories to create (under /data) [optional]
+ */
+-}}
+FROM {{image "golang"}} AS build
+
+{{template "clone.gotpl" (map
+    "Repo" .Repo
+    "Tag" .Tag
+)}}
+
+{{template "go-build.gotpl" (map
+    "Package" .Package
+    "LinkerFlags" .LinkerFlags
+    "BuildFlags" .BuildFlags
+)}}
+
+{{if .ExtraDirs}}
+{{template "mkdirs.gotpl" (map
+    "Dirs" .ExtraDirs
+)}}
+{{end}}
+
+FROM {{image "base"}}
+
+COPY --from=build /work/out /{{.BinaryName}}
+COPY --from=build /notices /notices
+ENTRYPOINT ["/{{.BinaryName}}"]

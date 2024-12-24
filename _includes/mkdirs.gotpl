@@ -1,0 +1,12 @@
+{{-
+/* Creates directories owned by the "nonroot" user
+ *
+ * Expected values:
+ *  .Dirs   - the directories to create
+ *  .Parent - the directory to create them in [optional; default: /data]
+ */
+-}}
+{{- $parent := or .Parent "/data" -}}
+RUN set -eux; \
+    mkdir -p{{range .Dirs}} {{$parent}}/{{.}}{{end}}; \
+    chown -R 65532:65532{{range .Dirs}} {{$parent}}/{{.}}{{end}};

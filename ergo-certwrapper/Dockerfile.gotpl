@@ -1,23 +1,40 @@
 FROM {{image "golang"}} AS build
 
-ARG CERTTAG="{{github_tag "csmith/certwrapper"}}"
-ARG ERGOTAG="{{github_tag "ergochat/ergo"}}"
+{{/* Clone and build certwrapper */}}
+{{template "clone.gotpl" (map
+    "Repo" "https://github.com/csmith/certwrapper"
+    "Tag" (github_tag "csmith/certwrapper")
+    "Dir" "/go/src/github.com/csmith/certwrapper"
+)}}
+
+{{template "go-build.gotpl" (map
+    "Package" "."
+    "BuildFlags" "-tags lego_httpreq"
+    "Target" "/out/certwrapper"
+    "LicensesPath" "/out/notices/certwrapper"
+)}}
+
+{{/* Clone and build ergo */}}
+{{template "clone.gotpl" (map
+    "Repo" "https://github.com/ergochat/ergo"
+    "Tag" (github_tag "ergochat/ergo")
+    "Dir" "/go/src/github.com/ergochat/ergo"
+)}}
+
+{{template "go-build.gotpl" (map
+    "Package" "."
+    "Target" "/out/ergo"
+    "LicensesPath" "/out/notices/ergo"
+)}}
+
+{{template "mkdirs.gotpl" (map
+    "Parent" "/out"
+    "Dirs" (arr "ircd" "certs" "ircd-bin")
+)}}
+
 
 RUN set -eux; \
-    # Build certwrapper
-    git clone --depth=1 -b $CERTTAG --single-branch https://github.com/csmith/certwrapper /go/src/github.com/csmith/certwrapper; \
-    cd /go/src/github.com/csmith/certwrapper && (\
-        CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags lego_httpreq -o /out/certwrapper .; \
-        go-licenses save ./... --save_path=/out/notices/certwrapper; \
-    ); \
-    # Build ergo
-    git clone --depth=1 -b $ERGOTAG --single-branch https://github.com/ergochat/ergo /go/src/github.com/ergochat/ergo; \
-    cd /go/src/github.com/ergochat/ergo && (\
-      CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o /out/ergo .; \
-      go-licenses save ./... --save_path=/out/notices/ergo; \
-    ); \
-    # Create folders for volumes + copy over languages \
-    install -o 65532 -g 65532 -d /out/ircd /out/certs /out/ircd-bin; \
+    # Copy over languages \
     cp -r /go/src/github.com/ergochat/ergo/languages /out/ircd-bin/languages;
 
 FROM {{image "base"}}

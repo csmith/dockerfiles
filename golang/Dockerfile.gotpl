@@ -1,5 +1,16 @@
 FROM {{image "alpine"}}
 
+{{/* Dependencies we only need for building go (will be removed after) */}}
+{{template "install-apk.gotpl" (map
+    "Packages" (arr "curl" "bash" "go")
+    "Virtual" ".build-deps"
+)}}
+
+{{/* Dependencies to include in the final image */}}
+{{template "install-apk.gotpl" (map
+    "Packages" (arr "gcc" "musl-dev" "git")
+)}}
+
 ARG GOLICENSETAG="{{github_tag "google/go-licenses"}}"
 ARG ARCHIVE_URL="{{golang_url}}"
 ARG ARCHIVE_SUM="{{golang_checksum}}"
@@ -8,11 +19,7 @@ ENV GOPATH=/go
 ENV PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 
 RUN set -eux; \
-    # Dependencies and source for bootstrapping go
-    apk add --no-cache --virtual .build-deps \
-        {{range $key, $value := alpine_packages "curl" "bash" "go" -}}
-        {{$key}}={{$value}} \
-        {{end}}; \
+    # Source for bootstrapping go
     curl -sfLo go.tar.gz $ARCHIVE_URL; \
     echo "$ARCHIVE_SUM *go.tar.gz" | sha256sum -wc -; \
     tar -C /usr/local -xzf go.tar.gz; \
@@ -30,11 +37,6 @@ RUN set -eux; \
     		/usr/local/go/pkg/tool/*/api \
     		/usr/local/go/pkg/tool/*/go_bootstrap \
     		/usr/local/go/src/cmd/dist/dist; \
-    # Dependencies commonly needed for building go apps
-    apk add --no-cache \
-        {{range $key, $value := alpine_packages "gcc" "musl-dev" "git" -}}
-        {{$key}}={{$value}} \
-        {{end}}; \
     # Set up the go path
     mkdir -p $GOPATH/src $GOPATH/bin; \
     chmod -R 777 $GOPATH; \

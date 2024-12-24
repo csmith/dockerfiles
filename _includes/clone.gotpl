@@ -1,0 +1,14 @@
+{{-
+/* Performs a shallow git clone of a repository.
+ *
+ * Expected values:
+ *  .Repo - the repository to be cloned
+ *  .Tag  - the tag (or branch) of the repository to check out
+ *  .Dir  - directory to make the checkout in [optional; default: /work]
+ */
+-}}
+{{- $dir := or .Dir "/work" -}}
+RUN set -eux; \
+    git clone --depth=1 -b {{.Tag}} --single-branch {{.Repo}} {{$dir}}
+
+WORKDIR {{$dir}}

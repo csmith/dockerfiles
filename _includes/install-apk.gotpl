@@ -1,0 +1,16 @@
+{{-
+/* Installs APKs.
+ *
+ * Expected values:
+ *  .Packages - the packages to install
+ *  .Virtual  - virtual package to create [optional]
+ */
+-}}
+RUN set -eux; \
+    apk add --no-cache{{if .Virtual}} --virtual {{.Virtual}}{{end}} \
+{{- range $package := .Packages}}
+    {{- range $key, $value := alpine_packages $package}}
+        {{$key}}={{$value}} \
+    {{- end -}}
+{{end}}
+    ;

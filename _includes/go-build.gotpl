@@ -1,0 +1,14 @@
+{{-
+/* Statically builds a go project in the CWD, and exports licenses.
+ *
+ * Expected values:
+ *  .LinkerFlags  - extra flags to pass to the linker [optional]
+ *  .BuildFlags   - extra flags to pass to the build tool [optional]
+ *  .Package      - the package to build (e.g. ./cmd/myapp)
+ *  .Target       - where to place the output binary [default "out"]
+ *  .LicensesPath - where to save licenses [default "/notices"]
+ */
+-}}
+RUN set -eux; \
+    CGO_ENABLED=0 GOOS=linux go build -a -ldflags "-buildid= -extldflags '-static' {{or .LinkerFlags ""}}" -trimpath {{or .BuildFlags ""}} -o {{or .Target "out"}} {{.Package}}; \
+    go-licenses save ./... --save_path={{or .LicensesPath "/notices"}};

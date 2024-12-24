@@ -1,11 +1,10 @@
 FROM {{image "alpine"}} AS build
 
+{{template "install-apk.gotpl" (map
+    "Packages" (arr "ca-certificates" "rsync")
+)}}
+
 RUN set -eux; \
-    # Sort out our dependencies
-    apk add --no-cache \
-        {{range $key, $value := alpine_packages "ca-certificates" "rsync" -}}
-        {{$key}}={{$value}} \
-        {{end}}; \
     # Set up directories and password file
     mkdir -p /rootfs/etc/ssl/certs /rootfs/tmp /rootfs/home/nonroot /rootfs/root; \
     echo "root:x:0:0:root:/root:/sbin/nologin" >> /rootfs/etc/passwd; \
