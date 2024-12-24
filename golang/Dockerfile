@@ -4,7 +4,7 @@
 FROM reg.c5h.io/alpine@sha256:00ea5027403ae44e92863169270e7fc9df15c993580e62b8b7ef4065faf38dd5
 
 ARG GOLICENSETAG="v1.6.0"
-ARG ARCHIVE_URL="https:/golang.org/dl/go1.23.4.src.tar.gz"
+ARG ARCHIVE_URL="https://golang.org/dl/go1.23.4.src.tar.gz"
 ARG ARCHIVE_SUM="ad345ac421e90814293a9699cca19dd5238251c3f687980bbcae28495b263531"
 
 ENV GOPATH=/go
