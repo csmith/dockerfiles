@@ -4,9 +4,11 @@ FROM {{image "alpine"}} AS build
     "Packages" (arr "git" "build-base" "tzdata" "ca-certificates" "linux-headers" "pcre-dev" "musl-dev" "openssl-dev" "openssl-libs-static" "zlib-dev" "zlib-static")
 )}}
 
+{{$tag := (github_tag "haproxy/haproxy")}}
+
 {{template "clone.gotpl" (map
     "Repo" "https://github.com/haproxy/haproxy"
-    "Tag" (github_tag "haproxy/haproxy")
+    "Tag" $tag
     "Dir" "/src/haproxy"
 )}}
 
@@ -14,7 +16,7 @@ COPY *.patch /src/
 
 RUN set -eux; \
      patch Makefile < /src/buildstatic.patch; \
-     if [ "$TAG" = "v2.5.0" ]; then \
+     if [ "{{$tag}}" = "v2.5.0" ]; then \
        patch -p1 < /src/header-flags.patch; \
      fi; \
      make TARGET=linux-musl USE_OPENSSL=1 USE_PCRE=1; \
