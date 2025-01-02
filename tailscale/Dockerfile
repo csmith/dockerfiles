@@ -3,12 +3,16 @@
 
 FROM reg.c5h.io/golang@sha256:d10c3e0f065951d99d1343cab61716daa8482ce4d7a430c3d590baf79d6c6c01 AS build
 
+RUN set -eux; \
+    git clone --depth=1 -b v1.78.3 --single-branch https://github.com/tailscale/tailscale /src
+
+WORKDIR /src
+
+
 ARG TAG="v1.78.3"
 
 RUN set -eux; \
-    # Check out and build
-    git clone --depth=1 -b $TAG --single-branch https://github.com/tailscale/tailscale /src; \
-    cd /src; \
+    # Build
     CGO_ENABLED=0 GOOS=linux go build -tags=xversion -trimpath -ldflags "-extldflags \"-static\" -buildid= -X tailscale.com/version.Long=$(echo $TAG | tr -d 'v')-t$(git rev-parse HEAD | cut -c1-9) -X tailscale.com/version.Short=$(echo $TAG | tr -d 'v') -X tailscale.com/version.GitCommit=$(git rev-parse HEAD)" ./cmd/tailscale; \
     CGO_ENABLED=0 GOOS=linux go build -tags=xversion -trimpath -ldflags "-extldflags \"-static\" -buildid= -X tailscale.com/version.Long=$(echo $TAG | tr -d 'v')-t$(git rev-parse HEAD | cut -c1-9) -X tailscale.com/version.Short=$(echo $TAG | tr -d 'v') -X tailscale.com/version.GitCommit=$(git rev-parse HEAD)" ./cmd/tailscaled; \
     mkdir -p /out/var/run/tailscale /out/state; \
