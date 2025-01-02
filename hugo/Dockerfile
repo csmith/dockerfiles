@@ -3,9 +3,6 @@
 
 FROM reg.c5h.io/golang@sha256:d10c3e0f065951d99d1343cab61716daa8482ce4d7a430c3d590baf79d6c6c01 AS build
 
-ARG TAG="v0.140.2"
-ARG MAGE="v1.15.0"
-
 RUN set -eux; \
     apk add --no-cache \
         binutils=2.43.1-r1 \
@@ -25,9 +22,18 @@ RUN set -eux; \
         musl-dev=1.2.5-r8 \
         zlib=1.3.1-r2 \
         zstd-libs=1.5.6-r2 \
-        ; \
-    git clone --depth=1 -b $TAG --single-branch https://github.com/gohugoio/hugo /tmp/work; \
-    cd /tmp/work; \
+    ;
+
+
+RUN set -eux; \
+    git clone --depth=1 -b v0.140.2 --single-branch https://github.com/gohugoio/hugo /tmp/work
+
+WORKDIR /tmp/work
+
+
+ARG MAGE="v1.15.0"
+
+RUN set -eux; \
     HUGO_BUILD_TAGS=extended go run github.com/magefile/mage@$MAGE hugo; \
     HUGO_BUILD_TAGS=extended go run github.com/magefile/mage@$MAGE install; \
     mkdir -p /tmp/site;
