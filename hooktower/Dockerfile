@@ -24,7 +24,7 @@ WORKDIR /go/src/github.com/adnanh/webhook
 
 RUN set -eux; \
     CGO_ENABLED=0 GOOS=linux go build -a -ldflags "-buildid= -extldflags '-static' " -trimpath  -o webhook .; \
-    go-licenses save ./... --save_path=/out/notices/wenhook;
+    go-licenses save ./... --save_path=/out/notices/webhook;
 
 
 FROM reg.c5h.io/base@sha256:3d9bc81e06db6829d63423bb674f142586ed9bd48613aab2849ada8f7b431a99
