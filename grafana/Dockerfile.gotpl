@@ -1,16 +1,16 @@
 FROM {{image "golang"}} AS build
 
-ARG TAG="{{github_tag "grafana/grafana"}}"
+{{template "install-apk.gotpl" (map
+    "Packages" (arr "yarn" "build-base" "bash" "curl" "tar")
+)}}
+
+{{template "clone-github.gotpl" (map
+    "Repo" "grafana/grafana"
+    "Dir" "/tmp/grafana"
+)}}
 
 RUN set -eux; \
-    # Dependencies
-    apk add --no-cache \
-        {{range $key, $value := alpine_packages "yarn" "build-base" "bash" "curl" "tar" -}}
-        {{$key}}={{$value}} \
-        {{end}};\
     # Build
-    git clone --depth=1 -b $TAG --single-branch https://github.com/grafana/grafana /tmp/grafana; \
-    cd /tmp/grafana; \
     yarn install; \
     NODE_ENV=production NODE_OPTIONS=--max_old_space_size=6144 yarn build; \
     make build-go; \

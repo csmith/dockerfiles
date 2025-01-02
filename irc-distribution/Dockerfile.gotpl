@@ -1,15 +1,6 @@
-FROM {{image "golang"}} AS build
-
-ARG TAG="{{github_tag "csmith/irc-distribution"}}"
-
-RUN set -eux; \
-    git clone --depth=1 -b $TAG --single-branch https://github.com/csmith/irc-distribution /go/src/github.com/csmith/irc-distribution; \
-    cd /go/src/github.com/csmith/irc-distribution; \
-    CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main ./cmd/distribution; \
-    go-licenses save ./... --save_path=/notices;
-
-FROM {{image "base"}}
-
-COPY --from=build /go/src/github.com/csmith/irc-distribution/main /irc-distribution
-COPY --from=build /notices /notices
-ENTRYPOINT ["/irc-distribution"]
+{{template "complete-go-image.gotpl" (map
+    "Repo" "https://github.com/csmith/irc-distribution"
+    "Tag" (github_tag "csmith/irc-distribution")
+    "Package" "./cmd/distribution"
+    "BinaryName" "irc-distribution"
+)}}

@@ -1,20 +1,12 @@
-FROM {{image "golang"}} AS build
+{{template "complete-go-image.gotpl" (map
+    "Repo" "https://github.com/cutlerydrawer/linx-server"
+    "Tag" (github_tag "cutlerydrawer/linx-server")
+    "Package" "."
+    "BinaryName" "linx-server"
+    "ExtraDirs" (arr "files" "meta")
+)}}
 
-ARG TAG="{{github_tag "csmith/linx-server"}}"
-
-RUN set -eux; \
-    git clone --depth=1 -b $TAG --single-branch https://github.com/csmith/linx-server /go/src/github.com/csmith/linx-server; \
-    cd /go/src/github.com/csmith/linx-server; \
-    CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main .; \
-    go-licenses save ./... --save_path=/notices; \
-    mkdir -p /data/files /data/meta; \
-    chown -R 65532:65532 /data;
-
-FROM {{image "base"}}
-
-COPY --from=build /go/src/github.com/csmith/linx-server/main /linx-server
 COPY --from=build /data /data
-COPY --from=build /notices /notices
 
 VOLUME ["/data/files", "/data/meta"]
 EXPOSE 8080

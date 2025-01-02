@@ -1,11 +1,14 @@
 FROM {{image "golang"}} AS build
 
+{{template "clone-github.gotpl" (map
+    "Project" "tailscale/tailscale"
+    "Dir" "/src"
+)}}
+
 ARG TAG="{{github_tag "tailscale/tailscale"}}"
 
 RUN set -eux; \
-    # Check out and build
-    git clone --depth=1 -b $TAG --single-branch https://github.com/tailscale/tailscale /src; \
-    cd /src; \
+    # Build
     CGO_ENABLED=0 GOOS=linux go build -tags=xversion -trimpath -ldflags "-extldflags \"-static\" -buildid= -X tailscale.com/version.Long=$(echo $TAG | tr -d 'v')-t$(git rev-parse HEAD | cut -c1-9) -X tailscale.com/version.Short=$(echo $TAG | tr -d 'v') -X tailscale.com/version.GitCommit=$(git rev-parse HEAD)" ./cmd/tailscale; \
     CGO_ENABLED=0 GOOS=linux go build -tags=xversion -trimpath -ldflags "-extldflags \"-static\" -buildid= -X tailscale.com/version.Long=$(echo $TAG | tr -d 'v')-t$(git rev-parse HEAD | cut -c1-9) -X tailscale.com/version.Short=$(echo $TAG | tr -d 'v') -X tailscale.com/version.GitCommit=$(git rev-parse HEAD)" ./cmd/tailscaled; \
     mkdir -p /out/var/run/tailscale /out/state; \

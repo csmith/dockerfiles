@@ -1,18 +1,19 @@
 FROM {{image "alpine"}} AS build
 
-ARG TAG="{{github_tag "redis/redis"}}"
+{{template "install-apk.gotpl" (map
+    "Packages" (arr "git" "build-base" "tzdata" "ca-certificates" "linux-headers" "pcre-dev" "musl-dev" "openssl-dev" "openssl-libs-static" "zlib-dev" "zlib-static")
+)}}
+
+{{template "clone-github.gotpl" (map
+    "Project" "redis/redis"
+    "Dir" "/src/redis"
+)}}
 
 ENV LDFLAGS="-static"
 
 COPY redis.conf /redis.conf
 
 RUN set -eux; \
-     apk add --no-cache --virtual .build-deps \
-        {{range $key, $value := alpine_packages "git" "build-base" "tzdata" "ca-certificates" "linux-headers" "pcre-dev" "musl-dev" "openssl-dev" "openssl-libs-static" "zlib-dev" "zlib-static" -}}
-        {{$key}}={{$value}} \
-        {{end}}; \
-     git clone --depth=1 -b $TAG --single-branch https://github.com/redis/redis /src/redis; \
-     cd /src/redis; \
      make distclean; \
      make; \
      mkdir /data; \

@@ -1,16 +1,16 @@
 FROM {{image "golang"}} AS build
 
-ARG TAG="{{github_tag "prometheus/prometheus"}}"
+{{template "install-apk.gotpl" (map
+    "Packages" (arr "npm" "build-base" "bash" "curl" "tar")
+)}}
+
+{{template "clone-github.gotpl" (map
+    "Project" "prometheus/prometheus"
+    "Dir" "/tmp/prometheus"
+)}}
 
 RUN set -eux; \
-    # Dependencies
-    apk add --no-cache \
-        {{range $key, $value := alpine_packages "npm" "build-base" "bash" "curl" "tar" -}}
-        {{$key}}={{$value}} \
-        {{end}};\
     # Build
-    git clone --depth=1 -b $TAG --single-branch https://github.com/prometheus/prometheus /tmp/prometheus; \
-    cd /tmp/prometheus; \
     make build npm_licenses; \
     # Fiddle with folders and prepare licenses
     mkdir -p /tmp/dist/etc/prometheus /tmp/dist/data /tmp/dist/notices; \

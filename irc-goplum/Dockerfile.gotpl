@@ -1,15 +1,6 @@
-FROM {{image "golang"}} AS build
-
-ARG TAG="{{github_tag "greboid/irc-goplum"}}"
-
-RUN set -eux; \
-    git clone --depth=1 -b $TAG --single-branch https://github.com/greboid/irc-goplum /go/src/github.com/greboid/irc-goplum; \
-    cd /go/src/github.com/greboid/irc-goplum; \
-    CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main ./cmd/goplum; \
-    go-licenses save ./... --save_path=/notices;
-
-FROM {{image "base"}}
-
-COPY --from=build /go/src/github.com/greboid/irc-goplum/main /irc-goplum
-COPY --from=build /notices /notices
-ENTRYPOINT ["/irc-goplum"]
+{{template "complete-go-image.gotpl" (map
+    "Repo" "https://github.com/greboid/irc-goplum"
+    "Tag" (github_tag "greboid/irc-goplum")
+    "Package" "./cmd/goplum"
+    "BinaryName" "irc-goplum"
+)}}

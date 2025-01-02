@@ -1,9 +1,8 @@
 FROM {{image "golang"}} AS build
 
 {{/* Clone and build certwrapper */}}
-{{template "clone.gotpl" (map
-    "Repo" "https://github.com/csmith/certwrapper"
-    "Tag" (github_tag "csmith/certwrapper")
+{{template "clone-github.gotpl" (map
+    "Project" "csmith/certwrapper"
     "Dir" "/go/src/github.com/csmith/certwrapper"
 )}}
 
@@ -15,9 +14,8 @@ FROM {{image "golang"}} AS build
 )}}
 
 {{/* Clone and build ergo */}}
-{{template "clone.gotpl" (map
-    "Repo" "https://github.com/ergochat/ergo"
-    "Tag" (github_tag "ergochat/ergo")
+{{template "clone-github.gotpl" (map
+    "Project" "ergochat/ergo"
     "Dir" "/go/src/github.com/ergochat/ergo"
 )}}
 

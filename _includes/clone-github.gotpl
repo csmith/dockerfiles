@@ -1,0 +1,13 @@
+{{-
+/* Performs a shallow git clone of the latest tag from a GitHub repository.
+ *
+ * Expected values:
+ *  .Project - the repository to be cloned
+ *  .Dir     - directory to make the checkout in [optional; default: /work]
+ */
+-}}
+{{- $dir := or .Dir "/work" -}}
+RUN set -eux; \
+    git clone --depth=1 -b {{github_tag .Project}} --single-branch https://github.com/{{.Project}} {{$dir}}
+
+WORKDIR {{$dir}}

@@ -1,23 +1,27 @@
 FROM {{image "golang"}} AS build
 
-ARG SOJUTAG="{{github_tag "emersion/soju"}}"
-ARG CERTTAG="{{github_tag "csmith/certwrapper"}}"
+{{template "clone-github.gotpl" (map
+    "Project" "csmith/certwrapper"
+    "Dir" "/go/src/github.com/csmith/certwrapper"
+)}}
+
+{{template "go-build.gotpl" (map
+    "Package" "."
+    "BuildFlags" "-tags lego_httpreq"
+    "Target" "/out/certwrapper"
+    "LicensesPath" "/out/notices/certwrapper"
+)}}
+
+{{template "clone-github.gotpl" (map
+    "Project" "emersion/soju"
+    "Dir" "/go/src/github.com/emersion/soju"
+)}}
 
 RUN set -eux; \
-    # Build certwrapper
-    git clone --depth=1 -b $CERTTAG --single-branch https://github.com/csmith/certwrapper /go/src/github.com/csmith/certwrapper; \
-    cd /go/src/github.com/csmith/certwrapper && (\
-        CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags lego_httpreq -o /out/certwrapper .; \
-        go-licenses save ./... --save_path=/notices; \
-    ); \
-    # Build soju
-    git clone --depth=1 -b $SOJUTAG --single-branch https://github.com/emersion/soju /go/src/github.com/emersion/soju; \
-    cd /go/src/github.com/emersion/soju && (\
-      GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags=moderncsqlite -o /out/soju ./cmd/soju; \
-      GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags=moderncsqlite -o /out/sojuctl ./cmd/sojuctl; \
-      # TODO: find a license tool that doesn't hardcode Google's opinion on "forbidden" licenses :/
-      # go-licenses save ./... --save_path=/notices; \
-    ); \
+    GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags=moderncsqlite -o /out/soju ./cmd/soju; \
+    GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags=moderncsqlite -o /out/sojuctl ./cmd/sojuctl; \
+    # TODO: find a license tool that doesn't hardcode Google's opinion on "forbidden" licenses :/
+    # go-licenses save ./... --save_path=/notices; \
     # Create folders for volumes
     install -o 65532 -g 65532 -d /out/data /out/certs;
 
