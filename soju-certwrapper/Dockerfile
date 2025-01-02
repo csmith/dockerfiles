@@ -3,24 +3,28 @@
 
 FROM reg.c5h.io/golang@sha256:d10c3e0f065951d99d1343cab61716daa8482ce4d7a430c3d590baf79d6c6c01 AS build
 
-ARG SOJUTAG="v0.8.2"
-ARG CERTTAG="v4.2.0"
+RUN set -eux; \
+    git clone --depth=1 -b v4.2.0 --single-branch https://github.com/csmith/certwrapper /go/src/github.com/csmith/certwrapper
+
+WORKDIR /go/src/github.com/csmith/certwrapper
+
 
 RUN set -eux; \
-    # Build certwrapper
-    git clone --depth=1 -b $CERTTAG --single-branch https://github.com/csmith/certwrapper /go/src/github.com/csmith/certwrapper; \
-    cd /go/src/github.com/csmith/certwrapper && (\
-        CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags lego_httpreq -o /out/certwrapper .; \
-        go-licenses save ./... --save_path=/notices; \
-    ); \
-    # Build soju
-    git clone --depth=1 -b $SOJUTAG --single-branch https://github.com/emersion/soju /go/src/github.com/emersion/soju; \
-    cd /go/src/github.com/emersion/soju && (\
-      GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags=moderncsqlite -o /out/soju ./cmd/soju; \
-      GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags=moderncsqlite -o /out/sojuctl ./cmd/sojuctl; \
-      # TODO: find a license tool that doesn't hardcode Google's opinion on "forbidden" licenses :/
-      # go-licenses save ./... --save_path=/notices; \
-    ); \
+    CGO_ENABLED=0 GOOS=linux go build -a -ldflags "-buildid= -extldflags '-static' " -trimpath -tags lego_httpreq -o /out/certwrapper .; \
+    go-licenses save ./... --save_path=/out/notices/certwrapper;
+
+
+RUN set -eux; \
+    git clone --depth=1 -b v0.8.2 --single-branch https://github.com/emersion/soju /go/src/github.com/emersion/soju
+
+WORKDIR /go/src/github.com/emersion/soju
+
+
+RUN set -eux; \
+    GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags=moderncsqlite -o /out/soju ./cmd/soju; \
+    GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags=moderncsqlite -o /out/sojuctl ./cmd/sojuctl; \
+    # TODO: find a license tool that doesn't hardcode Google's opinion on "forbidden" licenses :/
+    # go-licenses save ./... --save_path=/notices; \
     # Create folders for volumes
     install -o 65532 -g 65532 -d /out/data /out/certs;
 
