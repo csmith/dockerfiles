@@ -21,7 +21,7 @@ FROM {{image "golang"}} AS build
 {{template "go-build.gotpl" (map
     "Package" "."
     "Target" "webhook"
-    "LicensesPath" "/out/notices/wenhook"
+    "LicensesPath" "/out/notices/webhook"
 )}}
 
 FROM {{image "base"}}
