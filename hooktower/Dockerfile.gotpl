@@ -28,6 +28,6 @@ FROM {{image "base"}}
 
 COPY --from=build /go/src/github.com/containrrr/watchtower/watchtower /watchtower
 COPY --from=build /go/src/github.com/adnanh/webhook/webhook /webhook
-COPY --from=build /notices /notices
+COPY --from=build /out/notices /notices
 
 ENTRYPOINT ["/webhook"]
