@@ -1,13 +1,13 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/base-glibc/Dockerfile.gotpl
-# BOM: {"apk:acl-libs":"2.3.2-r1","apk:busybox":"1.37.0-r9","apk:busybox-binsh":"1.37.0-r9","apk:ca-certificates":"20241121-r0","apk:gcompat":"1.1.0-r4","apk:libcrypto3":"3.3.2-r4","apk:libgcc":"14.2.0-r4","apk:libstdc++":"14.2.0-r4","apk:libucontext":"1.3.2-r0","apk:libxxhash":"0.8.2-r2","apk:lz4-libs":"1.10.0-r0","apk:musl":"1.2.5-r8","apk:musl-obstack":"1.2.3-r2","apk:popt":"1.19-r4","apk:rsync":"3.3.0-r1","apk:tzdata":"2024b-r1","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.6-r2","image:alpine":"e8be2c2c2af5d9395797097b16640a10a133788db99feed559291c39ded75bfc"}
+# BOM: {"apk:acl-libs":"2.3.2-r1","apk:busybox":"1.37.0-r9","apk:busybox-binsh":"1.37.0-r9","apk:ca-certificates":"20241121-r1","apk:gcompat":"1.1.0-r4","apk:libcrypto3":"3.3.2-r4","apk:libgcc":"14.2.0-r4","apk:libstdc++":"14.2.0-r4","apk:libucontext":"1.3.2-r0","apk:libxxhash":"0.8.2-r2","apk:lz4-libs":"1.10.0-r0","apk:musl":"1.2.5-r8","apk:musl-obstack":"1.2.3-r2","apk:popt":"1.19-r4","apk:rsync":"3.3.0-r1","apk:tzdata":"2024b-r1","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.6-r2","image:alpine":"0be8812dc5bc37867ac650dde5331475f4fabd765e7f2f37f3166338e36cf6de"}
 
-FROM reg.c5h.io/alpine@sha256:e8be2c2c2af5d9395797097b16640a10a133788db99feed559291c39ded75bfc AS build
+FROM reg.c5h.io/alpine@sha256:0be8812dc5bc37867ac650dde5331475f4fabd765e7f2f37f3166338e36cf6de AS build
 
 RUN set -eux; \
     apk add --no-cache \
         busybox=1.37.0-r9 \
         busybox-binsh=1.37.0-r9 \
-        ca-certificates=20241121-r0 \
+        ca-certificates=20241121-r1 \
         libcrypto3=3.3.2-r4 \
         musl=1.2.5-r8 \
         acl-libs=2.3.2-r1 \
