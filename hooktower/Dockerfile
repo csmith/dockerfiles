@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hooktower/Dockerfile.gotpl
-# BOM: {"github:adnanh/webhook":"2.8.2","github:containrrr/watchtower":"v1.7.1","image:base":"a326d0e1775b6525bf9968a89afbd9b957c15d92f33afc33bad4c11e38adb46b","image:golang":"8dec622c0522882adf3ed0d9e6bd7f0fe66ce0153729aec362f9a5d091e973e2"}
+# BOM: {"github:adnanh/webhook":"2.8.2","github:containrrr/watchtower":"v1.7.1","image:base":"27b64203bd464e43e2314afe482fa80c5c8a3258cada24e4c97b40ab9be1bbd4","image:golang":"ee2aa9d15150ad6beb671f0febc38ef258eac10e247c32db8f9c12ea60eabf5e"}
 
-FROM reg.c5h.io/golang@sha256:8dec622c0522882adf3ed0d9e6bd7f0fe66ce0153729aec362f9a5d091e973e2 AS build
+FROM reg.c5h.io/golang@sha256:ee2aa9d15150ad6beb671f0febc38ef258eac10e247c32db8f9c12ea60eabf5e AS build
 
 
 RUN set -eux; \
@@ -27,7 +27,7 @@ RUN set -eux; \
     go-licenses save ./... --save_path=/out/notices/webhook;
 
 
-FROM reg.c5h.io/base@sha256:a326d0e1775b6525bf9968a89afbd9b957c15d92f33afc33bad4c11e38adb46b
+FROM reg.c5h.io/base@sha256:27b64203bd464e43e2314afe482fa80c5c8a3258cada24e4c97b40ab9be1bbd4
 
 COPY --from=build /go/src/github.com/containrrr/watchtower/watchtower /watchtower
 COPY --from=build /go/src/github.com/adnanh/webhook/webhook /webhook
