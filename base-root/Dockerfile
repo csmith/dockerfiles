@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/base-root/Dockerfile.gotpl
-# BOM: {"apk:acl-libs":"2.3.2-r1","apk:busybox":"1.37.0-r12","apk:busybox-binsh":"1.37.0-r12","apk:ca-certificates":"20241121-r1","apk:libcrypto3":"3.3.3-r0","apk:libxxhash":"0.8.2-r2","apk:lz4-libs":"1.10.0-r0","apk:musl":"1.2.5-r8","apk:popt":"1.19-r4","apk:rsync":"3.4.0-r0","apk:tzdata":"2024b-r1","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.6-r2","image:alpine":"0be8812dc5bc37867ac650dde5331475f4fabd765e7f2f37f3166338e36cf6de"}
+# BOM: {"apk:acl-libs":"2.3.2-r1","apk:busybox":"1.37.0-r12","apk:busybox-binsh":"1.37.0-r12","apk:ca-certificates":"20241121-r1","apk:libcrypto3":"3.3.3-r0","apk:libxxhash":"0.8.2-r2","apk:lz4-libs":"1.10.0-r0","apk:musl":"1.2.5-r9","apk:popt":"1.19-r4","apk:rsync":"3.4.0-r0","apk:tzdata":"2025a-r0","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.6-r2","image:alpine":"9dd02454e2bd77b983bf4db2e9ca788ce76b28aaafa607a1dab7097f616223a9"}
 
-FROM reg.c5h.io/alpine@sha256:0be8812dc5bc37867ac650dde5331475f4fabd765e7f2f37f3166338e36cf6de AS build
+FROM reg.c5h.io/alpine@sha256:9dd02454e2bd77b983bf4db2e9ca788ce76b28aaafa607a1dab7097f616223a9 AS build
 
 RUN set -eux; \
     apk add --no-cache \
@@ -9,11 +9,11 @@ RUN set -eux; \
         busybox-binsh=1.37.0-r12 \
         ca-certificates=20241121-r1 \
         libcrypto3=3.3.3-r0 \
-        musl=1.2.5-r8 \
+        musl=1.2.5-r9 \
         acl-libs=2.3.2-r1 \
         libxxhash=0.8.2-r2 \
         lz4-libs=1.10.0-r0 \
-        musl=1.2.5-r8 \
+        musl=1.2.5-r9 \
         popt=1.19-r4 \
         rsync=3.4.0-r0 \
         zlib=1.3.1-r2 \
@@ -29,9 +29,9 @@ RUN set -eux; \
     chown 65532:65532 /rootfs/home/nonroot; \
     chmod 01777 /tmp; \
     # Copy our data
-    apk add --no-cache musl=1.2.5-r8; \
+    apk add --no-cache musl=1.2.5-r9; \
     apk info -qL musl | rsync -aq --files-from=- / /rootfs/; \
-    apk add --no-cache tzdata=2024b-r1; \
+    apk add --no-cache tzdata=2025a-r0; \
     apk info -qL tzdata | rsync -aq --files-from=- / /rootfs/; \
     # Generate the CA certificates file and copy the result
     /usr/sbin/update-ca-certificates; \
