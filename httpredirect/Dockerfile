@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/httpredirect/Dockerfile.gotpl
-# BOM: {"github:greboid/httpredirect":"v1.0.3","image:base":"524e2a72907aa209ab61ecec7762951bd727b2c31592c5d3c1b2acce5f33c83f","image:golang":"33fd971bf44ba5b43730d4ee00ea6b76a8c76fd7e2d48ef96988bd2ce8277cfc"}
+# BOM: {"github:greboid/httpredirect":"v1.0.3","image:base":"524e2a72907aa209ab61ecec7762951bd727b2c31592c5d3c1b2acce5f33c83f","image:golang":"1960f6b4b2b1e2a683843f94da41dec035948604b17c7baa08a91c39c373e636"}
 
-FROM reg.c5h.io/golang@sha256:33fd971bf44ba5b43730d4ee00ea6b76a8c76fd7e2d48ef96988bd2ce8277cfc AS build
+FROM reg.c5h.io/golang@sha256:1960f6b4b2b1e2a683843f94da41dec035948604b17c7baa08a91c39c373e636 AS build
 
 RUN set -eux; \
     git clone --depth=1 -b v1.0.3 --single-branch https://github.com/greboid/httpredirect /work
