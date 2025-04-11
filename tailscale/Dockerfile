@@ -1,15 +1,15 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/tailscale/Dockerfile.gotpl
-# BOM: {"github:tailscale/tailscale":"v1.82.0","image:base":"4fea2559a3c315f01c6241c689da902344f4694dbdbdab4f5c0a1d24a8a78363","image:golang":"8db722d311cd3d21ae8cf75d8889dae3f4c17c8911456b2c8bd375bf716a6588"}
+# BOM: {"github:tailscale/tailscale":"v1.82.2","image:base":"4fea2559a3c315f01c6241c689da902344f4694dbdbdab4f5c0a1d24a8a78363","image:golang":"8db722d311cd3d21ae8cf75d8889dae3f4c17c8911456b2c8bd375bf716a6588"}
 
 FROM reg.c5h.io/golang@sha256:8db722d311cd3d21ae8cf75d8889dae3f4c17c8911456b2c8bd375bf716a6588 AS build
 
 RUN set -eux; \
-    git clone --depth=1 -b v1.82.0 --single-branch https://github.com/tailscale/tailscale /src
+    git clone --depth=1 -b v1.82.2 --single-branch https://github.com/tailscale/tailscale /src
 
 WORKDIR /src
 
 
-ARG TAG="v1.82.0"
+ARG TAG="v1.82.2"
 
 RUN set -eux; \
     # Build
