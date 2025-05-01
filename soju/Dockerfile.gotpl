@@ -1,0 +1,21 @@
+FROM {{image "golang"}} AS build
+
+{{template "clone-github.gotpl" (map
+    "Project" "emersion/soju"
+    "Dir" "/go/src/github.com/emersion/soju"
+)}}
+
+RUN set -eux; \
+    GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags=moderncsqlite -o /out/soju ./cmd/soju; \
+    GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -tags=moderncsqlite -o /out/sojuctl ./cmd/sojuctl; \
+    # TODO: find a license tool that doesn't hardcode Google's opinion on "forbidden" licenses :/
+    # go-licenses save ./... --save_path=/notices; \
+    # Create folders for volumes
+    install -o 65532 -g 65532 -d /out/data;
+
+FROM {{image "base"}}
+
+COPY --from=build /out/ /
+VOLUME ["/data"]
+
+ENTRYPOINT ["/soju"]
