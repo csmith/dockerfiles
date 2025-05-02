@@ -17,11 +17,11 @@ jobs:
     runs-on: ubuntu-latest
 {% if target.needed.size > 0 %}
     needs:
-{%- for dep in target.needed -%}
-        - {{ dep }}
-{%- endfor %}
-{% endif %}
-{%- raw -%}
+{%- for dep in target.needed %}
+      - {{ dep }}
+{%- endfor -%}
+{%- endif -%}
+{%- raw %}
     steps:
       - name: Checkout source
         uses: actions/checkout@v3

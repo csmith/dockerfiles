@@ -15,8 +15,6 @@ jobs:
   alpine:
     name: Build alpine
     runs-on: ubuntu-latest
-
-
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -51,148 +49,12 @@ jobs:
             git pull --rebase
           done
 
-  base-glibc:
-    name: Build base-glibc
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - alpine
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project base-glibc . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  base-root:
-    name: Build base-root
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - alpine
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project base-root . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  golang:
-    name: Build golang
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - alpine
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project golang . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
   postgres-13:
     name: Build postgres-13
     runs-on: ubuntu-latest
 
     needs:
-
-        - alpine
-
-
-
+      - alpine
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -227,16 +89,12 @@ jobs:
             git pull --rebase
           done
 
-  base:
-    name: Build base
+  golang:
+    name: Build golang
     runs-on: ubuntu-latest
 
     needs:
-
-        - base-root
-
-
-
+      - alpine
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -259,7 +117,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --project base . .
+          contempt --commit --build --push --project golang . .
           retries=0
           until git push
           do
@@ -271,18 +129,12 @@ jobs:
             git pull --rebase
           done
 
-  hugo:
-    name: Build hugo
+  base-root:
+    name: Build base-root
     runs-on: ubuntu-latest
 
     needs:
-
-        - golang
-
-        - base-glibc
-
-
-
+      - alpine
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -305,7 +157,47 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --project hugo . .
+          contempt --commit --build --push --project base-root . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  base-glibc:
+    name: Build base-glibc
+    runs-on: ubuntu-latest
+
+    needs:
+      - alpine
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project base-glibc . .
           retries=0
           until git push
           do
@@ -322,13 +214,8 @@ jobs:
     runs-on: ubuntu-latest
 
     needs:
-
-        - golang
-
-        - alpine
-
-
-
+      - golang
+      - alpine
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -363,18 +250,13 @@ jobs:
             git pull --rebase
           done
 
-  distribution:
-    name: Build distribution
+  hugo:
+    name: Build hugo
     runs-on: ubuntu-latest
 
     needs:
-
-        - golang
-
-        - base
-
-
-
+      - golang
+      - base-glibc
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -397,7 +279,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --project distribution . .
+          contempt --commit --build --push --project hugo . .
           retries=0
           until git push
           do
@@ -409,18 +291,12 @@ jobs:
             git pull --rebase
           done
 
-  dotege:
-    name: Build dotege
+  base:
+    name: Build base
     runs-on: ubuntu-latest
 
     needs:
-
-        - golang
-
-        - base
-
-
-
+      - base-root
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -443,743 +319,7 @@ jobs:
           git config user.email "${{ secrets.GIT_EMAIL }}"
           buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
 
-          contempt --commit --build --push --project dotege . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  ergo-certwrapper:
-    name: Build ergo-certwrapper
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - golang
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project ergo-certwrapper . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  grafana:
-    name: Build grafana
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - golang
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project grafana . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  haproxy:
-    name: Build haproxy
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - alpine
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project haproxy . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  hooktower:
-    name: Build hooktower
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - golang
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project hooktower . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  httpredirect:
-    name: Build httpredirect
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - golang
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project httpredirect . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  irc-bot:
-    name: Build irc-bot
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - golang
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project irc-bot . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  irc-distribution:
-    name: Build irc-distribution
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - golang
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project irc-distribution . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  irc-github:
-    name: Build irc-github
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - golang
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project irc-github . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  irc-goplum:
-    name: Build irc-goplum
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - golang
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project irc-goplum . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  irc-news:
-    name: Build irc-news
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - golang
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project irc-news . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  irc-notifier:
-    name: Build irc-notifier
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - golang
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project irc-notifier . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  linx-server:
-    name: Build linx-server
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - golang
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project linx-server . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  miniflux:
-    name: Build miniflux
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - golang
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project miniflux . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  prometheus:
-    name: Build prometheus
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - golang
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project prometheus . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  redis:
-    name: Build redis
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - alpine
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project redis . .
-          retries=0
-          until git push
-          do
-            if (( ++retries > 5 )); then
-                echo "Failed to push after 5 retries"
-                exit 1
-            fi
-            echo "Git push failed, pulling and retrying"
-            git pull --rebase
-          done
-
-  soju-certwrapper:
-    name: Build soju-certwrapper
-    runs-on: ubuntu-latest
-
-    needs:
-
-        - golang
-
-        - base
-
-
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: stable
-          cache: false
-      - name: Update
-        env:
-          BUILDAH_ISOLATION: chroot
-          REGISTRY: ${{ secrets.REGISTRY }}
-          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
-          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
-          GONOPROXY: github.com/*
-        run:  |
-          go install github.com/csmith/contempt/cmd/contempt@latest
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
-
-          contempt --commit --build --push --project soju-certwrapper . .
+          contempt --commit --build --push --project base . .
           retries=0
           until git push
           do
@@ -1196,13 +336,8 @@ jobs:
     runs-on: ubuntu-latest
 
     needs:
-
-        - golang
-
-        - base
-
-
-
+      - base
+      - golang
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -1237,18 +372,792 @@ jobs:
             git pull --rebase
           done
 
+  soju-certwrapper:
+    name: Build soju-certwrapper
+    runs-on: ubuntu-latest
+
+    needs:
+      - golang
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project soju-certwrapper . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  soju:
+    name: Build soju
+    runs-on: ubuntu-latest
+
+    needs:
+      - base
+      - golang
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project soju . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  redis:
+    name: Build redis
+    runs-on: ubuntu-latest
+
+    needs:
+      - alpine
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project redis . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  prometheus:
+    name: Build prometheus
+    runs-on: ubuntu-latest
+
+    needs:
+      - golang
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project prometheus . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  miniflux:
+    name: Build miniflux
+    runs-on: ubuntu-latest
+
+    needs:
+      - golang
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project miniflux . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  linx-server:
+    name: Build linx-server
+    runs-on: ubuntu-latest
+
+    needs:
+      - golang
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project linx-server . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  irc-notifier:
+    name: Build irc-notifier
+    runs-on: ubuntu-latest
+
+    needs:
+      - golang
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project irc-notifier . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  irc-news:
+    name: Build irc-news
+    runs-on: ubuntu-latest
+
+    needs:
+      - base
+      - golang
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project irc-news . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  irc-goplum:
+    name: Build irc-goplum
+    runs-on: ubuntu-latest
+
+    needs:
+      - base
+      - golang
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project irc-goplum . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  irc-github:
+    name: Build irc-github
+    runs-on: ubuntu-latest
+
+    needs:
+      - golang
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project irc-github . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  irc-distribution:
+    name: Build irc-distribution
+    runs-on: ubuntu-latest
+
+    needs:
+      - golang
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project irc-distribution . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  irc-bot:
+    name: Build irc-bot
+    runs-on: ubuntu-latest
+
+    needs:
+      - golang
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project irc-bot . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  httpredirect:
+    name: Build httpredirect
+    runs-on: ubuntu-latest
+
+    needs:
+      - golang
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project httpredirect . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  hooktower:
+    name: Build hooktower
+    runs-on: ubuntu-latest
+
+    needs:
+      - golang
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project hooktower . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  haproxy:
+    name: Build haproxy
+    runs-on: ubuntu-latest
+
+    needs:
+      - alpine
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project haproxy . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  grafana:
+    name: Build grafana
+    runs-on: ubuntu-latest
+
+    needs:
+      - golang
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project grafana . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  ergo-certwrapper:
+    name: Build ergo-certwrapper
+    runs-on: ubuntu-latest
+
+    needs:
+      - golang
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project ergo-certwrapper . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  dotege:
+    name: Build dotege
+    runs-on: ubuntu-latest
+
+    needs:
+      - golang
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project dotege . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
+  distribution:
+    name: Build distribution
+    runs-on: ubuntu-latest
+
+    needs:
+      - golang
+      - base
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: stable
+          cache: false
+      - name: Update
+        env:
+          BUILDAH_ISOLATION: chroot
+          REGISTRY: ${{ secrets.REGISTRY }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASS: ${{ secrets.REGISTRY_PASS }}
+          SOURCE_LINK: https://github.com/csmith/dockerfiles/blob/master/
+          GONOPROXY: github.com/*
+        run:  |
+          go install github.com/csmith/contempt/cmd/contempt@latest
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          buildah login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" $REGISTRY
+
+          contempt --commit --build --push --project distribution . .
+          retries=0
+          until git push
+          do
+            if (( ++retries > 5 )); then
+                echo "Failed to push after 5 retries"
+                exit 1
+            fi
+            echo "Git push failed, pulling and retrying"
+            git pull --rebase
+          done
+
   docker-socket-proxy:
     name: Build docker-socket-proxy
     runs-on: ubuntu-latest
 
     needs:
-
-        - haproxy
-
-        - base-root
-
-
-
+      - haproxy
+      - base-root
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
