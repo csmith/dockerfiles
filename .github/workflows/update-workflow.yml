@@ -1,0 +1,36 @@
+on:
+  workflow_dispatch:
+  push:
+    paths-ignore:
+      - '.github/workflows/update.yml'
+name: Update Workflow
+jobs:
+  update-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+          cache: false
+      - name: Install contempt orchestrator
+        run: go install github.com/csmith/contempt/cmd/orchestrator@latest
+      - name: Run contempt orchestrator
+        env:
+          REGISTRY: ${{ secrets.REGISTRY }}
+          TEMPLATE: .github/workflows/update.yml.tpl
+          OUTPUT: .github/workflows/update.yml
+        run: orchestrator .
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update workflow"
+          commit_user_name: ${{ secrets.GIT_USERNAME }}
+          commit_user_email: ${{ secrets.GIT_EMAIL }}
+          file_pattern: '.github/workflows/update.yml'
+      - name: Push changes
+        uses: cutlerydrawer/action-git-try-push@v2
