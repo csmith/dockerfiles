@@ -214,8 +214,8 @@ jobs:
     runs-on: ubuntu-latest
 
     needs:
-      - alpine
       - golang
+      - alpine
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -377,8 +377,8 @@ jobs:
     runs-on: ubuntu-latest
 
     needs:
-      - base
       - golang
+      - base
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -746,8 +746,8 @@ jobs:
     runs-on: ubuntu-latest
 
     needs:
-      - base
       - golang
+      - base
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -910,8 +910,8 @@ jobs:
     runs-on: ubuntu-latest
 
     needs:
-      - base
       - golang
+      - base
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -1033,8 +1033,8 @@ jobs:
     runs-on: ubuntu-latest
 
     needs:
-      - base
       - golang
+      - base
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
