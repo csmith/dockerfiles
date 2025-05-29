@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/docker-socket-proxy/Dockerfile.gotpl
-# BOM: {"image:base-root":"46984a720077bee7e09f32cceb5d1d6041cd524e4b7329a557abc293f79c3429","image:haproxy":"23a78ed5a3dc5808528ed40fd05c071c2ced808587604daa703c4d52d4e3c45f"}
+# BOM: {"image:base-root":"46984a720077bee7e09f32cceb5d1d6041cd524e4b7329a557abc293f79c3429","image:haproxy":"d7af7efa842327a925e3360284b30b8bfeeba24c7e26bfe68b4af356b2904598"}
 
-FROM reg.c5h.io/haproxy@sha256:23a78ed5a3dc5808528ed40fd05c071c2ced808587604daa703c4d52d4e3c45f AS haproxy
+FROM reg.c5h.io/haproxy@sha256:d7af7efa842327a925e3360284b30b8bfeeba24c7e26bfe68b4af356b2904598 AS haproxy
 
 FROM reg.c5h.io/base-root@sha256:46984a720077bee7e09f32cceb5d1d6041cd524e4b7329a557abc293f79c3429
 
