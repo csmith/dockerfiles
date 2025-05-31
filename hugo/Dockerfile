@@ -1,27 +1,27 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hugo/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.43.1-r2","apk:g++":"14.2.0-r4","apk:gcc":"14.2.0-r4","apk:gmp":"6.3.0-r2","apk:isl25":"0.25-r2","apk:jansson":"2.14-r4","apk:libatomic":"14.2.0-r4","apk:libgcc":"14.2.0-r4","apk:libgomp":"14.2.0-r4","apk:libstdc++":"14.2.0-r4","apk:libstdc++-dev":"14.2.0-r4","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1-r0","apk:musl":"1.2.5-r9","apk:musl-dev":"1.2.5-r9","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.6-r2","github:gohugoio/hugo":"v0.147.6","github:magefile/mage":"v1.15.0","image:base-glibc":"e4b0524a092d633e98dbc0b37a0654f8ae03f5801f7d396f9332cd1872d42fc5","image:golang":"fa6eaa2a62cb4e42f12c8989eaea342dfa683de02864fa0d3fab81d4b63e14ea"}
+# BOM: {"apk:binutils":"2.44-r0","apk:g++":"14.2.0-r6","apk:gcc":"14.2.0-r6","apk:gmp":"6.3.0-r3","apk:isl25":"0.25-r2","apk:jansson":"2.14.1-r0","apk:libatomic":"14.2.0-r6","apk:libgcc":"14.2.0-r6","apk:libgomp":"14.2.0-r6","apk:libstdc++":"14.2.0-r6","apk:libstdc++-dev":"14.2.0-r6","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1_p1-r0","apk:musl":"1.2.5-r10","apk:musl-dev":"1.2.5-r10","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.7-r0","github:gohugoio/hugo":"v0.147.6","github:magefile/mage":"v1.15.0","image:base-glibc":"484bc184e410fdecf66993b2b1c1850aa7fd2ebe18e8551d04dd23b0aab37b55","image:golang":"957ab837338281b3a1c4d8209e79e175786e4d4085055e80050de8f00a9218a2"}
 
-FROM reg.c5h.io/golang@sha256:fa6eaa2a62cb4e42f12c8989eaea342dfa683de02864fa0d3fab81d4b63e14ea AS build
+FROM reg.c5h.io/golang@sha256:957ab837338281b3a1c4d8209e79e175786e4d4085055e80050de8f00a9218a2 AS build
 
 RUN set -eux; \
     apk add --no-cache \
-        binutils=2.43.1-r2 \
-        g++=14.2.0-r4 \
-        gcc=14.2.0-r4 \
-        gmp=6.3.0-r2 \
+        binutils=2.44-r0 \
+        g++=14.2.0-r6 \
+        gcc=14.2.0-r6 \
+        gmp=6.3.0-r3 \
         isl25=0.25-r2 \
-        jansson=2.14-r4 \
-        libatomic=14.2.0-r4 \
-        libgcc=14.2.0-r4 \
-        libgomp=14.2.0-r4 \
-        libstdc++=14.2.0-r4 \
-        libstdc++-dev=14.2.0-r4 \
+        jansson=2.14.1-r0 \
+        libatomic=14.2.0-r6 \
+        libgcc=14.2.0-r6 \
+        libgomp=14.2.0-r6 \
+        libstdc++=14.2.0-r6 \
+        libstdc++-dev=14.2.0-r6 \
         mpc1=1.3.1-r1 \
-        mpfr4=4.2.1-r0 \
-        musl=1.2.5-r9 \
-        musl-dev=1.2.5-r9 \
+        mpfr4=4.2.1_p1-r0 \
+        musl=1.2.5-r10 \
+        musl-dev=1.2.5-r10 \
         zlib=1.3.1-r2 \
-        zstd-libs=1.5.6-r2 \
+        zstd-libs=1.5.7-r0 \
     ;
 
 
@@ -38,7 +38,7 @@ RUN set -eux; \
     HUGO_BUILD_TAGS=extended go run github.com/magefile/mage@$MAGE install; \
     mkdir -p /tmp/site;
 
-FROM reg.c5h.io/base-glibc@sha256:e4b0524a092d633e98dbc0b37a0654f8ae03f5801f7d396f9332cd1872d42fc5
+FROM reg.c5h.io/base-glibc@sha256:484bc184e410fdecf66993b2b1c1850aa7fd2ebe18e8551d04dd23b0aab37b55
 
 COPY --from=build /go/bin/hugo /usr/bin/hugo
 COPY --from=build --chown=65532:65532 /tmp/site /
