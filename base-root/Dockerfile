@@ -1,23 +1,23 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/base-root/Dockerfile.gotpl
-# BOM: {"apk:acl-libs":"2.3.2-r1","apk:busybox":"1.37.0-r12","apk:busybox-binsh":"1.37.0-r12","apk:ca-certificates":"20241121-r1","apk:libcrypto3":"3.3.3-r0","apk:libxxhash":"0.8.2-r2","apk:lz4-libs":"1.10.0-r0","apk:musl":"1.2.5-r9","apk:popt":"1.19-r4","apk:rsync":"3.4.0-r0","apk:tzdata":"2025b-r0","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.6-r2","image:alpine":"9dd02454e2bd77b983bf4db2e9ca788ce76b28aaafa607a1dab7097f616223a9"}
+# BOM: {"apk:acl-libs":"2.3.2-r1","apk:busybox":"1.37.0-r18","apk:busybox-binsh":"1.37.0-r18","apk:ca-certificates":"20241121-r2","apk:libcrypto3":"3.5.0-r0","apk:libxxhash":"0.8.3-r0","apk:lz4-libs":"1.10.0-r0","apk:musl":"1.2.5-r10","apk:popt":"1.19-r4","apk:rsync":"3.4.1-r0","apk:tzdata":"2025b-r0","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.7-r0","image:alpine":"6a8ebb97894a768cd91fc46e76bd04659c7ce2ca4a50fafa9c911e03897bb13a"}
 
-FROM reg.c5h.io/alpine@sha256:9dd02454e2bd77b983bf4db2e9ca788ce76b28aaafa607a1dab7097f616223a9 AS build
+FROM reg.c5h.io/alpine@sha256:6a8ebb97894a768cd91fc46e76bd04659c7ce2ca4a50fafa9c911e03897bb13a AS build
 
 RUN set -eux; \
     apk add --no-cache \
-        busybox=1.37.0-r12 \
-        busybox-binsh=1.37.0-r12 \
-        ca-certificates=20241121-r1 \
-        libcrypto3=3.3.3-r0 \
-        musl=1.2.5-r9 \
+        busybox=1.37.0-r18 \
+        busybox-binsh=1.37.0-r18 \
+        ca-certificates=20241121-r2 \
+        libcrypto3=3.5.0-r0 \
+        musl=1.2.5-r10 \
         acl-libs=2.3.2-r1 \
-        libxxhash=0.8.2-r2 \
+        libxxhash=0.8.3-r0 \
         lz4-libs=1.10.0-r0 \
-        musl=1.2.5-r9 \
+        musl=1.2.5-r10 \
         popt=1.19-r4 \
-        rsync=3.4.0-r0 \
+        rsync=3.4.1-r0 \
         zlib=1.3.1-r2 \
-        zstd-libs=1.5.6-r2 \
+        zstd-libs=1.5.7-r0 \
     ;
 
 RUN set -eux; \
@@ -29,7 +29,7 @@ RUN set -eux; \
     chown 65532:65532 /rootfs/home/nonroot; \
     chmod 01777 /tmp; \
     # Copy our data
-    apk add --no-cache musl=1.2.5-r9; \
+    apk add --no-cache musl=1.2.5-r10; \
     apk info -qL musl | rsync -aq --files-from=- / /rootfs/; \
     apk add --no-cache tzdata=2025b-r0; \
     apk info -qL tzdata | rsync -aq --files-from=- / /rootfs/; \
