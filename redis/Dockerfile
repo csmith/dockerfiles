@@ -1,75 +1,75 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/redis/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.43.1-r2","apk:brotli-libs":"1.1.0-r2","apk:build-base":"0.5-r3","apk:busybox":"1.37.0-r12","apk:busybox-binsh":"1.37.0-r12","apk:c-ares":"1.34.5-r0","apk:ca-certificates":"20241121-r1","apk:ca-certificates-bundle":"20241121-r1","apk:file":"5.46-r2","apk:fortify-headers":"1.1-r5","apk:g++":"14.2.0-r4","apk:gcc":"14.2.0-r4","apk:git":"2.47.2-r0","apk:gmp":"6.3.0-r2","apk:isl25":"0.25-r2","apk:jansson":"2.14-r4","apk:libatomic":"14.2.0-r4","apk:libcrypto3":"3.3.3-r0","apk:libcurl":"8.12.1-r1","apk:libexpat":"2.7.0-r0","apk:libgcc":"14.2.0-r4","apk:libgomp":"14.2.0-r4","apk:libidn2":"2.3.7-r0","apk:libmagic":"5.46-r2","apk:libpcre16":"8.45-r3","apk:libpcre32":"8.45-r3","apk:libpcrecpp":"8.45-r3","apk:libpsl":"0.21.5-r3","apk:libssl3":"3.3.3-r0","apk:libstdc++":"14.2.0-r4","apk:libstdc++-dev":"14.2.0-r4","apk:libunistring":"1.2-r0","apk:linux-headers":"6.6-r1","apk:make":"4.4.1-r2","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1-r0","apk:musl":"1.2.5-r9","apk:musl-dev":"1.2.5-r9","apk:nghttp2-libs":"1.64.0-r0","apk:openssl-dev":"3.3.3-r0","apk:openssl-libs-static":"3.3.3-r0","apk:patch":"2.7.6-r10","apk:pcre":"8.45-r3","apk:pcre-dev":"8.45-r3","apk:pcre2":"10.43-r0","apk:pkgconf":"2.3.0-r0","apk:tzdata":"2025b-r0","apk:zlib":"1.3.1-r2","apk:zlib-dev":"1.3.1-r2","apk:zlib-static":"1.3.1-r2","apk:zstd-libs":"1.5.6-r2","github:redis/redis":"8.0.2","image:alpine":"9dd02454e2bd77b983bf4db2e9ca788ce76b28aaafa607a1dab7097f616223a9","image:base":"4fea2559a3c315f01c6241c689da902344f4694dbdbdab4f5c0a1d24a8a78363"}
+# BOM: {"apk:binutils":"2.44-r0","apk:brotli-libs":"1.1.0-r2","apk:build-base":"0.5-r3","apk:busybox":"1.37.0-r18","apk:busybox-binsh":"1.37.0-r18","apk:c-ares":"1.34.5-r0","apk:ca-certificates":"20241121-r2","apk:ca-certificates-bundle":"20241121-r2","apk:file":"5.46-r2","apk:fortify-headers":"1.1-r5","apk:g++":"14.2.0-r6","apk:gcc":"14.2.0-r6","apk:git":"2.49.0-r0","apk:gmp":"6.3.0-r3","apk:isl25":"0.25-r2","apk:jansson":"2.14.1-r0","apk:libatomic":"14.2.0-r6","apk:libcrypto3":"3.5.0-r0","apk:libcurl":"8.14.0-r2","apk:libexpat":"2.7.1-r0","apk:libgcc":"14.2.0-r6","apk:libgomp":"14.2.0-r6","apk:libidn2":"2.3.7-r0","apk:libmagic":"5.46-r2","apk:libpcre16":"8.45-r4","apk:libpcre32":"8.45-r4","apk:libpcrecpp":"8.45-r4","apk:libpsl":"0.21.5-r3","apk:libssl3":"3.5.0-r0","apk:libstdc++":"14.2.0-r6","apk:libstdc++-dev":"14.2.0-r6","apk:libunistring":"1.3-r0","apk:linux-headers":"6.14.2-r0","apk:make":"4.4.1-r3","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1_p1-r0","apk:musl":"1.2.5-r10","apk:musl-dev":"1.2.5-r10","apk:nghttp2-libs":"1.65.0-r0","apk:openssl-dev":"3.5.0-r0","apk:openssl-libs-static":"3.5.0-r0","apk:patch":"2.8-r0","apk:pcre":"8.45-r4","apk:pcre-dev":"8.45-r4","apk:pcre2":"10.43-r1","apk:pkgconf":"2.4.3-r0","apk:tzdata":"2025b-r0","apk:zlib":"1.3.1-r2","apk:zlib-dev":"1.3.1-r2","apk:zlib-static":"1.3.1-r2","apk:zstd-libs":"1.5.7-r0","github:redis/redis":"8.0.2","image:alpine":"6a8ebb97894a768cd91fc46e76bd04659c7ce2ca4a50fafa9c911e03897bb13a","image:base":"c97e4a9e2aabe7541fb67a9d165b264bfb9d7cc15d954fc48b760e55156666d8"}
 
-FROM reg.c5h.io/alpine@sha256:9dd02454e2bd77b983bf4db2e9ca788ce76b28aaafa607a1dab7097f616223a9 AS build
+FROM reg.c5h.io/alpine@sha256:6a8ebb97894a768cd91fc46e76bd04659c7ce2ca4a50fafa9c911e03897bb13a AS build
 
 RUN set -eux; \
     apk add --no-cache \
         brotli-libs=1.1.0-r2 \
         c-ares=1.34.5-r0 \
-        ca-certificates-bundle=20241121-r1 \
-        git=2.47.2-r0 \
-        libcrypto3=3.3.3-r0 \
-        libcurl=8.12.1-r1 \
-        libexpat=2.7.0-r0 \
+        ca-certificates-bundle=20241121-r2 \
+        git=2.49.0-r0 \
+        libcrypto3=3.5.0-r0 \
+        libcurl=8.14.0-r2 \
+        libexpat=2.7.1-r0 \
         libidn2=2.3.7-r0 \
         libpsl=0.21.5-r3 \
-        libssl3=3.3.3-r0 \
-        libunistring=1.2-r0 \
-        musl=1.2.5-r9 \
-        nghttp2-libs=1.64.0-r0 \
-        pcre2=10.43-r0 \
+        libssl3=3.5.0-r0 \
+        libunistring=1.3-r0 \
+        musl=1.2.5-r10 \
+        nghttp2-libs=1.65.0-r0 \
+        pcre2=10.43-r1 \
         zlib=1.3.1-r2 \
-        zstd-libs=1.5.6-r2 \
-        binutils=2.43.1-r2 \
+        zstd-libs=1.5.7-r0 \
+        binutils=2.44-r0 \
         build-base=0.5-r3 \
         file=5.46-r2 \
         fortify-headers=1.1-r5 \
-        g++=14.2.0-r4 \
-        gcc=14.2.0-r4 \
-        gmp=6.3.0-r2 \
+        g++=14.2.0-r6 \
+        gcc=14.2.0-r6 \
+        gmp=6.3.0-r3 \
         isl25=0.25-r2 \
-        jansson=2.14-r4 \
-        libatomic=14.2.0-r4 \
-        libgcc=14.2.0-r4 \
-        libgomp=14.2.0-r4 \
+        jansson=2.14.1-r0 \
+        libatomic=14.2.0-r6 \
+        libgcc=14.2.0-r6 \
+        libgomp=14.2.0-r6 \
         libmagic=5.46-r2 \
-        libstdc++=14.2.0-r4 \
-        libstdc++-dev=14.2.0-r4 \
-        make=4.4.1-r2 \
+        libstdc++=14.2.0-r6 \
+        libstdc++-dev=14.2.0-r6 \
+        make=4.4.1-r3 \
         mpc1=1.3.1-r1 \
-        mpfr4=4.2.1-r0 \
-        musl=1.2.5-r9 \
-        musl-dev=1.2.5-r9 \
-        patch=2.7.6-r10 \
+        mpfr4=4.2.1_p1-r0 \
+        musl=1.2.5-r10 \
+        musl-dev=1.2.5-r10 \
+        patch=2.8-r0 \
         zlib=1.3.1-r2 \
-        zstd-libs=1.5.6-r2 \
+        zstd-libs=1.5.7-r0 \
         tzdata=2025b-r0 \
-        busybox=1.37.0-r12 \
-        busybox-binsh=1.37.0-r12 \
-        ca-certificates=20241121-r1 \
-        libcrypto3=3.3.3-r0 \
-        musl=1.2.5-r9 \
-        linux-headers=6.6-r1 \
-        libgcc=14.2.0-r4 \
-        libpcre16=8.45-r3 \
-        libpcre32=8.45-r3 \
-        libpcrecpp=8.45-r3 \
-        libstdc++=14.2.0-r4 \
-        musl=1.2.5-r9 \
-        pcre=8.45-r3 \
-        pcre-dev=8.45-r3 \
-        pkgconf=2.3.0-r0 \
-        musl=1.2.5-r9 \
-        musl-dev=1.2.5-r9 \
-        libcrypto3=3.3.3-r0 \
-        libssl3=3.3.3-r0 \
-        musl=1.2.5-r9 \
-        openssl-dev=3.3.3-r0 \
-        pkgconf=2.3.0-r0 \
-        openssl-libs-static=3.3.3-r0 \
-        musl=1.2.5-r9 \
-        pkgconf=2.3.0-r0 \
+        busybox=1.37.0-r18 \
+        busybox-binsh=1.37.0-r18 \
+        ca-certificates=20241121-r2 \
+        libcrypto3=3.5.0-r0 \
+        musl=1.2.5-r10 \
+        linux-headers=6.14.2-r0 \
+        libgcc=14.2.0-r6 \
+        libpcre16=8.45-r4 \
+        libpcre32=8.45-r4 \
+        libpcrecpp=8.45-r4 \
+        libstdc++=14.2.0-r6 \
+        musl=1.2.5-r10 \
+        pcre=8.45-r4 \
+        pcre-dev=8.45-r4 \
+        pkgconf=2.4.3-r0 \
+        musl=1.2.5-r10 \
+        musl-dev=1.2.5-r10 \
+        libcrypto3=3.5.0-r0 \
+        libssl3=3.5.0-r0 \
+        musl=1.2.5-r10 \
+        openssl-dev=3.5.0-r0 \
+        pkgconf=2.4.3-r0 \
+        openssl-libs-static=3.5.0-r0 \
+        musl=1.2.5-r10 \
+        pkgconf=2.4.3-r0 \
         zlib=1.3.1-r2 \
         zlib-dev=1.3.1-r2 \
         zlib-static=1.3.1-r2 \
@@ -92,7 +92,7 @@ RUN set -eux; \
      strip /src/redis/src/redis-server; \
      touch --date=@0 /src/redis/src/redis-server /data /redis.conf
 
-FROM reg.c5h.io/base@sha256:4fea2559a3c315f01c6241c689da902344f4694dbdbdab4f5c0a1d24a8a78363
+FROM reg.c5h.io/base@sha256:c97e4a9e2aabe7541fb67a9d165b264bfb9d7cc15d954fc48b760e55156666d8
 
 COPY --from=build --chown=65532:65532 /redis.conf /home/nonroot/redis.conf
 COPY --from=build --chown=65532:65532 /data /home/nonroot/database
