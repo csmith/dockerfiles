@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/ergo-certwrapper/Dockerfile.gotpl
-# BOM: {"github:csmith/certwrapper":"v4.3.0","github:ergochat/ergo":"v2.16.0","image:base":"c97e4a9e2aabe7541fb67a9d165b264bfb9d7cc15d954fc48b760e55156666d8","image:golang":"9da1769702db34616d1166e9c471a33ae30f761a519b092e1e22b6a6529e1cf3"}
+# BOM: {"github:csmith/certwrapper":"v4.3.0","github:ergochat/ergo":"v2.16.0","image:base":"c97e4a9e2aabe7541fb67a9d165b264bfb9d7cc15d954fc48b760e55156666d8","image:golang":"043e589219212c527f36ff88eb2ce8d9311339a8d96c0bf78f9c8bdc8eda3c24"}
 
-FROM reg.c5h.io/golang@sha256:9da1769702db34616d1166e9c471a33ae30f761a519b092e1e22b6a6529e1cf3 AS build
+FROM reg.c5h.io/golang@sha256:043e589219212c527f36ff88eb2ce8d9311339a8d96c0bf78f9c8bdc8eda3c24 AS build
 
 
 RUN set -eux; \
