@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/ergo-certwrapper/Dockerfile.gotpl
-# BOM: {"github:csmith/certwrapper":"v4.3.0","github:ergochat/ergo":"v2.16.0","image:base":"c97e4a9e2aabe7541fb67a9d165b264bfb9d7cc15d954fc48b760e55156666d8","image:golang":"d51835bb4b9909f172e3d9b495e5aa14564a70a36fabeafba6832cf0d8ae631b"}
+# BOM: {"github:csmith/certwrapper":"v4.3.0","github:ergochat/ergo":"v2.16.0","image:base":"81ab55b27588f4854075acf470a64bea02b2c1c3535f8067d6f37fe6e9a308b0","image:golang":"549f871c3be8857e3a2fd23f8c01ec5eeaa427bb5f3772a7b4704e2a8343da57"}
 
-FROM reg.c5h.io/golang@sha256:d51835bb4b9909f172e3d9b495e5aa14564a70a36fabeafba6832cf0d8ae631b AS build
+FROM reg.c5h.io/golang@sha256:549f871c3be8857e3a2fd23f8c01ec5eeaa427bb5f3772a7b4704e2a8343da57 AS build
 
 
 RUN set -eux; \
@@ -37,7 +37,7 @@ RUN set -eux; \
     # Copy over languages \
     cp -r /go/src/github.com/ergochat/ergo/languages /out/ircd-bin/languages;
 
-FROM reg.c5h.io/base@sha256:c97e4a9e2aabe7541fb67a9d165b264bfb9d7cc15d954fc48b760e55156666d8
+FROM reg.c5h.io/base@sha256:81ab55b27588f4854075acf470a64bea02b2c1c3535f8067d6f37fe6e9a308b0
 
 ENV CERTWRAPPER_CERTIFICATE_PATH=/certs/certificate.pem \
     CERTWRAPPER_DNS_PROVIDER=httpreq \
