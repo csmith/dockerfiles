@@ -40,4 +40,4 @@ RUN set -eux; \
     # Set up the go path
     mkdir -p $GOPATH/src $GOPATH/bin; \
     chmod -R 777 $GOPATH; \
-    go install github.com/google/go-licenses@$GOLICENSETAG
+    go install github.com/google/go-licenses/v2@$GOLICENSETAG
