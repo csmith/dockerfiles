@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/golang/Dockerfile.gotpl
-# BOM: {"apk:bash":"5.2.37-r0","apk:binutils":"2.44-r3","apk:brotli-libs":"1.1.0-r2","apk:busybox":"1.37.0-r19","apk:busybox-binsh":"1.37.0-r19","apk:c-ares":"1.34.5-r0","apk:ca-certificates-bundle":"20250619-r0","apk:curl":"8.14.1-r1","apk:gcc":"14.2.0-r6","apk:git":"2.49.1-r0","apk:gmp":"6.3.0-r3","apk:go":"1.24.6-r0","apk:isl25":"0.25-r2","apk:jansson":"2.14.1-r0","apk:libatomic":"14.2.0-r6","apk:libcrypto3":"3.5.2-r0","apk:libcurl":"8.14.1-r1","apk:libexpat":"2.7.1-r0","apk:libgcc":"14.2.0-r6","apk:libgomp":"14.2.0-r6","apk:libidn2":"2.3.7-r0","apk:libncursesw":"6.5_p20250503-r0","apk:libpsl":"0.21.5-r3","apk:libssl3":"3.5.2-r0","apk:libstdc++":"14.2.0-r6","apk:libunistring":"1.3-r0","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1_p1-r0","apk:musl":"1.2.5-r10","apk:musl-dev":"1.2.5-r10","apk:ncurses-terminfo-base":"6.5_p20250503-r0","apk:nghttp2-libs":"1.65.0-r0","apk:pcre2":"10.43-r1","apk:readline":"8.2.13-r1","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.7-r0","golang":"go1.25.0","image:alpine":"660c3cb1032bcacc15b95b8be733562d35b7c6b66be87fc02e55cfe5bcce3bd8"}
+# BOM: {"apk:bash":"5.2.37-r0","apk:binutils":"2.44-r3","apk:brotli-libs":"1.1.0-r2","apk:busybox":"1.37.0-r19","apk:busybox-binsh":"1.37.0-r19","apk:c-ares":"1.34.5-r0","apk:ca-certificates-bundle":"20250619-r0","apk:curl":"8.14.1-r1","apk:gcc":"14.2.0-r6","apk:git":"2.49.1-r0","apk:gmp":"6.3.0-r3","apk:go":"1.24.6-r0","apk:isl25":"0.25-r2","apk:jansson":"2.14.1-r0","apk:libatomic":"14.2.0-r6","apk:libcrypto3":"3.5.2-r0","apk:libcurl":"8.14.1-r1","apk:libexpat":"2.7.1-r0","apk:libgcc":"14.2.0-r6","apk:libgomp":"14.2.0-r6","apk:libidn2":"2.3.7-r0","apk:libncursesw":"6.5_p20250503-r0","apk:libpsl":"0.21.5-r3","apk:libssl3":"3.5.2-r0","apk:libstdc++":"14.2.0-r6","apk:libunistring":"1.3-r0","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1_p1-r0","apk:musl":"1.2.5-r10","apk:musl-dev":"1.2.5-r10","apk:ncurses-terminfo-base":"6.5_p20250503-r0","apk:nghttp2-libs":"1.65.0-r0","apk:pcre2":"10.43-r1","apk:readline":"8.2.13-r1","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.7-r0","golang":"go1.25.1","image:alpine":"660c3cb1032bcacc15b95b8be733562d35b7c6b66be87fc02e55cfe5bcce3bd8"}
 
 FROM reg.c5h.io/alpine@sha256:660c3cb1032bcacc15b95b8be733562d35b7c6b66be87fc02e55cfe5bcce3bd8
 
@@ -82,8 +82,8 @@ RUN set -eux; \
         zstd-libs=1.5.7-r0 \
     ;
 
-ARG ARCHIVE_URL="https://golang.org/dl/go1.25.0.src.tar.gz"
-ARG ARCHIVE_SUM="4bd01e91297207bfa450ea40d4d5a93b1b531a5e438473b2a06e18e077227225"
+ARG ARCHIVE_URL="https://golang.org/dl/go1.25.1.src.tar.gz"
+ARG ARCHIVE_SUM="d010c109cee94d80efe681eab46bdea491ac906bf46583c32e9f0dbb0bd1a594"
 
 ENV GOPATH=/go
 ENV PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
