@@ -1,10 +1,10 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/alpine/Dockerfile.gotpl
-# BOM: {"alpine":"3.22.1"}
+# BOM: {"alpine":"3.22.2"}
 
 FROM reg.c5h.io/alpine AS verify
 
-ARG ARCHIVE_URL="https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/alpine-minirootfs-3.22.1-x86_64.tar.gz"
-ARG ARCHIVE_SUM="0e5cc5702ad72a4e151f219976ba946d50161c3acce210ef3b122a529aba1270"
+ARG ARCHIVE_URL="https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/alpine-minirootfs-3.22.2-x86_64.tar.gz"
+ARG ARCHIVE_SUM="412454ed98025ad9cd910d13f3d448b184e81502baa83180e89f98d0f13674be"
 
 RUN set -eux; \
     apk add --no-cache curl; \
