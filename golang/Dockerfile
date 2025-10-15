@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/golang/Dockerfile.gotpl
-# BOM: {"apk:bash":"5.2.37-r0","apk:binutils":"2.44-r3","apk:brotli-libs":"1.1.0-r2","apk:busybox":"1.37.0-r19","apk:busybox-binsh":"1.37.0-r19","apk:c-ares":"1.34.5-r0","apk:ca-certificates-bundle":"20250911-r0","apk:curl":"8.14.1-r2","apk:gcc":"14.2.0-r6","apk:git":"2.49.1-r0","apk:gmp":"6.3.0-r3","apk:go":"1.24.8-r0","apk:isl25":"0.25-r2","apk:jansson":"2.14.1-r0","apk:libatomic":"14.2.0-r6","apk:libcrypto3":"3.5.4-r0","apk:libcurl":"8.14.1-r2","apk:libexpat":"2.7.3-r0","apk:libgcc":"14.2.0-r6","apk:libgomp":"14.2.0-r6","apk:libidn2":"2.3.7-r0","apk:libncursesw":"6.5_p20250503-r0","apk:libpsl":"0.21.5-r3","apk:libssl3":"3.5.4-r0","apk:libstdc++":"14.2.0-r6","apk:libunistring":"1.3-r0","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1_p1-r0","apk:musl":"1.2.5-r10","apk:musl-dev":"1.2.5-r10","apk:ncurses-terminfo-base":"6.5_p20250503-r0","apk:nghttp2-libs":"1.65.0-r0","apk:pcre2":"10.43-r1","apk:readline":"8.2.13-r1","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.7-r0","golang":"go1.25.3","image:alpine":"7870f9b13b86c48d20a50151dd813a32dff5cca8c3f71a968dec5ec2cd4880a2"}
+# BOM: {"apk:bash":"5.2.37-r0","apk:binutils":"2.44-r3","apk:brotli-libs":"1.1.0-r2","apk:busybox":"1.37.0-r19","apk:busybox-binsh":"1.37.0-r19","apk:c-ares":"1.34.5-r0","apk:ca-certificates-bundle":"20250911-r0","apk:curl":"8.14.1-r2","apk:gcc":"14.2.0-r6","apk:git":"2.49.1-r0","apk:gmp":"6.3.0-r3","apk:go":"1.24.9-r0","apk:isl25":"0.25-r2","apk:jansson":"2.14.1-r0","apk:libatomic":"14.2.0-r6","apk:libcrypto3":"3.5.4-r0","apk:libcurl":"8.14.1-r2","apk:libexpat":"2.7.3-r0","apk:libgcc":"14.2.0-r6","apk:libgomp":"14.2.0-r6","apk:libidn2":"2.3.7-r0","apk:libncursesw":"6.5_p20250503-r0","apk:libpsl":"0.21.5-r3","apk:libssl3":"3.5.4-r0","apk:libstdc++":"14.2.0-r6","apk:libunistring":"1.3-r0","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1_p1-r0","apk:musl":"1.2.5-r10","apk:musl-dev":"1.2.5-r10","apk:ncurses-terminfo-base":"6.5_p20250503-r0","apk:nghttp2-libs":"1.65.0-r0","apk:pcre2":"10.43-r1","apk:readline":"8.2.13-r1","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.7-r0","golang":"go1.25.3","image:alpine":"7870f9b13b86c48d20a50151dd813a32dff5cca8c3f71a968dec5ec2cd4880a2"}
 
 FROM reg.c5h.io/alpine@sha256:7870f9b13b86c48d20a50151dd813a32dff5cca8c3f71a968dec5ec2cd4880a2
 
@@ -30,7 +30,7 @@ RUN set -eux; \
         binutils=2.44-r3 \
         gcc=14.2.0-r6 \
         gmp=6.3.0-r3 \
-        go=1.24.8-r0 \
+        go=1.24.9-r0 \
         isl25=0.25-r2 \
         jansson=2.14.1-r0 \
         libatomic=14.2.0-r6 \
