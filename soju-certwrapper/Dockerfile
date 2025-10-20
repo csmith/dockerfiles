@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/soju-certwrapper/Dockerfile.gotpl
-# BOM: {"github:csmith/certwrapper":"v4.3.0","github:emersion/soju":"v0.9.0","image:base":"a09ba1c5a9b2ec41293a8fa0cef935f6ab81978fcbb62271f490ebb07bbf6024","image:golang":"0f699e860159831c5f85c9788b08e246a274be3ec46c7dfc092bef5e910d2ac9"}
+# BOM: {"github:csmith/certwrapper":"v4.3.0","github:emersion/soju":"v0.9.0","image:base":"a09ba1c5a9b2ec41293a8fa0cef935f6ab81978fcbb62271f490ebb07bbf6024","image:golang":"bcb710a28359e1c23074f451cb23aec940a9a009f76675ba5e049c83acf3f50f"}
 
-FROM reg.c5h.io/golang@sha256:0f699e860159831c5f85c9788b08e246a274be3ec46c7dfc092bef5e910d2ac9 AS build
+FROM reg.c5h.io/golang@sha256:bcb710a28359e1c23074f451cb23aec940a9a009f76675ba5e049c83acf3f50f AS build
 
 RUN set -eux; \
     git clone --depth=1 -b v4.3.0 --single-branch https://github.com/csmith/certwrapper /go/src/github.com/csmith/certwrapper
