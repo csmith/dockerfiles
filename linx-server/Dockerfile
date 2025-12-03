@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/linx-server/Dockerfile.gotpl
-# BOM: {"github:cutlerydrawer/linx-server":"v3.1.0","image:base":"a09ba1c5a9b2ec41293a8fa0cef935f6ab81978fcbb62271f490ebb07bbf6024","image:golang":"3d8a4a4be3ec41c9749199c202bde975682c48eda85d1fae8fdbb1dfa9271434"}
+# BOM: {"github:cutlerydrawer/linx-server":"v3.1.0","image:base":"a09ba1c5a9b2ec41293a8fa0cef935f6ab81978fcbb62271f490ebb07bbf6024","image:golang":"721cf01fb019b56e21cda3b686b375f25d192fc5e46ed92fc8f29b307440f8c0"}
 
-FROM reg.c5h.io/golang@sha256:3d8a4a4be3ec41c9749199c202bde975682c48eda85d1fae8fdbb1dfa9271434 AS build
+FROM reg.c5h.io/golang@sha256:721cf01fb019b56e21cda3b686b375f25d192fc5e46ed92fc8f29b307440f8c0 AS build
 
 RUN set -eux; \
     git clone --depth=1 -b v3.1.0 --single-branch https://github.com/cutlerydrawer/linx-server /work
