@@ -1,15 +1,15 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/distribution/Dockerfile.gotpl
-# BOM: {"apk:file":"5.46-r2","apk:libmagic":"5.46-r2","apk:make":"4.4.1-r3","apk:musl":"1.2.5-r10","image:base":"a09ba1c5a9b2ec41293a8fa0cef935f6ab81978fcbb62271f490ebb07bbf6024","image:golang":"721cf01fb019b56e21cda3b686b375f25d192fc5e46ed92fc8f29b307440f8c0"}
+# BOM: {"apk:file":"5.46-r2","apk:libmagic":"5.46-r2","apk:make":"4.4.1-r3","apk:musl":"1.2.5-r21","image:base":"46ea216adf9eb9615e03305be16d497ef5e1f3d936f3e986a8e4d25e599f27f7","image:golang":"5f6a4c6c2927f0ab0c0121807a47294754f9d9c4e11c2c0b40a636b8cef50350"}
 
-FROM reg.c5h.io/golang@sha256:721cf01fb019b56e21cda3b686b375f25d192fc5e46ed92fc8f29b307440f8c0 AS build
+FROM reg.c5h.io/golang@sha256:5f6a4c6c2927f0ab0c0121807a47294754f9d9c4e11c2c0b40a636b8cef50350 AS build
 
 RUN set -eux; \
     apk add --no-cache \
         make=4.4.1-r3 \
-        musl=1.2.5-r10 \
+        musl=1.2.5-r21 \
         file=5.46-r2 \
         libmagic=5.46-r2 \
-        musl=1.2.5-r10 \
+        musl=1.2.5-r21 \
     ;
 
 RUN set -eux; \
@@ -21,7 +21,7 @@ WORKDIR /go/src/github.com/docker/distribution
 RUN set -eux; \
     BUILDTAGS="include_oss include_gcs" GO111MODULE=off CGO_ENABLED=0 make bin/registry;
 
-FROM reg.c5h.io/base@sha256:a09ba1c5a9b2ec41293a8fa0cef935f6ab81978fcbb62271f490ebb07bbf6024
+FROM reg.c5h.io/base@sha256:46ea216adf9eb9615e03305be16d497ef5e1f3d936f3e986a8e4d25e599f27f7
 
 COPY --from=build /go/src/github.com/docker/distribution/cmd/registry/config-dev.yml /etc/docker/registry/config.yml
 COPY --from=build /go/src/github.com/docker/distribution/bin/registry /bin/registry
