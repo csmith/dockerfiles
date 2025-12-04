@@ -1,85 +1,87 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/golang/Dockerfile.gotpl
-# BOM: {"apk:bash":"5.2.37-r0","apk:binutils":"2.44-r3","apk:brotli-libs":"1.1.0-r2","apk:busybox":"1.37.0-r20","apk:busybox-binsh":"1.37.0-r20","apk:c-ares":"1.34.5-r0","apk:ca-certificates-bundle":"20250911-r0","apk:curl":"8.14.1-r2","apk:gcc":"14.2.0-r6","apk:git":"2.49.1-r0","apk:gmp":"6.3.0-r3","apk:go":"1.24.10-r0","apk:isl25":"0.25-r2","apk:jansson":"2.14.1-r0","apk:libatomic":"14.2.0-r6","apk:libcrypto3":"3.5.4-r0","apk:libcurl":"8.14.1-r2","apk:libexpat":"2.7.3-r0","apk:libgcc":"14.2.0-r6","apk:libgomp":"14.2.0-r6","apk:libidn2":"2.3.7-r0","apk:libncursesw":"6.5_p20250503-r0","apk:libpsl":"0.21.5-r3","apk:libssl3":"3.5.4-r0","apk:libstdc++":"14.2.0-r6","apk:libunistring":"1.3-r0","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.1_p1-r0","apk:musl":"1.2.5-r10","apk:musl-dev":"1.2.5-r10","apk:ncurses-terminfo-base":"6.5_p20250503-r0","apk:nghttp2-libs":"1.65.0-r0","apk:pcre2":"10.46-r0","apk:readline":"8.2.13-r1","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.7-r0","golang":"go1.25.5","image:alpine":"7870f9b13b86c48d20a50151dd813a32dff5cca8c3f71a968dec5ec2cd4880a2"}
+# BOM: {"apk:bash":"5.3.3-r1","apk:binutils":"2.45.1-r0","apk:brotli-libs":"1.2.0-r0","apk:busybox":"1.37.0-r29","apk:busybox-binsh":"1.37.0-r29","apk:c-ares":"1.34.5-r0","apk:ca-certificates-bundle":"20251003-r0","apk:curl":"8.17.0-r1","apk:gcc":"15.2.0-r2","apk:git":"2.52.0-r0","apk:gmp":"6.3.0-r4","apk:go":"1.25.4-r0","apk:isl25":"0.25-r2","apk:jansson":"2.14.1-r0","apk:libatomic":"15.2.0-r2","apk:libcrypto3":"3.5.4-r0","apk:libcurl":"8.17.0-r1","apk:libexpat":"2.7.3-r0","apk:libgcc":"15.2.0-r2","apk:libgomp":"15.2.0-r2","apk:libidn2":"2.3.8-r0","apk:libncursesw":"6.5_p20251123-r0","apk:libpsl":"0.21.5-r3","apk:libssl3":"3.5.4-r0","apk:libstdc++":"15.2.0-r2","apk:libunistring":"1.4.1-r0","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.2-r0","apk:musl":"1.2.5-r21","apk:musl-dev":"1.2.5-r21","apk:ncurses-terminfo-base":"6.5_p20251123-r0","apk:nghttp2-libs":"1.68.0-r0","apk:nghttp3":"1.13.1-r0","apk:pcre2":"10.47-r0","apk:readline":"8.3.1-r0","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.7-r2","golang":"go1.25.5","image:alpine":"7f1745fb850aebdcad90fe6d1c1e5759ef6ef9d04919c4c93fefb106fc012ffd"}
 
-FROM reg.c5h.io/alpine@sha256:7870f9b13b86c48d20a50151dd813a32dff5cca8c3f71a968dec5ec2cd4880a2
+FROM reg.c5h.io/alpine@sha256:7f1745fb850aebdcad90fe6d1c1e5759ef6ef9d04919c4c93fefb106fc012ffd
 
 
 RUN set -eux; \
     apk add --no-cache --virtual .build-deps \
-        brotli-libs=1.1.0-r2 \
+        brotli-libs=1.2.0-r0 \
         c-ares=1.34.5-r0 \
-        ca-certificates-bundle=20250911-r0 \
-        curl=8.14.1-r2 \
+        ca-certificates-bundle=20251003-r0 \
+        curl=8.17.0-r1 \
         libcrypto3=3.5.4-r0 \
-        libcurl=8.14.1-r2 \
-        libidn2=2.3.7-r0 \
+        libcurl=8.17.0-r1 \
+        libidn2=2.3.8-r0 \
         libpsl=0.21.5-r3 \
         libssl3=3.5.4-r0 \
-        libunistring=1.3-r0 \
-        musl=1.2.5-r10 \
-        nghttp2-libs=1.65.0-r0 \
+        libunistring=1.4.1-r0 \
+        musl=1.2.5-r21 \
+        nghttp2-libs=1.68.0-r0 \
+        nghttp3=1.13.1-r0 \
         zlib=1.3.1-r2 \
-        zstd-libs=1.5.7-r0 \
-        bash=5.2.37-r0 \
-        busybox=1.37.0-r20 \
-        busybox-binsh=1.37.0-r20 \
-        libncursesw=6.5_p20250503-r0 \
-        musl=1.2.5-r10 \
-        ncurses-terminfo-base=6.5_p20250503-r0 \
-        readline=8.2.13-r1 \
-        binutils=2.44-r3 \
-        gcc=14.2.0-r6 \
-        gmp=6.3.0-r3 \
-        go=1.24.10-r0 \
+        zstd-libs=1.5.7-r2 \
+        bash=5.3.3-r1 \
+        busybox=1.37.0-r29 \
+        busybox-binsh=1.37.0-r29 \
+        libncursesw=6.5_p20251123-r0 \
+        musl=1.2.5-r21 \
+        ncurses-terminfo-base=6.5_p20251123-r0 \
+        readline=8.3.1-r0 \
+        binutils=2.45.1-r0 \
+        gcc=15.2.0-r2 \
+        gmp=6.3.0-r4 \
+        go=1.25.4-r0 \
         isl25=0.25-r2 \
         jansson=2.14.1-r0 \
-        libatomic=14.2.0-r6 \
-        libgcc=14.2.0-r6 \
-        libgomp=14.2.0-r6 \
-        libstdc++=14.2.0-r6 \
+        libatomic=15.2.0-r2 \
+        libgcc=15.2.0-r2 \
+        libgomp=15.2.0-r2 \
+        libstdc++=15.2.0-r2 \
         mpc1=1.3.1-r1 \
-        mpfr4=4.2.1_p1-r0 \
-        musl=1.2.5-r10 \
-        musl-dev=1.2.5-r10 \
+        mpfr4=4.2.2-r0 \
+        musl=1.2.5-r21 \
+        musl-dev=1.2.5-r21 \
         zlib=1.3.1-r2 \
-        zstd-libs=1.5.7-r0 \
+        zstd-libs=1.5.7-r2 \
     ;
 
 
 RUN set -eux; \
     apk add --no-cache \
-        binutils=2.44-r3 \
-        gcc=14.2.0-r6 \
-        gmp=6.3.0-r3 \
+        binutils=2.45.1-r0 \
+        gcc=15.2.0-r2 \
+        gmp=6.3.0-r4 \
         isl25=0.25-r2 \
         jansson=2.14.1-r0 \
-        libatomic=14.2.0-r6 \
-        libgcc=14.2.0-r6 \
-        libgomp=14.2.0-r6 \
-        libstdc++=14.2.0-r6 \
+        libatomic=15.2.0-r2 \
+        libgcc=15.2.0-r2 \
+        libgomp=15.2.0-r2 \
+        libstdc++=15.2.0-r2 \
         mpc1=1.3.1-r1 \
-        mpfr4=4.2.1_p1-r0 \
-        musl=1.2.5-r10 \
+        mpfr4=4.2.2-r0 \
+        musl=1.2.5-r21 \
         zlib=1.3.1-r2 \
-        zstd-libs=1.5.7-r0 \
-        musl=1.2.5-r10 \
-        musl-dev=1.2.5-r10 \
-        brotli-libs=1.1.0-r2 \
+        zstd-libs=1.5.7-r2 \
+        musl=1.2.5-r21 \
+        musl-dev=1.2.5-r21 \
+        brotli-libs=1.2.0-r0 \
         c-ares=1.34.5-r0 \
-        ca-certificates-bundle=20250911-r0 \
-        git=2.49.1-r0 \
+        ca-certificates-bundle=20251003-r0 \
+        git=2.52.0-r0 \
         libcrypto3=3.5.4-r0 \
-        libcurl=8.14.1-r2 \
+        libcurl=8.17.0-r1 \
         libexpat=2.7.3-r0 \
-        libidn2=2.3.7-r0 \
+        libidn2=2.3.8-r0 \
         libpsl=0.21.5-r3 \
         libssl3=3.5.4-r0 \
-        libunistring=1.3-r0 \
-        musl=1.2.5-r10 \
-        nghttp2-libs=1.65.0-r0 \
-        pcre2=10.46-r0 \
+        libunistring=1.4.1-r0 \
+        musl=1.2.5-r21 \
+        nghttp2-libs=1.68.0-r0 \
+        nghttp3=1.13.1-r0 \
+        pcre2=10.47-r0 \
         zlib=1.3.1-r2 \
-        zstd-libs=1.5.7-r0 \
+        zstd-libs=1.5.7-r2 \
     ;
 
 ARG ARCHIVE_URL="https://golang.org/dl/go1.25.5.src.tar.gz"
