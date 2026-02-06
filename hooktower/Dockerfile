@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hooktower/Dockerfile.gotpl
-# BOM: {"github:adnanh/webhook":"2.8.2","github:containrrr/watchtower":"v1.7.1","image:base":"df41e52c0ffc5527d6042026b2d11605ff293dd09f4e088b4b6fb2d54e17a18a","image:golang":"fe297beab25063e7f09a6a45a799d4c877b9f393b6c67cca68469f9f3eb332a9"}
+# BOM: {"github:adnanh/webhook":"2.8.2","github:containrrr/watchtower":"v1.7.1","image:base":"df41e52c0ffc5527d6042026b2d11605ff293dd09f4e088b4b6fb2d54e17a18a","image:golang":"519590a2984f24aed2c2868ca5e9b2fa3b16e33976c4f8025cb7e48e0141f734"}
 
-FROM reg.c5h.io/golang@sha256:fe297beab25063e7f09a6a45a799d4c877b9f393b6c67cca68469f9f3eb332a9 AS build
+FROM reg.c5h.io/golang@sha256:519590a2984f24aed2c2868ca5e9b2fa3b16e33976c4f8025cb7e48e0141f734 AS build
 
 
 RUN set -eux; \
