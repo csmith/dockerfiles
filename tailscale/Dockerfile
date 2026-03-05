@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/tailscale/Dockerfile.gotpl
-# BOM: {"github:tailscale/tailscale":"v1.94.2","image:base":"df41e52c0ffc5527d6042026b2d11605ff293dd09f4e088b4b6fb2d54e17a18a","image:golang":"77752e4278043c67ff36b4335f475e90e765540450f428669249c4441cf287db"}
+# BOM: {"github:tailscale/tailscale":"v1.94.2","image:base":"84a319cda607326ba5aff905ae01191c4a3c793dbad0e058d9a816e3fb29036f","image:golang":"77752e4278043c67ff36b4335f475e90e765540450f428669249c4441cf287db"}
 
 FROM reg.c5h.io/golang@sha256:77752e4278043c67ff36b4335f475e90e765540450f428669249c4441cf287db AS build
 
@@ -18,7 +18,7 @@ RUN set -eux; \
     mkdir -p /out/var/run/tailscale /out/state; \
     chown -R 65532:65532 /out;
 
-FROM reg.c5h.io/base@sha256:df41e52c0ffc5527d6042026b2d11605ff293dd09f4e088b4b6fb2d54e17a18a
+FROM reg.c5h.io/base@sha256:84a319cda607326ba5aff905ae01191c4a3c793dbad0e058d9a816e3fb29036f
 
 COPY --from=build /src/tailscaled /tailscaled
 COPY --from=build /src/tailscale /tailscale
