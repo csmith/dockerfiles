@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hugo/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.45.1-r0","apk:g++":"15.2.0-r2","apk:gcc":"15.2.0-r2","apk:gmp":"6.3.0-r4","apk:isl25":"0.25-r2","apk:jansson":"2.14.1-r0","apk:libatomic":"15.2.0-r2","apk:libgcc":"15.2.0-r2","apk:libgomp":"15.2.0-r2","apk:libstdc++":"15.2.0-r2","apk:libstdc++-dev":"15.2.0-r2","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.2-r0","apk:musl":"1.2.5-r21","apk:musl-dev":"1.2.5-r21","apk:zlib":"1.3.1-r2","apk:zstd-libs":"1.5.7-r2","github:gohugoio/hugo":"v0.157.0","github:magefile/mage":"v1.15.0","image:base-glibc":"922def11f4ed4f66665a56390b5539d9a328f119a36fcb627ba181c61ddf65ae","image:golang":"9c61e0064662c493ce447213ee1e9a088a41d0e079202c8c8d872ba2826508b9"}
+# BOM: {"apk:binutils":"2.45.1-r0","apk:g++":"15.2.0-r2","apk:gcc":"15.2.0-r2","apk:gmp":"6.3.0-r4","apk:isl25":"0.25-r2","apk:jansson":"2.14.1-r0","apk:libatomic":"15.2.0-r2","apk:libgcc":"15.2.0-r2","apk:libgomp":"15.2.0-r2","apk:libstdc++":"15.2.0-r2","apk:libstdc++-dev":"15.2.0-r2","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.2-r0","apk:musl":"1.2.5-r21","apk:musl-dev":"1.2.5-r21","apk:zlib":"1.3.2-r0","apk:zstd-libs":"1.5.7-r2","github:gohugoio/hugo":"v0.157.0","github:magefile/mage":"v1.15.0","image:base-glibc":"922def11f4ed4f66665a56390b5539d9a328f119a36fcb627ba181c61ddf65ae","image:golang":"d5a6ed5cf7aaf950b1976155217f488356e39ed334b93a14418812f169e3fc69"}
 
-FROM reg.c5h.io/golang@sha256:9c61e0064662c493ce447213ee1e9a088a41d0e079202c8c8d872ba2826508b9 AS build
+FROM reg.c5h.io/golang@sha256:d5a6ed5cf7aaf950b1976155217f488356e39ed334b93a14418812f169e3fc69 AS build
 
 RUN set -eux; \
     apk add --no-cache \
@@ -20,7 +20,7 @@ RUN set -eux; \
         mpfr4=4.2.2-r0 \
         musl=1.2.5-r21 \
         musl-dev=1.2.5-r21 \
-        zlib=1.3.1-r2 \
+        zlib=1.3.2-r0 \
         zstd-libs=1.5.7-r2 \
     ;
 
