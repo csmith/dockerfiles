@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/ergo-certwrapper/Dockerfile.gotpl
-# BOM: {"github:csmith/certwrapper":"v4.3.0","github:ergochat/ergo":"v2.17.0","image:base":"84a319cda607326ba5aff905ae01191c4a3c793dbad0e058d9a816e3fb29036f","image:golang":"e76894c73b00fe5e379c1a2c5de8a721160d08ac76476b567e0ef9dccdc7d494"}
+# BOM: {"github:csmith/certwrapper":"v4.3.0","github:ergochat/ergo":"v2.18.0","image:base":"84a319cda607326ba5aff905ae01191c4a3c793dbad0e058d9a816e3fb29036f","image:golang":"e76894c73b00fe5e379c1a2c5de8a721160d08ac76476b567e0ef9dccdc7d494"}
 
 FROM reg.c5h.io/golang@sha256:e76894c73b00fe5e379c1a2c5de8a721160d08ac76476b567e0ef9dccdc7d494 AS build
 
@@ -17,7 +17,7 @@ RUN set -eux; \
 
 
 RUN set -eux; \
-    git clone --depth=1 -b v2.17.0 --single-branch https://github.com/ergochat/ergo /go/src/github.com/ergochat/ergo
+    git clone --depth=1 -b v2.18.0 --single-branch https://github.com/ergochat/ergo /go/src/github.com/ergochat/ergo
 
 WORKDIR /go/src/github.com/ergochat/ergo
 
