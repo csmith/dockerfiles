@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/soju-certwrapper/Dockerfile.gotpl
-# BOM: {"github:csmith/certwrapper":"v4.3.0","github:emersion/soju":"v0.10.1","image:base":"84a319cda607326ba5aff905ae01191c4a3c793dbad0e058d9a816e3fb29036f","image:golang":"c18c857611620e0eccfbe4d1bb392260edbc75c24203d7f3c6a292091c142d72"}
+# BOM: {"github:csmith/certwrapper":"v4.3.0","github:emersion/soju":"v0.10.1","image:base":"46cb85d037365ac7498d4cefa5882d5a6242d9907e66abcde3a2c2fc62a48987","image:golang":"d2c7d4b907467670c9dc335754a890a061167ede406e99020e7d7e1a43eada6a"}
 
-FROM reg.c5h.io/golang@sha256:c18c857611620e0eccfbe4d1bb392260edbc75c24203d7f3c6a292091c142d72 AS build
+FROM reg.c5h.io/golang@sha256:d2c7d4b907467670c9dc335754a890a061167ede406e99020e7d7e1a43eada6a AS build
 
 RUN set -eux; \
     git clone --depth=1 -b v4.3.0 --single-branch https://github.com/csmith/certwrapper /go/src/github.com/csmith/certwrapper
@@ -28,7 +28,7 @@ RUN set -eux; \
     # Create folders for volumes
     install -o 65532 -g 65532 -d /out/data /out/certs;
 
-FROM reg.c5h.io/base@sha256:84a319cda607326ba5aff905ae01191c4a3c793dbad0e058d9a816e3fb29036f
+FROM reg.c5h.io/base@sha256:46cb85d037365ac7498d4cefa5882d5a6242d9907e66abcde3a2c2fc62a48987
 
 ENV CERTWRAPPER_CERTIFICATE_PATH=/certs/certificate.pem \
     CERTWRAPPER_DNS_PROVIDER=httpreq \
