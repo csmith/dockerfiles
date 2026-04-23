@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hugo/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.45.1-r0","apk:g++":"15.2.0-r2","apk:gcc":"15.2.0-r2","apk:gmp":"6.3.0-r4","apk:isl25":"0.25-r2","apk:jansson":"2.14.1-r0","apk:libatomic":"15.2.0-r2","apk:libgcc":"15.2.0-r2","apk:libgomp":"15.2.0-r2","apk:libstdc++":"15.2.0-r2","apk:libstdc++-dev":"15.2.0-r2","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.2-r0","apk:musl":"1.2.5-r23","apk:musl-dev":"1.2.5-r23","apk:zlib":"1.3.2-r0","apk:zstd-libs":"1.5.7-r2","github:gohugoio/hugo":"v0.160.1","github:magefile/mage":"v1.17.1","image:base-glibc":"6027eb717957450fbb0fd22b484c3fd61f0472cd086819212386d573e278e166","image:golang":"79c4a958212bde36a835f9b7c9dd2f721090e1a214699a11cfddb72858bfac6d"}
+# BOM: {"apk:binutils":"2.45.1-r0","apk:g++":"15.2.0-r2","apk:gcc":"15.2.0-r2","apk:gmp":"6.3.0-r4","apk:isl25":"0.25-r2","apk:jansson":"2.14.1-r0","apk:libatomic":"15.2.0-r2","apk:libgcc":"15.2.0-r2","apk:libgomp":"15.2.0-r2","apk:libstdc++":"15.2.0-r2","apk:libstdc++-dev":"15.2.0-r2","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.2-r0","apk:musl":"1.2.5-r23","apk:musl-dev":"1.2.5-r23","apk:zlib":"1.3.2-r0","apk:zstd-libs":"1.5.7-r2","github:gohugoio/hugo":"v0.160.1","github:magefile/mage":"v1.17.2","image:base-glibc":"6027eb717957450fbb0fd22b484c3fd61f0472cd086819212386d573e278e166","image:golang":"79c4a958212bde36a835f9b7c9dd2f721090e1a214699a11cfddb72858bfac6d"}
 
 FROM reg.c5h.io/golang@sha256:79c4a958212bde36a835f9b7c9dd2f721090e1a214699a11cfddb72858bfac6d AS build
 
@@ -31,7 +31,7 @@ RUN set -eux; \
 WORKDIR /tmp/work
 
 
-ARG MAGE="v1.17.1"
+ARG MAGE="v1.17.2"
 
 RUN set -eux; \
     HUGO_BUILD_TAGS=extended go run github.com/magefile/mage@$MAGE hugo; \
