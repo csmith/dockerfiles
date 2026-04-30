@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/linx-server/Dockerfile.gotpl
-# BOM: {"github:cutlerydrawer/linx-server":"v3.4.1","image:base":"66af67568b123f6ec0ff7360f9f2f08e274753f885288e5732d6e0c087c1c1dd","image:golang":"3e1c17a1ec056ba6d63607916f131e01d0b1ccdf052536866f1c15bc8567c8ba"}
+# BOM: {"github:cutlerydrawer/linx-server":"v3.4.1","image:base":"00146a62a048620af617bc351091bce6105ca77ea883f65bf45aa22aecf62958","image:golang":"3e1c17a1ec056ba6d63607916f131e01d0b1ccdf052536866f1c15bc8567c8ba"}
 
 FROM reg.c5h.io/golang@sha256:3e1c17a1ec056ba6d63607916f131e01d0b1ccdf052536866f1c15bc8567c8ba AS build
 
@@ -21,7 +21,7 @@ RUN set -eux; \
 
 
 
-FROM reg.c5h.io/base@sha256:66af67568b123f6ec0ff7360f9f2f08e274753f885288e5732d6e0c087c1c1dd
+FROM reg.c5h.io/base@sha256:00146a62a048620af617bc351091bce6105ca77ea883f65bf45aa22aecf62958
 
 COPY --from=build /work/out /linx-server
 COPY --from=build /notices /notices
