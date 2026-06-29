@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/distribution/Dockerfile.gotpl
-# BOM: {"apk:file":"5.47-r2","apk:libmagic":"5.47-r2","apk:make":"4.4.1-r4","apk:musl":"1.2.6-r2","image:base":"5eae401fa2451fc9f557a2ecd950180c3cc0c43425fa6e9af5cd063e7a8cae38","image:golang":"ff41b0741faec698a6e43ebcd978c29e86d0c186483503e59e655535bc14aa63"}
+# BOM: {"apk:file":"5.47-r2","apk:libmagic":"5.47-r2","apk:make":"4.4.1-r4","apk:musl":"1.2.6-r2","image:base":"5eae401fa2451fc9f557a2ecd950180c3cc0c43425fa6e9af5cd063e7a8cae38","image:golang":"919b3de54087ebdfb600d8dfea6f1022eefc0f591bdc99ea1e57993c30301693"}
 
-FROM reg.c5h.io/golang@sha256:ff41b0741faec698a6e43ebcd978c29e86d0c186483503e59e655535bc14aa63 AS build
+FROM reg.c5h.io/golang@sha256:919b3de54087ebdfb600d8dfea6f1022eefc0f591bdc99ea1e57993c30301693 AS build
 
 RUN set -eux; \
     apk add --no-cache \
