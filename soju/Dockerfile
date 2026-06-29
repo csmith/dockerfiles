@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/soju/Dockerfile.gotpl
-# BOM: {"github:emersion/soju":"v0.10.1","image:base":"5eae401fa2451fc9f557a2ecd950180c3cc0c43425fa6e9af5cd063e7a8cae38","image:golang":"ff41b0741faec698a6e43ebcd978c29e86d0c186483503e59e655535bc14aa63"}
+# BOM: {"github:emersion/soju":"v0.10.1","image:base":"5eae401fa2451fc9f557a2ecd950180c3cc0c43425fa6e9af5cd063e7a8cae38","image:golang":"919b3de54087ebdfb600d8dfea6f1022eefc0f591bdc99ea1e57993c30301693"}
 
-FROM reg.c5h.io/golang@sha256:ff41b0741faec698a6e43ebcd978c29e86d0c186483503e59e655535bc14aa63 AS build
+FROM reg.c5h.io/golang@sha256:919b3de54087ebdfb600d8dfea6f1022eefc0f591bdc99ea1e57993c30301693 AS build
 
 RUN set -eux; \
     git clone --depth=1 -b v0.10.1 --single-branch https://github.com/emersion/soju /go/src/github.com/emersion/soju
