@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/miniflux/Dockerfile.gotpl
-# BOM: {"github:miniflux/v2":"2.3.2","image:base":"5eae401fa2451fc9f557a2ecd950180c3cc0c43425fa6e9af5cd063e7a8cae38","image:golang":"08fdcff7769508d1d6de4829951a3600b4aaf14a53b7d68f65a14977edfcd38a"}
+# BOM: {"github:miniflux/v2":"2.3.2","image:base":"5eae401fa2451fc9f557a2ecd950180c3cc0c43425fa6e9af5cd063e7a8cae38","image:golang":"256f4fbf1a17959c3fddffff306e8dc39900bb07530036adf60e6c81c75eefc3"}
 
-FROM reg.c5h.io/golang@sha256:08fdcff7769508d1d6de4829951a3600b4aaf14a53b7d68f65a14977edfcd38a AS build
+FROM reg.c5h.io/golang@sha256:256f4fbf1a17959c3fddffff306e8dc39900bb07530036adf60e6c81c75eefc3 AS build
 
 RUN set -eux; \
     git clone --depth=1 -b 2.3.2 --single-branch https://github.com/miniflux/v2 /work
