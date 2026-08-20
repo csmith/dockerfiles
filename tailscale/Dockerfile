@@ -1,15 +1,15 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/tailscale/Dockerfile.gotpl
-# BOM: {"github:https://github.com/tailscale/tailscale":"v1.102.2","image:base":"996f481af28d13a3c5069644629fbb02aace36a81a912b688db0771db8669424","image:golang":"051dcbc104b7513206661a70518fe9d361a3761f05bb356fde27e50671b346ef"}
+# BOM: {"github:https://github.com/tailscale/tailscale":"v1.102.3","image:base":"996f481af28d13a3c5069644629fbb02aace36a81a912b688db0771db8669424","image:golang":"030fd08673eb86719f173163c7b6cf26185177f79939c7485e11611f155ba4df"}
 
-FROM reg.c5h.io/golang@sha256:051dcbc104b7513206661a70518fe9d361a3761f05bb356fde27e50671b346ef AS build
+FROM reg.c5h.io/golang@sha256:030fd08673eb86719f173163c7b6cf26185177f79939c7485e11611f155ba4df AS build
 
 RUN set -eux; \
-    git clone --depth=1 -b v1.102.2 --single-branch https://github.com/tailscale/tailscale /src
+    git clone --depth=1 -b v1.102.3 --single-branch https://github.com/tailscale/tailscale /src
 
 WORKDIR /src
 
 
-ARG TAG="v1.102.2"
+ARG TAG="v1.102.3"
 
 RUN set -eux; \
     # Build
