@@ -1,5 +1,5 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/soju/Dockerfile.gotpl
-# BOM: {"github:https://github.com/emersion/soju":"v0.10.1","image:base":"996f481af28d13a3c5069644629fbb02aace36a81a912b688db0771db8669424","image:golang":"b3e8ee60f06a5fd458baffa36cd6da269eede5ec30670575a2fa17e1981d0e66"}
+# BOM: {"github:https://github.com/emersion/soju":"v0.10.1","image:base":"9ab54133b898317b7cec48c724593554022dd5e993bc139ecbfb860ccd622383","image:golang":"b3e8ee60f06a5fd458baffa36cd6da269eede5ec30670575a2fa17e1981d0e66"}
 
 FROM reg.c5h.io/golang@sha256:b3e8ee60f06a5fd458baffa36cd6da269eede5ec30670575a2fa17e1981d0e66 AS build
 
@@ -17,7 +17,7 @@ RUN set -eux; \
     # Create folders for volumes
     install -o 65532 -g 65532 -d /out/data;
 
-FROM reg.c5h.io/base@sha256:996f481af28d13a3c5069644629fbb02aace36a81a912b688db0771db8669424
+FROM reg.c5h.io/base@sha256:9ab54133b898317b7cec48c724593554022dd5e993bc139ecbfb860ccd622383
 
 COPY --from=build /out/ /
 VOLUME ["/data"]
