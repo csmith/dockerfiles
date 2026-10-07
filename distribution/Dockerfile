@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/distribution/Dockerfile.gotpl
-# BOM: {"apk:file":"5.47-r2","apk:libmagic":"5.47-r2","apk:make":"4.4.1-r4","apk:musl":"1.2.6-r2","image:base":"68804ff33ba310905be47653301a7636727a352c4b820d9e5e672df96577a3dc","image:golang":"9a36053a8ee5f8b5f6402597feeb6ebbdf5ac63ba4d50acd8a248882df580224"}
+# BOM: {"apk:file":"5.47-r2","apk:libmagic":"5.47-r2","apk:make":"4.4.1-r4","apk:musl":"1.2.6-r2","image:base":"fbcd09463f4b0824d709a18598637c2f7f7266d0591ca7b61311b2a12cca6f11","image:golang":"0635ad12ab31fa3ef67aa7be29d89d0ec89f0783e3e58e631e9ce244bf187f47"}
 
-FROM reg.c5h.io/golang@sha256:9a36053a8ee5f8b5f6402597feeb6ebbdf5ac63ba4d50acd8a248882df580224 AS build
+FROM reg.c5h.io/golang@sha256:0635ad12ab31fa3ef67aa7be29d89d0ec89f0783e3e58e631e9ce244bf187f47 AS build
 
 RUN set -eux; \
     apk add --no-cache \
@@ -21,7 +21,7 @@ WORKDIR /go/src/github.com/docker/distribution
 RUN set -eux; \
     BUILDTAGS="include_oss include_gcs" GO111MODULE=off CGO_ENABLED=0 make bin/registry;
 
-FROM reg.c5h.io/base@sha256:68804ff33ba310905be47653301a7636727a352c4b820d9e5e672df96577a3dc
+FROM reg.c5h.io/base@sha256:fbcd09463f4b0824d709a18598637c2f7f7266d0591ca7b61311b2a12cca6f11
 
 COPY --from=build /go/src/github.com/docker/distribution/cmd/registry/config-dev.yml /etc/docker/registry/config.yml
 COPY --from=build /go/src/github.com/docker/distribution/bin/registry /bin/registry
