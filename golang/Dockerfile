@@ -1,13 +1,13 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/golang/Dockerfile.gotpl
-# BOM: {"apk:bash":"5.3.9-r1","apk:binutils":"2.45.1-r1","apk:brotli-libs":"1.2.0-r1","apk:busybox":"1.37.0-r31","apk:busybox-binsh":"1.37.0-r31","apk:c-ares":"1.34.8-r0","apk:ca-certificates-bundle":"20261020-r0","apk:curl":"8.22.0-r0","apk:gcc":"15.2.0-r5","apk:git":"2.54.0-r0","apk:gmp":"6.3.0-r4","apk:go":"1.26.9-r0","apk:isl25":"0.25-r2","apk:jansson":"2.15.0-r0","apk:libatomic":"15.2.0-r5","apk:libcrypto3":"3.5.9-r0","apk:libcurl":"8.22.0-r0","apk:libexpat":"2.9.0-r0","apk:libgcc":"15.2.0-r5","apk:libgcc-static":"15.2.0-r5","apk:libgomp":"15.2.0-r5","apk:libidn2":"2.3.8-r0","apk:libncursesw":"6.6_p20260516-r0","apk:libpsl":"0.21.5-r3","apk:libssl3":"3.5.9-r0","apk:libstdc++":"15.2.0-r5","apk:libunistring":"1.4.2-r0","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.2-r0","apk:musl":"1.2.6-r2","apk:musl-dev":"1.2.6-r2","apk:ncurses-terminfo-base":"6.6_p20260516-r0","apk:nghttp2-libs":"1.70.0-r0","apk:pcre2":"10.49-r0","apk:readline":"8.3.3-r1","apk:zlib":"1.3.2-r1","apk:zstd-libs":"1.5.7-r2","golang":"go1.27.3","image:alpine":"fe68600aae367d4b396a3e721f0474930d43ea695c8d72aa0277e74bb96e4a16"}
+# BOM: {"apk:bash":"5.3.9-r1","apk:binutils":"2.45.1-r1","apk:brotli-libs":"1.2.1-r0","apk:busybox":"1.37.0-r31","apk:busybox-binsh":"1.37.0-r31","apk:c-ares":"1.34.9-r0","apk:ca-certificates-bundle":"20261020-r0","apk:curl":"8.22.0-r0","apk:gcc":"15.2.0-r5","apk:git":"2.54.0-r0","apk:gmp":"6.3.0-r4","apk:go":"1.26.9-r0","apk:isl25":"0.25-r2","apk:jansson":"2.15.0-r0","apk:libatomic":"15.2.0-r5","apk:libcrypto3":"3.5.9-r0","apk:libcurl":"8.22.0-r0","apk:libexpat":"2.9.0-r0","apk:libgcc":"15.2.0-r5","apk:libgcc-static":"15.2.0-r5","apk:libgomp":"15.2.0-r5","apk:libidn2":"2.3.8-r0","apk:libncursesw":"6.6_p20260516-r0","apk:libpsl":"0.21.5-r3","apk:libssl3":"3.5.9-r0","apk:libstdc++":"15.2.0-r5","apk:libunistring":"1.4.2-r0","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.2-r0","apk:musl":"1.2.6-r3","apk:musl-dev":"1.2.6-r3","apk:ncurses-terminfo-base":"6.6_p20260516-r0","apk:nghttp2-libs":"1.70.0-r0","apk:pcre2":"10.49-r0","apk:readline":"8.3.3-r1","apk:zlib":"1.3.2-r1","apk:zstd-libs":"1.5.7-r2","golang":"go1.27.3","image:alpine":"930c2b55771daf688e754e943c002fa02e169f69219c5005f666a7f1e312ce4c"}
 
-FROM reg.c5h.io/alpine@sha256:fe68600aae367d4b396a3e721f0474930d43ea695c8d72aa0277e74bb96e4a16
+FROM reg.c5h.io/alpine@sha256:930c2b55771daf688e754e943c002fa02e169f69219c5005f666a7f1e312ce4c
 
 
 RUN set -eux; \
     apk add --no-cache --virtual .build-deps \
-        brotli-libs=1.2.0-r1 \
-        c-ares=1.34.8-r0 \
+        brotli-libs=1.2.1-r0 \
+        c-ares=1.34.9-r0 \
         ca-certificates-bundle=20261020-r0 \
         curl=8.22.0-r0 \
         libcrypto3=3.5.9-r0 \
@@ -16,7 +16,7 @@ RUN set -eux; \
         libpsl=0.21.5-r3 \
         libssl3=3.5.9-r0 \
         libunistring=1.4.2-r0 \
-        musl=1.2.6-r2 \
+        musl=1.2.6-r3 \
         nghttp2-libs=1.70.0-r0 \
         zlib=1.3.2-r1 \
         zstd-libs=1.5.7-r2 \
@@ -24,7 +24,7 @@ RUN set -eux; \
         busybox=1.37.0-r31 \
         busybox-binsh=1.37.0-r31 \
         libncursesw=6.6_p20260516-r0 \
-        musl=1.2.6-r2 \
+        musl=1.2.6-r3 \
         ncurses-terminfo-base=6.6_p20260516-r0 \
         readline=8.3.3-r1 \
         binutils=2.45.1-r1 \
@@ -40,8 +40,8 @@ RUN set -eux; \
         libstdc++=15.2.0-r5 \
         mpc1=1.3.1-r1 \
         mpfr4=4.2.2-r0 \
-        musl=1.2.6-r2 \
-        musl-dev=1.2.6-r2 \
+        musl=1.2.6-r3 \
+        musl-dev=1.2.6-r3 \
         zlib=1.3.2-r1 \
         zstd-libs=1.5.7-r2 \
     ;
@@ -61,13 +61,13 @@ RUN set -eux; \
         libstdc++=15.2.0-r5 \
         mpc1=1.3.1-r1 \
         mpfr4=4.2.2-r0 \
-        musl=1.2.6-r2 \
+        musl=1.2.6-r3 \
         zlib=1.3.2-r1 \
         zstd-libs=1.5.7-r2 \
-        musl=1.2.6-r2 \
-        musl-dev=1.2.6-r2 \
-        brotli-libs=1.2.0-r1 \
-        c-ares=1.34.8-r0 \
+        musl=1.2.6-r3 \
+        musl-dev=1.2.6-r3 \
+        brotli-libs=1.2.1-r0 \
+        c-ares=1.34.9-r0 \
         ca-certificates-bundle=20261020-r0 \
         git=2.54.0-r0 \
         libcrypto3=3.5.9-r0 \
@@ -77,7 +77,7 @@ RUN set -eux; \
         libpsl=0.21.5-r3 \
         libssl3=3.5.9-r0 \
         libunistring=1.4.2-r0 \
-        musl=1.2.6-r2 \
+        musl=1.2.6-r3 \
         nghttp2-libs=1.70.0-r0 \
         pcre2=10.49-r0 \
         zlib=1.3.2-r1 \
