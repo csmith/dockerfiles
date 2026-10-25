@@ -1,10 +1,10 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/irc-bot/Dockerfile.gotpl
-# BOM: {"github:https://github.com/greboid/irc-bot":"v5.0.10","image:base":"091cf7586a6b9d750c6e29255c7231896ce1ec4ef852f351068072ca00216b47","image:golang":"bd172a7af0e1c90db90419b5c1dcab346836d53029ca9574bb16127bb858c47f"}
+# BOM: {"github:https://github.com/greboid/irc-bot":"v5.1.0","image:base":"091cf7586a6b9d750c6e29255c7231896ce1ec4ef852f351068072ca00216b47","image:golang":"bd172a7af0e1c90db90419b5c1dcab346836d53029ca9574bb16127bb858c47f"}
 
 FROM reg.c5h.io/golang@sha256:bd172a7af0e1c90db90419b5c1dcab346836d53029ca9574bb16127bb858c47f AS build
 
 RUN set -eux; \
-    git clone --depth=1 -b v5.0.10 --single-branch https://github.com/greboid/irc-bot /work
+    git clone --depth=1 -b v5.1.0 --single-branch https://github.com/greboid/irc-bot /work
 
 WORKDIR /work
 
