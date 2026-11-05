@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hugo/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.45.1-r1","apk:g++":"15.2.0-r5","apk:gcc":"15.2.0-r5","apk:gmp":"6.3.0-r4","apk:isl25":"0.25-r2","apk:jansson":"2.15.0-r0","apk:libatomic":"15.2.0-r5","apk:libgcc":"15.2.0-r5","apk:libgcc-static":"15.2.0-r5","apk:libgomp":"15.2.0-r5","apk:libstdc++":"15.2.0-r5","apk:libstdc++-dev":"15.2.0-r5","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.2-r0","apk:musl":"1.2.6-r3","apk:musl-dev":"1.2.6-r3","apk:zlib":"1.3.2-r1","apk:zstd-libs":"1.5.7-r2","github:https://github.com/gohugoio/hugo":"v0.169.0","github:https://github.com/magefile/mage":"v1.17.2","image:base-glibc":"46324c84efd0a8295aac9c616367f1f0114e2a9c22e1828dbc2f25a9e8724338","image:golang":"5c4ad85bffae07edfdae6e170e1d6550833106a17297d826c30e9a3a1556b65c"}
+# BOM: {"apk:binutils":"2.45.1-r1","apk:g++":"15.2.0-r5","apk:gcc":"15.2.0-r5","apk:gmp":"6.3.0-r4","apk:isl25":"0.25-r2","apk:jansson":"2.15.0-r0","apk:libatomic":"15.2.0-r5","apk:libgcc":"15.2.0-r5","apk:libgcc-static":"15.2.0-r5","apk:libgomp":"15.2.0-r5","apk:libstdc++":"15.2.0-r5","apk:libstdc++-dev":"15.2.0-r5","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.2-r0","apk:musl":"1.2.6-r3","apk:musl-dev":"1.2.6-r3","apk:zlib":"1.3.2-r1","apk:zstd-libs":"1.5.7-r2","github:https://github.com/gohugoio/hugo":"v0.169.0","github:https://github.com/magefile/mage":"v1.17.2","image:base-glibc":"0f5e298a1da08bea4cff0fbee464cd9e89e6d616fa34acc6a9563eee69936dee","image:golang":"4a8d5555821344f4f81945c99f58174d10913f63c25568befd2c2b58b43f237b"}
 
-FROM reg.c5h.io/golang@sha256:5c4ad85bffae07edfdae6e170e1d6550833106a17297d826c30e9a3a1556b65c AS build
+FROM reg.c5h.io/golang@sha256:4a8d5555821344f4f81945c99f58174d10913f63c25568befd2c2b58b43f237b AS build
 
 RUN set -eux; \
     apk add --no-cache \
@@ -39,7 +39,7 @@ RUN set -eux; \
     HUGO_BUILD_TAGS=extended go run github.com/magefile/mage@$MAGE install; \
     mkdir -p /tmp/site;
 
-FROM reg.c5h.io/base-glibc@sha256:46324c84efd0a8295aac9c616367f1f0114e2a9c22e1828dbc2f25a9e8724338
+FROM reg.c5h.io/base-glibc@sha256:0f5e298a1da08bea4cff0fbee464cd9e89e6d616fa34acc6a9563eee69936dee
 
 COPY --from=build /go/bin/hugo /usr/bin/hugo
 COPY --from=build --chown=65532:65532 /tmp/site /
