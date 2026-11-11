@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/hugo/Dockerfile.gotpl
-# BOM: {"apk:binutils":"2.45.1-r1","apk:g++":"15.2.0-r5","apk:gcc":"15.2.0-r5","apk:gmp":"6.3.0-r4","apk:isl25":"0.25-r2","apk:jansson":"2.15.0-r0","apk:libatomic":"15.2.0-r5","apk:libgcc":"15.2.0-r5","apk:libgcc-static":"15.2.0-r5","apk:libgomp":"15.2.0-r5","apk:libstdc++":"15.2.0-r5","apk:libstdc++-dev":"15.2.0-r5","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.2-r0","apk:musl":"1.2.6-r3","apk:musl-dev":"1.2.6-r3","apk:zlib":"1.4-r0","apk:zstd-libs":"1.5.7-r2","github:https://github.com/gohugoio/hugo":"v0.169.0","github:https://github.com/magefile/mage":"v1.17.2","image:base-glibc":"0f5e298a1da08bea4cff0fbee464cd9e89e6d616fa34acc6a9563eee69936dee","image:golang":"d6cf3be941b0b3337e885dbfc83e765120838f1464d1422a3b68c3c485ce1be5"}
+# BOM: {"apk:binutils":"2.45.1-r1","apk:g++":"15.2.0-r5","apk:gcc":"15.2.0-r5","apk:gmp":"6.3.0-r4","apk:isl25":"0.25-r2","apk:jansson":"2.15.0-r0","apk:libatomic":"15.2.0-r5","apk:libgcc":"15.2.0-r5","apk:libgcc-static":"15.2.0-r5","apk:libgomp":"15.2.0-r5","apk:libstdc++":"15.2.0-r5","apk:libstdc++-dev":"15.2.0-r5","apk:mpc1":"1.3.1-r1","apk:mpfr4":"4.2.2-r0","apk:musl":"1.2.6-r3","apk:musl-dev":"1.2.6-r3","apk:zlib":"1.4-r0","apk:zstd-libs":"1.5.7-r2","github:https://github.com/gohugoio/hugo":"v0.169.0","github:https://github.com/magefile/mage":"v1.17.2","image:base-glibc":"0f5e298a1da08bea4cff0fbee464cd9e89e6d616fa34acc6a9563eee69936dee","image:golang":"87be3283dc0e0b30e0e53bc9b791a09e466209855746c6981e2062626cee868c"}
 
-FROM reg.c5h.io/golang@sha256:d6cf3be941b0b3337e885dbfc83e765120838f1464d1422a3b68c3c485ce1be5 AS build
+FROM reg.c5h.io/golang@sha256:87be3283dc0e0b30e0e53bc9b791a09e466209855746c6981e2062626cee868c AS build
 
 RUN set -eux; \
     apk add --no-cache \
