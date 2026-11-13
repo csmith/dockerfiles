@@ -1,7 +1,7 @@
 # Generated from https://github.com/csmith/dockerfiles/blob/master/irc-distribution/Dockerfile.gotpl
-# BOM: {"github:https://github.com/csmith/irc-distribution":"v1.1.0","image:base":"fb20443cb04c169a893b5d736e3f466a42ed299664a12d0dcf68aa37acdc62e9","image:golang":"87be3283dc0e0b30e0e53bc9b791a09e466209855746c6981e2062626cee868c"}
+# BOM: {"github:https://github.com/csmith/irc-distribution":"v1.1.0","image:base":"fb20443cb04c169a893b5d736e3f466a42ed299664a12d0dcf68aa37acdc62e9","image:golang":"638a1c914c1117254a593a283f0e51d6e425b007d1cefe9d7efac14779f622ef"}
 
-FROM reg.c5h.io/golang@sha256:87be3283dc0e0b30e0e53bc9b791a09e466209855746c6981e2062626cee868c AS build
+FROM reg.c5h.io/golang@sha256:638a1c914c1117254a593a283f0e51d6e425b007d1cefe9d7efac14779f622ef AS build
 
 RUN set -eux; \
     git clone --depth=1 -b v1.1.0 --single-branch https://github.com/csmith/irc-distribution /work
